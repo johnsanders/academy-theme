@@ -1,0 +1,76 @@
+.academyTagsContainer {
+	display: flex;
+	flex-wrap: wrap;
+}
+.avatar {
+	border: solid white 2px;
+	border-radius: 25px;
+	height: 50px;
+	max-height: 50px;
+}
+.capInitial {
+	text-transform: capitalize;
+}
+.card {
+	border: 1px solid rgba(0,0,0,.125) !important;
+}
+.gridRowItems {
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	overflow: scroll;
+	padding-bottom: 1em;
+	position: relative;
+}
+.gridRowItem {
+	margin: 0.5em;
+	min-width: 250px;
+	position: relative;
+	width: 250px;
+}
+.gridRowItem a {
+	color: inherit;
+	text-decoration: none;
+}
+.gridRowItem .card {
+	height: 100%;
+}
+.gridRowItem .card-body {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 0.5em;
+}
+.instructorsContainer {
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 1em;
+	margin-left: 10px;
+}
+.scrollButton {
+	align-items: center;
+	background-color: #00000050;
+	border: none;
+	color: white;
+	display: flex;
+	height: 100% !important;
+	justify-content: center;
+	position: absolute;
+	top: 0;
+	transition: opacity 0.3s;
+	width: 2em;
+	z-index:10000;
+}
+.scrollButtonLeft {
+	left: 0;
+}
+.scrollButtonRight {
+	right: 0;
+}
+.scrollButtonsContainer {
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}

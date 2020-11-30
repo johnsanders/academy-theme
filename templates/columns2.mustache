@@ -6,7 +6,7 @@
 			{{> theme_academy/navbar }}
 			{{> theme_boost/nav-drawer }}
 			<div id="page" class="container-fluid d-print-block">
-				<div class="{{#isFrontPage}}d-none{{/isFrontPage}}">
+				<div class="{{#is_front_page}}d-none{{/is_front_page}}">
 					{{{ output.full_header }}}
 				</div>
 				<div id="page-content" class="row pb-3 d-print-block">
@@ -21,7 +21,7 @@
 						{{/hasregionmainsettingsmenu}}
 						<section
 							id="region-main"
-							class="has-blocks mb-3 {{#isFrontPage}}d-none{{/isFrontPage}}"
+							class="has-blocks mb-3 {{#is_front_page}}d-none{{/is_front_page}}"
 							aria-label="{{#str}}content{{/str}}"
 						>
 							{{#hasregionmainsettingsmenu}}
@@ -32,7 +32,9 @@
 							{{{ output.activity_navigation }}}
 							{{{ output.course_content_footer }}}
 						</section>
-						{{#isFrontPage}}<div id="academyGridApp"></div>{{/isFrontPage}}
+						{{#is_front_page}}
+							{{> theme_academy/grid }}
+						{{/is_front_page}}
 						{{#hasblocks}}
 							<section
 								data-region="blocks-column"

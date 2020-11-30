@@ -1,8 +1,8 @@
 <?php
 defined('MOODLE_INTERNAL') || die();
-
 user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
 require_once($CFG->libdir . '/behat/lib.php');
+require_once($CFG->dirroot . '/theme/academy/grid/get_grid_context.php');
 
 if (isloggedin()) {
 	$navdraweropen = (get_user_preferences('drawer-open-nav', 'true') == 'true');
@@ -18,7 +18,9 @@ $blockshtml = $OUTPUT->blocks('side-pre');
 $hasblocks = strpos($blockshtml, 'data-block=') !== false;
 $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions();
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
-$isFrontPage = $PAGE->has_set_url() && $PAGE->url->compare(context_system::instance()->get_url(), URL_MATCH_BASE);
+$is_front_page = $PAGE->has_set_url() && $PAGE->url->compare(context_system::instance()->get_url(), URL_MATCH_BASE);
+$grid_config = get_grid_context();
+
 $templatecontext = [
 	'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
 	'output' => $OUTPUT,
@@ -28,8 +30,11 @@ $templatecontext = [
 	'navdraweropen' => $navdraweropen,
 	'regionmainsettingsmenu' => $regionmainsettingsmenu,
 	'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
-	'isLoggedIn' => isloggedin(),
-	'isFrontPage' => $isFrontPage,
+	'is_logged_in' => isloggedin(),
+	'is_front_page' => $is_front_page,
+	'rows_json' => json_encode($grid_config["rows"]),
+	'carousel_json' => json_encode($grid_config["carousel"]),
+	'js_src' => $grid_config["js_src"],
 ];
 
 $nav = $PAGE->flatnav;

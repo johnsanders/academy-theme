@@ -1,0 +1,24 @@
+<style>
+	.area {
+		margin-bottom: 2em;
+	}
+	.caps {
+		text-transform: capitalize;
+	}
+	.thumb {
+		height: 100px;
+		margin: 1em;
+	}
+</style>
+<a class="btn btn-secondary mb-3" href="{{wwwroot}}/admin/settings.php?section=themesettingacademy&tab=uploads">Back to Settings</a>
+<h1 class="mb-5">Delete Files</h1>
+{{#all_files}}
+	<div class="area">
+		<h3 class="caps">{{area_name}}</h3>
+		{{#files}}
+			<a href="{{wwwroot}}/theme/academy/grid/upload_delete.php?contextid={{contextid}}&filename={{filename}}&filearea={{filearea}}&filepath={{filepath}}&itemid={{itemid}}">
+				<img class="thumb" src={{url}} />
+			</a>
+		{{/files}}
+	</div>
+{{/all_files}}
