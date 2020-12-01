@@ -23,7 +23,7 @@ interface Props {
 
 const tabs = ['Grid', 'Carousel', 'Instructors', 'Tags', 'Uploads'];
 
-const App: React.FC<Props> = (props: Props): JSX.Element => (
+const GridSettings: React.FC<Props> = (props: Props): JSX.Element => (
 	<div id="academyGridSettings">
 		{!props.unsavedChanges ? null : (
 			<div className="alert alert-warning unsavedAlert">
@@ -71,4 +71,4 @@ const App: React.FC<Props> = (props: Props): JSX.Element => (
 	</div>
 );
 
-export default App;
+export default GridSettings;

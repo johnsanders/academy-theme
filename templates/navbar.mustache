@@ -1,3 +1,4 @@
+<div id="academyNavbar"></div>
 <nav
 	class="fixed-top navbar navbar-light bg-white navbar-expand moodle-has-zindex"
 	aria-label="{{#str}}sitemenubar, admin{{/str}}"
@@ -6,8 +7,8 @@
 		data-region="drawer-toggle"
 		class="
 			mr-3
-			{{#isLoggedIn}}d-inline-block{{/isLoggedIn}}
-			{{^isLoggedIn}}d-none{{/isLoggedIn}}
+			{{#is_logged_in}}d-inline-block{{/is_logged_in}}
+			{{^is_logged_in}}d-none{{/is_logged_in}}
 		"
 	>
 		<button
@@ -48,4 +49,8 @@
 		</li>
 	</ul>
 </nav>
-
+<script>
+	const rows = {{{rows_json}}};
+	const carousel = {{{carousel_json}}};
+</script>
+<script src={{js_src}} type="text/javascript"></script>

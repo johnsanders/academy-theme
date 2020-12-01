@@ -1,12 +1,30 @@
-[data-region="drawer"] {
+@font-face { 
+	font-family: 'CNNSansRegular';
+	src: url('[[font:theme|CNNSansDisplayW04-Regular.eot]]');
+	src: url('[[font:theme|CNNSansDisplayW04-Regular.eot]]') format('embedded-opentype'),
+			 url('[[font:theme|CNNSansDisplayW04-Regular.woff]]') format('woff'),
+			 url('[[font:theme|CNNSansDisplayW04-Regular.woff2]]') format('woff2'),
+			 url('[[font:theme|CNNSansDisplayW04-Regular.ttf]]') format('truetype'),
+			 url('[[font:theme|CNNSansDisplayW04-Regular.svg]]') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+body {
+	font-family: 'CNNSansRegular';
+}
+#nav-drawer.lower {
 	top: 100px;
 }
 .navbar {
 	max-height: inherit;
 }
 nav.navbar .logo.fullsize img {
-	max-height: 75px;
+	height: 30px;
+	max-height: 30px;
+}
+nav.navbar.large .logo.fullsize img {
 	height: 75px;
+	max-height: 75px;
 }
 #page {
 	margin-top: 120px;

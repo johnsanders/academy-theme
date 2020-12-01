@@ -6,20 +6,23 @@ import React from 'react';
 import ReactTooltip from 'react-tooltip';
 import Row from './Row';
 import { Row as RowType } from '../types';
+import { createPortal } from 'react-dom';
 
-const App: React.FC = (): JSX.Element => {
-	return (
+const Display: React.FC = (): JSX.Element => {
+	const el = document.getElementById('academyGrid');
+	if (!el) throw new Error('Cannot find dom element');
+	return createPortal(
 		<>
 			<ReactTooltip />
 			<div className="mb-3">
 				<Carousel />
 			</div>
-
 			{rows.map((row) => (
 				<Row key={row.id} row={row} />
 			))}
-		</>
+		</>,
+		el,
 	);
 };
 
-export default App;
+export default Display;

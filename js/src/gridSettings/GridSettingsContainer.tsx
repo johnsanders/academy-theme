@@ -2,7 +2,7 @@ declare const inputId: string;
 import './style.css';
 import '../shared/style.css';
 import { CarouselItem, Config, Instructor, Row } from '../types';
-import App from './App';
+import App from './GridSettings';
 import React from 'react';
 import { Tag } from '../types';
 import modifyDom from '../helpers/modifyDom';
@@ -11,7 +11,7 @@ import updateUrl from '../helpers/updateUrl';
 
 const initialConfig: Config = { carousel: [], instructors: [], rows: [], tags: [] };
 
-const AppContainer: React.FC = (): JSX.Element => {
+const GridSettingsContainer: React.FC = (): JSX.Element => {
 	const inputRef = React.useRef(document.getElementById(inputId) as HTMLInputElement);
 	const queryRef = React.useRef<{ [key: string]: unknown }>(
 		qs.parse(window.location.search, { ignoreQueryPrefix: true }),
@@ -76,4 +76,4 @@ const AppContainer: React.FC = (): JSX.Element => {
 	);
 };
 
-export default AppContainer;
+export default GridSettingsContainer;

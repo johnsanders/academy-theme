@@ -32,12 +32,17 @@ $templatecontext = [
 	'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
 	'is_logged_in' => isloggedin(),
 	'is_front_page' => $is_front_page,
-	'rows_json' => json_encode($grid_config["rows"]),
-	'carousel_json' => json_encode($grid_config["carousel"]),
+	'rows_json' => $grid_config["rows_json"],
+	'carousel_json' => $grid_config["carousel_json"],
 	'js_src' => $grid_config["js_src"],
 ];
 
-$nav = $PAGE->flatnav;
+$navAll = $PAGE->flatnav;
+$nav = [];
+$unwantedNavs = ['Private files', 'Content bank'];
+foreach ($navAll as $navItem) {
+	if (!in_array($navItem->text, $unwantedNavs)) array_push($nav, $navItem);
+}
 $templatecontext['flatnavigation'] = $nav;
-$templatecontext['firstcollectionlabel'] = $nav->get_collectionlabel();
+$templatecontext['firstcollectionlabel'] = $navAll->get_collectionlabel();
 echo $OUTPUT->render_from_template('theme_academy/columns2', $templatecontext);
