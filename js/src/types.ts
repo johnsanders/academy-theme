@@ -26,6 +26,18 @@ export interface Module {
 	modname: string;
 	name: string;
 }
+export interface NavbarConfig {
+	ariaLabel: string;
+	customMenu: string;
+	isLoggedIn: boolean;
+	logoUrl: string;
+	menuButtonName: string;
+	navDrawerOpen: boolean;
+	navbarPluginOutput: string;
+	pageHeadingMenu: string;
+	siteName: string;
+	userMenu: string;
+}
 export interface Row {
 	id: string;
 	name: string;

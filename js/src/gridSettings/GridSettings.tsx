@@ -24,7 +24,7 @@ interface Props {
 const tabs = ['Grid', 'Carousel', 'Instructors', 'Tags', 'Uploads'];
 
 const GridSettings: React.FC<Props> = (props: Props): JSX.Element => (
-	<div id="academyGridSettings">
+	<div className="container" id="academyGridSettings">
 		{!props.unsavedChanges ? null : (
 			<div className="alert alert-warning unsavedAlert">
 				<Icon className="mr-1" icon={faExclamationTriangle} />

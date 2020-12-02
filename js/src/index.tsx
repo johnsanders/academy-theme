@@ -7,12 +7,12 @@ const Admin = React.lazy(() => import('./gridSettings'));
 const Display = React.lazy(() => import('./gridDisplay'));
 
 const App: React.FC = (): JSX.Element => {
-	const { pathname } = window.location;
+	const { search } = window.location;
 	return (
 		<>
 			<Navbar />
 			<React.Suspense fallback={<Loading />}>
-				{pathname.includes('/admin/settings.php') ? <Admin /> : <Display />}
+				{search.includes('section=themesettingacademy') ? <Admin /> : <Display />}
 			</React.Suspense>
 		</>
 	);

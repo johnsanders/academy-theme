@@ -59,7 +59,6 @@ const GridSettingsContainer: React.FC = (): JSX.Element => {
 		e.preventDefault();
 		if (formRef.current) formRef.current.submit();
 	};
-	console.log(unsavedChanges);
 	return (
 		<App
 			activeTab={activeTab}

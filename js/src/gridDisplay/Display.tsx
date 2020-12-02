@@ -8,9 +8,9 @@ import Row from './Row';
 import { Row as RowType } from '../types';
 import { createPortal } from 'react-dom';
 
-const Display: React.FC = (): JSX.Element => {
+const Display: React.FC = (): JSX.Element | null => {
 	const el = document.getElementById('academyGrid');
-	if (!el) throw new Error('Cannot find dom element');
+	if (!el) return null;
 	return createPortal(
 		<>
 			<ReactTooltip />
