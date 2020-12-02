@@ -1,6 +1,11 @@
+<script>
+	const navbarConfig = {{{nav_config}}};
+</script>
+
 <div id="academyNavbar"></div>
+
 <nav
-	class="fixed-top navbar navbar-light bg-white navbar-expand moodle-has-zindex"
+	class="fixed-top navbar navbar-light navbar-small bg-white navbar-expand moodle-has-zindex navbar-out"
 	aria-label="{{#str}}sitemenubar, admin{{/str}}"
 >
 	<div 
@@ -29,7 +34,7 @@
 	<a
 		href="{{{ config.wwwroot }}}"
 		class="navbar-brand aabtn has-logo">
-		<span class="logo fullsize d-none d-sm-inline">
+		<span class="logo d-none d-sm-inline">
 			<img src="{{output.get_compact_logo_url}}" alt="{{sitename}}">
 		</span>
 	</a>
