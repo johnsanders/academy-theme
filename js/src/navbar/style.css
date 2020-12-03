@@ -1,0 +1,41 @@
+nav.navbar {
+	background-color: #202020;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+	max-height: inherit;
+}
+nav.navbar .nav-link {
+	color: white;
+}
+nav.navbar.navbar-large {
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 1000;
+}
+nav.navbar.navbar-large span.logo img {
+	height: 75px;
+	max-height: 75px;
+}
+nav.navbar.navbar-small {
+	transition: transform 0.33s;
+	padding: 0 1em 0 0;
+}
+nav.navbar.navbar-small .navbar-brand {
+	padding: 0;
+}
+nav.navbar.navbar-small .logo img {
+	max-height: 40px;
+}
+nav.navbar.navbar-small.navbar-out {
+	transform: translate3d(0, -65px, 0);
+}
+nav.navbar .usertext, nav.navbar .dropdown-toggle:after, nav.navbar .login, nav.navbar .login a {
+	color: white;
+}
+#nav-drawer nav.list-group {
+	transition: transform 0.33s;
+}
+#nav-drawer.lower nav.list-group {
+	transform: translate3d(0, 50px, 0);
+}

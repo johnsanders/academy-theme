@@ -14,6 +14,17 @@ export interface Course {
 	id: string;
 	modules: Module[];
 }
+export interface FlatNavItem {
+	action: { [key: string]: any };
+	classes: string[];
+	get_indent: number;
+	icon: { alt: string; pix: string; component: string; attributes: { [key: string]: any } };
+	indent: number;
+	is_section: boolean | null;
+	isactive: boolean;
+	parent: { [key: string]: any };
+	text: string;
+}
 export interface Instructor {
 	avatarUrl: string;
 	bioUrl: string;
@@ -25,6 +36,9 @@ export interface Module {
 	id: string;
 	modname: string;
 	name: string;
+}
+export interface MoodleJs {
+	cfg: { wwwroot: string };
 }
 export interface NavbarConfig {
 	ariaLabel: string;

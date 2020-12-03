@@ -14,7 +14,7 @@ const Display: React.FC = (): JSX.Element | null => {
 	return createPortal(
 		<>
 			<ReactTooltip />
-			<div className="mb-3">
+			<div className="my-3">
 				<Carousel />
 			</div>
 			{rows.map((row) => (
