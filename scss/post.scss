@@ -12,32 +12,9 @@
 body {
 	font-family: 'CNNSansRegular';
 }
-#nav-drawer nav.list-group {
-	transition: transform 0.33s;
-}
-#nav-drawer.lower nav.list-group {
-	transform: translate3d(0, 50px, 0);
-}
-nav.navbar {
-	max-height: inherit;
-}
-nav.navbar.navbar-large {
-	left: 0;
-	position: absolute;
-	top: 0;
-	width: 100%;
-	z-index: 1000;
-}
-nav.navbar.navbar-large span.logo img {
-	height: 75px;
-	max-height: 75px;
-}
-nav.navbar.navbar-small {
-	transition: transform 0.33s;
-}
-nav.navbar.navbar-small.navbar-out {
-	transform: translate3d(0, -65px, 0);
+.loginLogo {
+	max-height: 100px;
 }
 #page {
-	margin-top: 120px;
+	margin-top: 105px;
 }

@@ -26,7 +26,6 @@ $nav_config = json_encode([
 	"ariaLabel" => get_string("sitemenubar", "admin"),
 	"customMenu" => $OUTPUT->custom_menu(),
 	"isLoggedIn" => isloggedin(),
-	"logoUrl" => (string) $OUTPUT->get_compact_logo_url(),
 	"menuButtonName" => get_string("sidepanel", "core"),
 	"navDrawerOpen" => $navdraweropen,
 	"navbarPluginOutput" => $OUTPUT->navbar_plugin_output(),
@@ -34,23 +33,6 @@ $nav_config = json_encode([
 	"siteName" => $sitename,
 	"userMenu" => $OUTPUT->user_menu(),
 ]);
-$templatecontext = [
-	'sitename' => $sitename,
-	'output' => $OUTPUT,
-	'sidepreblocks' => $blockshtml,
-	'hasblocks' => $hasblocks,
-	'bodyattributes' => $bodyattributes,
-	'navdraweropen' => $navdraweropen,
-	'regionmainsettingsmenu' => $regionmainsettingsmenu,
-	'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
-	'is_logged_in' => isloggedin(),
-	'is_front_page' => $is_front_page,
-	'rows_json' => $grid_config["rows_json"],
-	'carousel_json' => $grid_config["carousel_json"],
-	'js_src' => $grid_config["js_src"],
-	'nav_config' => $nav_config,
-];
-
 $nav_all = $PAGE->flatnav;
 $nav = [];
 $unwanted_navs = ['Private files', 'Content bank', 'Badges', 'Competencies'];
@@ -58,16 +40,34 @@ foreach ($nav_all as $nav_item) {
 	if (!in_array($nav_item->text, $unwanted_navs)) array_push(
 		$nav,
 		[
-			"action" => $nav_item->action,
-			"get_indent" => $nav_item->get_indent(),
+			"action" => (string) $nav_item->action,
+			"classes" => $nav_item->classes,
+			"indent" => $nav_item->get_indent(),
 			"icon" => $nav_item->icon,
 			"is_section" => $nav_item->is_section,
 			"isactive" => $nav_item->isactive,
+			"parent" => $nav_item->parent,
 			"text" => $nav_item->text,
 		],
 	);
 }
+$templatecontext = [
+	'bodyattributes' => $bodyattributes,
+	'carousel_json' => $grid_config["carousel_json"],
+	'flatnavigation_json' => json_encode($nav),
+	'hasblocks' => $hasblocks,
+	'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
+	'is_logged_in' => isloggedin(),
+	'is_front_page' => $is_front_page,
+	'js_src' => $grid_config["js_src"],
+	'nav_config' => $nav_config,
+	'navdraweropen' => $navdraweropen,
+	'output' => $OUTPUT,
+	'regionmainsettingsmenu' => $regionmainsettingsmenu,
+	'rows_json' => $grid_config["rows_json"],
+	'sidepreblocks' => $blockshtml,
+	'sitename' => $sitename,
+];
 
-$templatecontext['flatnavigation'] = $nav;
 $templatecontext['firstcollectionlabel'] = $nav_all->get_collectionlabel();
 echo $OUTPUT->render_from_template('theme_academy/columns2', $templatecontext);

@@ -1,9 +1,17 @@
 <div
 	id="nav-drawer"
 	data-region="drawer"
-	class="lower d-print-none moodle-has-zindex {{^navdraweropen}}closed{{/navdraweropen}}"
-	aria-hidden="{{#navdraweropen}}false{{/navdraweropen}}{{^navdraweropen}}true{{/navdraweropen}}"
+	class="
+		lower
+		d-print-none
+		moodle-has-zindex
+		{{^navdraweropen}}closed{{/navdraweropen}}
+	"
+	aria-hidden="
+		{{#navdraweropen}}false{{/navdraweropen}}
+		{{^navdraweropen}}true{{/navdraweropen}}
+	"
 	tabindex="-1"
 >
-    {{> theme_boost/flat_navigation }}
+    {{> theme_academy/flat_navigation }}
 </div>

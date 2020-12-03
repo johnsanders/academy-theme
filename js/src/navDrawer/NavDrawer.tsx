@@ -20,20 +20,20 @@ const NavDrawer: React.FC = (): JSX.Element | null => {
 									list-group-item-action
 									${navItem.isactive ? 'active' : ''}
 									${navItem.classes.join(' ')}
-									data-collapse="{{collapse}}"
-									data-forceopen="{{forceopen}}"
-									data-hidden="{{hidden}}"
-									data-indent="{{get_indent}}"
-									data-isactive="{{isactive}}"
-									data-isexpandable="{{isexpandable}}"
-									data-key="{{key}}"
-									data-nodetype="{{nodetype}}"
-									data-parent-key={navItem?.parent?.key}
-									data-preceedwithhr="{{preceedwithhr}}"
-									data-showdivider="{{showdivider}}"
-									data-type="{{type}}"
-									href="{{{action}}}"
 								`}
+								data-collapse="{{collapse}}"
+								data-forceopen="{{forceopen}}"
+								data-hidden="{{hidden}}"
+								data-indent="{{get_indent}}"
+								data-isactive="${navItem.isactive.toString()}"
+								data-isexpandable="{{isexpandable}}"
+								data-key="{{key}}"
+								data-nodetype="{{nodetype}}"
+								data-parent-key="${navItem?.parent?.key}"
+								data-preceedwithhr="{{preceedwithhr}}"
+								data-showdivider="{{showdivider}}"
+								data-type="{{type}}"
+								href={navItem.action}
 							>
 								<div className={`ml-${navItem.indent === 0 ? 0 : navItem.indent + 2}`}>
 									<div className="media">

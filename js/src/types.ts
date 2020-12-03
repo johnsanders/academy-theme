@@ -15,7 +15,7 @@ export interface Course {
 	modules: Module[];
 }
 export interface FlatNavItem {
-	action: { [key: string]: any };
+	action: string;
 	classes: string[];
 	get_indent: number;
 	icon: { alt: string; pix: string; component: string; attributes: { [key: string]: any } };
