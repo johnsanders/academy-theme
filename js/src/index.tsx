@@ -4,8 +4,8 @@ import Navbar from './navbar';
 import React from 'react';
 import { render } from 'react-dom';
 
-const GridAdmin = React.lazy(() => import('./gridSettings'));
-const GridDisplay = React.lazy(() => import('./gridDisplay'));
+const Settings = React.lazy(() => import('./themeSettings'));
+const FrontPage = React.lazy(() => import('./frontPage'));
 
 const App: React.FC = (): JSX.Element => {
 	const { search } = window.location;
@@ -14,7 +14,7 @@ const App: React.FC = (): JSX.Element => {
 			<Navbar />
 			<NavDrawer />
 			<React.Suspense fallback={<Loading />}>
-				{search.includes('section=themesettingacademy') ? <GridAdmin /> : <GridDisplay />}
+				{search.includes('section=themesettingacademy') ? <Settings /> : <FrontPage />}
 			</React.Suspense>
 		</>
 	);

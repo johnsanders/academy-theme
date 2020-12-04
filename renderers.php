@@ -64,9 +64,9 @@ class theme_academy_core_renderer extends core_renderer
 		$loginurl = get_login_url();
 		// If not logged in, show the typical not-logged-in string.
 		if (!isloggedin()) {
-			$returnstr = get_string('loggedinnot', 'moodle');
+			$returnstr = ''; // get_string('loggedinnot', 'moodle');
 			if (!$loginpage) {
-				$returnstr .= " (<a href=\"$loginurl\">" . get_string('login') . '</a>)';
+				$returnstr .= "<a href=\"$loginurl\">" . get_string('login') . '</a>';
 			}
 			return html_writer::div(
 				html_writer::span(

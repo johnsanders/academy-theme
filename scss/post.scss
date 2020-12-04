@@ -1,4 +1,26 @@
 @font-face { 
+	font-family: 'CNNSansBlack';
+	src: url('[[font:theme|CNNSansDisplayW04-Black.eot]]');
+	src: url('[[font:theme|CNNSansDisplayW04-Black.eot]]') format('embedded-opentype'),
+			 url('[[font:theme|CNNSansDisplayW04-Black.woff]]') format('woff'),
+			 url('[[font:theme|CNNSansDisplayW04-Black.woff2]]') format('woff2'),
+			 url('[[font:theme|CNNSansDisplayW04-Black.ttf]]') format('truetype'),
+			 url('[[font:theme|CNNSansDisplayW04-Black.svg]]') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face { 
+	font-family: 'CNNSansMedium';
+	src: url('[[font:theme|CNNSansDisplayW04-Medium.eot]]');
+	src: url('[[font:theme|CNNSansDisplayW04-Medium.eot]]') format('embedded-opentype'),
+			 url('[[font:theme|CNNSansDisplayW04-Medium.woff]]') format('woff'),
+			 url('[[font:theme|CNNSansDisplayW04-Medium.woff2]]') format('woff2'),
+			 url('[[font:theme|CNNSansDisplayW04-Medium.ttf]]') format('truetype'),
+			 url('[[font:theme|CNNSansDisplayW04-Medium.svg]]') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face { 
 	font-family: 'CNNSansRegular';
 	src: url('[[font:theme|CNNSansDisplayW04-Regular.eot]]');
 	src: url('[[font:theme|CNNSansDisplayW04-Regular.eot]]') format('embedded-opentype'),

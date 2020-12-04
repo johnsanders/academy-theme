@@ -69,5 +69,5 @@ $templatecontext = [
 	'sitename' => $sitename,
 ];
 
-$templatecontext['firstcollectionlabel'] = $nav_all->get_collectionlabel();
+$templatecontext['firstcollectionlabel'] = json_encode($nav_all->get_collectionlabel());
 echo $OUTPUT->render_from_template('theme_academy/columns2', $templatecontext);

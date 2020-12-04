@@ -1,0 +1,53 @@
+@media (min-width: 1500px) {
+	.col-xxl-2 {
+		-ms-flex: 0 0 16.666667%;
+		flex: 0 0 16.666667%;
+		max-width: 16.666667%;
+	}
+}
+.__react_component_tooltip {
+	padding: 2px 7px !important;
+}
+.academyTagsContainer span {
+	background-color: #ced4da;
+	border-radius: 5px;
+	font-size: 0.85em;
+	margin: 0 0.5em 0.5em 0;
+	padding: 2px 5px;
+}
+.avatar {
+	margin-left: -10px;
+}
+.card {
+	border: 1px solid rgba(0,0,0,.125) !important;
+}
+.card-img-top {
+	position: relative
+}
+.card-img-top img {
+	width: 100%
+}
+.carouselImg {
+	width: 100%;
+}
+.duration {
+	background-color: #00000050;
+	bottom: 0;
+	color: white;
+	padding: 0 0.5em;
+	position: absolute;
+	right: 0;
+}
+.gridRowItem:hover {
+	transform: scale3d(1.05, 1.05, 1.05);
+	transform-origin: center;
+	transition: transform 0.2s;
+}
+.rowHeader {
+	display: flex;
+	justify-content: space-between;
+}
+span.badge {
+	background-color: gray !important;
+	margin: 0 0.25em;
+}
