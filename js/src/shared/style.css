@@ -8,6 +8,13 @@
 	height: 50px;
 	max-height: 50px;
 }
+.body {
+	color: #2d2d2d;
+}
+button.btn:focus {
+	outline: none;
+	box-shadow: 0 0 0 1px rgba(170, 170, 170, 0.75)
+}
 .capInitial {
 	text-transform: capitalize;
 }
