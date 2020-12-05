@@ -16,14 +16,12 @@
                     <a href="{{signupurl}}">{{#str}} tocreatenewaccount {{/str}}</a>
                 </div>
             {{/cansignup}}
-
             {{#error}}
                 <div class="loginerrors mt-3">
                     <a href="#" id="loginerrormessage" class="accesshide">{{error}}</a>
                     <div class="alert alert-danger" role="alert" data-aria-autofocus="true">{{error}}</div>
                 </div>
             {{/error}}
-
             <div class="row justify-content-md-center">
                 <div class="col-md-5">
                     <form class="mt-3" action="{{loginurl}}" method="post" id="login">
