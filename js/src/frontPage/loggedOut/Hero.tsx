@@ -1,8 +1,8 @@
-declare const M: MoodleJs;
 declare const navbarConfig: NavbarConfig;
-import { MoodleJs, NavbarConfig } from '../../types';
+import { NavbarConfig } from '../../types';
 import React from 'react';
 import heroVideo from '../../img/hero.mp4';
+import logoLight from '../../img/logo_light.png';
 
 const Hero: React.FC = (): JSX.Element => (
 	<div
@@ -37,7 +37,7 @@ const Hero: React.FC = (): JSX.Element => (
 						<img
 							alt={navbarConfig.siteName}
 							className="mb-5"
-							src={M.cfg.wwwroot + '/theme/academy/images/logo_light.png'}
+							src={logoLight}
 							style={{ height: '150px' }}
 						/>
 						<h2 className="text-center text-light">

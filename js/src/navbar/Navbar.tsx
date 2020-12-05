@@ -5,6 +5,7 @@ import { MoodleJs, NavbarConfig } from '../types';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { faBars } from '@fortawesome/pro-solid-svg-icons';
+import logoLight from '../img/logo_light.png';
 
 interface Props {
 	fixed?: boolean;
@@ -48,10 +49,7 @@ const Navbar: React.FC<Props> = (props: Props): JSX.Element => (
 			</div>
 			<a className="navbar-brand aabtn has-logo" href={M.cfg.wwwroot}>
 				<span className="logo fullsize d-none d-sm-inline">
-					<img
-						alt={navbarConfig.siteName}
-						src={M.cfg.wwwroot + '/theme/academy/images/logo_light.png'}
-					/>
+					<img alt={navbarConfig.siteName} src={logoLight} />
 				</span>
 			</a>
 			<ul

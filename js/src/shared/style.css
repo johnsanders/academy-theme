@@ -27,6 +27,10 @@ button.btn:focus {
 .fontMedium {
 	font-family: 'CNNSansMedium';
 }
+footer {
+	background-color: #18191A;
+	color: white;
+}
 .gridRowItems {
 	display: flex;
 	flex-wrap: nowrap;

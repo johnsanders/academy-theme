@@ -1,4 +1,5 @@
 import ClientSegments from './ClientSegments';
+import Contact from './Contact';
 import Delivery from './Delivery';
 import ExecEducation from './ExecEducation';
 import Hero from './Hero';
@@ -13,6 +14,7 @@ const LoggedOut: React.FC = (): JSX.Element => {
 			<ExecEducation />
 			<Delivery />
 			<Trainers />
+			<Contact />
 		</>
 	);
 };

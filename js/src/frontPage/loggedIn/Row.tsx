@@ -33,7 +33,7 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => {
 	};
 	const handleScrollEvent = (): void => updateContainerInfo();
 	return (
-		<div>
+		<div className="thing">
 			<h3>{props.row.name}</h3>
 			<div className="position-relative">
 				<ScrollButtons

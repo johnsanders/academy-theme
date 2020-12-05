@@ -6,10 +6,10 @@
 			{{> theme_academy/navbar }}
 			{{> theme_academy/nav_drawer }}
 			<div id="page" class="container-fluid d-print-block">
-				<div class="{{#is_front_page}}d-none{{/is_front_page}}">
-					{{{ output.full_header }}}
-				</div>
-				<div id="page-content" class="row pb-3 d-print-block">
+				{{#is_front_page}}
+					<div id="academyFront"></div>
+				{{/is_front_page}}
+				<div id="page-content" class="row py-3 d-print-block {{#is_front_page}}d-none{{/is_front_page}}">
 					<div id="region-main-box" class="col-12">
 						{{#hasregionmainsettingsmenu}}
 							<div
@@ -21,7 +21,7 @@
 						{{/hasregionmainsettingsmenu}}
 						<section
 							id="region-main"
-							class="has-blocks mb-3 {{#is_front_page}}d-none{{/is_front_page}}"
+							class="has-blocks mb-3"
 							aria-label="{{#str}}content{{/str}}"
 						>
 							{{#hasregionmainsettingsmenu}}
@@ -32,9 +32,6 @@
 							{{{ output.activity_navigation }}}
 							{{{ output.course_content_footer }}}
 						</section>
-						{{#is_front_page}}
-							<div id="academyFront"></div>
-						{{/is_front_page}}
 						{{#hasblocks}}
 							<section
 								data-region="blocks-column"
@@ -48,7 +45,7 @@
 				</div>
 			</div>
 			{{{ output.standard_after_main_region_html }}}
-			{{> theme_academy/footer }}
+			<div id="academyFooter"></div>
 		</div>
 	</body>
 </html>
