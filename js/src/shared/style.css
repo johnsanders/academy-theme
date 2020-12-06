@@ -30,6 +30,10 @@ button.btn:focus {
 footer {
 	background-color: #18191A;
 	color: white;
+	transition: transform 0.5s;
+}
+footer .drawerOpen {
+	transform: translate3d(280px, 0, 0);
 }
 .gridRowItems {
 	display: flex;

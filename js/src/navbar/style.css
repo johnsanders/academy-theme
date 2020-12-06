@@ -11,6 +11,7 @@ nav.navbar .nav-link {
 }
 nav.navbar.fixed-top {
 	position: fixed !important;
+	z-index: 10300;
 }
 nav.navbar.navbar-large {
 	left: 0;

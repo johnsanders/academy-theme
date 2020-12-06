@@ -11,7 +11,13 @@ const Footer: React.FC<Props> = (props: Props): JSX.Element | null => {
 	if (!el) return null;
 	return createPortal(
 		<footer
-			className="pr-3 d-flex align-items-center justify-content-between w-100"
+			className={`
+				pr-3
+				d-flex
+				align-items-center
+				justify-content-between
+				w-100
+				${props.drawerOpen ? 'drawerOpen' : ''}`}
 			id="page-footer"
 		>
 			<img src={cnnLogo} style={{ height: '100px' }} />
