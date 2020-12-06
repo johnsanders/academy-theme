@@ -1,17 +1,18 @@
 declare const M: MoodleJs;
-declare const navbarConfig: NavbarConfig;
+declare const cnnAcademy: MoodleAcademy;
 import './style.css';
-import { MoodleJs, NavbarConfig } from '../types';
+import { MoodleAcademy, MoodleJs } from '../types';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { faBars } from '@fortawesome/pro-solid-svg-icons';
 import logoLight from '../img/logo_light.png';
 
+const { navbarConfig } = cnnAcademy;
+
 interface Props {
 	fixed?: boolean;
 	forceUserMenu?: boolean;
-	forwardRef: React.MutableRefObject<HTMLElement | undefined>;
-	isIn: boolean;
+	handleDrawerToggleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	size: string;
 }
 
@@ -24,12 +25,8 @@ const Navbar: React.FC<Props> = (props: Props): JSX.Element => (
 			${props.fixed ? 'fixed-top' : ''}
 			navbar-${props.size}
 			navbar-expand
-			${props.isIn ? '' : 'navbar-out'}
 			moodle-has-zindex
 		`}
-			ref={(el) => {
-				if (el) props.forwardRef.current = el;
-			}}
 		>
 			<div
 				className={`
@@ -45,6 +42,7 @@ const Navbar: React.FC<Props> = (props: Props): JSX.Element => (
 					data-action="toggle-drawer"
 					data-preference="drawer-open-nav"
 					data-side="left"
+					onClick={props.handleDrawerToggleClick}
 					type="button"
 				>
 					<Icon icon={faBars} />
@@ -73,13 +71,13 @@ const Navbar: React.FC<Props> = (props: Props): JSX.Element => (
 				/>
 			</ul>
 		</nav>
-		{props.forceUserMenu && !props.isIn ? (
+		{!props.forceUserMenu ? null : (
 			<div
 				className="forcedUserMenu"
 				dangerouslySetInnerHTML={{ __html: navbarConfig.userMenu }}
 				style={{ position: 'fixed', right: '1em', zIndex: 900 }}
 			/>
-		) : null}
+		)}
 	</>
 );
 

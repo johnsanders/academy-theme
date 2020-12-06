@@ -1,6 +1,6 @@
-declare const avatarUrls: string[];
+declare const cnnAcademy: MoodleAcademy;
+import { Instructor, MoodleAcademy } from '../types';
 import ImagesModal from './ImagesModal';
-import { Instructor } from '../types';
 import Instructors from './Instructors';
 import React from 'react';
 import { v4 as uuid } from 'uuid';
@@ -72,7 +72,7 @@ const InstructorsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			{!imageModalIsOpen ? null : (
 				<ImagesModal
 					handleImageClick={handleAvatarClick}
-					imageUrls={avatarUrls}
+					imageUrls={cnnAcademy.avatarUrls}
 					setIsOpen={setImageModalIsOpen}
 				/>
 			)}

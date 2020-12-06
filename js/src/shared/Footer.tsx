@@ -2,7 +2,11 @@ import React from 'react';
 import cnnLogo from '../img/cnn_logo.png';
 import { createPortal } from 'react-dom';
 
-const Footer: React.FC = (): JSX.Element | null => {
+interface Props {
+	drawerOpen: boolean;
+}
+
+const Footer: React.FC<Props> = (props: Props): JSX.Element | null => {
 	const el = document.getElementById('academyFooter');
 	if (!el) return null;
 	return createPortal(

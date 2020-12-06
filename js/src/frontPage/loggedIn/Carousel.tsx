@@ -1,13 +1,13 @@
-declare const carousel: CarouselItem[];
+declare const cnnAcademy: MoodleAcademy;
 import '../../shared/slickSlider.css';
 import '../../shared/slickSliderTheme.css';
-import { CarouselItem } from '../../types';
+import { MoodleAcademy } from '../../types';
 import React from 'react';
 import Slider from 'react-slick';
 
 const Carousel: React.FC = (): JSX.Element => {
 	const settings = {
-		arrows: true,
+		arrows: false,
 		autoplay: true,
 		autoplaySpeed: 10000,
 		dots: true,
@@ -19,7 +19,7 @@ const Carousel: React.FC = (): JSX.Element => {
 	};
 	return (
 		<Slider {...settings}>
-			{carousel.map((item) => (
+			{cnnAcademy.carousel.map((item) => (
 				<a href={item.targetUrl} key={item.id}>
 					<img className="carouselImg" src={item.url} />
 				</a>

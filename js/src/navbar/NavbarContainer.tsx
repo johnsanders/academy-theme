@@ -1,61 +1,73 @@
-declare const navbarConfig: NavbarConfig;
+declare const cnnAcademy: MoodleAcademy;
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { MoodleAcademy } from '../types';
 import Navbar from './Navbar';
-import { NavbarConfig } from '../types';
 import React from 'react';
-import attachListeners from './attachListeners';
 
+const { navbarConfig } = cnnAcademy;
 const largeThreshold = navbarConfig.isLoggedIn ? 50 : 400;
-const NavbarContainer: React.FC = (): JSX.Element => {
-	const stateRef = React.useRef(navbarConfig.isLoggedIn ? 'large' : 'none');
+
+interface Props {
+	setDrawerOpen: (drawerOpen: boolean) => void;
+}
+
+const NavbarContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	const drawerRef = React.useRef(document.querySelector('#nav-drawer') as HTMLElement);
-	const largeRef = React.useRef<HTMLDivElement>();
-	const smallRef = React.useRef<HTMLDivElement>();
-	const [largeIn, setLargeIn] = React.useState(stateRef.current === 'large');
-	const [smallIn, setSmallIn] = React.useState(stateRef.current === 'small');
+	const [navState, setNavState] = React.useState(navbarConfig.isLoggedIn ? 'large' : 'none');
+	const navStateRef = React.useRef(navState);
+	navStateRef.current = navState;
 	const setLarge = (): void => {
-		stateRef.current = 'large';
 		drawerRef.current.classList.add('lower');
-		setLargeIn(true);
-		setSmallIn(false);
+		setNavState('large');
 	};
 	const setNone = (): void => {
-		stateRef.current = 'none';
 		drawerRef.current.classList.remove('lower');
-		setLargeIn(false);
-		setSmallIn(false);
+		setNavState('none');
 	};
 	const setSmall = (): void => {
-		stateRef.current = 'small';
-		setLargeIn(false);
-		setSmallIn(true);
+		setNavState('small');
 		drawerRef.current.classList.remove('lower');
 	};
+	const handleDrawerToggleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
+		e.preventDefault();
+		const drawerOpen = !drawerRef.current.classList.contains('closed');
+		console.log(drawerOpen);
+	};
 	React.useEffect(() => {
-		attachListeners(largeRef.current, smallRef.current);
 		const onScroll = () => {
 			if (navbarConfig.isLoggedIn) {
-				if (stateRef.current === 'small' && window.scrollY < largeThreshold) setLarge();
-				else if (stateRef.current === 'large' && window.scrollY > largeThreshold) setSmall();
+				if (navStateRef.current === 'small' && window.scrollY < largeThreshold) setLarge();
+				else if (navStateRef.current === 'large' && window.scrollY > largeThreshold) setSmall();
 			} else {
-				if (stateRef.current === 'large' && window.scrollY < largeThreshold) setNone();
-				else if (stateRef.current === 'none' && window.scrollY > largeThreshold) setLarge();
+				if (navStateRef.current === 'large' && window.scrollY < largeThreshold) setNone();
+				else if (navStateRef.current === 'none' && window.scrollY > largeThreshold) setLarge();
 			}
 		};
 		onScroll();
 		document.addEventListener('scroll', onScroll);
 		return () => document.removeEventListener('scroll', onScroll);
 	}, []);
+	React.useEffect(() => {
+		if (cnnAcademy.drawer) cnnAcademy.drawer.init();
+	}, [navState]);
 	return (
-		<>
-			<Navbar
-				fixed={!navbarConfig.isLoggedIn}
-				forceUserMenu={!navbarConfig.isLoggedIn}
-				forwardRef={largeRef}
-				isIn={largeIn}
-				size="large"
-			/>
-			<Navbar fixed={true} forwardRef={smallRef} isIn={smallIn} size="small" />
-		</>
+		<TransitionGroup>
+			{navState === 'large' ? (
+				<CSSTransition classNames="navbar" timeout={300}>
+					<Navbar
+						fixed={!navbarConfig.isLoggedIn}
+						forceUserMenu={!navbarConfig.isLoggedIn}
+						handleDrawerToggleClick={handleDrawerToggleClick}
+						size="large"
+					/>
+				</CSSTransition>
+			) : null}
+			{navState === 'small' ? (
+				<CSSTransition classNames="navbar" timeout={300}>
+					<Navbar fixed={true} handleDrawerToggleClick={handleDrawerToggleClick} size="small" />
+				</CSSTransition>
+			) : null}
+		</TransitionGroup>
 	);
 };
 

@@ -1,7 +1,7 @@
-declare const inputId: string;
+declare const cnnAcademy: MoodleAcademy;
 import './style.css';
 import '../shared/style.css';
-import { CarouselItem, Config, Instructor, Row } from '../types';
+import { CarouselItem, Config, Instructor, MoodleAcademy, Row } from '../types';
 import App from './GridSettings';
 import React from 'react';
 import { Tag } from '../types';
@@ -12,7 +12,9 @@ import updateUrl from '../helpers/updateUrl';
 const initialConfig: Config = { carousel: [], instructors: [], rows: [], tags: [] };
 
 const GridSettingsContainer: React.FC = (): JSX.Element => {
-	const inputRef = React.useRef(document.getElementById(inputId) as HTMLInputElement);
+	const inputRef = React.useRef(
+		document.getElementById(cnnAcademy.settingsInputId) as HTMLInputElement,
+	);
 	const queryRef = React.useRef<{ [key: string]: unknown }>(
 		qs.parse(window.location.search, { ignoreQueryPrefix: true }),
 	);

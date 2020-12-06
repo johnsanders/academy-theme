@@ -1,17 +1,10 @@
-declare const navbarConfig: NavbarConfig;
-import Footer from '../shared/Footer';
+declare const cnnAcademy: MoodleAcademy;
 import LoggedIn from './loggedIn';
 import LoggedOut from './loggedOut';
-import { NavbarConfig } from '../types';
+import { MoodleAcademy } from '../types';
 import React from 'react';
 
-const FrontPage: React.FC = (): JSX.Element => {
-	return (
-		<>
-			{navbarConfig.isLoggedIn ? <LoggedIn /> : <LoggedOut />}
-			<Footer />
-		</>
-	);
-};
+const FrontPage: React.FC = (): JSX.Element =>
+	cnnAcademy.navbarConfig.isLoggedIn ? <LoggedIn /> : <LoggedOut />;
 
 export default FrontPage;

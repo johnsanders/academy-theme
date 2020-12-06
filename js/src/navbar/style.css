@@ -44,9 +44,12 @@ nav.navbar.navbar-small.navbar-out {
 nav.navbar .usertext, nav.navbar .dropdown-toggle:after, nav.navbar .login, nav.navbar .login a {
 	color: white;
 }
+#nav-drawer {
+	top: 40px;
+}
 #nav-drawer nav.list-group {
 	transition: transform 0.33s;
 }
 #nav-drawer.lower nav.list-group {
-	transform: translate3d(0, 50px, 0);
+	transform: translate3d(0, 60px, 0);
 }

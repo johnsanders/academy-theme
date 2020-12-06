@@ -37,6 +37,16 @@ export interface Module {
 	modname: string;
 	name: string;
 }
+export interface MoodleAcademy {
+	avatarUrls: string[];
+	carousel: CarouselItem[];
+	courses: Course[];
+	drawer: { init: () => void };
+	navbarConfig: NavbarConfig;
+	rows: Row[];
+	settingsInputId: string;
+	thumbsUrls: string[];
+}
 export interface MoodleJs {
 	cfg: { wwwroot: string };
 }

@@ -1,11 +1,11 @@
-declare const rows: RowType[];
+declare const cnnAcademy: MoodleAcademy;
 import './style.css';
 import '../../shared/style.css';
 import Carousel from './Carousel';
+import { MoodleAcademy } from '../../types';
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
 import Row from './Row';
-import { Row as RowType } from '../../types';
 import { createPortal } from 'react-dom';
 
 const LoggedIn: React.FC = (): JSX.Element | null => {
@@ -14,10 +14,10 @@ const LoggedIn: React.FC = (): JSX.Element | null => {
 	return createPortal(
 		<>
 			<ReactTooltip />
-			<div className="my-3">
+			<div className="my-3" style={{ height: '160px' }}>
 				<Carousel />
 			</div>
-			{rows.map((row) => (
+			{cnnAcademy.rows.map((row) => (
 				<Row key={row.id} row={row} />
 			))}
 		</>,

@@ -1,5 +1,5 @@
-declare const navbarConfig: NavbarConfig;
-import { NavbarConfig } from '../../types';
+declare const cnnAcademy: MoodleAcademy;
+import { MoodleAcademy } from '../../types';
 import React from 'react';
 import heroVideo from '../../img/hero.mp4';
 import logoLight from '../../img/logo_light.png';
@@ -35,7 +35,7 @@ const Hero: React.FC = (): JSX.Element => (
 				<div className="row h-100">
 					<div className="col-xs-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 d-flex flex-column justify-content-center align-items-center">
 						<img
-							alt={navbarConfig.siteName}
+							alt={cnnAcademy.navbarConfig.siteName}
 							className="mb-5"
 							src={logoLight}
 							style={{ height: '150px' }}
