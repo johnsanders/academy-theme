@@ -81,9 +81,8 @@ class theme_academy_core_renderer extends core_renderer
 		if (isguestuser()) {
 			$returnstr = get_string('loggedinasguest');
 			if (!$loginpage && $withlinks) {
-				$returnstr .= " (<a href=\"$loginurl\">" . get_string('login') . '</a>)';
+				$returnstr .= " <a href=\"$loginurl\">" . get_string('login') . '</a>';
 			}
-
 			return html_writer::div(
 				html_writer::span(
 					$returnstr,
@@ -95,17 +94,10 @@ class theme_academy_core_renderer extends core_renderer
 
 		// Get some navigation opts.
 		$opts = user_get_user_navigation_info($user, $this->page);
-
-		// $avatarclasses = "avatars";
-		$avatarcontents = html_writer::span($opts->metadata['useravatar'], 'avatar current');
 		$usertextcontents = $opts->metadata['userfullname'];
 
 		// Other user.
 		if (!empty($opts->metadata['asotheruser'])) {
-			$avatarcontents .= html_writer::span(
-				$opts->metadata['realuseravatar'],
-				'avatar realuser'
-			);
 			$usertextcontents = $opts->metadata['realuserfullname'];
 			$usertextcontents .= html_writer::tag(
 				'span',
@@ -138,24 +130,7 @@ class theme_academy_core_renderer extends core_renderer
 			);
 		}
 
-		/*
-		// MNet.
-		if (!empty($opts->metadata['asmnetuser'])) {
-			$mnet = strtolower(preg_replace('#[ ]+#', '-', trim($opts->metadata['mnetidprovidername'])));
-			$usertextcontents .= html_writer::span(
-				$opts->metadata['mnetidprovidername'],
-				'meta mnet mnet-' . $mnet
-			);
-		}
-		*/
 
-		/*
-		$returnstr .= html_writer::span(
-			html_writer::span($usertextcontents, 'usertext mr-1') .
-				html_writer::span($avatarcontents, $avatarclasses),
-			'userbutton'
-		);
-		*/
 		$returnstr .= html_writer::span($usertextcontents, 'usertext mr-1');
 
 		// Create a divider (well, a filler).

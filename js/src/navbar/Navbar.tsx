@@ -10,6 +10,7 @@ import logoLight from '../img/logo_light.png';
 interface Props {
 	fixed?: boolean;
 	forceUserMenu?: boolean;
+	forwardRef: React.MutableRefObject<HTMLElement | undefined>;
 	isIn: boolean;
 	size: string;
 }
@@ -26,6 +27,9 @@ const Navbar: React.FC<Props> = (props: Props): JSX.Element => (
 			${props.isIn ? '' : 'navbar-out'}
 			moodle-has-zindex
 		`}
+			ref={(el) => {
+				if (el) props.forwardRef.current = el;
+			}}
 		>
 			<div
 				className={`

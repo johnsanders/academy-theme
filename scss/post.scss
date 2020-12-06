@@ -34,6 +34,12 @@
 body {
 	font-family: 'CNNSansRegular';
 }
+.list-group-item.active {
+	z-index: 2;
+	color: #fff;
+	background-color: #6c757d;
+	border-color:#6c757d;
+}
 .loginLogo {
 	max-height: 100px;
 }

@@ -2,11 +2,14 @@ declare const navbarConfig: NavbarConfig;
 import Navbar from './Navbar';
 import { NavbarConfig } from '../types';
 import React from 'react';
+import attachListeners from './attachListeners';
 
 const largeThreshold = navbarConfig.isLoggedIn ? 50 : 400;
 const NavbarContainer: React.FC = (): JSX.Element => {
 	const stateRef = React.useRef(navbarConfig.isLoggedIn ? 'large' : 'none');
-	const drawerRef = React.useRef(document.querySelector('#nav-drawer') as HTMLDivElement);
+	const drawerRef = React.useRef(document.querySelector('#nav-drawer') as HTMLElement);
+	const largeRef = React.useRef<HTMLDivElement>();
+	const smallRef = React.useRef<HTMLDivElement>();
 	const [largeIn, setLargeIn] = React.useState(stateRef.current === 'large');
 	const [smallIn, setSmallIn] = React.useState(stateRef.current === 'small');
 	const setLarge = (): void => {
@@ -28,6 +31,7 @@ const NavbarContainer: React.FC = (): JSX.Element => {
 		drawerRef.current.classList.remove('lower');
 	};
 	React.useEffect(() => {
+		attachListeners(largeRef.current, smallRef.current);
 		const onScroll = () => {
 			if (navbarConfig.isLoggedIn) {
 				if (stateRef.current === 'small' && window.scrollY < largeThreshold) setLarge();
@@ -46,10 +50,11 @@ const NavbarContainer: React.FC = (): JSX.Element => {
 			<Navbar
 				fixed={!navbarConfig.isLoggedIn}
 				forceUserMenu={!navbarConfig.isLoggedIn}
+				forwardRef={largeRef}
 				isIn={largeIn}
 				size="large"
 			/>
-			<Navbar fixed={true} isIn={smallIn} size="small" />
+			<Navbar fixed={true} forwardRef={smallRef} isIn={smallIn} size="small" />
 		</>
 	);
 };

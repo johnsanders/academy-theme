@@ -33,6 +33,7 @@ $nav_config = json_encode([
 	"siteName" => $sitename,
 	"userMenu" => $OUTPUT->user_menu(),
 ]);
+
 $nav_all = $PAGE->flatnav;
 $nav = [];
 $unwanted_navs = ['Private files', 'Content bank', 'Badges', 'Competencies'];
@@ -47,6 +48,7 @@ foreach ($nav_all as $nav_item) {
 			"is_section" => $nav_item->is_section,
 			"isactive" => $nav_item->isactive,
 			"parent" => $nav_item->parent,
+			"showDivider" => $nav_item->showdivider(),
 			"text" => $nav_item->text,
 		],
 	);
@@ -54,7 +56,8 @@ foreach ($nav_all as $nav_item) {
 $templatecontext = [
 	'bodyattributes' => $bodyattributes,
 	'carousel_json' => $grid_config["carousel_json"],
-	'flatnavigation_json' => json_encode($nav),
+	'flatnavigation_json' => '[]', // json_encode($nav),
+	'flatnavigation' => $PAGE->flatnav,
 	'hasblocks' => $hasblocks,
 	'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
 	'is_logged_in' => isloggedin(),
