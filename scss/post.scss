@@ -43,6 +43,9 @@ body {
 .loginLogo {
 	max-height: 100px;
 }
-#page {
+#page.loggedIn {
 	margin-top: 105px;
+}
+#page.loggedOut {
+	margin-top: 0;
 }

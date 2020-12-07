@@ -8,7 +8,15 @@
 			{{{ output.standard_top_of_body_html }}}
 			{{> theme_academy/navbar }}
 			{{> theme_academy/nav_drawer }}
-			<div id="page" class="container-fluid d-print-block">
+			<div
+				id="page"
+					class="
+						container-fluid
+						d-print-block
+						{{#is_logged_in}}loggedIn{{/is_logged_in}}
+						{{^is_logged_in}}loggedOut{{/is_logged_in}}
+					"
+				>
 				{{#is_front_page}}
 					<div id="academyFront"></div>
 				{{/is_front_page}}
