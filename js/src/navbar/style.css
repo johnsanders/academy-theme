@@ -5,9 +5,22 @@ nav.navbar {
 	background-color: #18191A;
 	box-shadow: 0 2px 4px rgba(0,0,0,0.5);
 	max-height: inherit;
+	transition: transform 0.33s;
 }
 nav.navbar .nav-link {
 	color: white;
+}
+nav.navbar-enter {
+	transform: translate3d(0, -105px, 0);
+}
+nav.navbar-enter-active {
+	transform: translate3d(0, 0, 0);
+}
+nav.navbar-exit{
+	transform: translate3d(0, 0, 0);
+}
+nav.navbar-exit-active {
+	transform: translate3d(0, -105px, 0);
 }
 nav.navbar.fixed-top {
 	position: fixed !important;
@@ -26,9 +39,6 @@ nav.navbar.navbar-large span.logo img {
 }
 nav.navbar.navbar-small {
 	padding: 0 1em 0 0;
-}
-nav.navbar.navbar-small, nav.navbar.navbar-large {
-	transition: transform 0.33s;
 }
 nav.navbar.navbar-small .navbar-brand {
 	padding: 0;
