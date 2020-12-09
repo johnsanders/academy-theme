@@ -1,1 +1,1 @@
-export { default } from './GridSettingsContainer';
+export { default } from './ThemeSettingsContainer';

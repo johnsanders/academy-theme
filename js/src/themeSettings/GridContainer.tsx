@@ -8,7 +8,6 @@ import { createBlankGridItem } from '../helpers/createBlankItem';
 
 interface Props {
 	config: Config;
-	inputRef: React.MutableRefObject<HTMLInputElement>;
 	setRows: (rows: Row[]) => void;
 }
 

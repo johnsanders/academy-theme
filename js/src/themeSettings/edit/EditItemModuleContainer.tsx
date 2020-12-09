@@ -1,5 +1,5 @@
-declare const courses: Course[];
-import { Course, Module, RowItem } from '../../types';
+declare const cnnAcademy: MoodleAcademy;
+import { Module, MoodleAcademy, RowItem } from '../../types';
 import EditItemModule from './EditItemModule';
 import React from 'react';
 
@@ -11,6 +11,7 @@ interface Props {
 }
 
 const ModuleSelector: React.FC<Props> = (props: Props): JSX.Element => {
+	const { courses } = cnnAcademy;
 	const allModulesRef = React.useRef(
 		courses.reduce<Module[]>((acc, course) => [...acc, ...course.modules], []),
 	);

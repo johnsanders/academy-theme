@@ -9,12 +9,12 @@ import Row from './Row';
 import { createPortal } from 'react-dom';
 
 const LoggedIn: React.FC = (): JSX.Element | null => {
-	const el = document.getElementById('academyFront');
+	const el = document.getElementById('academyContent');
 	if (!el) return null;
 	return createPortal(
 		<>
 			<ReactTooltip />
-			<div className="my-3" style={{ height: '160px' }}>
+			<div className="my-3">
 				<Carousel />
 			</div>
 			{cnnAcademy.rows.map((row) => (

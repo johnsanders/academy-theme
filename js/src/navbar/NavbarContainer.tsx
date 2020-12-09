@@ -3,6 +3,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { MoodleAcademy } from '../types';
 import Navbar from './Navbar';
 import React from 'react';
+import SimpleMenu from './SimpleMenu';
 
 const { navbarConfig } = cnnAcademy;
 const largeThreshold = navbarConfig.isLoggedIn ? 50 : 400;
@@ -30,8 +31,6 @@ const NavbarContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	};
 	const handleDrawerToggleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
-		const drawerOpen = !drawerRef.current.classList.contains('closed');
-		console.log(drawerOpen);
 	};
 	React.useEffect(() => {
 		const onScroll = () => {
@@ -56,7 +55,6 @@ const NavbarContainer: React.FC<Props> = (props: Props): JSX.Element => {
 				<CSSTransition classNames="navbar" timeout={300}>
 					<Navbar
 						fixed={!navbarConfig.isLoggedIn}
-						forceUserMenu={!navbarConfig.isLoggedIn}
 						handleDrawerToggleClick={handleDrawerToggleClick}
 						size="large"
 					/>
@@ -67,6 +65,7 @@ const NavbarContainer: React.FC<Props> = (props: Props): JSX.Element => {
 					<Navbar fixed={true} handleDrawerToggleClick={handleDrawerToggleClick} size="small" />
 				</CSSTransition>
 			) : null}
+			{navState === 'none' ? <SimpleMenu userMenu={navbarConfig.userMenu} /> : null}
 		</TransitionGroup>
 	);
 };

@@ -15,7 +15,6 @@ const MainContent: React.FC = (): JSX.Element => {
 		const drawer = document.getElementById('nav-drawer');
 		// setDrawerOpen(!drawer ? false : !drawer.classList.contains('closed'));
 	}, []);
-	console.log('fjdsklfjds');
 	return (
 		<>
 			<Navbar setDrawerOpen={setDrawerOpen} />

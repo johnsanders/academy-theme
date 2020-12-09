@@ -1,13 +1,16 @@
-<script>
-	cnnAcademy = {};
-</script>
 {{> theme_boost/head }}
 	<body {{{ bodyattributes }}}>
+		<script>
+			cnnAcademy = {};
+		</script>
 		{{> core/local/toast/wrapper}}
 		<div id="page-wrapper" class="d-print-block">
 			{{{ output.standard_top_of_body_html }}}
 			{{> theme_academy/navbar }}
 			{{> theme_academy/nav_drawer }}
+			{{#has_academy_content}}
+				<div id="academyContent"></div>
+			{{/has_academy_content}}
 			<div
 				id="page"
 					class="
@@ -15,12 +18,13 @@
 						d-print-block
 						{{#is_logged_in}}loggedIn{{/is_logged_in}}
 						{{^is_logged_in}}loggedOut{{/is_logged_in}}
+						{{#has_academy_content}}d-none{{/has_academy_content}}
 					"
 				>
-				{{#is_front_page}}
-					<div id="academyFront"></div>
-				{{/is_front_page}}
-				<div id="page-content" class="row py-3 d-print-block {{#is_front_page}}d-none{{/is_front_page}}">
+				{{^has_academy_content}}
+					{{{ output.full_header }}}
+				{{/has_academy_content}}
+				<div id="page-content" class="row py-3 d-print-block ">
 					<div id="region-main-box" class="col-12">
 						{{#hasregionmainsettingsmenu}}
 							<div
@@ -73,3 +77,4 @@
 			M.util.js_complete('theme_boost/drawer');
 	});
 {{/js}}
+{{> theme_academy/handle_zoom_frame }}

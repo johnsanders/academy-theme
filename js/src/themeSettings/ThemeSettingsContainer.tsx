@@ -2,16 +2,17 @@ declare const cnnAcademy: MoodleAcademy;
 import './style.css';
 import '../shared/style.css';
 import { CarouselItem, Config, Instructor, MoodleAcademy, Row } from '../types';
-import App from './GridSettings';
 import React from 'react';
 import { Tag } from '../types';
+import ThemeSettings from './ThemeSettings';
+import { createPortal } from 'react-dom';
 import modifyDom from '../helpers/modifyDom';
 import qs from 'qs';
 import updateUrl from '../helpers/updateUrl';
 
 const initialConfig: Config = { carousel: [], instructors: [], rows: [], tags: [] };
 
-const GridSettingsContainer: React.FC = (): JSX.Element => {
+const ThemeSettingsContainer: React.FC = (): JSX.Element | null => {
 	const inputRef = React.useRef(
 		document.getElementById(cnnAcademy.settingsInputId) as HTMLInputElement,
 	);
@@ -61,8 +62,15 @@ const GridSettingsContainer: React.FC = (): JSX.Element => {
 		e.preventDefault();
 		if (formRef.current) formRef.current.submit();
 	};
-	return (
-		<App
+
+	const el = document.getElementById('academyContent');
+
+	if (!el) {
+		console.log('Could not find academyContent element');
+		return null;
+	}
+	return createPortal(
+		<ThemeSettings
 			activeTab={activeTab}
 			config={config}
 			handleNavClick={handleNavClick}
@@ -73,8 +81,9 @@ const GridSettingsContainer: React.FC = (): JSX.Element => {
 			setTags={setTags}
 			submitForm={submitForm}
 			unsavedChanges={unsavedChanges}
-		/>
+		/>,
+		el,
 	);
 };
 
-export default GridSettingsContainer;
+export default ThemeSettingsContainer;

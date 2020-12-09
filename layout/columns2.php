@@ -19,6 +19,7 @@ $hasblocks = strpos($blockshtml, 'data-block=') !== false;
 $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions();
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 $is_front_page = $PAGE->has_set_url() && $PAGE->url->compare(context_system::instance()->get_url(), URL_MATCH_BASE);
+$is_settings_page = $PAGE->has_set_url() && strpos((string)$PAGE->url, 'themesettingacademy') !== false;
 $grid_config = get_grid_context();
 $sitename = format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);
 
@@ -58,10 +59,10 @@ $templatecontext = [
 	'carousel_json' => $grid_config["carousel_json"],
 	'flatnavigation_json' => '[]', // json_encode($nav),
 	'flatnavigation' => $PAGE->flatnav,
+	'has_academy_content' => $is_front_page || $is_settings_page,
 	'hasblocks' => $hasblocks,
 	'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
 	'is_logged_in' => isloggedin(),
-	'is_front_page' => $is_front_page,
 	'js_src' => $grid_config["js_src"],
 	'nav_config' => $nav_config,
 	'navdraweropen' => $navdraweropen,
@@ -70,6 +71,7 @@ $templatecontext = [
 	'rows_json' => $grid_config["rows_json"],
 	'sidepreblocks' => $blockshtml,
 	'sitename' => $sitename,
+	'user_name_for_zoom_iframe' => urlencode($USER->firstname . ' ' . $USER->lastname),
 ];
 
 $templatecontext['firstcollectionlabel'] = json_encode($nav_all->get_collectionlabel());

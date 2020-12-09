@@ -49,7 +49,7 @@ const GridSettings: React.FC<Props> = (props: Props): JSX.Element => (
 			))}
 		</ul>
 		{props.activeTab === 'grid' ? (
-			<GridContainer config={props.config} inputRef={props.inputRef} setRows={props.setRows} />
+			<GridContainer config={props.config} setRows={props.setRows} />
 		) : null}
 		{props.activeTab === 'carousel' ? (
 			<CarouselContainer
