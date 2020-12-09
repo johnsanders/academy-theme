@@ -1,9 +1,10 @@
 declare const cnnAcademy: MoodleAcademy;
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import CSSTransition from 'react-transition-group/CSSTransition';
 import { MoodleAcademy } from '../types';
 import Navbar from './Navbar';
 import React from 'react';
 import SimpleMenu from './SimpleMenu';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
 
 const { navbarConfig } = cnnAcademy;
 const largeThreshold = navbarConfig.isLoggedIn ? 50 : 400;

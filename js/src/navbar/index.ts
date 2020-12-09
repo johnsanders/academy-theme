@@ -1,1 +1,2 @@
-export { default } from './NavbarContainer';
+import NavbarContainer from './NavbarContainer';
+export default NavbarContainer;

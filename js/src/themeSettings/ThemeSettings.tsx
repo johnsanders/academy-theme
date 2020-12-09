@@ -31,7 +31,7 @@ const GridSettings: React.FC<Props> = (props: Props): JSX.Element => (
 				Unsaved Changes
 			</div>
 		)}
-		<button className="btn btn-primary mt-3 mb-4">
+		<button className="btn btn-primary mt-3 mb-4" onClick={props.submitForm}>
 			<Icon className="mr-1" icon={faSave} />
 			Save All Changes
 		</button>

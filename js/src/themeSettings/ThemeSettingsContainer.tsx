@@ -60,11 +60,10 @@ const ThemeSettingsContainer: React.FC = (): JSX.Element | null => {
 	const setTags = (tags: Tag[]): void => setConfig({ ...config, tags });
 	const submitForm = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
+		window.onbeforeunload = null;
 		if (formRef.current) formRef.current.submit();
 	};
-
 	const el = document.getElementById('academyContent');
-
 	if (!el) {
 		console.log('Could not find academyContent element');
 		return null;

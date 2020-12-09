@@ -8,9 +8,9 @@
 			{{{ output.standard_top_of_body_html }}}
 			{{> theme_academy/navbar }}
 			{{> theme_academy/nav_drawer }}
-			{{#has_academy_content}}
+			{{#is_front_page}}
 				<div id="academyContent"></div>
-			{{/has_academy_content}}
+			{{/is_front_page}}
 			<div
 				id="page"
 					class="
@@ -18,7 +18,7 @@
 						d-print-block
 						{{#is_logged_in}}loggedIn{{/is_logged_in}}
 						{{^is_logged_in}}loggedOut{{/is_logged_in}}
-						{{#has_academy_content}}d-none{{/has_academy_content}}
+						{{#is_front_page}}d-none{{/is_front_page}}
 					"
 				>
 				{{^has_academy_content}}
@@ -44,6 +44,9 @@
 							{{/hasregionmainsettingsmenu}}
 							{{{ output.course_content_header }}}
 							{{{ output.main_content }}}
+							{{#is_settings_page}}
+								<div id="academyContent"></div>
+							{{/is_settings_page}}
 							{{{ output.activity_navigation }}}
 							{{{ output.course_content_footer }}}
 						</section>

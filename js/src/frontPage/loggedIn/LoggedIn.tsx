@@ -12,7 +12,7 @@ const LoggedIn: React.FC = (): JSX.Element | null => {
 	const el = document.getElementById('academyContent');
 	if (!el) return null;
 	return createPortal(
-		<>
+		<div className="container" style={{ marginTop: '122px' }}>
 			<ReactTooltip />
 			<div className="my-3">
 				<Carousel />
@@ -20,7 +20,7 @@ const LoggedIn: React.FC = (): JSX.Element | null => {
 			{cnnAcademy.rows.map((row) => (
 				<Row key={row.id} row={row} />
 			))}
-		</>,
+		</div>,
 		el,
 	);
 };
