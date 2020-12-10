@@ -4,8 +4,8 @@ import professional from '../../img/professional.svg';
 import tvPhone from '../../img/tv_phone.svg';
 
 const ClientSegments: React.FC = (): JSX.Element => (
-	<div>
-		<div style={{ margin: '7em 0 5em 0' }}>
+	<div style={{ backgroundColor: 'white', padding: '10em 0' }}>
+		<div style={{ paddingBottom: '5em' }}>
 			<h1 className="text-center">Learning with CNN</h1>
 			<h5 className="text-center">CNN Academy serves three client segments</h5>
 		</div>

@@ -1,5 +1,8 @@
 {{> theme_boost/head }}
-	<body {{{ bodyattributes }}}>
+	<body
+		{{{ bodyattributes }}}
+		{{^is_logged_in}}style="background-color: black;"{{/is_logged_in}}
+	>
 		<script>
 			cnnAcademy = {};
 		</script>

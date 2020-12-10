@@ -5,7 +5,7 @@ import webinars from '../../img/webinars.jpg';
 
 const Delivery: React.FC = (): JSX.Element => (
 	<div style={{ backgroundColor: '#f1f1f2' }}>
-		<div className="mb-3" style={{ padding: '7em 0 5em 0' }}>
+		<div className="mb-3" style={{ padding: '10em 0 10em 0' }}>
 			<h1 className="text-center">Course Delivery</h1>
 			<h5 className="text-center">CNN Academy offers a diverse array of courses and modules.</h5>
 		</div>

@@ -21,9 +21,9 @@ const Trainers: React.FC = (): JSX.Element => {
 	};
 	const beforeChange = (_current: number, next: number): void => setSliderIndex(next);
 	return (
-		<div className="container" style={{ padding: '7em 0' }}>
+		<div style={{ backgroundColor: 'white', padding: '7em 2em' }}>
 			<div className="row">
-				<div className="col-xs-12 col-md-4">
+				<div className="col-xs-12 col-md-4 col-lg-3 offset-lg-1 offset-xl-2">
 					<h1 className="mb-5"> Our specialist team of trainers</h1>
 					<div className="mb-5">
 						Access one of our subject matter experts from our portfolio of trainers and journalists.
@@ -35,7 +35,11 @@ const Trainers: React.FC = (): JSX.Element => {
 						{trainersInfo[sliderIndex].description}
 					</div>
 				</div>
-				<div className="col-xs-12 col-md-8" id="sliderContainer" onClick={handleClick}>
+				<div
+					className="col-xs-12 col-md-8 col-lg-7 col-xl-5 mt-auto mb-auto"
+					id="sliderContainer"
+					onClick={handleClick}
+				>
 					<Slider
 						arrows={false}
 						beforeChange={beforeChange}

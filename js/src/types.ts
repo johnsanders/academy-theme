@@ -39,13 +39,14 @@ export interface Module {
 }
 export interface MoodleAcademy {
 	avatarUrls: string[];
-	carousel: CarouselItem[];
+	carouselItems: CarouselItem[];
+	carouselUrls: string[];
 	courses: Course[];
 	drawer: { init: () => void };
 	navbarConfig: NavbarConfig;
 	rows: Row[];
 	settingsInputId: string;
-	thumbsUrls: string[];
+	thumbUrls: string[];
 }
 export interface MoodleJs {
 	cfg: { wwwroot: string };

@@ -19,7 +19,7 @@ const Carousel: React.FC = (): JSX.Element => {
 	};
 	return (
 		<Slider {...settings}>
-			{cnnAcademy.carousel.map((item) => (
+			{cnnAcademy.carouselItems.map((item) => (
 				<a href={item.targetUrl} key={item.id}>
 					<img className="carouselImg" src={item.url} />
 				</a>

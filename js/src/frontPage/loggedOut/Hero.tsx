@@ -1,6 +1,7 @@
 declare const cnnAcademy: MoodleAcademy;
 import { MoodleAcademy } from '../../types';
 import React from 'react';
+import heroPoster from '../../img/heroPoster.jpg';
 import heroVideo from '../../img/hero.mp4';
 import logoLight from '../../img/logo_light.png';
 
@@ -19,6 +20,7 @@ const Hero: React.FC = (): JSX.Element => (
 			className="w-100"
 			loop={true}
 			muted={true}
+			poster={heroPoster}
 			src={heroVideo}
 			style={{ minHeight: '100%', minWidth: '100%', objectFit: 'cover' }}
 		/>

@@ -7,8 +7,7 @@ const ExecEducation: React.FC = (): JSX.Element => (
 		style={{
 			backgroundColor: '#18191A',
 			color: 'white',
-			margin: '8em 0 0 0',
-			padding: '8em 2em',
+			padding: '12em 3em',
 		}}
 	>
 		<div className="col-xs-12 col-md-8">

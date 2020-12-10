@@ -38,7 +38,7 @@ const EditItemThumbnail: React.FC<Props> = (props: Props): JSX.Element => {
 			{thumbsModalIsOpen && (
 				<ImagesModal
 					handleImageClick={props.updateThumb}
-					imageUrls={cnnAcademy.thumbsUrls}
+					imageUrls={cnnAcademy.thumbUrls}
 					setIsOpen={setThumbsModalIsOpen}
 				/>
 			)}

@@ -1,7 +1,8 @@
-declare const carouselUrls: string[];
+declare const cnnAcademy: MoodleAcademy;
 import { faCheck, faImage, faTimes } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import ImagesModal from '../ImagesModal';
+import { MoodleAcademy } from '../../types';
 import React from 'react';
 
 interface Props {
@@ -64,7 +65,7 @@ const EditCarouselItem: React.FC<Props> = (props: Props): JSX.Element => (
 		{props.imageModalIsOpen && (
 			<ImagesModal
 				handleImageClick={props.handleImageSelect}
-				imageUrls={carouselUrls}
+				imageUrls={cnnAcademy.carouselUrls}
 				setIsOpen={props.setImageModalIsOpen}
 			/>
 		)}
