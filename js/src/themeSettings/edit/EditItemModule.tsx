@@ -1,5 +1,5 @@
-declare const courses: Course[];
-import { Course, RowItem } from '../../types';
+declare const cnnAcademy: MoodleAcademy;
+import { Course, MoodleAcademy, RowItem } from '../../types';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import ModulesList from './ModulesList';
 import React from 'react';
@@ -47,7 +47,7 @@ const ModuleSelector: React.FC<Props> = (props: Props): JSX.Element => (
 						onChange={props.handleCourseChange}
 						value={props.course.id}
 					>
-						{courses.map((course) => (
+						{cnnAcademy.courses.map((course) => (
 							<option key={course.id} value={course.id}>
 								{course.fullname}
 							</option>

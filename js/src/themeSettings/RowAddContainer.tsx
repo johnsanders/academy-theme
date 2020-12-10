@@ -27,7 +27,6 @@ const RowAddContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		if (!requiredCourse || requiredCourses.includes(requiredCourse)) return;
 		setRequiredCourses([...requiredCourses, requiredCourse]);
 		setRequiredCourse('');
-		setFormOpen(false);
 	};
 	const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
@@ -37,6 +36,9 @@ const RowAddContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		e.preventDefault();
 		props.handleAdd({ id: uuid(), items: [], name, requiredCourses });
 		setName('');
+		setRequiredCourse('');
+		setRequiredCourses([]);
+		setFormOpen(false);
 	};
 	return (
 		<RowAdd
