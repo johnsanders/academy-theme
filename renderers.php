@@ -66,7 +66,7 @@ class theme_academy_core_renderer extends core_renderer
 		if (!isloggedin()) {
 			$returnstr = ''; // get_string('loggedinnot', 'moodle');
 			if (!$loginpage) {
-				$returnstr .= "<a href=\"$loginurl\">" . get_string('login') . '</a>';
+				$returnstr .= "<a href=\"$loginurl\">" . get_string('login', 'theme_academy') . '</a>';
 			}
 			return html_writer::div(
 				html_writer::span(
@@ -147,18 +147,24 @@ class theme_academy_core_renderer extends core_renderer
 		if ($withlinks) {
 			$navitemcount = count($opts->navitems);
 			$idx = 0;
-			$unwantedLinks = ['Profile', 'Grades', 'Messages'];
+			$unwantedLinks = ['Dashboard', 'Profile', 'Grades', 'Messages'];
+			array_unshift($opts->navitems, (object)[
+				"itemtype" => "link",
+				"url" => new moodle_url('/calendar/view.php'),
+				"title" => "Calendar",
+				"titleidentifier" => "profile,moodle",
+				"pix" => "i/calendar",
+			]);
 			foreach ($opts->navitems as $value) {
+				// echo $value->pix;
 				switch ($value->itemtype) {
 					case 'divider':
 						// If the nav item is a divider, add one and skip link processing.
-						// $am->add($divider);
+						$am->add($divider);
 						break;
-
 					case 'invalid':
 						// Silently skip invalid entries (should we post a notification?).
 						break;
-
 					case 'link':
 						// Process this as a link item.
 						if (in_array($value->title, $unwantedLinks)) break;
@@ -172,7 +178,6 @@ class theme_academy_core_renderer extends core_renderer
 								array('class' => 'iconsmall')
 							) . $value->title;
 						}
-
 						$al = new action_menu_link_secondary(
 							$value->url,
 							$pix,

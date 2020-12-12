@@ -4,7 +4,10 @@ user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
 require_once($CFG->libdir . '/behat/lib.php');
 require_once($CFG->dirroot . '/theme/academy/grid/get_grid_context.php');
 
-if (isloggedin()) {
+$system_context = context_system::instance();
+$show_nav_drawer = has_capability('moodle/site:manageblocks', $system_context, $USER);
+
+if (isloggedin() && $show_nav_drawer) {
 	$navdraweropen = (get_user_preferences('drawer-open-nav', 'true') == 'true');
 } else {
 	$navdraweropen = false;
@@ -18,7 +21,7 @@ $blockshtml = $OUTPUT->blocks('side-pre');
 $hasblocks = strpos($blockshtml, 'data-block=') !== false;
 $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions();
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
-$is_front_page = $PAGE->has_set_url() && $PAGE->url->compare(context_system::instance()->get_url(), URL_MATCH_BASE);
+$is_front_page = $PAGE->has_set_url() && $PAGE->url->compare($system_context->get_url(), URL_MATCH_BASE);
 $is_settings_page = $PAGE->has_set_url() && strpos((string)$PAGE->url, 'themesettingacademy') !== false;
 $grid_config = get_grid_context();
 $sitename = format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);
@@ -31,6 +34,7 @@ $nav_config = json_encode([
 	"navDrawerOpen" => $navdraweropen,
 	"navbarPluginOutput" => $OUTPUT->navbar_plugin_output(),
 	"pageHeadingMenu" => $OUTPUT->page_heading_menu(),
+	"showNavToggle" => $show_nav_drawer,
 	"siteName" => $sitename,
 	"userMenu" => $OUTPUT->user_menu(),
 ]);
@@ -70,10 +74,10 @@ $templatecontext = [
 	'output' => $OUTPUT,
 	'regionmainsettingsmenu' => $regionmainsettingsmenu,
 	'rows_json' => $grid_config["rows_json"],
+	'show_nav_drawer' => $show_nav_drawer,
 	'sidepreblocks' => $blockshtml,
 	'sitename' => $sitename,
 	'user_name_for_zoom_iframe' => urlencode($USER->firstname . ' ' . $USER->lastname),
 ];
-
 $templatecontext['firstcollectionlabel'] = json_encode($nav_all->get_collectionlabel());
 echo $OUTPUT->render_from_template('theme_academy/columns2', $templatecontext);
