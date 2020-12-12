@@ -18,6 +18,7 @@ const RowAdd: React.FC<Props> = (props: Props): JSX.Element =>
 	!props.formOpen ? (
 		<div className="form-group">
 			<button className="btn btn-secondary" onClick={props.handleOpenForm}>
+				<Icon className="mr-1" icon={faPlusCircle} />
 				Add a Row
 			</button>
 		</div>

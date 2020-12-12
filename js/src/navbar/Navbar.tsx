@@ -26,27 +26,29 @@ const Navbar: React.FC<Props> = (props: Props): JSX.Element => (
 			moodle-has-zindex
 		`}
 	>
-		<div
-			className={`
+		{!cnnAcademy.navbarConfig.showNavToggle ? null : (
+			<div
+				className={`
 				${props.size === 'large' ? 'mr-3' : ''}
 				${navbarConfig.isLoggedIn ? 'd-inline-block' : 'd-none'}
 			`}
-			data-region="drawer-toggle"
-		>
-			<button
-				aria-controls="nav-drawer"
-				aria-expanded={navbarConfig.navDrawerOpen}
-				className="btn nav-link float-sm-left btn-dark bg-transparent"
-				data-action="toggle-drawer"
-				data-preference="drawer-open-nav"
-				data-side="left"
-				onClick={props.handleDrawerToggleClick}
-				type="button"
+				data-region="drawer-toggle"
 			>
-				<Icon icon={faBars} />
-				<span className="sr-only">{navbarConfig.menuButtonName}</span>
-			</button>
-		</div>
+				<button
+					aria-controls="nav-drawer"
+					aria-expanded={navbarConfig.navDrawerOpen}
+					className="btn nav-link float-sm-left btn-dark bg-transparent"
+					data-action="toggle-drawer"
+					data-preference="drawer-open-nav"
+					data-side="left"
+					onClick={props.handleDrawerToggleClick}
+					type="button"
+				>
+					<Icon icon={faBars} />
+					<span className="sr-only">{navbarConfig.menuButtonName}</span>
+				</button>
+			</div>
+		)}
 		<a className="navbar-brand aabtn has-logo" href={M.cfg.wwwroot}>
 			<span className="logo fullsize d-none d-sm-inline">
 				<img alt={navbarConfig.siteName} src={logoLight} />

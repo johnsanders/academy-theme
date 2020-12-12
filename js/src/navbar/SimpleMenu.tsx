@@ -9,7 +9,7 @@ const SimpleMenu: React.FC<Props> = (props: Props) => (
 		className="forcedUserMenu"
 		dangerouslySetInnerHTML={{ __html: props.userMenu }}
 		style={{
-			backgroundColor: 'black',
+			backgroundColor: '#000000A0',
 			padding: '0 0.5em',
 			position: 'fixed',
 			right: 0,

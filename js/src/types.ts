@@ -60,6 +60,7 @@ export interface NavbarConfig {
 	navDrawerOpen: boolean;
 	navbarPluginOutput: string;
 	pageHeadingMenu: string;
+	showNavToggle: boolean;
 	siteName: string;
 	userMenu: string;
 }
