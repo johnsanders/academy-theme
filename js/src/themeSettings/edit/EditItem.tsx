@@ -17,9 +17,9 @@ interface Props {
 	newItem: RowItem;
 	saveItem: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	updateInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	updateInstructors: (instructors: Instructor[]) => void;
+	updateInstructors: (instructors: string[]) => void;
 	updateModule: (module: Module) => void;
-	updateTags: (tags: Tag[]) => void;
+	updateTags: (tags: string[]) => void;
 	updateThumb: (thumbUrl: string) => void;
 }
 

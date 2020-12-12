@@ -1,7 +1,7 @@
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import Tag from './Tag';
-import { Tag as TagType } from '../types';
+import { Tag as TagType } from '../../types';
 import { faPlusCircle } from '@fortawesome/pro-solid-svg-icons';
 
 interface Props {

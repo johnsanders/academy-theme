@@ -1,7 +1,7 @@
 import { Instructor, Module, Row, RowItem, Tag } from '../../types';
 import EditItem from './EditItem';
 import React from 'react';
-import { createModuleUrl } from '../GridContainer';
+import { createModuleUrl } from '../gridTab/GridContainer';
 
 interface Props {
 	activeItem: RowItem;
@@ -15,14 +15,14 @@ interface Props {
 const EditItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	const [errorMessage, setErrorMessage] = React.useState('');
 	const [newItem, setNewItem] = React.useState<RowItem>(props.activeItem);
-	const updateItemInfo = (instructors: Instructor[], tags: Tag[], thumbUrl: string): void =>
+	const updateItemInfo = (instructors: string[], tags: string[], thumbUrl: string): void =>
 		setNewItem({ ...newItem, instructors, tags, thumbUrl });
 	const updateInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const key = e.currentTarget.dataset.id;
 		if (!key) throw new Error('Cannot get input id');
 		setNewItem({ ...newItem, [key]: e.currentTarget.value });
 	};
-	const updateInstructors = (newInstructors: Instructor[]): void =>
+	const updateInstructors = (newInstructors: string[]): void =>
 		updateItemInfo(newInstructors, newItem.tags, newItem.thumbUrl);
 	const updateModule = (module: Module) => {
 		const url = createModuleUrl(module.id, module.modname);
@@ -34,7 +34,7 @@ const EditItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			url,
 		});
 	};
-	const updateTags = (newTags: Tag[]) =>
+	const updateTags = (newTags: string[]) =>
 		updateItemInfo(newItem.instructors, newTags, newItem.thumbUrl);
 	const updateThumb = (thumbUrl: string): void =>
 		updateItemInfo(newItem.instructors, newItem.tags, thumbUrl);

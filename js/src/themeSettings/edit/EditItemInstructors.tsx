@@ -1,13 +1,13 @@
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { Instructor } from '../../types';
-import InstructorsTable from '../InstructorsTable';
+import InstructorsTable from '../instructorsTab/InstructorsTable';
 import React from 'react';
 import { faPlusCircle } from '@fortawesome/pro-solid-svg-icons';
 
 interface Props {
 	allInstructors: Instructor[];
-	instructors: Instructor[];
-	updateInstructors: (instructors: Instructor[]) => void;
+	instructors: string[];
+	updateInstructors: (instructors: string[]) => void;
 }
 
 const EditItemInstructors: React.FC<Props> = (props: Props): JSX.Element => {
@@ -24,15 +24,11 @@ const EditItemInstructors: React.FC<Props> = (props: Props): JSX.Element => {
 	const handleAddInstructor = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
 		if (!selectedInstructor) throw new Error('No instructor selected');
-		if (props.instructors.find((instructor) => instructor.id === selectedInstructor.id)) return;
-		props.updateInstructors([...props.instructors, selectedInstructor]);
+		if (props.instructors.find((instructorId) => instructorId === selectedInstructor.id)) return;
+		props.updateInstructors([...props.instructors, selectedInstructor.id]);
 	};
-	const handleDeleteInstructor = (id: string): void => {
-		const instructorToDelete = props.instructors.find((instructor) => instructor.id === id);
-		if (!instructorToDelete) throw new Error('Cannot find instructor to delete');
-		const newInstructors = props.instructors.filter(
-			(instructor) => instructor.id !== instructorToDelete.id,
-		);
+	const handleDeleteInstructor = (idToDelete: string): void => {
+		const newInstructors = props.instructors.filter((instructorId) => instructorId !== idToDelete);
 		props.updateInstructors(newInstructors);
 	};
 	return (
@@ -67,7 +63,12 @@ const EditItemInstructors: React.FC<Props> = (props: Props): JSX.Element => {
 			{props.instructors.length === 0 ? (
 				<div className="form-group text-muted">This module has no instructors assigned.</div>
 			) : (
-				<InstructorsTable handleDelete={handleDeleteInstructor} instructors={props.instructors} />
+				<InstructorsTable
+					handleDelete={handleDeleteInstructor}
+					instructors={props.allInstructors.filter((instructor) =>
+						props.instructors.includes(instructor.id),
+					)}
+				/>
 			)}
 		</>
 	);

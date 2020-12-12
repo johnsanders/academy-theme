@@ -1,6 +1,6 @@
 import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautiful-dnd';
 import { faCog, faTimes } from '@fortawesome/pro-solid-svg-icons';
-import { CarouselItem } from '../types';
+import { CarouselItem } from '../../types';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 

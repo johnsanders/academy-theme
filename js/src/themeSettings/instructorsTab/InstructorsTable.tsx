@@ -1,5 +1,5 @@
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { Instructor } from '../types';
+import { Instructor } from '../../types';
 import React from 'react';
 import { faTrash } from '@fortawesome/pro-solid-svg-icons';
 

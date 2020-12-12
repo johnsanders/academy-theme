@@ -1,6 +1,6 @@
 import '../../shared/style.css';
 import '../style.css';
-import GridContainer from '../GridContainer';
+import GridContainer from '../gridTab/GridContainer';
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import injectConfig from './injectConfig';

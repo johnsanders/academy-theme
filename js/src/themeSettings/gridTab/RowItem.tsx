@@ -1,15 +1,17 @@
+import { Instructor, RowItem as RowItemType, Tag } from '../../types';
 import { faCog, faTimes } from '@fortawesome/pro-solid-svg-icons';
 import { DraggableProvided } from 'react-beautiful-dnd';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { RowItem as RowItemType } from '../types';
-import getForegroundColor from '../helpers/getForegroundColor';
+import getForegroundColor from '../../helpers/getForegroundColor';
 
 interface Props {
-	provided: DraggableProvided;
+	getInstructorById: (id: string) => Instructor | null;
+	getTagById: (id: string) => Tag | null;
 	item: RowItemType;
 	handleDeleteItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleEditItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	provided: DraggableProvided;
 	rowId: string;
 }
 
@@ -25,27 +27,33 @@ const RowItem: React.FC<Props> = (props: Props): JSX.Element => (
 		<div className="card-body">
 			<h4>{props.item.name}</h4>
 			<div className="instructorsContainer">
-				{props.item.instructors.map((instructor) => (
-					<img
-						className="avatar"
-						data-tip={`Instructor: ${instructor.name}`}
-						key={instructor.id}
-						src={instructor.avatarUrl}
-					/>
-				))}
+				{props.item.instructors.map((instructorId) => {
+					const instructor = props.getInstructorById(instructorId);
+					return !instructor ? null : (
+						<img
+							className="avatar"
+							data-tip={`Instructor: ${instructor.name}`}
+							key={instructor.id}
+							src={instructor.avatarUrl}
+						/>
+					);
+				})}
 			</div>
 			<div className="academyTagsContainer">
-				{props.item.tags.map((tag) => (
-					<span
-						key={tag.id}
-						style={{
-							backgroundColor: tag.color,
-							color: getForegroundColor(tag.color),
-						}}
-					>
-						{tag.name}
-					</span>
-				))}
+				{props.item.tags.map((tagId) => {
+					const tag = props.getTagById(tagId);
+					return !tag ? null : (
+						<span
+							key={tag.id}
+							style={{
+								backgroundColor: tag.color,
+								color: getForegroundColor(tag.color),
+							}}
+						>
+							{tag.name}
+						</span>
+					);
+				})}
 			</div>
 		</div>
 		<div className="gridItemBtn gridItemBtnClose">

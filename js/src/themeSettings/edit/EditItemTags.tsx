@@ -1,13 +1,13 @@
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import Tag from '../Tag';
+import Tag from '../tagsTab/Tag';
 import { Tag as TagType } from '../../types';
 import { faPlusCircle } from '@fortawesome/pro-solid-svg-icons';
 
 interface Props {
 	allTags: TagType[];
-	tags: TagType[];
-	updateTags: (newTags: TagType[]) => void;
+	tags: string[];
+	updateTags: (newTags: string[]) => void;
 }
 
 const EditItemTags: React.FC<Props> = (props: Props): JSX.Element => {
@@ -20,14 +20,12 @@ const EditItemTags: React.FC<Props> = (props: Props): JSX.Element => {
 	const handleAddTag = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
 		if (!selectedTag) throw new Error('No tag selected');
-		props.updateTags([...props.tags, selectedTag]);
+		props.updateTags([...props.tags, selectedTag.id]);
 	};
 	const handleDeleteTag = (e: React.MouseEvent<HTMLAnchorElement>): void => {
 		e.preventDefault();
-		const id = e.currentTarget.dataset.id;
-		const tagToDelete = props.tags.find((tag) => tag.id === id);
-		if (!tagToDelete) throw new Error('Cannot find tag to delete');
-		props.updateTags(props.tags.filter((tag) => tag.id !== tagToDelete.id));
+		const idToDelete = e.currentTarget.dataset.id;
+		props.updateTags(props.tags.filter((tagId) => tagId !== idToDelete));
 	};
 	return (
 		<>
@@ -61,9 +59,13 @@ const EditItemTags: React.FC<Props> = (props: Props): JSX.Element => {
 				<div className="form-group text-muted">This module has no tags assigned.</div>
 			) : (
 				<div className="academyTagsContainer form-group">
-					{props.tags.map((tag) => (
-						<Tag handleDelete={handleDeleteTag} key={tag.id} showDeleteButton={true} tag={tag} />
-					))}
+					{props.tags.map((tagId) => {
+						console.log(tagId);
+						const tag = props.allTags.find((tag) => tag.id === tagId);
+						return tag ? (
+							<Tag handleDelete={handleDeleteTag} key={tagId} showDeleteButton={true} tag={tag} />
+						) : null;
+					})}
 				</div>
 			)}
 		</>

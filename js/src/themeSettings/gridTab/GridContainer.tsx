@@ -1,10 +1,10 @@
 declare const M: { cfg: { wwwroot: string } };
-import { Config, Row, RowItem } from '../types';
-import EditItemContainer from './edit/EditItemContainer';
+import { Config, Instructor, Row, RowItem, Tag } from '../../types';
+import EditItemContainer from '../edit/EditItemContainer';
 import React from 'react';
 import RowsContainer from './RowsContainer';
 import arrayMove from 'array-move';
-import { createBlankGridItem } from '../helpers/createBlankItem';
+import { createBlankGridItem } from '../../helpers/createBlankItem';
 
 interface Props {
 	config: Config;
@@ -68,10 +68,16 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		);
 		props.setRows(newRows);
 	};
+	const getInstructorById = (id: string): Instructor | null =>
+		props.config.instructors.find((instructor) => instructor.id === id) || null;
+	const getTagById = (id: string): Tag | null =>
+		props.config.tags.find((tag) => tag.id === id) || null;
 	return (
 		<>
 			{activeRow || activeItem ? null : (
 				<RowsContainer
+					getInstructorById={getInstructorById}
+					getTagById={getTagById}
 					handleAddItemToRow={handleAddItemToRow}
 					handleAddRow={handleAddRow}
 					handleDeleteItem={handleDeleteItem}

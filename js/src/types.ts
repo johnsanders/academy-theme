@@ -73,11 +73,11 @@ export interface Row {
 export interface RowItem {
 	duration: string;
 	id: string;
-	instructors: Instructor[];
+	instructors: string[];
 	modId: string;
 	modName: string;
 	name: string;
-	tags: Tag[];
+	tags: string[];
 	thumbUrl: string;
 	url: string;
 }

@@ -1,11 +1,11 @@
 import { CarouselItem, Config, Instructor, Row, Tag } from '../types';
 import { faExclamationTriangle, faSave } from '@fortawesome/pro-solid-svg-icons';
-import CarouselContainer from './CarouselContainer';
-import GridContainer from './GridContainer';
+import CarouselContainer from './carouselTab/CarouselContainer';
+import GridContainer from './gridTab/GridContainer';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import InstructorsContainer from './InstructorsContainer';
+import InstructorsContainer from './instructorsTab/InstructorsContainer';
 import React from 'react';
-import TagsContainer from './TagsContainer';
+import TagsContainer from './tagsTab/TagsContainer';
 import Uploads from './Uploads';
 
 interface Props {
@@ -23,7 +23,7 @@ interface Props {
 
 const tabs = ['Grid', 'Carousel', 'Instructors', 'Tags', 'Uploads'];
 
-const GridSettings: React.FC<Props> = (props: Props): JSX.Element => (
+const ThemeSettings: React.FC<Props> = (props: Props): JSX.Element => (
 	<div className="container" id="academyGridSettings">
 		{!props.unsavedChanges ? null : (
 			<div className="alert alert-warning unsavedAlert">
@@ -71,4 +71,4 @@ const GridSettings: React.FC<Props> = (props: Props): JSX.Element => (
 	</div>
 );
 
-export default GridSettings;
+export default ThemeSettings;

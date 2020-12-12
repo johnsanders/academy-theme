@@ -1,9 +1,9 @@
 import Carousel from './Carousel';
-import { CarouselItem } from '../types';
+import { CarouselItem } from '../../types';
 import { DropResult } from 'react-beautiful-dnd';
 import React from 'react';
 import arrayMove from 'array-move';
-import { createBlankCarouselItem } from '../helpers/createBlankItem';
+import { createBlankCarouselItem } from '../../helpers/createBlankItem';
 
 interface Props {
 	carouselItems: CarouselItem[];

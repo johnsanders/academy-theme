@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row } from '../types';
+import { Row } from '../../types';
 import RowAdd from './RowAdd';
 import { v4 as uuid } from 'uuid';
 

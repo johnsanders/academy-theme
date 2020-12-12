@@ -1,7 +1,7 @@
-import { CarouselItem } from '../types';
+import { CarouselItem } from '../../types';
 import CarouselItems from './CarouselItems';
 import { DropResult } from 'react-beautiful-dnd';
-import EditCarouselItemContainer from './edit/EditCarouselItemContainer';
+import EditCarouselItemContainer from '../edit/EditCarouselItemContainer';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { faPlusCircle } from '@fortawesome/pro-solid-svg-icons';

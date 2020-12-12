@@ -5,12 +5,14 @@ import {
 	Droppable,
 	ResponderProvided,
 } from 'react-beautiful-dnd';
+import { Instructor, RowItem as RowItemType, Tag } from '../../types';
 import React from 'react';
 import RowItem from './RowItem';
-import { RowItem as RowItemType } from '../types';
 
 interface Props {
 	containerRef: React.MutableRefObject<HTMLDivElement | undefined>;
+	getInstructorById: (id: string) => Instructor | null;
+	getTagById: (id: string) => Tag | null;
 	handleAddItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleDeleteItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleDeleteRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -49,6 +51,8 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => (
 							<Draggable draggableId={item.modId} index={i} key={item.modId}>
 								{(provided) => (
 									<RowItem
+										getInstructorById={props.getInstructorById}
+										getTagById={props.getTagById}
 										handleDeleteItemClick={props.handleDeleteItemClick}
 										handleEditItemClick={props.handleEditItemClick}
 										item={item}

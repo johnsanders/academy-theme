@@ -1,6 +1,6 @@
 declare const cnnAcademy: MoodleAcademy;
-import { Instructor, MoodleAcademy } from '../types';
-import ImagesModal from './ImagesModal';
+import { Instructor, MoodleAcademy } from '../../types';
+import ImagesModal from '../ImagesModal';
 import Instructors from './Instructors';
 import React from 'react';
 import { v4 as uuid } from 'uuid';

@@ -1,9 +1,9 @@
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Tag as TagType } from '../types';
+import { Tag as TagType } from '../../types';
 import { faTimesCircle } from '@fortawesome/pro-solid-svg-icons';
 
-import getForegroundColor from '../helpers/getForegroundColor';
+import getForegroundColor from '../../helpers/getForegroundColor';
 
 interface Props {
 	tag: TagType;
