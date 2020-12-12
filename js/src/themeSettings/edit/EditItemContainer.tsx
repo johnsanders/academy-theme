@@ -22,6 +22,8 @@ const EditItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		if (!key) throw new Error('Cannot get input id');
 		setNewItem({ ...newItem, [key]: e.currentTarget.value });
 	};
+	const updateDate = (key: 'dateEnd' | 'dateStart', value: number | null): void =>
+		setNewItem({ ...newItem, [key]: value });
 	const updateInstructors = (newInstructors: string[]): void =>
 		updateItemInfo(newInstructors, newItem.tags, newItem.thumbUrl);
 	const updateModule = (module: Module) => {
@@ -61,6 +63,7 @@ const EditItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			errorMessage={errorMessage}
 			newItem={newItem}
 			saveItem={saveItem}
+			updateDate={updateDate}
 			updateInput={updateInput}
 			updateInstructors={updateInstructors}
 			updateModule={updateModule}

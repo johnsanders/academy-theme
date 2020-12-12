@@ -71,6 +71,8 @@ export interface Row {
 	requiredCourses: string[];
 }
 export interface RowItem {
+	dateEnd: number | null;
+	dateStart: number | null;
 	duration: string;
 	id: string;
 	instructors: string[];

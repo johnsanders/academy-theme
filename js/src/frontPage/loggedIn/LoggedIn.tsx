@@ -12,14 +12,18 @@ const LoggedIn: React.FC = (): JSX.Element | null => {
 	const el = document.getElementById('academyContent');
 	if (!el) return null;
 	return createPortal(
-		<div className="container" style={{ marginTop: '122px' }}>
+		<div className="container-fluid" style={{ marginTop: '122px' }}>
 			<ReactTooltip />
-			<div className="my-3">
-				<Carousel />
+			<div className="row">
+				<div className="col-xs-12 col-lg-10 offset-lg-1 col-xl-8 offset-xl-2">
+					<div className="my-3">
+						<Carousel />
+					</div>
+					{cnnAcademy.rows.map((row) => (
+						<Row key={row.id} row={row} />
+					))}
+				</div>
 			</div>
-			{cnnAcademy.rows.map((row) => (
-				<Row key={row.id} row={row} />
-			))}
 		</div>,
 		el,
 	);

@@ -49,7 +49,6 @@ const RowsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		const id = e.currentTarget.dataset.id;
 		if (id) activeRowIdRef.current = id;
 	};
-	console.log(props.rows);
 	return (
 		<>
 			{props.rows.map((row) => (

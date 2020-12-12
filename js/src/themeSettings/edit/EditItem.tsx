@@ -1,5 +1,6 @@
 import { Instructor, Module, Row, RowItem, Tag } from '../../types';
 import { faCheck, faTimes } from '@fortawesome/pro-solid-svg-icons';
+import EditItemDates from './EditItemDates';
 import EditItemInstructors from './EditItemInstructors';
 import EditItemModule from './EditItemModuleContainer';
 import EditItemTags from './EditItemTags';
@@ -16,6 +17,7 @@ interface Props {
 	errorMessage: string;
 	newItem: RowItem;
 	saveItem: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	updateDate: (key: 'dateEnd' | 'dateStart', value: number | null) => void;
 	updateInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	updateInstructors: (instructors: string[]) => void;
 	updateModule: (module: Module) => void;
@@ -31,6 +33,11 @@ const EditItem: React.FC<Props> = (props: Props): JSX.Element => (
 			onFocus={props.clearErrorMessage}
 			selectedItemName={props.newItem.name}
 			updateModule={props.updateModule}
+		/>
+		<EditItemDates
+			end={props.newItem.dateEnd}
+			start={props.newItem.dateStart}
+			updateDate={props.updateDate}
 		/>
 		<EditItemInstructors
 			allInstructors={props.allInstructors}
@@ -52,15 +59,18 @@ const EditItem: React.FC<Props> = (props: Props): JSX.Element => (
 			thumbUrl={props.newItem.thumbUrl}
 			updateThumb={props.updateThumb}
 		/>
-		<button className="btn btn-secondary mt-2 mr-1" onClick={props.saveItem}>
-			<Icon className="mr-1" icon={faCheck} />
-			Done
-		</button>
-		<button className="btn btn-secondary mt-2 mr-3" onClick={props.cancelEdit}>
-			<Icon className="mr-1" icon={faTimes} />
-			Cancel
-		</button>
-		<span className="text-error">{props.errorMessage}</span>
+		<div className="mt-5">
+			<button className="btn btn-secondary mr-1" onClick={props.saveItem}>
+				<Icon className="mr-1" icon={faCheck} />
+				Done
+			</button>
+			<button className="btn btn-secondary mr-3" onClick={props.cancelEdit}>
+				<Icon className="mr-1" icon={faTimes} />
+				Cancel
+			</button>
+
+			<span className="text-error">{props.errorMessage}</span>
+		</div>
 	</>
 );
 
