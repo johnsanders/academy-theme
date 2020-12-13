@@ -1,13 +1,12 @@
-import { Instructor, RowItem as RowItemType, Tag } from '../../types';
 import { faCog, faTimes } from '@fortawesome/pro-solid-svg-icons';
+import { getInstructorById, getTagById } from '../../shared/getById';
 import { DraggableProvided } from 'react-beautiful-dnd';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { RowItem as RowItemType } from '../../types';
 import getForegroundColor from '../../helpers/getForegroundColor';
 
 interface Props {
-	getInstructorById: (id: string) => Instructor | null;
-	getTagById: (id: string) => Tag | null;
 	item: RowItemType;
 	handleDeleteItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleEditItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -28,7 +27,7 @@ const RowItem: React.FC<Props> = (props: Props): JSX.Element => (
 			<h4>{props.item.name}</h4>
 			<div className="instructorsContainer">
 				{props.item.instructors.map((instructorId) => {
-					const instructor = props.getInstructorById(instructorId);
+					const instructor = getInstructorById(instructorId);
 					return !instructor ? null : (
 						<img
 							className="avatar"
@@ -41,7 +40,7 @@ const RowItem: React.FC<Props> = (props: Props): JSX.Element => (
 			</div>
 			<div className="academyTagsContainer">
 				{props.item.tags.map((tagId) => {
-					const tag = props.getTagById(tagId);
+					const tag = getTagById(tagId);
 					return !tag ? null : (
 						<span
 							key={tag.id}

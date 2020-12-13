@@ -1,7 +1,7 @@
 <script>
-	cnnAcademy.carouselItems = {{{carousel_json}}};
-	cnnAcademy.navbarConfig = {{{nav_config}}};
-	cnnAcademy.rows = {{{rows_json}}};
+	const moodleContext = {{{cnn_academy_json}}};
+	const navbarConfig = {{{nav_config}}};
+	cnnAcademy = {...cnnAcademy, ...moodleContext, navbarConfig };
 </script>
 
 <div id="academyNavbar"></div>

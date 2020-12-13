@@ -16,8 +16,9 @@ const EditItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	const [errorMessage, setErrorMessage] = React.useState('');
 	const [newItem, setNewItem] = React.useState<RowItem>(props.activeItem);
 	const updateDuration = (duration: string): void => setNewItem({ ...newItem, duration });
-	const updateDate = (key: 'dateEnd' | 'dateStart', value: number | null): void =>
+	const updateDate = (key: 'dateEnd' | 'dateStart', value: number | null): void => {
 		setNewItem({ ...newItem, [key]: value });
+	};
 	const updateModule = (module: Module) => {
 		const url = createModuleUrl(module.id, module.modname);
 		setNewItem({
@@ -28,7 +29,6 @@ const EditItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			url,
 		});
 	};
-	console.log(props.activeItem.dateStart);
 	const updateInstructors = (instructors: string[]): void =>
 		setNewItem({ ...newItem, instructors });
 	const updateTags = (tags: string[]) => setNewItem({ ...newItem, tags });

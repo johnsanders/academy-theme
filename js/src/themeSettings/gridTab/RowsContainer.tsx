@@ -1,12 +1,10 @@
-import { Instructor, Row as RowType, Tag } from '../../types';
 import { DropResult } from 'react-beautiful-dnd';
 import React from 'react';
 import Row from './Row';
 import RowAddContainer from './RowAddContainer';
+import { Row as RowType } from '../../types';
 
 interface Props {
-	getInstructorById: (id: string) => Instructor | null;
-	getTagById: (id: string) => Tag | null;
 	handleAddItemToRow: (rowId: string) => void;
 	handleAddRow: (row: RowType) => void;
 	handleDeleteItem: (rowId: string, itemId: string) => void;
@@ -53,8 +51,6 @@ const RowsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		<>
 			{props.rows.map((row) => (
 				<Row
-					getInstructorById={props.getInstructorById}
-					getTagById={props.getTagById}
 					handleAddItemClick={handleAddItemClick}
 					handleDeleteItemClick={handleDeleteItemClick}
 					handleDeleteRowClick={handleDeleteRowClick}

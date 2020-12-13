@@ -68,7 +68,7 @@ const EditItem: React.FC<Props> = (props: Props): JSX.Element => (
 		<div>
 			<button className="btn btn-secondary mr-1" onClick={props.saveItem}>
 				<Icon className="mr-1" icon={faCheck} />
-				Add Grid Item
+				Done
 			</button>
 			<button className="btn btn-secondary mr-3" onClick={props.cancelEdit}>
 				<Icon className="mr-1" icon={faTimes} />

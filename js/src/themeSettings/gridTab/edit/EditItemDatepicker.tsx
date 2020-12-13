@@ -17,6 +17,7 @@ const EditItemDatepicker: React.FC<Props> = (props: Props): JSX.Element => (
 		</label>
 		<DatePicker
 			className="form-control"
+			dateFormat="d MMMM, yyyy"
 			id={props.id}
 			onChange={props.onChange}
 			placeholderText="Not set"

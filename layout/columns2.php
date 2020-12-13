@@ -23,7 +23,7 @@ $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_action
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 $is_front_page = $PAGE->has_set_url() && $PAGE->url->compare($system_context->get_url(), URL_MATCH_BASE);
 $is_settings_page = $PAGE->has_set_url() && strpos((string)$PAGE->url, 'themesettingacademy') !== false;
-$grid_config = get_grid_context();
+$grid_context = get_grid_context($is_settings_page);
 $sitename = format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);
 
 $nav_config = json_encode([
@@ -39,6 +39,32 @@ $nav_config = json_encode([
 	"userMenu" => $OUTPUT->user_menu(),
 ]);
 
+$templatecontext = [
+	'bodyattributes' => $bodyattributes,
+	'cnn_academy_json' => json_encode($grid_context['cnn_academy']),
+	'firstcollectionlabel' => json_encode($PAGE->flatnav->get_collectionlabel()),
+	'flatnavigation_json' => '[]', // json_encode($nav),
+	'flatnavigation' => $PAGE->flatnav,
+	'hasblocks' => $hasblocks,
+	'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
+	'is_front_page' => $is_front_page,
+	'is_logged_in' => isloggedin(),
+	'is_settings_page' => $is_settings_page,
+	'js_src' => $grid_context['js_src'],
+	'nav_config' => $nav_config,
+	'navdraweropen' => $navdraweropen,
+	'output' => $OUTPUT,
+	'regionmainsettingsmenu' => $regionmainsettingsmenu,
+	'show_nav_drawer' => $show_nav_drawer,
+	'sidepreblocks' => $blockshtml,
+	'sitename' => $sitename,
+	'user_name_for_zoom_iframe' => urlencode($USER->firstname . ' ' . $USER->lastname),
+];
+
+echo $OUTPUT->render_from_template('theme_academy/columns2', $templatecontext);
+
+
+/*
 $nav_all = $PAGE->flatnav;
 $nav = [];
 $unwanted_navs = ['Private files', 'Content bank', 'Badges', 'Competencies'];
@@ -58,26 +84,4 @@ foreach ($nav_all as $nav_item) {
 		],
 	);
 }
-$templatecontext = [
-	'bodyattributes' => $bodyattributes,
-	'carousel_json' => $grid_config["carousel_json"],
-	'flatnavigation_json' => '[]', // json_encode($nav),
-	'flatnavigation' => $PAGE->flatnav,
-	'hasblocks' => $hasblocks,
-	'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
-	'is_front_page' => $is_front_page,
-	'is_logged_in' => isloggedin(),
-	'is_settings_page' => $is_settings_page,
-	'js_src' => $grid_config["js_src"],
-	'nav_config' => $nav_config,
-	'navdraweropen' => $navdraweropen,
-	'output' => $OUTPUT,
-	'regionmainsettingsmenu' => $regionmainsettingsmenu,
-	'rows_json' => $grid_config["rows_json"],
-	'show_nav_drawer' => $show_nav_drawer,
-	'sidepreblocks' => $blockshtml,
-	'sitename' => $sitename,
-	'user_name_for_zoom_iframe' => urlencode($USER->firstname . ' ' . $USER->lastname),
-];
-$templatecontext['firstcollectionlabel'] = json_encode($nav_all->get_collectionlabel());
-echo $OUTPUT->render_from_template('theme_academy/columns2', $templatecontext);
+*

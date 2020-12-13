@@ -43,9 +43,11 @@ export interface MoodleAcademy {
 	carouselUrls: string[];
 	courses: Course[];
 	drawer: { init: () => void };
+	instructors: Instructor[];
 	navbarConfig: NavbarConfig;
 	rows: Row[];
 	settingsInputId: string;
+	tags: Tag[];
 	thumbUrls: string[];
 }
 export interface MoodleJs {

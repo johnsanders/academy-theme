@@ -1,15 +1,13 @@
 import { DropResult, ResponderProvided } from 'react-beautiful-dnd';
-import { Instructor, Row as RowType, Tag } from '../../types';
 import { faPlusCircle, faTrash } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import RowItems from './RowItems';
+import { Row as RowType } from '../../types';
 import ScrollButtons from '../../shared/ScrollButtons';
 import debounce from 'lodash/debounce';
 
 interface Props {
-	getInstructorById: (id: string) => Instructor | null;
-	getTagById: (id: string) => Tag | null;
 	handleAddItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleDeleteItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleDeleteRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -81,8 +79,6 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => {
 				/>
 				<RowItems
 					containerRef={containerRef}
-					getInstructorById={props.getInstructorById}
-					getTagById={props.getTagById}
 					handleAddItemClick={props.handleAddItemClick}
 					handleDeleteItemClick={props.handleDeleteItemClick}
 					handleDeleteRowClick={props.handleDeleteRowClick}

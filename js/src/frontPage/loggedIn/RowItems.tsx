@@ -1,3 +1,4 @@
+import { getInstructorById, getTagById } from '../../shared/getById';
 import React from 'react';
 import { Row } from '../../types';
 import getForegroundColor from '../../helpers/getForegroundColor';
@@ -9,39 +10,45 @@ interface Props {
 	row: Row;
 }
 
-const RowItems: React.FC<Props> = (props: Props): JSX.Element => {
-	return (
-		<div
-			className="gridRowItems"
-			onMouseEnter={props.handleMouse}
-			onMouseLeave={props.handleMouse}
-			onScroll={props.handleScroll}
-			ref={(el) => {
-				if (el) props.containerRef.current = el;
-			}}
-		>
-			{props.row.items.map((item) => (
-				<div className="gridRowItem" key={item.modId}>
-					<a href={item.url}>
-						<div className="card">
-							<div className="card-img-top">
-								<img src={item.thumbUrl} />
-								{item.duration ? <span className="duration">{item.duration}</span> : null}
-							</div>
-							<div className="card-body">
-								<h4>{item.name}</h4>
-								<div className="instructorsContainer">
-									{item.instructors.map((instructor) => (
+const RowItems: React.FC<Props> = (props: Props): JSX.Element => (
+	<div
+		className="gridRowItems"
+		onMouseEnter={props.handleMouse}
+		onMouseLeave={props.handleMouse}
+		onScroll={props.handleScroll}
+		ref={(el) => {
+			if (el) props.containerRef.current = el;
+		}}
+	>
+		{props.row.items.map((item) => (
+			<div className="gridRowItem" key={item.modId}>
+				<a href={item.url}>
+					<div className="card">
+						<div className="card-img-top">
+							<img src={item.thumbUrl} />
+							{item.duration ? <span className="duration">{item.duration}</span> : null}
+						</div>
+						<div className="card-body">
+							<h4>{item.name}</h4>
+							<div className="instructorsContainer">
+								{item.instructors.map((instructorId) => {
+									const instructor = getInstructorById(instructorId);
+									if (!instructor) return null;
+									return (
 										<img
 											className="avatar"
 											data-tip={`Instructor: ${instructor.name}`}
 											key={instructor.id}
 											src={instructor.avatarUrl}
 										/>
-									))}
-								</div>
-								<div className="academyTagsContainer">
-									{item.tags.map((tag) => (
+									);
+								})}
+							</div>
+							<div className="academyTagsContainer">
+								{item.tags.map((tagId) => {
+									const tag = getTagById(tagId);
+									if (!tag) return null;
+									return (
 										<span
 											key={tag.id}
 											style={{
@@ -51,15 +58,15 @@ const RowItems: React.FC<Props> = (props: Props): JSX.Element => {
 										>
 											{tag.name}
 										</span>
-									))}
-								</div>
+									);
+								})}
 							</div>
 						</div>
-					</a>
-				</div>
-			))}
-		</div>
-	);
-};
+					</div>
+				</a>
+			</div>
+		))}
+	</div>
+);
 
 export default RowItems;
