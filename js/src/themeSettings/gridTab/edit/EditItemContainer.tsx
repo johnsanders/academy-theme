@@ -1,7 +1,7 @@
-import { Instructor, Module, Row, RowItem, Tag } from '../../types';
+import { Instructor, Module, Row, RowItem, Tag } from '../../../types';
 import EditItem from './EditItem';
 import React from 'react';
-import { createModuleUrl } from '../gridTab/GridContainer';
+import { createModuleUrl } from '../GridContainer';
 
 interface Props {
 	activeItem: RowItem;
@@ -15,17 +15,9 @@ interface Props {
 const EditItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	const [errorMessage, setErrorMessage] = React.useState('');
 	const [newItem, setNewItem] = React.useState<RowItem>(props.activeItem);
-	const updateItemInfo = (instructors: string[], tags: string[], thumbUrl: string): void =>
-		setNewItem({ ...newItem, instructors, tags, thumbUrl });
-	const updateInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
-		const key = e.currentTarget.dataset.id;
-		if (!key) throw new Error('Cannot get input id');
-		setNewItem({ ...newItem, [key]: e.currentTarget.value });
-	};
+	const updateDuration = (duration: string): void => setNewItem({ ...newItem, duration });
 	const updateDate = (key: 'dateEnd' | 'dateStart', value: number | null): void =>
 		setNewItem({ ...newItem, [key]: value });
-	const updateInstructors = (newInstructors: string[]): void =>
-		updateItemInfo(newInstructors, newItem.tags, newItem.thumbUrl);
 	const updateModule = (module: Module) => {
 		const url = createModuleUrl(module.id, module.modname);
 		setNewItem({
@@ -36,10 +28,11 @@ const EditItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			url,
 		});
 	};
-	const updateTags = (newTags: string[]) =>
-		updateItemInfo(newItem.instructors, newTags, newItem.thumbUrl);
-	const updateThumb = (thumbUrl: string): void =>
-		updateItemInfo(newItem.instructors, newItem.tags, thumbUrl);
+	console.log(props.activeItem.dateStart);
+	const updateInstructors = (instructors: string[]): void =>
+		setNewItem({ ...newItem, instructors });
+	const updateTags = (tags: string[]) => setNewItem({ ...newItem, tags });
+	const updateThumb = (thumbUrl: string): void => setNewItem({ ...newItem, thumbUrl });
 	const cancelEdit = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
 		props.cancelEdit();
@@ -64,7 +57,7 @@ const EditItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			newItem={newItem}
 			saveItem={saveItem}
 			updateDate={updateDate}
-			updateInput={updateInput}
+			updateDuration={updateDuration}
 			updateInstructors={updateInstructors}
 			updateModule={updateModule}
 			updateTags={updateTags}

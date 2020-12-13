@@ -1,6 +1,7 @@
-import { Instructor, Module, Row, RowItem, Tag } from '../../types';
+import { Instructor, Module, Row, RowItem, Tag } from '../../../types';
 import { faCheck, faTimes } from '@fortawesome/pro-solid-svg-icons';
-import EditItemDates from './EditItemDates';
+import EditItemDatesContainer from './EditItemDatesContainer';
+import EditItemDuration from './EditItemDuration';
 import EditItemInstructors from './EditItemInstructors';
 import EditItemModule from './EditItemModuleContainer';
 import EditItemTags from './EditItemTags';
@@ -18,7 +19,7 @@ interface Props {
 	newItem: RowItem;
 	saveItem: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	updateDate: (key: 'dateEnd' | 'dateStart', value: number | null) => void;
-	updateInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	updateDuration: (duration: string) => void;
 	updateInstructors: (instructors: string[]) => void;
 	updateModule: (module: Module) => void;
 	updateTags: (tags: string[]) => void;
@@ -27,48 +28,52 @@ interface Props {
 
 const EditItem: React.FC<Props> = (props: Props): JSX.Element => (
 	<>
-		<h2>Grid Item</h2>
+		<h2>Edit Grid Item</h2>
 		<EditItemModule
+			className="mb-3"
 			itemsAlreadyInRow={props.activeRow.items}
 			onFocus={props.clearErrorMessage}
 			selectedItemName={props.newItem.name}
 			updateModule={props.updateModule}
 		/>
-		<EditItemDates
+		<EditItemDatesContainer
+			className="mb-3"
 			end={props.newItem.dateEnd}
 			start={props.newItem.dateStart}
 			updateDate={props.updateDate}
 		/>
 		<EditItemInstructors
 			allInstructors={props.allInstructors}
+			className="mb-3"
 			instructors={props.newItem.instructors}
 			updateInstructors={props.updateInstructors}
 		/>
-		<EditItemTags allTags={props.allTags} tags={props.newItem.tags} updateTags={props.updateTags} />
-		<div className="form-group">
-			<label htmlFor="duration">Duration</label>
-			<input
-				className="form-control"
-				data-id="duration"
-				onChange={props.updateInput}
-				value={props.newItem.duration}
-			/>
-		</div>
+		<EditItemTags
+			allTags={props.allTags}
+			className="mb-3"
+			tags={props.newItem.tags}
+			updateTags={props.updateTags}
+		/>
+		<EditItemDuration
+			className="mb-3"
+			duration={props.newItem.duration}
+			updateDuration={props.updateDuration}
+		/>
 		<EditItemThumbnail
+			className="mb-3"
 			onFocus={props.clearErrorMessage}
 			thumbUrl={props.newItem.thumbUrl}
 			updateThumb={props.updateThumb}
 		/>
-		<div className="mt-5">
+		<div>
 			<button className="btn btn-secondary mr-1" onClick={props.saveItem}>
 				<Icon className="mr-1" icon={faCheck} />
-				Done
+				Add Grid Item
 			</button>
 			<button className="btn btn-secondary mr-3" onClick={props.cancelEdit}>
 				<Icon className="mr-1" icon={faTimes} />
 				Cancel
 			</button>
-
 			<span className="text-error">{props.errorMessage}</span>
 		</div>
 	</>

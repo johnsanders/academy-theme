@@ -12,46 +12,50 @@ interface Props {
 }
 
 const CarouselItems: React.FC<Props> = (props: Props): JSX.Element => (
-	<>
-		<h3>Current Carousel Items</h3>
-		{props.carouselItems.length === 0 && (
-			<div className="mb-2 text-muted">No carousel items to display.</div>
-		)}
-		<DragDropContext onDragEnd={props.handleDragEnd}>
-			<Droppable direction="vertical" droppableId="droppable">
-				{(provided) => (
-					<div className="d-flex align-items-center flex-column mb-2" ref={provided.innerRef}>
-						{props.carouselItems.map((item, i) => (
-							<Draggable draggableId={item.id} index={i} key={item.id}>
-								{(provided) => (
-									<div
-										className="carouselAdminItem"
-										ref={provided.innerRef}
-										style={{ userSelect: 'none' }}
-										{...provided.draggableProps}
-										{...provided.dragHandleProps}
-									>
-										<img src={item.url} />
-										<div className="gridItemBtn gridItemBtnClose">
-											<button data-id={item.id} onClick={props.handleDeleteItemClick}>
-												<Icon icon={faTimes} />
-											</button>
+	<div className="card">
+		<div className="card-header pt-2 pb-0">
+			<h4>Current Carousel Items</h4>
+		</div>
+		<div className="card-body">
+			{props.carouselItems.length === 0 && (
+				<div className="mb-2 text-muted">No carousel items to display.</div>
+			)}
+			<DragDropContext onDragEnd={props.handleDragEnd}>
+				<Droppable direction="vertical" droppableId="droppable">
+					{(provided) => (
+						<div className="d-flex align-items-center flex-column mb-2" ref={provided.innerRef}>
+							{props.carouselItems.map((item, i) => (
+								<Draggable draggableId={item.id} index={i} key={item.id}>
+									{(provided) => (
+										<div
+											className="carouselAdminItem"
+											ref={provided.innerRef}
+											style={{ userSelect: 'none' }}
+											{...provided.draggableProps}
+											{...provided.dragHandleProps}
+										>
+											<img src={item.url} />
+											<div className="gridItemBtn gridItemBtnClose">
+												<button data-id={item.id} onClick={props.handleDeleteItemClick}>
+													<Icon icon={faTimes} />
+												</button>
+											</div>
+											<div className="gridItemBtn gridItemBtnEdit">
+												<button data-id={item.id} onClick={props.handleEditItemClick}>
+													<Icon icon={faCog} />
+												</button>
+											</div>
 										</div>
-										<div className="gridItemBtn gridItemBtnEdit">
-											<button data-id={item.id} onClick={props.handleEditItemClick}>
-												<Icon icon={faCog} />
-											</button>
-										</div>
-									</div>
-								)}
-							</Draggable>
-						))}
-						{provided.placeholder}
-					</div>
-				)}
-			</Droppable>
-		</DragDropContext>
-	</>
+									)}
+								</Draggable>
+							))}
+							{provided.placeholder}
+						</div>
+					)}
+				</Droppable>
+			</DragDropContext>
+		</div>
+	</div>
 );
 
 export default CarouselItems;

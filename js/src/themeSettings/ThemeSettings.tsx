@@ -3,7 +3,7 @@ import { faExclamationTriangle, faSave } from '@fortawesome/pro-solid-svg-icons'
 import CarouselContainer from './carouselTab/CarouselContainer';
 import GridContainer from './gridTab/GridContainer';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import InstructorsContainer from './instructorsTab/InstructorsContainer';
+import Instructors from './instructorsTab/Instructors';
 import React from 'react';
 import TagsContainer from './tagsTab/TagsContainer';
 import Uploads from './Uploads';
@@ -59,10 +59,7 @@ const ThemeSettings: React.FC<Props> = (props: Props): JSX.Element => (
 			/>
 		) : null}
 		{props.activeTab === 'instructors' ? (
-			<InstructorsContainer
-				instructors={props.config.instructors}
-				setInstructors={props.setInstructors}
-			/>
+			<Instructors instructors={props.config.instructors} setInstructors={props.setInstructors} />
 		) : null}
 		{props.activeTab === 'tags' ? (
 			<TagsContainer setTags={props.setTags} tags={props.config.tags} />

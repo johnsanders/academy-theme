@@ -1,9 +1,10 @@
 declare const cnnAcademy: MoodleAcademy;
-import { Module, MoodleAcademy, RowItem } from '../../types';
+import { Module, MoodleAcademy, RowItem } from '../../../types';
 import EditItemModule from './EditItemModule';
 import React from 'react';
 
 interface Props {
+	className?: string;
 	itemsAlreadyInRow: RowItem[];
 	onFocus: () => void;
 	selectedItemName: string;
@@ -33,6 +34,7 @@ const ModuleSelector: React.FC<Props> = (props: Props): JSX.Element => {
 	if (!course) throw new Error('Cannot find selected course');
 	return (
 		<EditItemModule
+			className={props.className}
 			course={course}
 			handleCourseChange={handleCourseChange}
 			handleOpenSelectorClick={handleOpenSelectorClick}

@@ -1,10 +1,10 @@
 declare const M: { cfg: { wwwroot: string } };
 import { Config, Instructor, Row, RowItem, Tag } from '../../types';
-import EditItemContainer from '../edit/EditItemContainer';
+import EditItemContainer from './edit/EditItemContainer';
 import React from 'react';
 import RowsContainer from './RowsContainer';
 import arrayMove from 'array-move';
-import { createBlankGridItem } from './createBlankItem';
+import createBlankGridItem from './createBlankGridItem';
 
 interface Props {
 	config: Config;

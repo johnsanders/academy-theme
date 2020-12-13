@@ -3,7 +3,7 @@ import { CarouselItem } from '../../types';
 import { DropResult } from 'react-beautiful-dnd';
 import React from 'react';
 import arrayMove from 'array-move';
-import { createBlankCarouselItem } from '../gridTab/createBlankItem';
+import createBlankCarouselItem from './createBlankCarouselItem';
 
 interface Props {
 	carouselItems: CarouselItem[];

@@ -1,97 +1,82 @@
-import { faPlusCircle, faUser } from '@fortawesome/pro-solid-svg-icons';
+import EditInstructorContainer from './EditInstructorContainer';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { Instructor } from '../../types';
 import InstructorsTable from './InstructorsTable';
 import React from 'react';
+import createBlankInstructor from './createBlankInstructor';
+import { faPlusCircle } from '@fortawesome/pro-solid-svg-icons';
 
 interface Props {
-	avatarUrl: string;
-	bioUrl: string;
-	clearErrorMessage: () => void;
-	errorMessage: string;
-	handleAdd: (e: React.MouseEvent<HTMLButtonElement>) => void;
-	handleDelete: (id: string) => void;
-	handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
-	handleOpenImageModal: (e: React.MouseEvent<HTMLButtonElement>) => void;
-	imageModalIsOpen: boolean;
 	instructors: Instructor[];
-	name: string;
-	role: string;
-	roles: string[];
+	setInstructors: (instructors: Instructor[]) => void;
 }
 
-const Instructors: React.FC<Props> = (props: Props): JSX.Element => (
-	<>
-		<h2>Manage Instructors</h2>
-		<h3>Add a New Instructor</h3>
-		<div className="mb-3">
-			<div className="form-group">
-				<label htmlFor="name">Name</label>
-				<input
-					className="form-control"
-					data-id="setName"
-					id="name"
-					onChange={props.handleInputChange}
-					onFocus={props.clearErrorMessage}
-					value={props.name}
+const Instructors: React.FC<Props> = (props: Props): JSX.Element => {
+	const [activeInstructor, setActiveInstructor] = React.useState<Instructor | null>(null);
+	const handleEditFinished = (newInstructor: Instructor): void => {
+		const instructorToUpdate = props.instructors.find(
+			(instructor) => instructor.id === newInstructor.id,
+		);
+		if (instructorToUpdate) {
+			const newInstructors = props.instructors.map((instructor) =>
+				instructor.id === instructorToUpdate.id ? newInstructor : instructor,
+			);
+			props.setInstructors(newInstructors);
+		} else {
+			console.log('adding', newInstructor);
+			props.setInstructors([...props.instructors, newInstructor]);
+		}
+		setActiveInstructor(null);
+	};
+	const handleEdit = (id: string): void => {
+		const instructorToEdit = props.instructors.find((instructor) => instructor.id === id);
+		if (instructorToEdit) setActiveInstructor(instructorToEdit);
+	};
+	const handleDelete = (id: string): void => {
+		const newInstructors = props.instructors.filter((instructor) => instructor.id !== id);
+		props.setInstructors(newInstructors);
+	};
+	const handleAddInstructorClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
+		e.preventDefault();
+		setActiveInstructor(createBlankInstructor());
+	};
+	const handleEditCancel = (): void => setActiveInstructor(null);
+	return (
+		<>
+			{activeInstructor ? (
+				<EditInstructorContainer
+					handleCancel={handleEditCancel}
+					handleEditFinished={handleEditFinished}
+					initialProperties={activeInstructor}
 				/>
-			</div>
-			<div className="form-group">
-				<label htmlFor="bioUrl">Bio Link</label>
-				<input
-					className="form-control"
-					data-id="setBioUrl"
-					id="bioUrl"
-					onChange={props.handleInputChange}
-					onFocus={props.clearErrorMessage}
-					value={props.bioUrl}
-				/>
-			</div>
-			<div className="form-group">
-				<label htmlFor="role">Role</label>
-				<select
-					className="form-control"
-					data-id="setRole"
-					id="role"
-					onChange={props.handleInputChange}
-					value={props.role}
-				>
-					{props.roles.map((role) => (
-						<option key={role} value={role}>
-							{role}
-						</option>
-					))}
-				</select>
-			</div>
-			<div className="form-group">
-				<label>Avatar</label>
-				{props.avatarUrl === '' ? (
-					<div className="text-muted">No avatar selected.</div>
-				) : (
-					<img className="avatar d-block" src={props.avatarUrl} />
-				)}
-				<button
-					className="btn btn-secondary mt-2"
-					onClick={props.handleOpenImageModal}
-					onFocus={props.clearErrorMessage}
-				>
-					<Icon className="mr-1" icon={faUser} />
-					Select Avatar
-				</button>
-			</div>
-			<button className="btn btn-secondary mr-3" onClick={props.handleAdd}>
-				<Icon className="mr-1" icon={faPlusCircle} />
-				Add Instructor to List
-			</button>
-			<span className="text-error">{props.errorMessage}</span>
-		</div>
-		<h3>Existing Instructors</h3>
-		{props.instructors.length === 0 ? (
-			<div className="text-muted">No instructors to display.</div>
-		) : (
-			<InstructorsTable handleDelete={props.handleDelete} instructors={props.instructors} />
-		)}
-	</>
-);
+			) : (
+				<>
+					<button className="btn btn-secondary mb-3" onClick={handleAddInstructorClick}>
+						<Icon className="mr-1" icon={faPlusCircle} />
+						Add an Instructor
+					</button>
+					<div
+						className="card-header pt-2 pb-0"
+						style={{
+							border: '1px solid rgba(0,0,0,.125)',
+							borderBottom: '1px solid rgba(0,0,0,.03)',
+						}}
+					>
+						<h4>Existing Instructors</h4>
+					</div>
+					{props.instructors.length === 0 ? (
+						<div className="text-muted">No instructors to display.</div>
+					) : (
+						<InstructorsTable
+							handleDelete={handleDelete}
+							handleEdit={handleEdit}
+							instructors={props.instructors}
+						/>
+					)}
+				</>
+			)}
+		</>
+	);
+};
 
 export default Instructors;

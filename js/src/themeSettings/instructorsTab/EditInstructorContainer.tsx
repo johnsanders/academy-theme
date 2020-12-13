@@ -1,29 +1,33 @@
 declare const cnnAcademy: MoodleAcademy;
 import { Instructor, MoodleAcademy } from '../../types';
+import EditInstructor from './EditInstructor';
 import ImagesModal from '../ImagesModal';
-import Instructors from './Instructors';
 import React from 'react';
-import { v4 as uuid } from 'uuid';
 
-const roles = ['Instructor', 'Speaker', 'Special Guest', 'Contributor'];
+export const roles = ['Instructor', 'Speaker', 'Special Guest', 'Contributor'];
 
 interface Props {
-	instructors: Instructor[];
-	setInstructors: (instructors: Instructor[]) => void;
+	handleCancel: () => void;
+	handleEditFinished: (instructor: Instructor) => void;
+	initialProperties: Instructor;
 }
 
-const InstructorsContainer: React.FC<Props> = (props: Props): JSX.Element => {
-	const [avatarUrl, setAvatarUrl] = React.useState('');
-	const [bioUrl, setBioUrl] = React.useState('');
+const EditInstructorContainer: React.FC<Props> = (props: Props): JSX.Element => {
+	const [avatarUrl, setAvatarUrl] = React.useState(props.initialProperties.avatarUrl);
+	const [bioUrl, setBioUrl] = React.useState(props.initialProperties.bioUrl);
 	const [errorMessage, setErrorMessage] = React.useState('');
-	const [name, setName] = React.useState('');
+	const [name, setName] = React.useState(props.initialProperties.name);
 	const [imageModalIsOpen, setImageModalIsOpen] = React.useState(false);
-	const [role, setRole] = React.useState(roles[0]);
+	const [role, setRole] = React.useState(props.initialProperties.role);
 	const updaters = { setBioUrl, setName, setRole };
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
 		const updaterName = e.currentTarget.dataset.id;
 		if (!updaterName) throw new Error('Cannot get updater');
 		updaters[updaterName](e.currentTarget.value);
+	};
+	const handleCancel = (e: React.MouseEvent<HTMLButtonElement>): void => {
+		e.preventDefault();
+		props.handleCancel();
 	};
 	const handleAdd = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
@@ -32,16 +36,11 @@ const InstructorsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			setErrorMessage('All fields are required');
 			return;
 		}
-		const newInstructors = [...props.instructors, { avatarUrl, bioUrl, id: uuid(), name, role }];
+		props.handleEditFinished({ avatarUrl, bioUrl, id: props.initialProperties.id, name, role });
 		setAvatarUrl('');
 		setBioUrl('');
 		setName('');
 		setRole(roles[0]);
-		props.setInstructors(newInstructors);
-	};
-	const handleDelete = (id: string): void => {
-		const newInstructors = props.instructors.filter((instructor) => instructor.id !== id);
-		props.setInstructors(newInstructors);
 	};
 	const handleOpenImageModal = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
@@ -54,17 +53,16 @@ const InstructorsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	const clearErrorMessage = () => setErrorMessage('');
 	return (
 		<>
-			<Instructors
+			<EditInstructor
 				avatarUrl={avatarUrl}
 				bioUrl={bioUrl}
 				clearErrorMessage={clearErrorMessage}
 				errorMessage={errorMessage}
 				handleAdd={handleAdd}
-				handleDelete={handleDelete}
+				handleCancel={handleCancel}
 				handleInputChange={handleInputChange}
 				handleOpenImageModal={handleOpenImageModal}
 				imageModalIsOpen={imageModalIsOpen}
-				instructors={props.instructors}
 				name={name}
 				role={role}
 				roles={roles}
@@ -80,4 +78,4 @@ const InstructorsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	);
 };
 
-export default InstructorsContainer;
+export default EditInstructorContainer;

@@ -1,0 +1,69 @@
+import 'react-datepicker/dist/react-datepicker.css';
+import EditItemDatepicker from './EditItemDatepicker';
+import React from 'react';
+
+interface Props {
+	className?: string;
+	editing: boolean;
+	end: number | null;
+	handleButtonClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	onEndChange: (date: Date) => void;
+	onStartChange: (date: Date) => void;
+	start: number | null;
+}
+
+const EditItemDates: React.FC<Props> = (props: Props): JSX.Element => (
+	<div className={`card ${props.className || ''}`}>
+		<div className="card-header pt-2 pb-0">
+			<h4>Dates</h4>
+		</div>
+		<div className="card-body">
+			<div>
+				<label htmlFor="displayDateToggle">Item is displayed:</label>
+			</div>
+			<div className="btn-group mb-0 mb-2" id="displayDateToggle">
+				<button
+					className={`btn btn-sm btn-secondary ${props.editing ? '' : 'active'}`}
+					id="editOff"
+					onClick={props.handleButtonClick}
+				>
+					Always
+				</button>
+				<button
+					className={`btn btn-sm btn-secondary ${props.editing ? 'active' : ''}`}
+					id="editOn"
+					onClick={props.handleButtonClick}
+				>
+					During Date Range
+				</button>
+			</div>
+			<div className="d-flex align-items-center">
+				{!props.editing ? null : (
+					<>
+						<EditItemDatepicker
+							className="mr-1 mb-0"
+							id="dateStart"
+							label="Start Date"
+							onChange={props.onStartChange}
+							value={props.start}
+						/>
+						<EditItemDatepicker
+							className="mr-1 mb-0"
+							id="dateEnd"
+							label="End Date"
+							onChange={props.onEndChange}
+							value={props.end}
+						/>
+						{props.end && props.start ? null : (
+							<span style={{ lineHeight: 1, marginTop: '2em' }}>
+								Unset date(s). Item will always display.
+							</span>
+						)}
+					</>
+				)}
+			</div>
+		</div>
+	</div>
+);
+
+export default EditItemDates;

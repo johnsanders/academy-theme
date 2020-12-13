@@ -18,51 +18,61 @@ interface Props {
 
 const Tags: React.FC<Props> = (props: Props): JSX.Element => (
 	<>
-		<h2>Manage Tags</h2>
-		<form onSubmit={props.handleAddTag}>
-			<h3>Create New Tag</h3>
-			<div className="form-group">
-				<label htmlFor="name">New Tag Name</label>
-				<div className="input-group">
-					<input
-						className="form-control"
-						id="name"
-						onChange={props.handleNameChange}
-						onFocus={props.clearErrorMessage}
-						value={props.selectedName}
-					/>
+		<h2 className="mb-3">Manage Tags</h2>
+		<div className="card mb-3">
+			<div className="card-header pt-2 pb-0">
+				<h4>Create New Tag</h4>
+			</div>
+			<div className="card-body">
+				<form onSubmit={props.handleAddTag}>
+					<div className="form-group">
+						<label htmlFor="name">New Tag Name</label>
+						<div className="input-group">
+							<input
+								className="form-control"
+								id="name"
+								onChange={props.handleNameChange}
+								onFocus={props.clearErrorMessage}
+								value={props.selectedName}
+							/>
+						</div>
+					</div>
+					<div className="form-group">
+						<label>New Tag Color</label>
+						<input
+							className="form-control"
+							onChange={props.handleColorChange}
+							style={{ cursor: 'pointer', display: 'block', height: '3em', padding: '5px 8px' }}
+							type="color"
+							value={props.selectedColor}
+						/>
+					</div>
+					<div className="form-group mb-0">
+						<button className="btn btn-secondary mr-3">
+							<Icon className="mr-1" icon={faPlusCircle} />
+							Add Tag to List
+						</button>
+						<span className="text-error">{props.errorMessage}</span>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div className="card">
+			<div className="card-header pt-2 pb-0">
+				<h4>Existing Tags</h4>
+			</div>
+			<div className="card-body">
+				{props.tags.length === 0 ? <div className="text-muted">No tags to display.</div> : null}
+				<div className="academyTagsContainer">
+					{props.tags.map((tag) => (
+						<Tag
+							handleDelete={props.handleDeleteTag}
+							key={tag.id}
+							showDeleteButton={true}
+							tag={tag}
+						/>
+					))}
 				</div>
-			</div>
-			<div className="form-group">
-				<label>New Tag Color</label>
-				<input
-					className="form-control"
-					onChange={props.handleColorChange}
-					style={{ cursor: 'pointer', display: 'block', height: '3em', padding: '5px 8px' }}
-					type="color"
-					value={props.selectedColor}
-				/>
-			</div>
-			<div className="form-group">
-				<button className="btn btn-secondary mr-3">
-					<Icon className="mr-1" icon={faPlusCircle} />
-					Add Tag to List
-				</button>
-				<span className="text-error">{props.errorMessage}</span>
-			</div>
-		</form>
-		<div className="form-group">
-			<h3>Existing Tags</h3>
-			{props.tags.length === 0 ? <div className="text-muted">No tags to display.</div> : null}
-			<div className="academyTagsContainer">
-				{props.tags.map((tag) => (
-					<Tag
-						handleDelete={props.handleDeleteTag}
-						key={tag.id}
-						showDeleteButton={true}
-						tag={tag}
-					/>
-				))}
 			</div>
 		</div>
 	</>
