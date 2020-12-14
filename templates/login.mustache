@@ -1,0 +1,30 @@
+{{> theme_boost/head }}
+<body {{{ bodyattributes }}}
+	style="
+		background-image: url('{{wwwroot}}/theme/academy/pix/login_bkg.jpg');
+		background-position: right;
+		background-size: cover;
+	"
+>
+{{> core/local/toast/wrapper}}
+<div id="page-wrapper">
+	{{{ output.standard_top_of_body_html }}}
+	<div id="page">
+		<div id="page-content" class="d-flex align-items-center justify-content-start">
+			<section id="region-main" aria-label="{{#str}}content{{/str}}" class="ml-xs-0 ml-lg-5 w-100">
+				{{{ output.course_content_header }}}
+				{{{ output.main_content }}}
+				{{{ output.course_content_footer }}}
+			</section>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
+{{#js}}
+M.util.js_pending('theme_boost/loader');
+require(['theme_boost/loader'], function() {
+  M.util.js_complete('theme_boost/loader');
+});
+{{/js}}
