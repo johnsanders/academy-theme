@@ -23,7 +23,6 @@ const Instructors: React.FC<Props> = (props: Props): JSX.Element => {
 			);
 			props.setInstructors(newInstructors);
 		} else {
-			console.log('adding', newInstructor);
 			props.setInstructors([...props.instructors, newInstructor]);
 		}
 		setActiveInstructor(null);

@@ -1,22 +1,20 @@
 import React from 'react';
-import { Row } from '../../types';
-import RowAdd from './RowAdd';
-import { v4 as uuid } from 'uuid';
+import { Row } from '../../../types';
+import RowEdit from './RowEdit';
 
 interface Props {
-	handleAdd: (row: Row) => void;
+	handleCancel: () => void;
+	handleSaveRow: (row: Row) => void;
+	initialValues: Row;
 }
 
 const RowAddContainer: React.FC<Props> = (props: Props): JSX.Element => {
-	const [formOpen, setFormOpen] = React.useState(false);
-	const [name, setName] = React.useState('');
-	const [requiredCourses, setRequiredCourses] = React.useState<string[]>([]);
+	const [name, setName] = React.useState(props.initialValues.name);
+	const [requiredCourses, setRequiredCourses] = React.useState<string[]>(
+		props.initialValues.requiredCourses,
+	);
 	const [requiredCourse, setRequiredCourse] = React.useState('');
 	const updaters = { setName, setRequiredCourse };
-	const handleOpenForm = (e: React.MouseEvent<HTMLButtonElement>): void => {
-		e.preventDefault();
-		setFormOpen(true);
-	};
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const id = e.currentTarget.dataset.id;
 		if (!id) throw new Error('Cannot find input id');
@@ -30,24 +28,26 @@ const RowAddContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	};
 	const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
-		setFormOpen(false);
+		props.handleCancel();
 	};
-	const handleAdd = (e: React.MouseEvent<HTMLButtonElement>): void => {
+	const handleSaveRow = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
-		props.handleAdd({ id: uuid(), items: [], name, requiredCourses });
 		setName('');
 		setRequiredCourse('');
 		setRequiredCourses([]);
-		setFormOpen(false);
+		props.handleSaveRow({
+			id: props.initialValues.id,
+			items: props.initialValues.items,
+			name,
+			requiredCourses,
+		});
 	};
 	return (
-		<RowAdd
-			formOpen={formOpen}
-			handleAdd={handleAdd}
+		<RowEdit
 			handleAddRequiredCourse={handleAddRequiredCourse}
 			handleCancel={handleCancel}
 			handleInputChange={handleInputChange}
-			handleOpenForm={handleOpenForm}
+			handleSaveRow={handleSaveRow}
 			name={name}
 			requiredCourse={requiredCourse}
 			requiredCourses={requiredCourses}

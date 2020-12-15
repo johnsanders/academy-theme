@@ -1,10 +1,9 @@
 declare const M: { cfg: { wwwroot: string } };
 import { Config, Row, RowItem } from '../../types';
-import EditItemContainer from './edit/EditItemContainer';
+import { createBlankGridItem, createBlankGridRow } from './createBlankElement';
+import Grid from './Grid';
 import React from 'react';
-import RowsContainer from './RowsContainer';
 import arrayMove from 'array-move';
-import createBlankGridItem from './createBlankGridItem';
 
 interface Props {
 	config: Config;
@@ -17,11 +16,36 @@ export const createModuleUrl = (id: string, modname: string): string =>
 const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	const [activeItem, setActiveItem] = React.useState<RowItem | null>(null);
 	const [activeRow, setActiveRow] = React.useState<Row | null>(null);
-	const cancelEdit = (): void => {
+	const cancelEdit = (e?: React.MouseEvent<HTMLButtonElement>): void => {
+		if (e) e.preventDefault();
 		setActiveItem(null);
 		setActiveRow(null);
 	};
-	const handleAddRow = (newRow: Row): void => props.setRows([...props.config.rows, newRow]);
+	const handleAddRowClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
+		e.preventDefault();
+		const newRow = createBlankGridRow();
+		setActiveRow(newRow);
+	};
+	const handleEditRowClick = (rowId: string): void => {
+		const rowToEdit = props.config.rows.find((row) => row.id === rowId);
+		if (rowToEdit) setActiveRow(rowToEdit);
+	};
+	const handleSaveRow = (newRow: Row): void => {
+		const existingRow = props.config.rows.find((row) => row.id === newRow.id);
+		const newRows = existingRow
+			? props.config.rows.map((row) => (row.id === newRow.id ? newRow : row))
+			: [...props.config.rows, newRow];
+		props.setRows(newRows);
+		setActiveRow(null);
+	};
+	const handleReorderRow = (rowId: string, from: number, to: number): void => {
+		const row = props.config.rows.find((row) => row.id === rowId);
+		if (!row) throw new Error('Cannot find row to reorder');
+		const newItems = arrayMove(row.items, from, to);
+		const newRow = { ...row, items: newItems };
+		const newRows = props.config.rows.map((row) => (row.id === rowId ? newRow : row));
+		props.setRows(newRows);
+	};
 	const handleDeleteRow = (idToDelete: string): void =>
 		props.setRows(props.config.rows.filter((row) => row.id !== idToDelete));
 	const handleAddItemToRow = (rowId: string) => {
@@ -49,14 +73,6 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		props.setRows(props.config.rows.map((row) => (row.id === activeRow.id ? newRow : row)));
 		cancelEdit();
 	};
-	const handleReorderRow = (rowId: string, from: number, to: number): void => {
-		const row = props.config.rows.find((row) => row.id === rowId);
-		if (!row) throw new Error('Cannot find row to reorder');
-		const newItems = arrayMove(row.items, from, to);
-		const newRow = { ...row, items: newItems };
-		const newRows = props.config.rows.map((row) => (row.id === rowId ? newRow : row));
-		props.setRows(newRows);
-	};
 	const handleDeleteItem = (rowId: string, deletedItemId: string) => {
 		const newRows = props.config.rows.map((row) =>
 			row.id !== rowId
@@ -69,29 +85,21 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		props.setRows(newRows);
 	};
 	return (
-		<>
-			{activeRow || activeItem ? null : (
-				<RowsContainer
-					handleAddItemToRow={handleAddItemToRow}
-					handleAddRow={handleAddRow}
-					handleDeleteItem={handleDeleteItem}
-					handleDeleteRow={handleDeleteRow}
-					handleEditItem={handleEditItem}
-					handleReorderRow={handleReorderRow}
-					rows={props.config.rows}
-				/>
-			)}
-			{activeItem && activeRow ? (
-				<EditItemContainer
-					activeItem={activeItem}
-					activeRow={activeRow}
-					allInstructors={props.config.instructors}
-					allTags={props.config.tags}
-					cancelEdit={cancelEdit}
-					handleSave={handleSaveItem}
-				/>
-			) : null}
-		</>
+		<Grid
+			activeItem={activeItem}
+			activeRow={activeRow}
+			cancelEdit={cancelEdit}
+			config={props.config}
+			handleAddItemToRow={handleAddItemToRow}
+			handleAddRowClick={handleAddRowClick}
+			handleDeleteItem={handleDeleteItem}
+			handleDeleteRow={handleDeleteRow}
+			handleEditItem={handleEditItem}
+			handleEditRowClick={handleEditRowClick}
+			handleReorderRow={handleReorderRow}
+			handleSaveItem={handleSaveItem}
+			handleSaveRow={handleSaveRow}
+		/>
 	);
 };
 

@@ -1,5 +1,5 @@
 import { DropResult, ResponderProvided } from 'react-beautiful-dnd';
-import { faPlusCircle, faTrash } from '@fortawesome/pro-solid-svg-icons';
+import { faPencil, faPlus, faTrash } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import RowItems from './RowItems';
@@ -12,6 +12,7 @@ interface Props {
 	handleDeleteItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleDeleteRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleEditItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	handleEditRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleDragEnd: (result: DropResult, provided: ResponderProvided) => void;
 	handleMouseEnter: (e: React.MouseEvent<HTMLDivElement>) => void;
 	row: RowType;
@@ -55,8 +56,16 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => {
 						data-id={props.row.id}
 						onClick={props.handleAddItemClick}
 					>
-						<Icon className="mr-1" icon={faPlusCircle} />
-						Add an Item to Row
+						<Icon className="mr-1" icon={faPlus} />
+						Add Item
+					</button>
+					<button
+						className="btn btn-secondary btn-sm mr-2 mb-1"
+						data-id={props.row.id}
+						onClick={props.handleEditRowClick}
+					>
+						<Icon className="mr-1" icon={faPencil} />
+						Edit Row
 					</button>
 					<button
 						className="btn btn-secondary btn-sm mb-1"

@@ -1,21 +1,25 @@
 import { DropResult } from 'react-beautiful-dnd';
 import React from 'react';
 import Row from './Row';
-import RowAddContainer from './RowAddContainer';
 import { Row as RowType } from '../../types';
 
 interface Props {
 	handleAddItemToRow: (rowId: string) => void;
-	handleAddRow: (row: RowType) => void;
 	handleDeleteItem: (rowId: string, itemId: string) => void;
 	handleDeleteRow: (rowId: string) => void;
 	handleEditItem: (rowId: string, itemId: string) => void;
+	handleEditRowClick: (rowId: string) => void;
 	handleReorderRow: (rowId: string, from: number, to: number) => void;
+	handleSaveRow: (row: RowType) => void;
 	rows: RowType[];
 }
 
 const RowsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	const activeRowIdRef = React.useRef<string>();
+	const handleEditRowClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
+		const rowId = e.currentTarget.dataset.id;
+		if (rowId) props.handleEditRowClick(rowId);
+	};
 	const handleAddItemClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
 		const rowId = e.currentTarget.dataset.id;
@@ -56,12 +60,12 @@ const RowsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 					handleDeleteRowClick={handleDeleteRowClick}
 					handleDragEnd={handleDragEnd}
 					handleEditItemClick={handleEditItemClick}
+					handleEditRowClick={handleEditRowClick}
 					handleMouseEnter={handleMouseEnter}
 					key={row.id}
 					row={row}
 				/>
 			))}
-			<RowAddContainer handleAdd={props.handleAddRow} />
 		</>
 	);
 };

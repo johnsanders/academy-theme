@@ -49,7 +49,7 @@ const InstructorsTable: React.FC<Props> = (props: Props) => {
 						<td className="text-center">
 							{!props.handleEdit ? null : (
 								<button
-									className="btn btn-sm btn-secondary mr-1"
+									className="btn btn-sm btn-secondary mr-1 mb-1"
 									data-id={instructor.id}
 									onClick={handleEdit}
 								>
@@ -58,7 +58,7 @@ const InstructorsTable: React.FC<Props> = (props: Props) => {
 								</button>
 							)}
 							<button
-								className="btn btn-sm btn-secondary"
+								className="btn btn-sm btn-secondary mb-1"
 								data-id={instructor.id}
 								onClick={handleDelete}
 							>

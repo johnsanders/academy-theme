@@ -10,7 +10,7 @@ $context = context_system::instance();
 $fs = get_file_storage();
 $file = $fs->get_file(
 	$context->id,
-	"block_academy_grid",
+	"theme_academy",
 	$_GET["filearea"],
 	$_GET["itemid"],
 	$_GET["filepath"],
