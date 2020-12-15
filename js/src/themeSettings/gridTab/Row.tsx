@@ -51,7 +51,7 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => {
 				</h4>
 				<span>
 					<button
-						className="btn btn-secondary btn-sm mr-2"
+						className="btn btn-secondary btn-sm mr-2 mb-1"
 						data-id={props.row.id}
 						onClick={props.handleAddItemClick}
 					>
@@ -59,7 +59,7 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => {
 						Add an Item to Row
 					</button>
 					<button
-						className="btn btn-secondary btn-sm"
+						className="btn btn-secondary btn-sm mb-1"
 						data-id={props.row.id}
 						onClick={props.handleDeleteRowClick}
 					>

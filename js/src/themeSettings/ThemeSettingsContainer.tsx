@@ -47,6 +47,7 @@ const ThemeSettingsContainer: React.FC = (): JSX.Element | null => {
 		setActiveTab(activeTab as string);
 		queryRef.current.tab = activeTab;
 		updateUrl(queryRef.current);
+		window.onbeforeunload = null;
 	}, []);
 	const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>): void => {
 		const id = e.currentTarget.dataset.id;
