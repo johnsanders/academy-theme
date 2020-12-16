@@ -7,15 +7,7 @@ require_once($CFG->dirroot . '/theme/academy/grid/get_grid_context.php');
 $system_context = context_system::instance();
 $show_nav_drawer = has_capability('moodle/site:manageblocks', $system_context, $USER);
 
-if (isloggedin() && $show_nav_drawer) {
-	$navdraweropen = (get_user_preferences('drawer-open-nav', 'true') == 'true');
-} else {
-	$navdraweropen = false;
-}
 $extraclasses = [];
-if ($navdraweropen) {
-	$extraclasses[] = 'drawer-open-left';
-}
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
 $blockshtml = $OUTPUT->blocks('side-pre');
 $hasblocks = strpos($blockshtml, 'data-block=') !== false;

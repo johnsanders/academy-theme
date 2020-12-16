@@ -5,13 +5,9 @@
 		lower
 		d-print-none
 		moodle-has-zindex
-		{{^navdraweropen}}closed{{/navdraweropen}}
-		{{^show_nav_drawer}}closed{{/show_nav_drawer}}
+		closed
 	"
-	aria-hidden="
-		{{#navdraweropen}}false{{/navdraweropen}}
-		{{^navdraweropen}}true{{/navdraweropen}}
-	"
+	aria-hidden="true"
 	tabindex="-1"
 >
     {{> theme_academy/flat_navigation }}
