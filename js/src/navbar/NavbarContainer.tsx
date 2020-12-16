@@ -9,11 +9,7 @@ import TransitionGroup from 'react-transition-group/TransitionGroup';
 const { navbarConfig } = cnnAcademy;
 const largeThreshold = navbarConfig.isLoggedIn ? 50 : 400;
 
-interface Props {
-	setDrawerOpen: (drawerOpen: boolean) => void;
-}
-
-const NavbarContainer: React.FC<Props> = (props: Props): JSX.Element => {
+const NavbarContainer: React.FC = (): JSX.Element => {
 	const drawerRef = React.useRef(document.querySelector('#nav-drawer') as HTMLElement);
 	const [navState, setNavState] = React.useState(navbarConfig.isLoggedIn ? 'large' : 'none');
 	const navStateRef = React.useRef(navState);

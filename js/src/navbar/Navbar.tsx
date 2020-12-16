@@ -15,62 +15,74 @@ interface Props {
 	size: string;
 }
 
-const Navbar: React.FC<Props> = (props: Props): JSX.Element => (
-	<nav
-		aria-label={navbarConfig.ariaLabel}
-		className={`
+const Navbar: React.FC<Props> = (props: Props): JSX.Element => {
+	React.useEffect(() => {
+		const handleNotificationClick = (e: MouseEvent) => {
+			e.stopPropagation();
+			window.location.replace(`${M.cfg.wwwroot}/message/output/popup/notifications.php`);
+		};
+		const notificationToggle = document.querySelector(
+			'[data-region=popover-region-toggle]',
+		) as HTMLDivElement;
+		notificationToggle.addEventListener('click', handleNotificationClick);
+	}, []);
+	return (
+		<nav
+			aria-label={navbarConfig.ariaLabel}
+			className={`
 			navbar
 			${props.fixed ? 'fixed-top' : ''}
 			navbar-${props.size}
 			navbar-expand
 			moodle-has-zindex
 		`}
-	>
-		{!cnnAcademy.navbarConfig.showNavToggle ? null : (
-			<div
-				className={`
+		>
+			{!navbarConfig.showNavToggle ? null : (
+				<div
+					className={`
 				${props.size === 'large' ? 'mr-3' : ''}
 				${navbarConfig.isLoggedIn ? 'd-inline-block' : 'd-none'}
 			`}
-				data-region="drawer-toggle"
-			>
-				<button
-					aria-controls="nav-drawer"
-					aria-expanded={navbarConfig.navDrawerOpen}
-					className="btn nav-link float-sm-left btn-dark bg-transparent"
-					data-action="toggle-drawer"
-					data-preference="drawer-open-nav"
-					data-side="left"
-					onClick={props.handleDrawerToggleClick}
-					type="button"
+					data-region="drawer-toggle"
 				>
-					<Icon icon={faBars} />
-					<span className="sr-only">{navbarConfig.menuButtonName}</span>
-				</button>
-			</div>
-		)}
-		<a className="navbar-brand aabtn has-logo" href={M.cfg.wwwroot}>
-			<span className="logo fullsize d-none d-sm-inline">
-				<img alt={navbarConfig.siteName} src={logoLight} />
-			</span>
-		</a>
-		<ul
-			className="navbar-nav d-none d-md-flex"
-			dangerouslySetInnerHTML={{
-				__html: navbarConfig.customMenu + (navbarConfig.pageHeadingMenu || ''),
-			}}
-		/>
-		<ul className="nav navbar-nav ml-auto">
-			<li
-				className="nav-item"
-				dangerouslySetInnerHTML={{ __html: navbarConfig.navbarPluginOutput }}
+					<button
+						aria-controls="nav-drawer"
+						aria-expanded="false"
+						className="btn nav-link float-sm-left btn-dark bg-transparent"
+						data-action="toggle-drawer"
+						data-preference="drawer-open-nav"
+						data-side="left"
+						onClick={props.handleDrawerToggleClick}
+						type="button"
+					>
+						<Icon icon={faBars} />
+						<span className="sr-only">{navbarConfig.menuButtonName}</span>
+					</button>
+				</div>
+			)}
+			<a className="navbar-brand aabtn has-logo" href={M.cfg.wwwroot}>
+				<span className="logo fullsize d-none d-sm-inline">
+					<img alt={navbarConfig.siteName} src={logoLight} />
+				</span>
+			</a>
+			<ul
+				className="navbar-nav d-none d-md-flex"
+				dangerouslySetInnerHTML={{
+					__html: navbarConfig.customMenu + (navbarConfig.pageHeadingMenu || ''),
+				}}
 			/>
-			<li
-				className="nav-item d-flex align-items-center"
-				dangerouslySetInnerHTML={{ __html: navbarConfig.userMenu }}
-			/>
-		</ul>
-	</nav>
-);
+			<ul className="nav navbar-nav ml-auto">
+				<li
+					className="nav-item"
+					dangerouslySetInnerHTML={{ __html: navbarConfig.navbarPluginOutput }}
+				/>
+				<li
+					className="nav-item d-flex align-items-center"
+					dangerouslySetInnerHTML={{ __html: navbarConfig.userMenu }}
+				/>
+			</ul>
+		</nav>
+	);
+};
 
 export default Navbar;
