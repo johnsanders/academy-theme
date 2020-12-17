@@ -6,16 +6,18 @@ interface Props {
 	className?: string;
 	id: string;
 	isClearable?: boolean;
-	label: string;
+	label?: string;
 	onChange: (date: Date) => void;
 	value: number | null;
 }
 
 const EditItemDatepicker: React.FC<Props> = (props: Props): JSX.Element => (
 	<div className={`form-group ${props.className || ''}`}>
-		<label className="d-block" htmlFor={props.id}>
-			{props.label}
-		</label>
+		{!props.label ? null : (
+			<label className="d-block" htmlFor={props.id}>
+				{props.label}
+			</label>
+		)}
 		<DatePicker
 			className="form-control"
 			dateFormat="d MMM, yyyy | HH:mm"

@@ -43,7 +43,7 @@ const EditItemInstructors: React.FC<Props> = (props: Props): JSX.Element => {
 						<span className="text-muted">No instructors have been created.</span>
 					) : (
 						<>
-							<label htmlFor="instructors">Instructor Name</label>
+							<h5>Instructor Name</h5>
 							<select
 								className="form-control"
 								id="instructors"
@@ -64,7 +64,7 @@ const EditItemInstructors: React.FC<Props> = (props: Props): JSX.Element => {
 					)}
 				</div>
 				<div>
-					<label>Assigned Instructors</label>
+					<h5>Assigned Instructors</h5>
 					{props.instructors.length === 0 ? (
 						<div className="form-group text-muted mb-0">
 							This module has no instructors assigned.

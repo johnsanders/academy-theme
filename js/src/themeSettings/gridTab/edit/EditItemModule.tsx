@@ -24,7 +24,7 @@ const ModuleSelector: React.FC<Props> = (props: Props): JSX.Element => (
 		</div>
 		<div className="card-body">
 			<div className="form-group">
-				<label>Module Name</label>
+				<h5>Module Name</h5>
 				{props.selectedItemName === '' ? (
 					<div className="text-muted">No module selected.</div>
 				) : (

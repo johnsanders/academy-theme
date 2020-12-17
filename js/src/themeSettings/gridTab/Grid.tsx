@@ -36,7 +36,7 @@ const Grid: React.FC<Props> = (props: Props): JSX.Element => (
 					handleSaveRow={props.handleSaveRow}
 					rows={props.config.rows}
 				/>
-				<div className="form-group">
+				<div>
 					<button className="btn btn-secondary" onClick={props.handleAddRowClick}>
 						<Icon className="mr-1" icon={faPlus} />
 						Add a Row

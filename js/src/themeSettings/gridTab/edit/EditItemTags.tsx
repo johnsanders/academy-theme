@@ -39,7 +39,6 @@ const EditItemTags: React.FC<Props> = (props: Props): JSX.Element => {
 						<span className="text-muted">No tags have been created.</span>
 					) : (
 						<>
-							<label htmlFor="tag">Tag Label</label>
 							<select
 								className="form-control"
 								id="tag"

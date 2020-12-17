@@ -28,7 +28,7 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => (
 		onMouseLeave={props.handleMouse}
 		ref={(el) => {
 			if (el) {
-				const itemsContainer = el.querySelector<HTMLDivElement>('.gridRow');
+				const itemsContainer = el.querySelector<HTMLDivElement>('.gridRowItems');
 				if (itemsContainer) props.containerRef.current = itemsContainer;
 			}
 		}}

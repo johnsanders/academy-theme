@@ -49,7 +49,7 @@ if ($mform->is_cancelled()) {
 	$name = $mform->get_new_filename('grid_image');
 	$im = imagecreatefromstring($content);
 	$cropped = crop_to_16_9($im);
-	$scaled = imagescale($im, 360, 180);
+	$scaled = imagescale($cropped, 320, 180);
 	$tmp_path = tempnam(sys_get_temp_dir(), 'tmpimg');
 	imagejpeg($scaled, $tmp_path);
 	$file_info = [

@@ -26,15 +26,15 @@ const EditItemDates: React.FC<Props> = (props: Props): JSX.Element => (
 				<Icon className="mr-1" icon={faInfoCircle} />
 				All times in GMT
 			</div>
+			<h5>Date displayed with item</h5>
 			<EditItemDatepicker
 				className="mr-1 mb-3"
 				id="dateVisible"
 				isClearable={true}
-				label="Date displayed with item"
 				onChange={props.onDisplayedChange}
 				value={props.displayed}
 			/>
-			<h5>Item is displayed</h5>
+			<h5>When Item is displayed</h5>
 			<div className="btn-group mb-0 mb-2" id="displayDateToggle">
 				<button
 					className={`btn btn-sm btn-secondary ${props.editing ? '' : 'active'}`}

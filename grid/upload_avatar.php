@@ -52,7 +52,7 @@ if ($mform->is_cancelled()) {
 	$name = $mform->get_new_filename('avatar');
 	$im = imagecreatefromstring($content);
 	$cropped = crop_to_square($im);
-	$scaled = imagescale($im, 100, 100);
+	$scaled = imagescale($cropped, 100, 100);
 	$tmp_path = tempnam(sys_get_temp_dir(), 'tmpimg');
 	imagejpeg($scaled, $tmp_path);
 	$file_info = [
