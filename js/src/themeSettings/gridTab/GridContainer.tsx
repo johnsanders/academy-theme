@@ -1,6 +1,6 @@
 declare const M: { cfg: { wwwroot: string } };
 import { Config, Row, RowItem } from '../../types';
-import { createBlankGridItem, createBlankGridRow } from './createBlankElement';
+import { createBlankGridItem, createBlankGridRow } from './edit/createBlankElement';
 import Grid from './Grid';
 import React from 'react';
 import arrayMove from 'array-move';

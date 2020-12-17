@@ -73,6 +73,7 @@ export interface Row {
 	requiredCourses: string[];
 }
 export interface RowItem {
+	dateDisplayed: number | null;
 	dateEnd: number | null;
 	dateStart: number | null;
 	duration: string;

@@ -18,7 +18,7 @@ interface Props {
 	errorMessage: string;
 	newItem: RowItem;
 	saveItem: (e: React.MouseEvent<HTMLButtonElement>) => void;
-	updateDate: (key: 'dateEnd' | 'dateStart', value: number | null) => void;
+	updateDate: (key: 'dateEnd' | 'dateStart' | 'dateDisplayed', value: number | null) => void;
 	updateDuration: (duration: string) => void;
 	updateInstructors: (instructors: string[]) => void;
 	updateModule: (module: Module) => void;
@@ -38,6 +38,7 @@ const EditItem: React.FC<Props> = (props: Props): JSX.Element => (
 		/>
 		<EditItemDatesContainer
 			className="mb-3"
+			displayed={props.newItem.dateDisplayed}
 			end={props.newItem.dateEnd}
 			start={props.newItem.dateStart}
 			updateDate={props.updateDate}

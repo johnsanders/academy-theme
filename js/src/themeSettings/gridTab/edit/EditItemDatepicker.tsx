@@ -5,6 +5,7 @@ import React from 'react';
 interface Props {
 	className?: string;
 	id: string;
+	isClearable?: boolean;
 	label: string;
 	onChange: (date: Date) => void;
 	value: number | null;
@@ -17,8 +18,9 @@ const EditItemDatepicker: React.FC<Props> = (props: Props): JSX.Element => (
 		</label>
 		<DatePicker
 			className="form-control"
-			dateFormat="d MMMM, yyyy"
+			dateFormat="d MMM, yyyy | HH:mm"
 			id={props.id}
+			isClearable={props.isClearable}
 			onChange={props.onChange}
 			placeholderText="Not set"
 			selected={props.value ? new Date(props.value) : null}

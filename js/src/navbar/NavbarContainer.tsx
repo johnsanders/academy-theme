@@ -43,9 +43,6 @@ const NavbarContainer: React.FC = (): JSX.Element => {
 		document.addEventListener('scroll', onScroll);
 		return () => document.removeEventListener('scroll', onScroll);
 	}, []);
-	React.useEffect(() => {
-		if (cnnAcademy.drawer) cnnAcademy.drawer.init();
-	}, [navState]);
 	return (
 		<TransitionGroup>
 			{navState === 'large' ? (

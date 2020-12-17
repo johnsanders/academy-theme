@@ -24,7 +24,7 @@ const Navbar: React.FC<Props> = (props: Props): JSX.Element => {
 		const notificationToggle = document.querySelector(
 			'[data-region=popover-region-toggle]',
 		) as HTMLDivElement;
-		notificationToggle.addEventListener('click', handleNotificationClick);
+		if (notificationToggle) notificationToggle.addEventListener('click', handleNotificationClick);
 	}, []);
 	return (
 		<nav
