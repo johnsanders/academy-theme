@@ -10,7 +10,7 @@ const ClientSegments: React.FC = (): JSX.Element => (
 			<h5 className="text-center">CNN Academy serves three client segments</h5>
 		</div>
 		<div className="mx-5 row">
-			<div className="col-sm-12 col-md-4 text-center">
+			<div className="col-12 col-md-4 text-center">
 				<div className="text-center">
 					<img src={tvPhone} style={{ width: '150px' }} />
 					<h3 className="fontMedium mt-4 text-center">Media training for media professionals</h3>
@@ -23,7 +23,7 @@ const ClientSegments: React.FC = (): JSX.Element => (
 					</div>
 				</div>
 			</div>
-			<div className="col-sm-12 col-md-4 text-center">
+			<div className="col-12 col-md-4 text-center">
 				<img src={education} style={{ width: '150px' }} />
 				<h3 className="fontMedium mt-4 text-center">
 					Journalism training for students and young professionals
@@ -35,7 +35,7 @@ const ClientSegments: React.FC = (): JSX.Element => (
 					- Experimental learning via content creation <br />
 				</div>
 			</div>
-			<div className="col-sm-12 col-md-4 text-center">
+			<div className="col-12 col-md-4 text-center">
 				<img src={professional} style={{ width: '150px' }} />
 				<h3 className="fontMedium mt-4 text-center">
 					Executive programmes for experienced professionals

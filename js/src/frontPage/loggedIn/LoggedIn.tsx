@@ -15,7 +15,7 @@ const LoggedIn: React.FC = (): JSX.Element | null => {
 		<div className="container-fluid" style={{ marginTop: '122px' }}>
 			<ReactTooltip />
 			<div className="row">
-				<div className="col-sm-12 col-xl-10 offset-xl-1">
+				<div className="col-12 col-xl-10 offset-xl-1">
 					<div className="my-3">
 						<Carousel />
 					</div>
