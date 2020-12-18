@@ -1,4 +1,5 @@
 import { getInstructorById, getTagById } from '../../shared/getById';
+import ImageWithLoader from './ImageWithLoader';
 import React from 'react';
 import { Row } from '../../types';
 import getForegroundColor from '../../helpers/getForegroundColor';
@@ -27,7 +28,7 @@ const RowItems: React.FC<Props> = (props: Props): JSX.Element => (
 					<a href={item.url}>
 						<div className="card">
 							<div className="card-img-top">
-								<img src={item.thumbUrl} />
+								<ImageWithLoader imgUrl={item.thumbUrl} />
 								{item.duration ? <span className="duration">{item.duration}</span> : null}
 							</div>
 							<div className="card-body">

@@ -3,11 +3,16 @@
 		{{{ bodyattributes }}}
 		{{^is_logged_in}}style="background-color: black;"{{/is_logged_in}}
 	>
+		{{> theme_academy/loader }}
 		<script>
 			window.cnnAcademy = {};
 		</script>
 		{{> core/local/toast/wrapper}}
-		<div id="page-wrapper" class="d-print-block">
+		<div
+			id="page-wrapper"
+			class="d-print-block"
+			style="visibility: hidden;"
+		>
 			{{{ output.standard_top_of_body_html }}}
 			{{> theme_academy/navbar }}
 			{{> theme_academy/nav_drawer }}

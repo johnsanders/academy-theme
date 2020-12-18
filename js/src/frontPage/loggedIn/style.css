@@ -43,6 +43,28 @@
 	transform-origin: center;
 	transition: transform 0.2s;
 }
+img.loading {
+	visibility: hidden;
+}
+.imgWithLoader {
+	display: block;
+	min-height: 125px;
+}
+.imgWithLoader .loaderContainer {
+	align-items: center;
+	background-color: #F0F0F0;
+	display: flex;
+	height: 125px;
+	justify-content: center;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+.imgWithLoader  img {
+	left: 0;
+	top: 0;
+}
 .rowHeader {
 	display: flex;
 	justify-content: space-between;
