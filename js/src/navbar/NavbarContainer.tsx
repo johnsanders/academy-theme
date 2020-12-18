@@ -3,11 +3,13 @@ import { MoodleAcademy } from '../types';
 import Navbar from './Navbar';
 import React from 'react';
 import SimpleMenu from './SimpleMenu';
+import clearLoader from './clearLoader';
 
 const { navbarConfig } = cnnAcademy;
 const largeThreshold = navbarConfig.isLoggedIn ? 50 : 400;
 
 const NavbarContainer: React.FC = (): JSX.Element => {
+	React.useEffect(clearLoader, []);
 	const drawerRef = React.useRef(document.querySelector('#nav-drawer') as HTMLElement);
 	const [navState, setNavState] = React.useState(navbarConfig.isLoggedIn ? 'large' : 'none');
 	const setLarge = (): void => {

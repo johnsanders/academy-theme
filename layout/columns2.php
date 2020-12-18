@@ -3,7 +3,7 @@ defined('MOODLE_INTERNAL') || die();
 user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
 require_once($CFG->libdir . '/behat/lib.php');
 require_once($CFG->dirroot . '/theme/academy/grid/get_grid_context.php');
-require_once($CFG->dirroot . '/theme/academy/grid/get_flatnav.php');
+// require_once($CFG->dirroot . '/theme/academy/grid/get_flatnav.php');
 
 $system_context = context_system::instance();
 $show_nav_drawer = has_capability('moodle/site:manageblocks', $system_context, $USER);
@@ -37,7 +37,7 @@ $templatecontext = [
 	'cnn_academy_json' => json_encode($grid_context['cnn_academy']),
 	'firstcollectionlabel' => json_encode($PAGE->flatnav->get_collectionlabel()),
 	'flatnavigation_json' => '[]', // json_encode($flatnav),
-	'flatnavigation' => $flatnav,
+	'flatnavigation' => $PAGE->flatnav,
 	'hasblocks' => $hasblocks,
 	'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
 	'is_front_page' => $is_front_page,
