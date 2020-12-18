@@ -26,7 +26,7 @@ const Footer: React.FC<Props> = (props: Props): JSX.Element | null => {
 				</a>
 				<a href="https://commercial.cnn.com/cookies">Cookies</a>
 			</div>
-			<div className="col-sm-12 col-md-5 d-flex flex-column justify-content-center align-items-sm-center align-items-md-end">
+			<div className="col-sm-12 col-md-5 d-flex flex-column justify-content-center align-items-sm-center align-items-md-end py-1">
 				<div className="text-right pr-3">
 					© 2021 Cable News Network. A WarnerMedia Company. All Rights Reserved.
 				</div>
