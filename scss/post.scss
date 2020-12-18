@@ -44,6 +44,9 @@ body {
 .loginLogo {
 	max-height: 100px;
 }
+[data-region="drawer"] {
+	height: 100%;
+}
 #page.loggedIn {
 	margin-top: 105px;
 }
