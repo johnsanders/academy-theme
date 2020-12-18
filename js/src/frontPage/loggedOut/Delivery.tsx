@@ -10,7 +10,7 @@ const Delivery: React.FC = (): JSX.Element => (
 			<h5 className="text-center">CNN Academy offers a diverse array of courses and modules.</h5>
 		</div>
 		<div className="mx-5 row" style={{ paddingBottom: '7em' }}>
-			<div className="col-xs-12 col-md-4 mb-3 text-center">
+			<div className="col-sm-12 col-md-4 mb-3 text-center">
 				<div className="text-center">
 					<img src={onsiteCourses} style={{ maxWidth: '25vw', width: '300px' }} />
 					<h3 className="fontMedium mt-4 text-center">On-site courses</h3>
@@ -19,7 +19,7 @@ const Delivery: React.FC = (): JSX.Element => (
 					</div>
 				</div>
 			</div>
-			<div className="col-xs-12 col-md-4 mb-3 text-center">
+			<div className="col-sm-12 col-md-4 mb-3 text-center">
 				<img src={bootcamps} style={{ maxWidth: '25vw', width: '300px' }} />
 				<h3 className="fontMedium mt-4 text-center">CNN Bootcamps</h3>
 				<div className="text-center">
@@ -27,7 +27,7 @@ const Delivery: React.FC = (): JSX.Element => (
 					production and broadcasting
 				</div>
 			</div>
-			<div className="col-xs-12 col-md-4 mb-3 text-center">
+			<div className="col-sm-12 col-md-4 mb-3 text-center">
 				<img src={webinars} style={{ maxWidth: '25vw', width: '300px' }} />
 				<h3 className="fontMedium mt-4 text-center">Webinars</h3>
 				<div className="text-center">

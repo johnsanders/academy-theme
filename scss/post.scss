@@ -38,8 +38,6 @@ body {
 	font-family: 'CNNSansRegular';
 }
 .list-group-item.active {
-	z-index: 2;
-	color: #fff;
 	background-color: #6c757d;
 	border-color:#6c757d;
 }
@@ -51,4 +49,11 @@ body {
 }
 #page.loggedOut {
 	margin-top: 0;
+}
+#page-footer a {
+	color: inherit;
+	text-decoration: inherit;
+}
+#page-footer a:hover {
+	text-decoration: underline;
 }

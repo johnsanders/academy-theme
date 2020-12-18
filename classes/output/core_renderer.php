@@ -7,9 +7,7 @@ class theme_academy_core_renderer extends core_renderer
 	public function render_login(\core_auth\output\login $form)
 	{
 		global $CFG, $SITE;
-
 		$context = $form->export_for_template($this);
-
 		// Override because rendering is not supported in template yet.
 		if ($CFG->rememberusername == 0) {
 			$context->cookieshelpiconformatted = $this->help_icon('cookiesenabledonlysession');
@@ -27,7 +25,6 @@ class theme_academy_core_renderer extends core_renderer
 			true,
 			['context' => context_course::instance(SITEID), "escape" => false]
 		);
-
 		return $this->render_from_template('theme_academy/loginform', $context);
 	}
 

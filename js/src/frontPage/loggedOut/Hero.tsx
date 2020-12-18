@@ -35,7 +35,7 @@ const Hero: React.FC = (): JSX.Element => (
 		>
 			<div className="container h-100">
 				<div className="row h-100">
-					<div className="col-xs-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 d-flex flex-column justify-content-center align-items-center">
+					<div className="col-sm-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 d-flex flex-column justify-content-center align-items-center">
 						<img
 							alt={cnnAcademy.navbarConfig.siteName}
 							className="mb-5"
