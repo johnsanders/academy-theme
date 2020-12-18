@@ -74,13 +74,15 @@
 {{#js}}
 	M.util.js_pending('theme_boost/loader');
 	require(['theme_boost/loader'], function() {
-			M.util.js_complete('theme_boost/loader');
+		M.util.js_complete('theme_boost/loader');
 	});
 	M.util.js_pending('theme_boost/drawer');
 	require(['theme_boost/drawer'], function(drawer) {
-			cnnAcademy.drawer = drawer;
+		cnnAcademy.drawer = drawer;
+		setTimeout(() => {
 			drawer.init();
 			M.util.js_complete('theme_boost/drawer');
+		}, 1000);
 	});
 {{/js}}
 {{> theme_academy/handle_zoom_frame }}

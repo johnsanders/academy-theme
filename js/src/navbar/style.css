@@ -23,15 +23,14 @@ nav.navbar-exit-active {
 	transform: translate3d(0, -105px, 0);
 }
 nav.navbar.fixed-top {
-	position: fixed !important;
-	z-index: 10300;
-}
-nav.navbar.navbar-large {
 	left: 0;
-	position: absolute;
+	position: fixed !important;
 	top: 0;
 	width: 100%;
-	z-index: 1000;
+	z-index: 10300;
+}
+nav.navbar.navbar-none {
+	transform: translate3d(0, -65px, 0);
 }
 nav.navbar.navbar-large span.logo img {
 	height: 75px;

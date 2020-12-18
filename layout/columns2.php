@@ -3,6 +3,7 @@ defined('MOODLE_INTERNAL') || die();
 user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
 require_once($CFG->libdir . '/behat/lib.php');
 require_once($CFG->dirroot . '/theme/academy/grid/get_grid_context.php');
+require_once($CFG->dirroot . '/theme/academy/grid/get_flatnav.php');
 
 $system_context = context_system::instance();
 $show_nav_drawer = has_capability('moodle/site:manageblocks', $system_context, $USER);
@@ -35,8 +36,8 @@ $templatecontext = [
 	'bodyattributes' => $bodyattributes,
 	'cnn_academy_json' => json_encode($grid_context['cnn_academy']),
 	'firstcollectionlabel' => json_encode($PAGE->flatnav->get_collectionlabel()),
-	'flatnavigation_json' => '[]', // json_encode($nav),
-	'flatnavigation' => $PAGE->flatnav,
+	'flatnavigation_json' => '[]', // json_encode($flatnav),
+	'flatnavigation' => $flatnav,
 	'hasblocks' => $hasblocks,
 	'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
 	'is_front_page' => $is_front_page,
@@ -54,26 +55,3 @@ $templatecontext = [
 ];
 
 echo $OUTPUT->render_from_template('theme_academy/columns2', $templatecontext);
-
-
-/*
-$nav_all = $PAGE->flatnav;
-$nav = [];
-$unwanted_navs = ['Private files', 'Content bank', 'Badges', 'Competencies'];
-foreach ($nav_all as $nav_item) {
-	if (!in_array($nav_item->text, $unwanted_navs)) array_push(
-		$nav,
-		[
-			"action" => (string) $nav_item->action,
-			"classes" => $nav_item->classes,
-			"indent" => $nav_item->get_indent(),
-			"icon" => $nav_item->icon,
-			"is_section" => $nav_item->is_section,
-			"isactive" => $nav_item->isactive,
-			"parent" => $nav_item->parent,
-			"showDivider" => $nav_item->showdivider(),
-			"text" => $nav_item->text,
-		],
-	);
-}
-*
