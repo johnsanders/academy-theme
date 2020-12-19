@@ -15,10 +15,10 @@ const LoggedIn: React.FC = (): JSX.Element | null => {
 	const el = document.getElementById('academyContent');
 	const queryRef = React.useRef(qsParse(window.location.search, { ignoreQueryPrefix: true }));
 	const [activeTagId, setActiveTagId] = React.useState(queryRef.current.collection);
-	React.useEffect(() => {
-		console.log(activeTagId);
-		activeTagId === '' ? updateUrl(null) : updateUrl({ collection: activeTagId });
-	}, [activeTagId]);
+	React.useEffect(
+		() => (activeTagId === '' ? updateUrl(null) : updateUrl({ collection: activeTagId })),
+		[activeTagId],
+	);
 	if (!el) return null;
 	return createPortal(
 		<div className="container-fluid" style={{ marginTop: '122px' }}>

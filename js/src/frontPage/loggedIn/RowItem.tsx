@@ -35,12 +35,13 @@ const RowItem: React.FC<Props> = (props: Props): JSX.Element => {
 							const instructor = getInstructorById(instructorId);
 							if (!instructor) return null;
 							return (
-								<img
-									className="avatar"
-									data-tip={`Instructor: ${instructor.name}`}
-									key={instructor.id}
-									src={instructor.avatarUrl}
-								/>
+								<a href={instructor.bioUrl} key={instructor.id}>
+									<img
+										className="avatar"
+										data-tip={`Instructor: ${instructor.name}`}
+										src={instructor.avatarUrl}
+									/>
+								</a>
 							);
 						})}
 					</div>
