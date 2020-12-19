@@ -1,6 +1,6 @@
+import GridItem from './GridItem';
 import React from 'react';
 import { Row } from '../../types';
-import RowItem from './RowItem';
 
 interface Props {
 	containerRef: React.MutableRefObject<HTMLDivElement | undefined>;
@@ -21,7 +21,7 @@ const RowItems: React.FC<Props> = (props: Props): JSX.Element => (
 		}}
 	>
 		{props.row.items.map((item) => {
-			return <RowItem item={item} key={item.id} setActiveTagId={props.setActiveTagId} />;
+			return <GridItem item={item} key={item.id} setActiveTagId={props.setActiveTagId} />;
 		})}
 	</div>
 );

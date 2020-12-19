@@ -9,7 +9,7 @@ interface Props {
 	setActiveTagId: (tagId: string) => void;
 }
 
-const RowItem: React.FC<Props> = (props: Props): JSX.Element => {
+const GridItem: React.FC<Props> = (props: Props): JSX.Element => {
 	const dateString =
 		props.item.dateDisplayed && new Date(props.item.dateDisplayed).toLocaleString();
 	const handleTagClick = (e: React.MouseEvent<HTMLSpanElement>): void => {
@@ -71,4 +71,4 @@ const RowItem: React.FC<Props> = (props: Props): JSX.Element => {
 	);
 };
 
-export default RowItem;
+export default GridItem;

@@ -1,7 +1,7 @@
 import { Row, RowItem as RowItemType, Tag } from '../../types';
+import GridItem from './GridItem';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import RowItem from './RowItem';
 import { faChevronLeft } from '@fortawesome/pro-solid-svg-icons';
 
 interface Props {
@@ -27,9 +27,11 @@ const Collection: React.FC<Props> = (props: Props): JSX.Element | null => {
 				View All
 			</button>
 			<h2>Collection: {props.tag.name}</h2>
-			{collectionItems.map((item) => (
-				<RowItem item={item} key={item.id} setActiveTagId={props.setActiveTagId} />
-			))}
+			<div className="d-flex flex-wrap justify-content-sm-center justify-content-lg-start">
+				{collectionItems.map((item) => (
+					<GridItem item={item} key={item.id} setActiveTagId={props.setActiveTagId} />
+				))}
+			</div>
 		</div>
 	);
 };
