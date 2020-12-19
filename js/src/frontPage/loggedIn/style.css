@@ -8,12 +8,19 @@
 .__react_component_tooltip {
 	padding: 2px 7px !important;
 }
-.academyTagsContainer span {
+.academyTagsContainer {
+	margin-bottom: -0.25em;
+}
+.academyTagsContainer button {
 	background-color: #ced4da;
+	border: none;
 	border-radius: 5px;
 	font-size: 0.85em;
 	margin: 0 0.5em 0.5em 0;
 	padding: 2px 5px;
+}
+.academyTagsContainer button:active {
+	border: none;
 }
 .avatar {
 	margin-left: -10px;

@@ -1,9 +1,13 @@
 import qs from 'qs';
 
-const updateUrl = (query: { [key: string]: unknown }): void => {
+const updateUrl = (query: { [key: string]: unknown } | null): void => {
 	const { origin, pathname } = window.location;
-	const newUrl = origin + pathname + qs.stringify(query, { addQueryPrefix: true });
-	window.history.pushState(null, document.title, newUrl);
+	if (!query) {
+		window.history.pushState(null, document.title, origin + pathname);
+	} else {
+		const newUrl = origin + pathname + qs.stringify(query, { addQueryPrefix: true });
+		window.history.pushState(null, document.title, newUrl);
+	}
 };
 
 export default updateUrl;

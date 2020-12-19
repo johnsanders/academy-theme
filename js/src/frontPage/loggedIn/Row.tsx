@@ -6,6 +6,7 @@ import debounce from 'lodash/debounce';
 
 interface Props {
 	row: RowType;
+	setActiveTagId: (tagId: string) => void;
 }
 
 const Row: React.FC<Props> = (props: Props): JSX.Element => {
@@ -49,6 +50,7 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => {
 					handleMouse={handleMouseEvent}
 					handleScroll={handleScrollEvent}
 					row={props.row}
+					setActiveTagId={props.setActiveTagId}
 				/>
 			</div>
 		</div>
