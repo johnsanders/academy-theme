@@ -5,6 +5,7 @@ import { RowItem as RowItemType } from '../../types';
 import getForegroundColor from '../../helpers/getForegroundColor';
 
 interface Props {
+	handleInit: () => void;
 	item: RowItemType;
 	setActiveTagId: (tagId: string) => void;
 }
@@ -21,7 +22,7 @@ const GridItem: React.FC<Props> = (props: Props): JSX.Element => {
 			<div className="card">
 				<div className="card-img-top">
 					<a href={props.item.url}>
-						<ImageWithLoader imgUrl={props.item.thumbUrl} />
+						<ImageWithLoader handleInit={props.handleInit} imgUrl={props.item.thumbUrl} />
 					</a>
 					{props.item.duration ? <span className="duration">{props.item.duration}</span> : null}
 				</div>

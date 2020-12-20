@@ -1,5 +1,5 @@
 const clearLoader = (): void => {
-	const loader = document.getElementById('academyLoader');
+	const loader = document.getElementById('academyLoaderTemplate');
 	const wrapper = document.getElementById('page-wrapper');
 	setTimeout(() => {
 		if (loader) loader.classList.add('d-none');

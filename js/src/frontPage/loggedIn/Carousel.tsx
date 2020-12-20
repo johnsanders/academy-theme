@@ -1,15 +1,26 @@
-declare const cnnAcademy: MoodleAcademy;
 import '../../shared/slickSlider.css';
 import '../../shared/slickSliderTheme.css';
-import { MoodleAcademy } from '../../types';
+import Slider, { Settings } from 'react-slick';
+import { CarouselItem } from '../../types';
 import React from 'react';
-import Slider from 'react-slick';
 
-const Carousel: React.FC = (): JSX.Element => {
-	const settings = {
+interface Props {
+	handleInit: () => void;
+	items: CarouselItem[];
+	loading: boolean;
+}
+
+const Carousel: React.FC<Props> = (props: Props): JSX.Element => {
+	const imgLoadRef = React.useRef(0);
+	const handleImgLoad = () => {
+		imgLoadRef.current += 1;
+		if (imgLoadRef.current === props.items.length) props.handleInit();
+	};
+	const settings: Settings = {
 		arrows: false,
 		autoplay: true,
 		autoplaySpeed: 10000,
+		className: props.loading ? 'd-none' : '',
 		dots: true,
 		infinite: true,
 		pauseOnHover: true,
@@ -19,9 +30,9 @@ const Carousel: React.FC = (): JSX.Element => {
 	};
 	return (
 		<Slider {...settings}>
-			{cnnAcademy.carouselItems.map((item) => (
+			{props.items.map((item) => (
 				<a href={item.targetUrl} key={item.id}>
-					<img className="carouselImg" src={item.url} />
+					<img className="carouselImg" onLoad={handleImgLoad} src={item.url} />
 				</a>
 			))}
 		</Slider>

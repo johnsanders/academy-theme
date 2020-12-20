@@ -7,7 +7,12 @@ import React from 'react';
 import Trainers from './Trainers';
 import { createPortal } from 'react-dom';
 
-const LoggedOut: React.FC = (): JSX.Element | null => {
+interface Props {
+	loading: boolean;
+	setLoading: (loading: boolean) => void;
+}
+
+const LoggedOut: React.FC<Props> = (_props: Props): JSX.Element | null => {
 	const el = document.getElementById('academyContent');
 	if (!el) return null;
 	return createPortal(

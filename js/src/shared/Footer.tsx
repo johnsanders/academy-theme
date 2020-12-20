@@ -4,13 +4,21 @@ import { createPortal } from 'react-dom';
 
 interface Props {
 	drawerOpen: boolean;
+	loading?: boolean;
 }
 
 const Footer: React.FC<Props> = (props: Props): JSX.Element | null => {
 	const el = document.getElementById('academyFooter');
 	if (!el) return null;
 	return createPortal(
-		<footer className={`row ${props.drawerOpen ? 'drawerOpen' : ''} py-2 py-md-0`} id="page-footer">
+		<footer
+			className={`
+				row py-2 py-md-0
+				${props.loading ? 'd-none' : ''}
+				${props.drawerOpen ? 'drawerOpen' : ''}
+			`}
+			id="page-footer"
+		>
 			<div className="col-12 col-md-2 d-none d-md-flex justify-content-center justify-content-md-start mb-2 mb-md-0">
 				<img src={cnnLogo} style={{ height: '100px', minHeight: '100%' }} />
 			</div>

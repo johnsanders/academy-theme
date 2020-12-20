@@ -3,6 +3,7 @@ import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
 interface Props {
+	handleInit: () => void;
 	imgUrl: string;
 }
 
@@ -12,8 +13,12 @@ const ImageWithLoader: React.FC<Props> = (props: Props): JSX.Element => {
 	const handleImageError = () => {
 		setLoading(false);
 		setError(true);
+		props.handleInit();
 	};
-	const handleImageLoad = () => setLoading(false);
+	const handleImageLoad = () => {
+		setLoading(false);
+		props.handleInit();
+	};
 	return (
 		<span className="imgWithLoader">
 			<div className={`loaderContainer ${loading || error ? 'd-flex' : 'd-none'}`}>

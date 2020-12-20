@@ -5,6 +5,8 @@ import ScrollButtons from '../../shared/ScrollButtons';
 import debounce from 'lodash/debounce';
 
 interface Props {
+	handleInit: () => void;
+	loading: boolean;
 	row: RowType;
 	setActiveTagId: (tagId: string) => void;
 }
@@ -15,6 +17,9 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => {
 	const [containerScrollLeft, setContainerScrollLeft] = React.useState(0);
 	const [containerScrollWidth, setContainerScrollWidth] = React.useState(0);
 	const [hovered, setHovered] = React.useState(false);
+	React.useEffect(() => {
+		if (props.row.items.length === 0) props.handleInit();
+	}, []);
 	const updateContainerInfo = debounce((): void => {
 		if (!containerRef.current) return;
 		setContainerClientWidth(containerRef.current.clientWidth);
@@ -34,7 +39,7 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => {
 	};
 	const handleScrollEvent = (): void => updateContainerInfo();
 	return (
-		<div>
+		<div className={props.loading ? 'd-none' : ''}>
 			<h3>{props.row.name}</h3>
 			<div className="position-relative">
 				<ScrollButtons
@@ -47,6 +52,7 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => {
 				/>
 				<RowItems
 					containerRef={containerRef}
+					handleInit={props.handleInit}
 					handleMouse={handleMouseEvent}
 					handleScroll={handleScrollEvent}
 					row={props.row}

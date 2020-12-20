@@ -7,14 +7,16 @@ const Settings = React.lazy(() => import('./themeSettings'));
 const FrontPage = React.lazy(() => import('./frontPage'));
 
 const MainContent: React.FC = (): JSX.Element => {
-	const { search } = window.location;
+	const isSettingsPage = window.location.search.includes('section=themesettingacademy');
+	const [loading, setLoading] = React.useState(!isSettingsPage);
 	return (
 		<>
 			<Navbar />
+			{loading ? <Loading /> : null}
 			<React.Suspense fallback={<Loading />}>
-				{search.includes('section=themesettingacademy') ? <Settings /> : <FrontPage />}
+				{isSettingsPage ? <Settings /> : <FrontPage loading={loading} setLoading={setLoading} />}
 			</React.Suspense>
-			<Footer drawerOpen={false} />
+			<Footer drawerOpen={false} loading={loading} />
 		</>
 	);
 };
