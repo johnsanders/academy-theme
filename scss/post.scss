@@ -2,10 +2,10 @@
 	font-family: 'CNNSansBlack';
 	src: url('[[font:theme|CNNSansDisplayW04-Black.eot]]');
 	src: url('[[font:theme|CNNSansDisplayW04-Black.eot]]') format('embedded-opentype'),
-			 url('[[font:theme|CNNSansDisplayW04-Black.woff]]') format('woff'),
-			 url('[[font:theme|CNNSansDisplayW04-Black.woff2]]') format('woff2'),
-			 url('[[font:theme|CNNSansDisplayW04-Black.ttf]]') format('truetype'),
-			 url('[[font:theme|CNNSansDisplayW04-Black.svg]]') format('svg');
+		url('[[font:theme|CNNSansDisplayW04-Black.woff]]') format('woff'),
+		url('[[font:theme|CNNSansDisplayW04-Black.woff2]]') format('woff2'),
+		url('[[font:theme|CNNSansDisplayW04-Black.ttf]]') format('truetype'),
+		url('[[font:theme|CNNSansDisplayW04-Black.svg]]') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -13,10 +13,10 @@
 	font-family: 'CNNSansMedium';
 	src: url('[[font:theme|CNNSansDisplayW04-Medium.eot]]');
 	src: url('[[font:theme|CNNSansDisplayW04-Medium.eot]]') format('embedded-opentype'),
-			 url('[[font:theme|CNNSansDisplayW04-Medium.woff]]') format('woff'),
-			 url('[[font:theme|CNNSansDisplayW04-Medium.woff2]]') format('woff2'),
-			 url('[[font:theme|CNNSansDisplayW04-Medium.ttf]]') format('truetype'),
-			 url('[[font:theme|CNNSansDisplayW04-Medium.svg]]') format('svg');
+		url('[[font:theme|CNNSansDisplayW04-Medium.woff]]') format('woff'),
+		url('[[font:theme|CNNSansDisplayW04-Medium.woff2]]') format('woff2'),
+		url('[[font:theme|CNNSansDisplayW04-Medium.ttf]]') format('truetype'),
+		url('[[font:theme|CNNSansDisplayW04-Medium.svg]]') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -24,15 +24,38 @@
 	font-family: 'CNNSansRegular';
 	src: url('[[font:theme|CNNSansDisplayW04-Regular.eot]]');
 	src: url('[[font:theme|CNNSansDisplayW04-Regular.eot]]') format('embedded-opentype'),
-			 url('[[font:theme|CNNSansDisplayW04-Regular.woff]]') format('woff'),
-			 url('[[font:theme|CNNSansDisplayW04-Regular.woff2]]') format('woff2'),
-			 url('[[font:theme|CNNSansDisplayW04-Regular.ttf]]') format('truetype'),
-			 url('[[font:theme|CNNSansDisplayW04-Regular.svg]]') format('svg');
+		url('[[font:theme|CNNSansDisplayW04-Regular.woff]]') format('woff'),
+		url('[[font:theme|CNNSansDisplayW04-Regular.woff2]]') format('woff2'),
+		url('[[font:theme|CNNSansDisplayW04-Regular.ttf]]') format('truetype'),
+		url('[[font:theme|CNNSansDisplayW04-Regular.svg]]') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
+@keyframes flip {
+	0% {
+		transform: rotate3D(0, 0, 0, 0deg);
+		
+	}
+	50% {
+		transform: rotate3D(1, 0, 0, 180deg);
+	}
+	100% {
+		transform: rotate3D(0, 0, 1, 180deg);
+	}
+}
 a {
 	color: unset;
+}
+.academyLoader {
+	align-items: center;
+	display: flex;
+	height: 100vh;
+	justify-content: center;
+	left: 0;
+	perspective: 1000px;
+	position: fixed;
+	top: 0;
+	width: 100vw;
 }
 body {
 	font-family: 'CNNSansRegular';
@@ -40,6 +63,12 @@ body {
 .list-group-item.active {
 	background-color: #6c757d;
 	border-color:#6c757d;
+}
+#loaderBox {
+	animation: flip 1.5s infinite;
+	background-color: #CA0000;
+	height: 100px;
+	width: 100px;
 }
 .loginLogo {
 	max-height: 100px;

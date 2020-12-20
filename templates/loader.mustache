@@ -1,34 +1,3 @@
-<style>
-	@keyframes flip {
-		0% {
-			transform: rotate3D(0, 0, 0, 0deg);
-			
-		}
-		50% {
-			transform: rotate3D(1, 0, 0, 180deg);
-		}
-		100% {
-			transform: rotate3D(0, 0, 1, 180deg);
-		}
-	}
-	#academyLoader {
-		align-items: center;
-		display: flex;
-		height: 100vh;
-		justify-content: center;
-		left: 0;
-		perspective: 1000px;
-		position: fixed;
-		top: 0;
-		width: 100vw;
-	}
-	#loaderBox {
-		animation: flip 1.5s infinite;
-		background-color: #CA0000;
-		height: 100px;
-		width: 100px;
-	}
-</style>
-<div id="academyLoader">
+<div class="academyLoader" id="academyLoaderTemplate">
 	<div id="loaderBox"></div>
 </div>
