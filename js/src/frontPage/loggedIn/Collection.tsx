@@ -6,7 +6,6 @@ import { faChevronLeft } from '@fortawesome/pro-solid-svg-icons';
 
 interface Props {
 	handleInit: () => void;
-	loading: boolean;
 	rows: Row[];
 	setActiveTagId: (tagId: string) => void;
 	tag: Tag | undefined;
@@ -28,7 +27,7 @@ const Collection: React.FC<Props> = (props: Props): JSX.Element | null => {
 		props.setActiveTagId('');
 	};
 	return (
-		<div className={`mb-5 ${props.loading ? 'd-none' : ''}`}>
+		<div className="mb-5">
 			<button className="btn btn-secondary mb-3" onClick={handleBackClick}>
 				<Icon className="mr-1" icon={faChevronLeft} />
 				View All

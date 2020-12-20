@@ -8,22 +8,25 @@ import Trainers from './Trainers';
 import { createPortal } from 'react-dom';
 
 interface Props {
-	loading: boolean;
 	setLoading: (loading: boolean) => void;
+	visible: boolean;
 }
 
-const LoggedOut: React.FC<Props> = (_props: Props): JSX.Element | null => {
+const LoggedOut: React.FC<Props> = (props: Props): JSX.Element | null => {
 	const el = document.getElementById('academyContent');
+	const setLoading = () => {
+		props.setLoading(false);
+	};
 	if (!el) return null;
 	return createPortal(
-		<>
-			<Hero />
+		<div className={`fadeIn ${props.visible ? '' : 'd-none'}`}>
+			<Hero setLoading={setLoading} />
 			<ClientSegments />
 			<ExecEducation />
 			<Delivery />
 			<Trainers />
 			<Contact />
-		</>,
+		</div>,
 		el,
 	);
 };

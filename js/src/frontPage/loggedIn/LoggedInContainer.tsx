@@ -11,8 +11,8 @@ import updateUrl from '../../helpers/updateUrl';
 const { carouselItems, rows, tags } = cnnAcademy;
 
 interface Props {
-	loading: boolean;
 	setLoading: (loading: boolean) => void;
+	visible: boolean;
 }
 
 const LoggedInContainer: React.FC<Props> = (props: Props): JSX.Element | null => {
@@ -49,11 +49,11 @@ const LoggedInContainer: React.FC<Props> = (props: Props): JSX.Element | null =>
 			handleCarouselInit={handleCarouselInit}
 			handleCollectionInit={handleCollectionInit}
 			handleRowInit={handleRowInit}
-			loading={props.loading}
 			rows={rows}
 			setActiveTagId={setActiveTagId}
 			setLoading={props.setLoading}
 			tags={tags}
+			visible={props.visible}
 		/>,
 		el,
 	);

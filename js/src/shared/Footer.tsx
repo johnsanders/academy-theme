@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 
 interface Props {
 	drawerOpen: boolean;
-	loading?: boolean;
+	visible?: boolean;
 }
 
 const Footer: React.FC<Props> = (props: Props): JSX.Element | null => {
@@ -13,8 +13,8 @@ const Footer: React.FC<Props> = (props: Props): JSX.Element | null => {
 	return createPortal(
 		<footer
 			className={`
-				row py-2 py-md-0
-				${props.loading ? 'd-none' : ''}
+				row py-2 py-md-0 fadeIn
+				${props.visible === false ? 'd-none' : ''}
 				${props.drawerOpen ? 'drawerOpen' : ''}
 			`}
 			id="page-footer"

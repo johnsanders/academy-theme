@@ -1,11 +1,11 @@
 declare const M: MoodleJs;
 declare const cnnAcademy: MoodleAcademy;
 import './style.css';
-import { MoodleAcademy, MoodleJs } from '../types';
+import { MoodleAcademy, MoodleJs } from '../../types';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { faBars } from '@fortawesome/pro-solid-svg-icons';
-import logoLight from '../img/logo_light.png';
+import logoLight from '../../img/logo_light.png';
 
 const { navbarConfig } = cnnAcademy;
 

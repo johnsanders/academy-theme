@@ -5,6 +5,7 @@ import { CarouselItem, Config, Instructor, MoodleAcademy, Row } from '../types';
 import React from 'react';
 import { Tag } from '../types';
 import ThemeSettings from './ThemeSettings';
+import clearLoader from '../helpers/clearLoader';
 import { createPortal } from 'react-dom';
 import modifyDom from '../helpers/modifyDom';
 import qs from 'qs';
@@ -48,6 +49,7 @@ const ThemeSettingsContainer: React.FC = (): JSX.Element | null => {
 		queryRef.current.tab = activeTab;
 		updateUrl(queryRef.current);
 		window.onbeforeunload = null;
+		clearLoader();
 	}, []);
 	const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>): void => {
 		const id = e.currentTarget.dataset.id;

@@ -6,7 +6,6 @@ import debounce from 'lodash/debounce';
 
 interface Props {
 	handleInit: () => void;
-	loading: boolean;
 	row: RowType;
 	setActiveTagId: (tagId: string) => void;
 }
@@ -39,7 +38,7 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => {
 	};
 	const handleScrollEvent = (): void => updateContainerInfo();
 	return (
-		<div className={props.loading ? 'd-none' : ''}>
+		<div>
 			<h3>{props.row.name}</h3>
 			<div className="position-relative">
 				<ScrollButtons

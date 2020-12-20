@@ -7,7 +7,6 @@ import React from 'react';
 interface Props {
 	handleInit: () => void;
 	items: CarouselItem[];
-	loading: boolean;
 }
 
 const Carousel: React.FC<Props> = (props: Props): JSX.Element => {
@@ -20,7 +19,6 @@ const Carousel: React.FC<Props> = (props: Props): JSX.Element => {
 		arrows: false,
 		autoplay: true,
 		autoplaySpeed: 10000,
-		className: props.loading ? 'd-none' : '',
 		dots: true,
 		infinite: true,
 		pauseOnHover: true,
