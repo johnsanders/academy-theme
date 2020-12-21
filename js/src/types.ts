@@ -48,6 +48,7 @@ export interface MoodleAcademy {
 	rows: Row[];
 	settingsInputId: string;
 	tags: Tag[];
+	templateType: string;
 	thumbUrls: string[];
 }
 export interface MoodleJs {

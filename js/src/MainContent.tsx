@@ -1,7 +1,7 @@
 import Footer from './shared/Footer';
 import FrontPage from './frontPage';
 import Loading from './shared/Loading';
-import Navbar from './shared/navbar';
+import Navbar from './navbar';
 import React from 'react';
 import clearLoader from './helpers/clearLoader';
 

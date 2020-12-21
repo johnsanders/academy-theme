@@ -1,5 +1,5 @@
 declare const cnnAcademy: MoodleAcademy;
-import { MoodleAcademy } from '../../types';
+import { MoodleAcademy } from '../types';
 import Navbar from './Navbar';
 import React from 'react';
 import SimpleMenu from './SimpleMenu';
