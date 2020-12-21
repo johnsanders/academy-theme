@@ -5,11 +5,11 @@ import { CarouselItem, Config, Instructor, MoodleAcademy, Row } from '../types';
 import React from 'react';
 import { Tag } from '../types';
 import ThemeSettings from './ThemeSettings';
-import clearLoader from '../helpers/clearLoader';
+import clearStaticLoader from '../helpers/clearStaticLoader';
 import { createPortal } from 'react-dom';
 import modifyDom from '../helpers/modifyDom';
 import qs from 'qs';
-import updateUrl from '../helpers/updateUrl';
+import updateUrlQuery from '../helpers/updateUrlQuery';
 
 const initialConfig: Config = { carousel: [], instructors: [], rows: [], tags: [] };
 
@@ -47,14 +47,14 @@ const ThemeSettingsContainer: React.FC = (): JSX.Element | null => {
 		const activeTab = query.tab || 'grid';
 		setActiveTab(activeTab as string);
 		queryRef.current.tab = activeTab;
-		updateUrl(queryRef.current);
+		updateUrlQuery(queryRef.current);
 		window.onbeforeunload = null;
-		clearLoader();
+		clearStaticLoader();
 	}, []);
 	const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>): void => {
 		const id = e.currentTarget.dataset.id;
 		queryRef.current.tab = id;
-		updateUrl(queryRef.current);
+		updateUrlQuery(queryRef.current);
 		if (id) setActiveTab(id.toLowerCase());
 	};
 	const setCarousel = (carousel: CarouselItem[]): void => setConfig({ ...config, carousel });

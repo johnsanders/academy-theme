@@ -5,7 +5,7 @@
 	>
 		{{> theme_academy/loader }}
 		<script>
-			window.cnnAcademy = {};
+			window.cnnAcademy = { templateType: 'main' };
 		</script>
 		{{> core/local/toast/wrapper}}
 		<div
@@ -15,23 +15,19 @@
 			{{{ output.standard_top_of_body_html }}}
 			{{> theme_academy/navbar }}
 			{{> theme_academy/nav_drawer }}
-			{{#is_front_page}}
-				<div id="academyContent"></div>
-			{{/is_front_page}}
 			<div
 				id="page"
-					class="
-						container-fluid
-						d-print-block
-						{{#is_logged_in}}loggedIn{{/is_logged_in}}
-						{{^is_logged_in}}loggedOut{{/is_logged_in}}
-						{{#is_front_page}}d-none{{/is_front_page}}
-					"
-				>
-				{{^has_academy_content}}
-					{{{ output.full_header }}}
-				{{/has_academy_content}}
-				<div id="page-content" class="row py-3 d-print-block ">
+				class="
+					container-fluid
+					d-print-block
+					{{#is_logged_in}}loggedIn{{/is_logged_in}}
+					{{^is_logged_in}}loggedOut{{/is_logged_in}}
+					fadeIn
+					d-none
+				"
+			>
+				{{{ output.full_header }}}
+				<div id="page-content" class="row py-3 d-print-block">
 					<div id="region-main-box" class="col-12">
 						{{#hasregionmainsettingsmenu}}
 							<div
@@ -51,9 +47,6 @@
 							{{/hasregionmainsettingsmenu}}
 							{{{ output.course_content_header }}}
 							{{{ output.main_content }}}
-							{{#is_settings_page}}
-								<div id="academyContent"></div>
-							{{/is_settings_page}}
 							{{{ output.activity_navigation }}}
 							{{{ output.course_content_footer }}}
 						</section>
@@ -88,5 +81,9 @@
 			M.util.js_complete('theme_boost/drawer');
 		}, 1000);
 	});
+	const zoomIframe = document.getElementById('zoom_iframe');
+	if (zoomIframe) {
+		const src = 'https://academy.cnntoolbox.com:443/public?name={{user_name_for_zoom_iframe}}';
+		zoomIframe.src = src;
+	}
 {{/js}}
-{{> theme_academy/handle_zoom_frame }}

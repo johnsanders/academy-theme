@@ -31,10 +31,17 @@
 	font-weight: normal;
 	font-style: normal;
 }
+@keyframes fadeIn {
+	0% {opacity:0;}
+	100% {opacity:1;}
+}
+@keyframes fadeOut {
+	0% {opacity:1;}
+	100% {opacity:0;}
+}
 @keyframes flip {
 	0% {
 		transform: rotate3D(0, 0, 0, 0deg);
-		
 	}
 	50% {
 		transform: rotate3D(1, 0, 0, 180deg);
@@ -60,6 +67,12 @@ a {
 }
 body {
 	font-family: 'CNNSansRegular';
+}
+.fadeIn {
+	animation: fadeIn 1s;
+}
+.fadeOut {
+	animation: fadeOut 1s;
 }
 .list-group-item.active {
 	background-color: #6c757d;

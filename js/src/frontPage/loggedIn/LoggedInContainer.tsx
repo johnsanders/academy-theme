@@ -6,7 +6,7 @@ import { MoodleAcademy } from '../../types';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { parse as qsParse } from 'qs';
-import updateUrl from '../../helpers/updateUrl';
+import updateUrlQuery from '../../helpers/updateUrlQuery';
 
 const { carouselItems, rows, tags } = cnnAcademy;
 
@@ -25,7 +25,10 @@ const LoggedInContainer: React.FC<Props> = (props: Props): JSX.Element | null =>
 		queryRef.current.collection as string | undefined,
 	);
 	React.useEffect(
-		() => (activeTagId === '' ? updateUrl(null) : updateUrl({ collection: activeTagId })),
+		() =>
+			activeTagId === ''
+				? updateUrlQuery(null, ['collection'])
+				: updateUrlQuery({ collection: activeTagId }),
 		[activeTagId],
 	);
 	const handleCarouselInit = () => {

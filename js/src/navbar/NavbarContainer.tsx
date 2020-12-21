@@ -43,8 +43,9 @@ const NavbarContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		document.addEventListener('scroll', onScroll);
 		return () => document.removeEventListener('scroll', onScroll);
 	}, [onScroll]);
+	const fadeClass = cnnAcademy.templateType === 'front_page_logged_out' ? '' : 'fadeIn';
 	return (
-		<div className={`fadeIn ${props.visible ? '' : 'd-none'}`}>
+		<div className={`${fadeClass} ${props.visible ? '' : 'd-none'}`}>
 			{navState === 'none' ? (
 				<SimpleMenu userMenu={cnnAcademy.navbarConfig.userMenu} />
 			) : (
