@@ -1,4 +1,4 @@
-{{> theme_boost/head }}
+{{> theme_academy/head }}
 	<body {{{ bodyattributes }}} >
 		<script>
 			window.cnnAcademy = { templateType: 'settings' };
@@ -28,7 +28,7 @@
 						{{/hasregionmainsettingsmenu}}
 						<section
 							id="region-main"
-							class="has-blocks mb-3"
+							class="{{#hasblocks}}has-blocks{{/hasblocks}} mb-3"
 							aria-label="{{#str}}content{{/str}}"
 						>
 							{{#hasregionmainsettingsmenu}}

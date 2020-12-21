@@ -1,12 +1,11 @@
 declare const cnnAcademy: MoodleAcademy;
 import Footer from './shared/Footer';
-import FrontPage from './frontPage';
-import Loading from './shared/Loading';
 import { MoodleAcademy } from './types';
 import Navbar from './navbar';
 import React from 'react';
 import clearStaticLoader from './helpers/clearStaticLoader';
 
+const FrontPage = React.lazy(() => import('./frontPage'));
 const Settings = React.lazy(() => import('./themeSettings'));
 
 const MainContent: React.FC = (): JSX.Element => {
@@ -18,7 +17,7 @@ const MainContent: React.FC = (): JSX.Element => {
 	return (
 		<>
 			<Navbar visible={!loading} />
-			<React.Suspense fallback={<Loading />}>
+			<React.Suspense fallback={<div />}>
 				{isAcademySettingsPage ? (
 					<Settings />
 				) : (
