@@ -74,6 +74,14 @@ body {
 .fadeOut {
 	animation: fadeOut 1s;
 }
+footer {
+	background-color: #18191A;
+	color: white;
+	transition: transform 0.5s;
+}
+footer .drawerOpen {
+	transform: translate3d(280px, 0, 0);
+}
 .list-group-item.active {
 	background-color: #6c757d;
 	border-color:#6c757d;
