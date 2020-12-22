@@ -1,7 +1,7 @@
-import { Course } from '../../../types';
+import { Course } from '../../../../types';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { createModuleUrl } from '../GridContainer';
+import { createModuleUrl } from '../../GridContainer';
 import { faPlus } from '@fortawesome/pro-solid-svg-icons';
 
 interface Props {

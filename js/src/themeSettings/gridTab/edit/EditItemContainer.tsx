@@ -22,8 +22,8 @@ const EditItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	): void => {
 		setNewItem({ ...newItem, [key]: value });
 	};
-	const updateModule = (module: Module) => {
-		const url = createModuleUrl(module.id, module.modname);
+	const updateModule = (module: Module, manualUrl?: string) => {
+		const url = manualUrl || createModuleUrl(module.id, module.modname);
 		setNewItem({
 			...newItem,
 			modId: module.id,
