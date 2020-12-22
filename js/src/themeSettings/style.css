@@ -15,6 +15,9 @@
 	color: white;
 	opacity: 1;
 }
+button.disabled {
+	cursor: not-allowed;
+}
 .carouselAdminItem {
 	margin: 1em 0;
 	position: relative;

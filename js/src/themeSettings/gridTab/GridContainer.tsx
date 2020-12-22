@@ -4,6 +4,7 @@ import { createBlankGridItem, createBlankGridRow } from './edit/createBlankEleme
 import Grid from './Grid';
 import React from 'react';
 import arrayMove from 'array-move';
+import disableSaveButtons from '../disableSaveButtons';
 
 interface Props {
 	config: Config;
@@ -20,15 +21,18 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		if (e) e.preventDefault();
 		setActiveItem(null);
 		setActiveRow(null);
+		disableSaveButtons(false);
 	};
 	const handleAddRowClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
 		const newRow = createBlankGridRow();
 		setActiveRow(newRow);
+		disableSaveButtons(true);
 	};
 	const handleEditRowClick = (rowId: string): void => {
 		const rowToEdit = props.config.rows.find((row) => row.id === rowId);
 		if (rowToEdit) setActiveRow(rowToEdit);
+		disableSaveButtons(true);
 	};
 	const handleSaveRow = (newRow: Row): void => {
 		const existingRow = props.config.rows.find((row) => row.id === newRow.id);
@@ -37,6 +41,7 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			: [...props.config.rows, newRow];
 		props.setRows(newRows);
 		setActiveRow(null);
+		disableSaveButtons(false);
 	};
 	const handleReorderRow = (rowId: string, from: number, to: number): void => {
 		const row = props.config.rows.find((row) => row.id === rowId);
@@ -54,6 +59,7 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		const newItem = createBlankGridItem();
 		setActiveRow(row);
 		setActiveItem(newItem);
+		disableSaveButtons(true);
 	};
 	const handleEditItem = (rowId: string, itemId: string) => {
 		const row = props.config.rows.find((row) => row.id == rowId);
@@ -62,6 +68,7 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		if (!item) throw new Error('Cannot find item');
 		setActiveRow(row);
 		setActiveItem(item);
+		disableSaveButtons(true);
 	};
 	const handleSaveItem = (newItem: RowItem): void => {
 		if (!activeRow || !activeItem) throw new Error('activeRow or activeItem is not defined');
@@ -72,6 +79,7 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		const newRow = { ...activeRow, items: newItems };
 		props.setRows(props.config.rows.map((row) => (row.id === activeRow.id ? newRow : row)));
 		cancelEdit();
+		disableSaveButtons(false);
 	};
 	const handleDeleteItem = (rowId: string, deletedItemId: string) => {
 		const newRows = props.config.rows.map((row) =>

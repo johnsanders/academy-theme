@@ -1,13 +1,13 @@
 declare const cnnAcademy: MoodleAcademy;
 import { Module, MoodleAcademy, RowItem } from '../../../../types';
-import EditItemModule from './EditItemModule';
+import EditItemModuleSelector from './EditItemModuleSelector';
 import React from 'react';
 
 interface Props {
 	className?: string;
 	itemsAlreadyInRow: RowItem[];
 	onFocus: () => void;
-	selectedItem: RowItem;
+	selectedItemName: string;
 	updateModule: (module: Module, url?: string) => void;
 }
 
@@ -17,7 +17,6 @@ const ModuleSelector: React.FC<Props> = (props: Props): JSX.Element => {
 		courses.reduce<Module[]>((acc, course) => [...acc, ...course.modules], []),
 	);
 	const [courseId, setCourseId] = React.useState(courses[0].id);
-	const [isManual, setIsManual] = React.useState(props.selectedItem.modName === 'manual');
 	const [selectorIsOpen, setSelectorIsOpen] = React.useState(false);
 	const handleCourseChange = (e: React.ChangeEvent<HTMLSelectElement>): void =>
 		setCourseId(e.currentTarget.value);
@@ -34,19 +33,16 @@ const ModuleSelector: React.FC<Props> = (props: Props): JSX.Element => {
 	const course = courses.find((course) => course.id === courseId);
 	if (!course) throw new Error('Cannot find selected course');
 	return (
-		<EditItemModule
+		<EditItemModuleSelector
 			className={props.className}
 			course={course}
 			handleCourseChange={handleCourseChange}
 			handleOpenSelectorClick={handleOpenSelectorClick}
 			handleSelectModule={handleSelectModule}
-			isManual={isManual}
 			itemsAlreadyInRow={props.itemsAlreadyInRow}
 			onFocus={props.onFocus}
-			selectedItem={props.selectedItem}
+			selectedModuleName={props.selectedItemName}
 			selectorIsOpen={selectorIsOpen}
-			setIsManual={setIsManual}
-			updateModule={props.updateModule}
 		/>
 	);
 };

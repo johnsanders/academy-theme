@@ -4,6 +4,7 @@ import { Instructor } from '../../types';
 import InstructorsTable from './InstructorsTable';
 import React from 'react';
 import createBlankInstructor from './createBlankInstructor';
+import disableSaveButtons from '../disableSaveButtons';
 import { faPlusCircle } from '@fortawesome/pro-solid-svg-icons';
 
 interface Props {
@@ -26,10 +27,12 @@ const Instructors: React.FC<Props> = (props: Props): JSX.Element => {
 			props.setInstructors([...props.instructors, newInstructor]);
 		}
 		setActiveInstructor(null);
+		disableSaveButtons(false);
 	};
 	const handleEdit = (id: string): void => {
 		const instructorToEdit = props.instructors.find((instructor) => instructor.id === id);
 		if (instructorToEdit) setActiveInstructor(instructorToEdit);
+		disableSaveButtons(true);
 	};
 	const handleDelete = (id: string): void => {
 		const newInstructors = props.instructors.filter((instructor) => instructor.id !== id);
@@ -38,8 +41,12 @@ const Instructors: React.FC<Props> = (props: Props): JSX.Element => {
 	const handleAddInstructorClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
 		setActiveInstructor(createBlankInstructor());
+		disableSaveButtons(true);
 	};
-	const handleEditCancel = (): void => setActiveInstructor(null);
+	const handleEditCancel = (): void => {
+		setActiveInstructor(null);
+		disableSaveButtons(false);
+	};
 	return (
 		<>
 			{activeInstructor ? (

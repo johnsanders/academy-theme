@@ -3,7 +3,7 @@ import { faCheck, faTimes } from '@fortawesome/pro-solid-svg-icons';
 import EditItemDatesContainer from './dates/EditItemDatesContainer';
 import EditItemDuration from './EditItemDuration';
 import EditItemInstructors from './EditItemInstructors';
-import EditItemModuleContainer from './module/EditItemModuleContainer';
+import EditItemModule from './module/EditItemModule';
 import EditItemTags from './EditItemTags';
 import EditItemThumbnail from './EditItemThumbnail';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
@@ -29,7 +29,7 @@ interface Props {
 const EditItem: React.FC<Props> = (props: Props): JSX.Element => (
 	<>
 		<h2>Edit Grid Item</h2>
-		<EditItemModuleContainer
+		<EditItemModule
 			className="mb-3"
 			itemsAlreadyInRow={props.activeRow.items}
 			onFocus={props.clearErrorMessage}

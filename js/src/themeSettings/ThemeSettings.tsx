@@ -31,7 +31,7 @@ const ThemeSettings: React.FC<Props> = (props: Props): JSX.Element => (
 				Unsaved Changes
 			</div>
 		)}
-		<button className="btn btn-primary mt-3 mb-4" onClick={props.submitForm}>
+		<button className="btn btn-primary mt-3 mb-4 saveAll" onClick={props.submitForm}>
 			<Icon className="mr-1" icon={faSave} />
 			Save All Changes
 		</button>
@@ -65,7 +65,7 @@ const ThemeSettings: React.FC<Props> = (props: Props): JSX.Element => (
 			<TagsContainer setTags={props.setTags} tags={props.config.tags} />
 		) : null}
 		{props.activeTab === 'uploads' ? <Uploads /> : null}
-		<button className="btn btn-primary mt-3" onClick={props.submitForm}>
+		<button className="btn btn-primary mt-3 saveAll" onClick={props.submitForm}>
 			<Icon className="mr-1" icon={faSave} />
 			Save All Changes
 		</button>

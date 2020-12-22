@@ -10,7 +10,8 @@ const Settings = React.lazy(() => import('./themeSettings'));
 
 const MainContent: React.FC = (): JSX.Element => {
 	const isAcademySettingsPage = window.location.search.includes('section=themesettingacademy');
-	const [loading, setLoading] = React.useState(cnnAcademy.templateType.includes('front_page'));
+	const isFrontPage = cnnAcademy.templateType.includes('front_page');
+	const [loading, setLoading] = React.useState(isFrontPage);
 	React.useEffect(() => {
 		if (!loading) clearStaticLoader();
 	}, [loading]);
@@ -18,11 +19,8 @@ const MainContent: React.FC = (): JSX.Element => {
 		<>
 			<Navbar visible={!loading} />
 			<React.Suspense fallback={<div />}>
-				{isAcademySettingsPage ? (
-					<Settings />
-				) : (
-					<FrontPage setLoading={setLoading} visible={!loading} />
-				)}
+				{isAcademySettingsPage ? <Settings /> : null}
+				{isFrontPage ? <FrontPage setLoading={setLoading} visible={!loading} /> : null}
 			</React.Suspense>
 			<Footer drawerOpen={false} visible={!loading} />
 		</>

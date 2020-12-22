@@ -1,45 +1,39 @@
-import { Course, Module, RowItem } from '../../../../types';
+import { Module, RowItem } from '../../../../types';
 import EditItemModuleManual from './EditItemModuleManual';
-import EditItemModuleSelector from './EditItemModuleSelector';
+import EditItemModuleSelectorContainer from './EditItemModuleSelectorContainer';
 import React from 'react';
 
 interface Props {
 	className?: string;
-	course: Course;
-	handleCourseChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-	handleOpenSelectorClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-	handleSelectModule: (moduleId: string) => void;
-	isManual: boolean;
 	itemsAlreadyInRow: RowItem[];
 	onFocus: () => void;
-	selectorIsOpen: boolean;
 	selectedItem: RowItem;
-	setIsManual: (isManual: boolean) => void;
-	updateModule: (manualModule: Module, url?: string) => void;
+	updateModule: (module: Module, url?: string) => void;
 }
 
-const EditItemModule: React.FC<Props> = (props: Props): JSX.Element => {
+const ModuleSelector: React.FC<Props> = (props: Props): JSX.Element => {
+	const [isManual, setIsManual] = React.useState(props.selectedItem.modName === 'manual');
 	return (
 		<div className={`card ${props.className || ''}`}>
 			<div className="card-header d-flex justify-content-between">
-				<h4 className="mb-0">{props.isManual ? 'Manual Module' : 'Course Module'}</h4>
+				<h4 className="mb-0">{isManual ? 'Manual Module' : 'Course Module'}</h4>
 				<div className="btn-group">
 					<button
-						className={`btn btn-secondary btn-sm ${props.isManual ? '' : 'active'}`}
-						onClick={() => props.setIsManual(false)}
+						className={`btn btn-secondary btn-sm ${isManual ? '' : 'active'}`}
+						onClick={() => setIsManual(false)}
 					>
 						Course Module
 					</button>
 					<button
-						className={`btn btn-secondary btn-sm ${props.isManual ? 'active' : ''}`}
-						onClick={() => props.setIsManual(true)}
+						className={`btn btn-secondary btn-sm ${isManual ? 'active' : ''}`}
+						onClick={() => setIsManual(true)}
 					>
 						Manual
 					</button>
 				</div>
 			</div>
 			<div className="card-body">
-				{props.isManual ? (
+				{isManual ? (
 					<EditItemModuleManual
 						className={props.className}
 						onFocus={props.onFocus}
@@ -47,16 +41,12 @@ const EditItemModule: React.FC<Props> = (props: Props): JSX.Element => {
 						updateModule={props.updateModule}
 					/>
 				) : (
-					<EditItemModuleSelector
+					<EditItemModuleSelectorContainer
 						className={props.className}
-						course={props.course}
-						handleCourseChange={props.handleCourseChange}
-						handleOpenSelectorClick={props.handleOpenSelectorClick}
-						handleSelectModule={props.handleSelectModule}
 						itemsAlreadyInRow={props.itemsAlreadyInRow}
 						onFocus={props.onFocus}
-						selectedModuleName={props.selectedItem.name}
-						selectorIsOpen={props.selectorIsOpen}
+						selectedItemName={props.selectedItem.name}
+						updateModule={props.updateModule}
 					/>
 				)}
 			</div>
@@ -64,4 +54,4 @@ const EditItemModule: React.FC<Props> = (props: Props): JSX.Element => {
 	);
 };
 
-export default EditItemModule;
+export default ModuleSelector;

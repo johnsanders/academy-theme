@@ -63,6 +63,7 @@ const ThemeSettingsContainer: React.FC = (): JSX.Element | null => {
 	const setTags = (tags: Tag[]): void => setConfig({ ...config, tags });
 	const submitForm = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
+		if (e.currentTarget.classList.contains('disabled')) return;
 		window.onbeforeunload = null;
 		if (formRef.current) formRef.current.submit();
 	};
