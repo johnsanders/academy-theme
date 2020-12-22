@@ -3,7 +3,7 @@ defined('MOODLE_INTERNAL') || die();
 $THEME->name = 'academy';
 $THEME->sheets = [];
 $THEME->editor_sheets = [];
-$THEME->parents = ['boost'];
+$THEME->parents = [];
 $THEME->enable_dock = false;
 $THEME->yuicssmodules = array();
 $THEME->rendererfactory = 'theme_overridden_renderer_factory';
