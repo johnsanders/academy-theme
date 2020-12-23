@@ -50,26 +50,30 @@ const Navbar: React.FC<Props> = (props: Props): JSX.Element => (
 			</div>
 		)}
 		<a className="navbar-brand aabtn has-logo" href={M.cfg.wwwroot}>
-			<span className="logo fullsize d-none d-sm-inline">
+			<span className="logo fullsize d-sm-inline">
 				<img alt={navbarConfig.siteName} src={logoLight} />
 			</span>
 		</a>
-		<ul
-			className="navbar-nav d-none d-md-flex"
-			dangerouslySetInnerHTML={{
-				__html: navbarConfig.customMenu + (navbarConfig.pageHeadingMenu || ''),
-			}}
-		/>
-		<ul className="nav navbar-nav ml-auto">
-			<li
-				className="nav-item"
-				dangerouslySetInnerHTML={{ __html: navbarConfig.navbarPluginOutput }}
-			/>
-			<li
-				className="nav-item d-flex align-items-center"
-				dangerouslySetInnerHTML={{ __html: navbarConfig.userMenu }}
-			/>
-		</ul>
+		<div className="ml-auto d-flex flex-wrap justify-content-end">
+			<ul className="nav navbar-nav">
+				<li
+					className="nav-item"
+					dangerouslySetInnerHTML={{ __html: navbarConfig.navbarPluginOutput }}
+				/>
+				<li className="nav-item mr-2">
+					<ul
+						className="navbar-nav"
+						dangerouslySetInnerHTML={{
+							__html: navbarConfig.customMenu + (navbarConfig.pageHeadingMenu || ''),
+						}}
+					/>
+				</li>
+				<li
+					className="nav-item d-flex align-items-center"
+					dangerouslySetInnerHTML={{ __html: navbarConfig.userMenu }}
+				/>
+			</ul>
+		</div>
 	</nav>
 );
 
