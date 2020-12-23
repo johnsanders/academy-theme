@@ -1,3 +1,4 @@
+import { isEqual } from 'lodash';
 import qs from 'qs';
 
 const updateUrlQuery = (toAdd: { [key: string]: unknown } | null, toDelete?: string[]): void => {
@@ -7,8 +8,10 @@ const updateUrlQuery = (toAdd: { [key: string]: unknown } | null, toDelete?: str
 		toDelete.forEach((key) => delete currentQs[key]);
 	}
 	const newQs = { ...currentQs, ...toAdd };
-	const newUrl = origin + pathname + qs.stringify(newQs, { addQueryPrefix: true });
-	window.history.pushState(null, document.title, newUrl);
+	if (!isEqual(newQs, currentQs)) {
+		const newUrl = origin + pathname + qs.stringify(newQs, { addQueryPrefix: true });
+		window.history.pushState(null, document.title, newUrl);
+	}
 };
 
 export default updateUrlQuery;

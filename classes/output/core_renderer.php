@@ -35,16 +35,12 @@ class theme_academy_core_renderer extends core_renderer
 			$this->page->include_region_main_settings_in_header_actions() &&
 			!$this->page->blocks->is_block_present('settings')
 		) {
-			// Only include the region main settings if the page has requested it and it doesn't already have
-			// the settings block on it. The region main settings are included in the settings block and
-			// duplicating the content causes behat failures.
 			$this->page->add_header_action(html_writer::div(
 				$this->region_main_settings_menu(),
 				'd-print-none',
 				['id' => 'region-main-settings-menu']
 			));
 		}
-
 		$header = new stdClass();
 		$header->settingsmenu = $this->context_header_settings_menu();
 		$header->contextheader = $this->context_header();
@@ -79,30 +75,21 @@ class theme_academy_core_renderer extends core_renderer
 		}
 
 		$returnstr = "";
-
-		// If during initial install, return the empty return string.
 		if (during_initial_install()) {
 			return $returnstr;
 		}
-
 		$loginpage = $this->is_login_page();
 		$loginurl = get_login_url();
-		// If not logged in, show the typical not-logged-in string.
 		if (!isloggedin()) {
 			$returnstr = ''; // get_string('loggedinnot', 'moodle');
 			if (!$loginpage) {
 				$returnstr .= "<a href=\"$loginurl\">" . get_string('login', 'theme_academy') . '</a>';
 			}
 			return html_writer::div(
-				html_writer::span(
-					$returnstr,
-					'login'
-				),
+				html_writer::span($returnstr, 'login'),
 				$usermenuclasses
 			);
 		}
-
-		// If logged in as a guest user, show a string to that effect.
 		if (isguestuser()) {
 			$returnstr = get_string('loggedinasguest');
 			if (!$loginpage && $withlinks) {
@@ -117,11 +104,9 @@ class theme_academy_core_renderer extends core_renderer
 			);
 		}
 
-		// Get some navigation opts.
 		$opts = user_get_user_navigation_info($user, $this->page);
 		$usertextcontents = $opts->metadata['userfullname'];
 
-		// Other user.
 		if (!empty($opts->metadata['asotheruser'])) {
 			$usertextcontents = $opts->metadata['realuserfullname'];
 			$usertextcontents .= html_writer::tag(
@@ -138,7 +123,6 @@ class theme_academy_core_renderer extends core_renderer
 			);
 		}
 
-		// Role.
 		if (!empty($opts->metadata['asotherrole'])) {
 			$role = core_text::strtolower(preg_replace('#[ ]+#', '-', trim($opts->metadata['rolename'])));
 			$usertextcontents .= html_writer::span(
@@ -147,7 +131,6 @@ class theme_academy_core_renderer extends core_renderer
 			);
 		}
 
-		// User login failures.
 		if (!empty($opts->metadata['userloginfail'])) {
 			$usertextcontents .= html_writer::span(
 				$opts->metadata['userloginfail'],
@@ -155,10 +138,8 @@ class theme_academy_core_renderer extends core_renderer
 			);
 		}
 
-
 		$returnstr .= html_writer::span($usertextcontents, 'usertext mr-1');
 
-		// Create a divider (well, a filler).
 		$divider = new action_menu_filler();
 		$divider->primary = false;
 
@@ -175,7 +156,7 @@ class theme_academy_core_renderer extends core_renderer
 			$unwantedLinks = ['Dashboard', 'Profile', 'Grades', 'Messages'];
 			array_unshift($opts->navitems, (object)[
 				"itemtype" => "link",
-				"url" => new moodle_url('/calendar/view.php'),
+				"url" => new moodle_url('/calendar/view.php?view=month'),
 				"title" => "Calendar",
 				"titleidentifier" => "profile,moodle",
 				"pix" => "i/calendar",
