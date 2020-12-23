@@ -23,16 +23,26 @@ const Footer: React.FC<Props> = (props: Props): JSX.Element | null => {
 				<img src={cnnLogo} style={{ height: '100px', minHeight: '100%' }} />
 			</div>
 			<div className="col-12 col-md-5 d-flex align-items-center justify-content-center mb-2 mb-md-0">
-				<a className="mr-3" href="https://commercial.cnn.com/terms-conditions">
+				<a
+					className="mr-3"
+					data-translate="termsofuse"
+					href="https://commercial.cnn.com/terms-conditions"
+				>
 					Terms of Use
 				</a>
-				<a className="mr-3" href="https://commercial.cnn.com/privacy-policy">
+				<a
+					className="mr-3"
+					data-translate="privacypolicy"
+					href="https://commercial.cnn.com/privacy-policy"
+				>
 					Privacy Policy
 				</a>
-				<a href="https://commercial.cnn.com/cookies">Cookies</a>
+				<a data-translate="cookies" href="https://commercial.cnn.com/cookies">
+					Cookies
+				</a>
 			</div>
 			<div className="col-12 col-md-5 d-flex flex-column justify-content-center align-items-center align-items-md-end py-1">
-				<div className="text-center text-md-right pr-3">
+				<div className="text-center text-md-right pr-3" data-translate="copyright">
 					© 2021 Cable News Network. A WarnerMedia Company. All Rights Reserved.
 				</div>
 				<div className="text-right pr-3">CNN Sans ™ &amp; © 2016 Cable News Network.</div>

@@ -43,7 +43,7 @@ export interface MoodleAcademy {
 	carouselUrls: string[];
 	courses: Course[];
 	drawer: { init: () => void };
-	getStrings: (strings: { key: string; module: string }[]) => string[];
+	getStrings: MoodleJs['util']['get_strings'];
 	instructors: Instructor[];
 	navbarConfig: NavbarConfig;
 	rows: Row[];
@@ -54,6 +54,10 @@ export interface MoodleAcademy {
 }
 export interface MoodleJs {
 	cfg: { wwwroot: string };
+	util: {
+		get_string: (key: string, component: string) => string;
+		get_strings: (strings: { component: string; key: string }[]) => Promise<string[]>;
+	};
 }
 export interface NavbarConfig {
 	ariaLabel: string;

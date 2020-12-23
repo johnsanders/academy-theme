@@ -153,12 +153,12 @@ class theme_academy_core_renderer extends core_renderer
 		if ($withlinks) {
 			$navitemcount = count($opts->navitems);
 			$idx = 0;
-			$unwantedLinks = ['Dashboard', 'Profile', 'Grades', 'Messages'];
+			$unwantedLinks = ['mymoodle,admin', 'profile,moodle', 'grades,grades', 'messages,messages'];
 			array_unshift($opts->navitems, (object)[
 				"itemtype" => "link",
 				"url" => new moodle_url('/calendar/view.php?view=month'),
-				"title" => "Calendar",
-				"titleidentifier" => "profile,moodle",
+				"title" => get_string('calendar', 'core_calendar'),
+				"titleidentifier" => "calendar,moodle",
 				"pix" => "i/calendar",
 			]);
 			foreach ($opts->navitems as $value) {
@@ -173,7 +173,7 @@ class theme_academy_core_renderer extends core_renderer
 						break;
 					case 'link':
 						// Process this as a link item.
-						if (in_array($value->title, $unwantedLinks)) break;
+						if (in_array($value->titleidentifier, $unwantedLinks)) break;
 						$pix = null;
 						if (isset($value->pix) && !empty($value->pix)) {
 							$pix = new pix_icon($value->pix, '', null, array('class' => 'iconsmall'));

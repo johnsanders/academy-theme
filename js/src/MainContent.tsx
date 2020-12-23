@@ -4,6 +4,7 @@ import { MoodleAcademy } from './types';
 import Navbar from './navbar';
 import React from 'react';
 import clearStaticLoader from './helpers/clearStaticLoader';
+import prepTranslation from './helpers/prepTranslation';
 
 const FrontPage = React.lazy(() => import('./frontPage'));
 const Settings = React.lazy(() => import('./themeSettings'));
@@ -13,7 +14,7 @@ const MainContent: React.FC = (): JSX.Element => {
 	const isFrontPage = cnnAcademy.templateType.includes('front_page');
 	const [loading, setLoading] = React.useState(isFrontPage);
 	React.useEffect(() => {
-		if (!loading) clearStaticLoader();
+		if (!loading) prepTranslation().then(clearStaticLoader);
 	}, [loading]);
 	return (
 		<>
