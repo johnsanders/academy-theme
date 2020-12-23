@@ -68,6 +68,9 @@ a {
 body {
 	font-family: 'CNNSansRegular';
 }
+[data-region="drawer"] {
+	height: 100%;
+}
 .fadeIn {
 	animation: fadeIn 1s;
 }
@@ -95,9 +98,6 @@ footer .drawerOpen {
 .loginLogo {
 	max-height: 100px;
 }
-[data-region="drawer"] {
-	height: 100%;
-}
 #page.loggedIn {
 	margin-top: 105px;
 }
@@ -110,4 +110,7 @@ footer .drawerOpen {
 }
 #page-footer a:hover {
 	text-decoration: underline;
+}
+.aabtn.focus, .btn-link.focus, .nav-link.focus, .atto_link_button.focus, [role="button"].focus, .list-group-item-action.focus, input[type="checkbox"].focus, input[type="radio"].focus, input[type="file"].focus, input[type="image"].focus, .sr-only-focusable.focus, a.dropdown-item.focus, a.dropdown-toggle.focus, .modal-dialog[tabindex="0"].focus, .moodle-dialogue-base .closebutton.focus, button.close.focus, .aabtn:focus, .btn-link:focus, .nav-link:focus, .atto_link_button:focus, [role="button"]:focus, .list-group-item-action:focus, input[type="checkbox"]:focus, input[type="radio"]:focus, input[type="file"]:focus, input[type="image"]:focus, .sr-only-focusable:focus, a.dropdown-item:focus, a.dropdown-toggle:focus, .modal-dialog[tabindex="0"]:focus, .moodle-dialogue-base .closebutton:focus, button.close:focus {
+	box-shadow: 0 0 0 0.01em rgba(20,46,65,.75);
 }

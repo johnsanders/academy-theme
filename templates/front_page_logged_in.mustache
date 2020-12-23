@@ -33,10 +33,15 @@
 	});
 	M.util.js_pending('theme_boost/drawer');
 	require(['theme_boost/drawer'], function(drawer) {
-		cnnAcademy.drawer = drawer;
+		window.cnnAcademy.drawer = drawer;
 		setTimeout(() => {
 			drawer.init();
 			M.util.js_complete('theme_boost/drawer');
 		}, 1000);
+	});
+	M.util.js_pending('core/str');
+	window.cnnAcademy.translationReady = false;
+	require(['core/str'], (str) => {
+		window.cnnAcademy.getStrings = str.get_strings;
 	});
 {{/js}}

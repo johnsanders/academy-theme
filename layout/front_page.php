@@ -3,6 +3,7 @@ defined('MOODLE_INTERNAL') || die();
 user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
 require_once($CFG->libdir . '/behat/lib.php');
 require_once($CFG->dirroot . '/theme/academy/grid/get_grid_context.php');
+require_once($CFG->dirroot . '/theme/academy/grid/get_nav_config.php');
 // require_once($CFG->dirroot . '/theme/academy/grid/get_flatnav.php');
 
 $system_context = context_system::instance();
@@ -17,19 +18,6 @@ $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settin
 $grid_context = get_grid_context($is_settings_page);
 $sitename = format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);
 
-$nav_config = json_encode([
-	"ariaLabel" => get_string("sitemenubar", "admin"),
-	"customMenu" => $OUTPUT->custom_menu(),
-	"isLoggedIn" => isloggedin(),
-	"menuButtonName" => get_string("sidepanel", "core"),
-	"navDrawerOpen" => $navdraweropen,
-	"navbarPluginOutput" => $OUTPUT->navbar_plugin_output(),
-	"pageHeadingMenu" => $OUTPUT->page_heading_menu(),
-	"showNavToggle" => $show_nav_drawer,
-	"siteName" => $sitename,
-	"userMenu" => $OUTPUT->user_menu(),
-]);
-
 $templatecontext = [
 	'bodyattributes' => $bodyattributes,
 	'cnn_academy_json' => json_encode($grid_context['cnn_academy']),
@@ -39,7 +27,7 @@ $templatecontext = [
 	'hasblocks' => $hasblocks,
 	'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
 	'js_src' => $grid_context['js_src'],
-	'nav_config' => $nav_config,
+	'nav_config' => get_nav_config($OUTPUT, $navdraweropen, $sitename, $show_nav_drawer),
 	'navdraweropen' => $navdraweropen,
 	'output' => $OUTPUT,
 	'regionmainsettingsmenu' => $regionmainsettingsmenu,
