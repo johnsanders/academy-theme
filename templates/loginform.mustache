@@ -109,19 +109,15 @@
 {{/maintenance}}
 {{#js}}
     {{#error}}
-        require(['jquery'], function($) {
-            $('#loginerrormessage').focus();
-        });
+			const errorMessage = document.getElementById('loginerrormessage');
+			if (errorMessage) errorMessage.focus();
     {{/error}}
     {{^error}}
-        {{#autofocusform}}
-            require(['jquery'], function($) {
-                if ($('#username').val()) {
-                    $('#password').focus();
-                } else {
-                    $('#username').focus();
-                }
-            });
-        {{/autofocusform}}
+			{{#autofocusform}}
+				const username = document.getElementById('username');
+				const password = document.getElementById('password');
+				if (username && username.value && password) password.focus();
+				else if (username) username.focus();
+			{{/autofocusform}}
     {{/error}}
 {{/js}}

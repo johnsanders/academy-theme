@@ -12,9 +12,11 @@ const Settings = React.lazy(() => import('./themeSettings'));
 const MainContent: React.FC = (): JSX.Element => {
 	const isAcademySettingsPage = window.location.search.includes('section=themesettingacademy');
 	const isFrontPage = cnnAcademy.templateType.includes('front_page');
+	const isLoggedIn = cnnAcademy.navbarConfig.isLoggedIn;
 	const [loading, setLoading] = React.useState(isFrontPage);
 	React.useEffect(() => {
-		if (!loading) prepTranslation().then(clearStaticLoader);
+		if (!loading && isLoggedIn) prepTranslation().then(clearStaticLoader);
+		else if (!loading) clearStaticLoader();
 	}, [loading]);
 	return (
 		<>

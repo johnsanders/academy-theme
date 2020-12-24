@@ -28,7 +28,6 @@ $templatecontext = [
 	'flatnavigation' => $PAGE->flatnav,
 	'hasblocks' => $hasblocks,
 	'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
-	'is_logged_in' => isloggedin(),
 	'js_src' => $grid_context['js_src'],
 	'nav_config' => get_nav_config($OUTPUT, $navdraweropen, $sitename, $show_nav_drawer),
 	'navdraweropen' => $navdraweropen,
