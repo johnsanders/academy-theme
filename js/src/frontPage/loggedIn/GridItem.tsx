@@ -1,5 +1,5 @@
 import { getInstructorById, getTagById } from '../../shared/getById';
-import ImageWithLoader from './ImageWithLoader';
+import ImageWithFallback from './ImageWithFallback';
 import React from 'react';
 import { RowItem as RowItemType } from '../../types';
 import getForegroundColor from '../../helpers/getForegroundColor';
@@ -22,7 +22,7 @@ const GridItem: React.FC<Props> = (props: Props): JSX.Element => {
 			<div className="card">
 				<div className="card-img-top">
 					<a href={props.item.url}>
-						<ImageWithLoader handleInit={props.handleInit} imgUrl={props.item.thumbUrl} />
+						<ImageWithFallback handleInit={props.handleInit} imgUrl={props.item.thumbUrl} />
 					</a>
 					{props.item.duration ? <span className="duration">{props.item.duration}</span> : null}
 				</div>

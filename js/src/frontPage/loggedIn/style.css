@@ -51,27 +51,20 @@
 	transform-origin: center;
 	transition: transform 0.2s;
 }
-img.loading {
-	visibility: hidden;
-}
-.imgWithLoader {
-	display: block;
-	min-height: 125px;
-}
-.imgWithLoader .loaderContainer {
+.imgFallback {
 	align-items: center;
 	background-color: #F0F0F0;
+	color: #FFFFFF;
 	display: flex;
-	height: 125px;
+	height: 140px;
 	justify-content: center;
 	left: 0;
-	position: absolute;
 	top: 0;
 	width: 100%;
 }
-.imgWithLoader  img {
-	left: 0;
-	top: 0;
+.imgFallback  img {
+	filter: saturate(0) contrast(0.3) brightness(2);
+	transform: scale(0.5);
 }
 .rowHeader {
 	display: flex;
