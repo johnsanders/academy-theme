@@ -1,4 +1,3 @@
-declare const M: { cfg: { wwwroot: string } };
 import { Config, Row, RowItem } from '../../types';
 import { createBlankGridItem, createBlankGridRow } from './edit/createBlankElement';
 import Grid from './Grid';
@@ -12,7 +11,7 @@ interface Props {
 }
 
 export const createModuleUrl = (id: string, modname: string): string =>
-	`${M.cfg.wwwroot}/mod/${modname}/view.php?id=${id}`;
+	`/mod/${modname}/view.php?id=${id}`;
 
 const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	const [activeItem, setActiveItem] = React.useState<RowItem | null>(null);
