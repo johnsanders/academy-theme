@@ -10,14 +10,21 @@ import logoLight from '../img/logo_light.png';
 const { navbarConfig } = cnnAcademy;
 
 interface Props {
+	ariaLabel: string;
 	fixed?: boolean;
 	handleDrawerToggleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	isLoggedIn: boolean;
+	menuButtonName: string;
+	navbarPluginOutput: string;
+	pageHeadingMenu: string;
+	siteName: string;
 	size: string;
+	userMenu: string;
 }
 
 const Navbar: React.FC<Props> = (props: Props): JSX.Element => (
 	<nav
-		aria-label={navbarConfig.ariaLabel}
+		aria-label={props.ariaLabel}
 		className={`
 			navbar
 			fixed-top
@@ -30,7 +37,7 @@ const Navbar: React.FC<Props> = (props: Props): JSX.Element => (
 			<div
 				className={`
 						${props.size === 'large' ? 'mr-3' : ''}
-						${navbarConfig.isLoggedIn ? 'd-inline-block' : 'd-none'}
+						${props.isLoggedIn ? 'd-inline-block' : 'd-none'}
 					`}
 				data-region="drawer-toggle"
 			>
@@ -45,32 +52,31 @@ const Navbar: React.FC<Props> = (props: Props): JSX.Element => (
 					type="button"
 				>
 					<Icon icon={faBars} />
-					<span className="sr-only">{navbarConfig.menuButtonName}</span>
+					<span className="sr-only">{props.menuButtonName}</span>
 				</button>
 			</div>
 		)}
 		<a className="navbar-brand aabtn has-logo" href={M.cfg.wwwroot}>
 			<span className="logo fullsize d-sm-inline">
-				<img alt={navbarConfig.siteName} src={logoLight} />
+				<img alt={props.siteName} src={logoLight} />
 			</span>
 		</a>
 		<div className="ml-auto d-flex flex-wrap justify-content-end">
-			<ul className="nav navbar-nav">
-				<li
-					className="nav-item"
-					dangerouslySetInnerHTML={{ __html: navbarConfig.navbarPluginOutput }}
-				/>
-				<li className="nav-item mr-2">
-					<ul
-						className="navbar-nav"
-						dangerouslySetInnerHTML={{
-							__html: navbarConfig.customMenu + (navbarConfig.pageHeadingMenu || ''),
-						}}
-					/>
+			<ul className="nav navbar-nav justify-content-end">
+				<li className="nav-item" dangerouslySetInnerHTML={{ __html: props.navbarPluginOutput }} />
+				<li className="nav-item">
+					{!props.isLoggedIn ? null : (
+						<ul
+							className="navbar-nav"
+							dangerouslySetInnerHTML={{
+								__html: navbarConfig.customMenu + (props.pageHeadingMenu || ''),
+							}}
+						/>
+					)}
 				</li>
 				<li
-					className="nav-item d-flex align-items-center"
-					dangerouslySetInnerHTML={{ __html: navbarConfig.userMenu }}
+					className="nav-item nav-link d-flex align-items-center ml-2"
+					dangerouslySetInnerHTML={{ __html: props.userMenu }}
 				/>
 			</ul>
 		</div>

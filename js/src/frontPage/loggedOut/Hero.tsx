@@ -56,7 +56,7 @@ const Hero: React.FC<Props> = (props: Props): JSX.Element => {
 								onError={handleInit}
 								onLoad={handleInit}
 								src={logoLight}
-								style={{ height: '150px' }}
+								style={{ maxWidth: '90%', width: '500px' }}
 							/>
 							<h2 className="text-center text-light">
 								Courses to develop best practices in cross-platform journalism, production and

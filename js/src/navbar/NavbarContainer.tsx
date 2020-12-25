@@ -50,9 +50,16 @@ const NavbarContainer: React.FC<Props> = (props: Props): JSX.Element => {
 				<SimpleMenu userMenu={cnnAcademy.navbarConfig.userMenu} />
 			) : (
 				<Navbar
+					ariaLabel={navbarConfig.ariaLabel}
 					fixed={!navbarConfig.isLoggedIn}
 					handleDrawerToggleClick={handleDrawerToggleClick}
+					isLoggedIn={navbarConfig.isLoggedIn}
+					menuButtonName={navbarConfig.menuButtonName}
+					navbarPluginOutput={navbarConfig.navbarPluginOutput}
+					pageHeadingMenu={navbarConfig.pageHeadingMenu}
+					siteName={navbarConfig.siteName}
 					size={navState}
+					userMenu={navbarConfig.userMenu}
 				/>
 			)}
 		</div>

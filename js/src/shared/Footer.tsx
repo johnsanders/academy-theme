@@ -13,13 +13,16 @@ const Footer: React.FC<Props> = (props: Props): JSX.Element | null => {
 	return createPortal(
 		<footer
 			className={`
-				row py-2 py-md-0 fadeIn
+				row px-0 py-2 py-md-0 mx-0 fadeIn
 				${props.visible === false ? 'd-none' : ''}
 				${props.drawerOpen ? 'drawerOpen' : ''}
 			`}
 			id="page-footer"
 		>
-			<div className="col-12 col-md-2 d-none d-md-flex justify-content-center justify-content-md-start mb-2 mb-md-0">
+			<div
+				className="col-12 col-md-2 d-none d-md-flex justify-content-center justify-content-md-start mb-2 mb-md-0"
+				style={{ marginLeft: '-15px', marginRight: '15px' }}
+			>
 				<img src={cnnLogo} style={{ height: '100px', minHeight: '100%' }} />
 			</div>
 			<div className="col-12 col-md-5 d-flex align-items-center justify-content-center mb-2 mb-md-0">

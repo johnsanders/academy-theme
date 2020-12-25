@@ -3,7 +3,7 @@ import execEducation from '../../img/exec_education.jpg';
 
 const ExecEducation: React.FC = (): JSX.Element => (
 	<div
-		className="row"
+		className="row mx-0"
 		style={{
 			backgroundColor: '#18191A',
 			color: 'white',

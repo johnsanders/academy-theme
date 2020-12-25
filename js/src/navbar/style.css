@@ -32,8 +32,17 @@ nav.navbar.fixed-top {
 nav.navbar.navbar-none {
 	transform: translate3d(0, -65px, 0);
 }
+@media (max-width: 640px) {
+	nav.navbar.navbar-large span.logo img {
+		height: 40px;
+	}
+}
+@media (min-width: 640px) {
+	nav.navbar.navbar-large span.logo img {
+		height: 75px;
+	}
+}
 nav.navbar.navbar-large span.logo img {
-	height: 75px;
 	max-height: 75px;
 }
 nav.navbar.navbar-small {
