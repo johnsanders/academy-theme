@@ -2,6 +2,7 @@ import '../../shared/slickSlider.css';
 import '../../shared/slickSliderTheme.css';
 import Slider, { Settings } from 'react-slick';
 import { CarouselItem } from '../../types';
+import ErrorBoundary from '../../shared/ErrorBoundary';
 import React from 'react';
 
 interface Props {
@@ -27,13 +28,15 @@ const Carousel: React.FC<Props> = (props: Props): JSX.Element => {
 		speed: 500,
 	};
 	return (
-		<Slider {...settings}>
-			{props.items.map((item) => (
-				<a href={item.targetUrl} key={item.id}>
-					<img className="carouselImg" onLoad={handleImgLoad} src={item.url} />
-				</a>
-			))}
-		</Slider>
+		<ErrorBoundary>
+			<Slider {...settings}>
+				{props.items.map((item) => (
+					<a href={item.targetUrl} key={item.id}>
+						<img className="carouselImg" onLoad={handleImgLoad} src={item.url} />
+					</a>
+				))}
+			</Slider>
+		</ErrorBoundary>
 	);
 };
 

@@ -1,5 +1,6 @@
 declare const cnnAcademy: MoodleAcademy;
-import Footer from './shared/Footer';
+import ErrorBoundary from './shared/ErrorBoundary';
+import FooterContainer from './shared/FooterContainer';
 import { MoodleAcademy } from './types';
 import Navbar from './navbar';
 import React from 'react';
@@ -14,18 +15,21 @@ const MainContent: React.FC = (): JSX.Element => {
 	const isFrontPage = cnnAcademy.templateType.includes('front_page');
 	const isLoggedIn = cnnAcademy.navbarConfig.isLoggedIn;
 	const [loading, setLoading] = React.useState(isFrontPage);
+	const handleReactError = () => setLoading(false);
 	React.useEffect(() => {
 		if (!loading && isLoggedIn) prepTranslation().then(clearStaticLoader);
 		else if (!loading) clearStaticLoader();
 	}, [loading]);
 	return (
 		<>
-			<Navbar visible={!loading} />
+			<ErrorBoundary errorMessage="Error rendering navbar" handleError={handleReactError}>
+				<Navbar visible={!loading} />
+			</ErrorBoundary>
 			<React.Suspense fallback={<div />}>
 				{isAcademySettingsPage ? <Settings /> : null}
 				{isFrontPage ? <FrontPage setLoading={setLoading} visible={!loading} /> : null}
 			</React.Suspense>
-			<Footer drawerOpen={false} visible={!loading} />
+			<FooterContainer drawerOpen={false} visible={!loading} />
 		</>
 	);
 };

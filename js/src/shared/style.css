@@ -6,6 +6,7 @@
 	border: solid white 2px;
 	border-radius: 25px;
 	height: 50px;
+	margin-left: -10px;
 	max-height: 50px;
 }
 .body {
@@ -20,6 +21,12 @@ button.btn:focus {
 }
 .card {
 	border: 1px solid rgba(0,0,0,.125) !important;
+}
+.card-img-top {
+	position: relative;
+}
+.card-img-top img {
+	width: 100%
 }
 .fontBlack {
 	font-family: 'CNNSansBlack';
@@ -53,6 +60,21 @@ button.btn:focus {
 	flex-direction: column;
 	justify-content: space-between;
 	padding: 0.5em;
+}
+.imgFallback {
+	align-items: center;
+	background-color: #F0F0F0;
+	color: #FFFFFF;
+	display: flex;
+	height: 140px;
+	justify-content: center;
+	left: 0;
+	top: 0;
+	width: 100%;
+}
+.imgFallback img {
+	filter: saturate(0) contrast(0.3) brightness(2);
+	transform: scale(0.5);
 }
 .instructorsContainer {
 	display: flex;

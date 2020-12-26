@@ -1,6 +1,7 @@
-import GridItem from './GridItem';
+import ErrorBoundary from '../../shared/ErrorBoundary';
 import React from 'react';
 import { Row } from '../../types';
+import RowItem from './RowItem';
 
 interface Props {
 	containerRef: React.MutableRefObject<HTMLDivElement | undefined>;
@@ -18,26 +19,28 @@ const RowItems: React.FC<Props> = (props: Props): JSX.Element => {
 		if (itemsInitCountRef.current === props.row.items.length) props.handleInit();
 	};
 	return (
-		<div
-			className="gridRowItems"
-			onMouseEnter={props.handleMouse}
-			onMouseLeave={props.handleMouse}
-			onScroll={props.handleScroll}
-			ref={(el) => {
-				if (el) props.containerRef.current = el;
-			}}
-		>
-			{props.row.items.map((item) => {
-				return (
-					<GridItem
-						handleInit={handleItemInit}
-						item={item}
-						key={item.id}
-						setActiveTagId={props.setActiveTagId}
-					/>
-				);
-			})}
-		</div>
+		<ErrorBoundary errorMessage="Error rendering content row" handleError={props.handleInit}>
+			<div
+				className="gridRowItems"
+				onMouseEnter={props.handleMouse}
+				onMouseLeave={props.handleMouse}
+				onScroll={props.handleScroll}
+				ref={(el) => {
+					if (el) props.containerRef.current = el;
+				}}
+			>
+				{props.row.items.map((item) => {
+					return (
+						<RowItem
+							handleInit={handleItemInit}
+							item={item}
+							key={item.id}
+							setActiveTagId={props.setActiveTagId}
+						/>
+					);
+				})}
+			</div>
+		</ErrorBoundary>
 	);
 };
 

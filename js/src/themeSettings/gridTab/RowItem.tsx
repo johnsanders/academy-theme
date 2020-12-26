@@ -2,6 +2,7 @@ import { faCog, faTimes } from '@fortawesome/pro-solid-svg-icons';
 import { getInstructorById, getTagById } from '../../shared/getById';
 import { DraggableProvided } from 'react-beautiful-dnd';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
+import ImageWithFallback from '../../shared/ImageWithFallback';
 import React from 'react';
 import { RowItem as RowItemType } from '../../types';
 import getForegroundColor from '../../helpers/getForegroundColor';
@@ -25,7 +26,9 @@ const RowItem: React.FC<Props> = (props: Props): JSX.Element => {
 			{...props.provided.draggableProps}
 			{...props.provided.dragHandleProps}
 		>
-			<img className="card-img-top" src={props.item.thumbUrl} />
+			<div className="card-img-top">
+				<ImageWithFallback imgUrl={props.item.thumbUrl} />
+			</div>
 			<div className="card-body">
 				<h4 className="mb-0">{props.item.name}</h4>
 				{dateString ? <div className="text-muted">{dateString}</div> : null}

@@ -1,8 +1,8 @@
 import React from 'react';
-import logoDark from '../../img/logo_dark.png';
+import logoDark from '../img/logo_dark.png';
 
 interface Props {
-	handleInit: () => void;
+	handleInit?: () => void;
 	imgUrl: string;
 }
 
@@ -10,9 +10,9 @@ const ImageWithFallback: React.FC<Props> = (props: Props): JSX.Element => {
 	const [error, setError] = React.useState(false);
 	const handleImageError = () => {
 		setError(true);
-		props.handleInit();
+		props.handleInit && props.handleInit();
 	};
-	const handleImageLoad = () => props.handleInit();
+	const handleImageLoad = () => props.handleInit && props.handleInit();
 	return error ? (
 		<div className="imgFallback">
 			<img src={logoDark} />
