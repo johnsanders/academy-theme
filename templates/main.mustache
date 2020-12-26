@@ -1,10 +1,10 @@
 {{> theme_academy/head }}
 	<body {{{ bodyattributes }}}>
 		{{> theme_academy/loader }}
+		{{> core/local/toast/wrapper}}
 		<script>
 			window.cnnAcademy = { templateType: 'main', translationReady: false };
 		</script>
-		{{> core/local/toast/wrapper}}
 		<div
 			id="page-wrapper"
 			class="d-print-block"

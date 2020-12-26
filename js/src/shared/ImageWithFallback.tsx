@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import logoDark from '../img/logo_dark.png';
 
 interface Props {
@@ -8,7 +8,9 @@ interface Props {
 
 const ImageWithFallback: React.FC<Props> = (props: Props): JSX.Element => {
 	const [error, setError] = React.useState(false);
-	const handleImageError = () => {
+	const handleImageError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+		e.preventDefault();
+		e.stopPropagation();
 		setError(true);
 		props.handleInit && props.handleInit();
 	};

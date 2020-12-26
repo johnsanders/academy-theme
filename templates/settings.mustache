@@ -1,9 +1,10 @@
 {{> theme_academy/head }}
 	<body {{{ bodyattributes }}} >
-		<script>
-			window.cnnAcademy = { templateType: 'settings' };
-		</script>
+		{{> theme_academy/loader }}
 		{{> core/local/toast/wrapper}}
+		<script>
+			window.cnnAcademy = { templateType: 'settings', translationReady: false };
+		</script>
 		<div
 			id="page-wrapper"
 			class="d-print-block"
