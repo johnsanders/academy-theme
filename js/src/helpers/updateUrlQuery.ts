@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash';
+import isEqual from 'lodash/isEqual';
 import qs from 'qs';
 
 const updateUrlQuery = (toAdd: { [key: string]: unknown } | null, toDelete?: string[]): void => {
