@@ -48,25 +48,29 @@ class admin_setting_configacademygrid extends admin_setting
 		}
 		return $urls;
 	}
-
-	public function output_html($data, $query = '')
+	private function get_courses()
 	{
-		global $CFG, $DB, $OUTPUT;
-		$thumb_urls = $this->get_files("thumbs");
-		$carousel_urls = $this->get_files("carousel");
-		$avatar_urls = $this->get_files("avatars");
+		global $DB;
 		$courses_list = $DB->get_records('course', null, '', 'id,fullname');
 		$courses_associative = array_map(function ($course) {
 			$cm = get_fast_modinfo($course->id);
 			$cms = $cm->get_cms();
 			$modules = [];
 			$modules = array_map(function ($my_cm) {
-				return array("id" => $my_cm->id, "modname" => $my_cm->modname, "module" => $my_cm->module, "name" => $my_cm->name);
+				return ["id" => $my_cm->id, "modname" => $my_cm->modname, "module" => $my_cm->module, "name" => $my_cm->name];
 			}, $cms);
 			$course->modules = array_values($modules);
 			return $course;
 		}, $courses_list);
-		$courses = array_values($courses_associative);
+		return array_values($courses_associative);
+	}
+	public function output_html($data, $query = '')
+	{
+		global $CFG,  $OUTPUT;
+		$thumb_urls = $this->get_files("thumbs");
+		$carousel_urls = $this->get_files("carousel");
+		$avatar_urls = $this->get_files("avatars");
+		$courses = $this->get_courses();
 		$default = $this->get_defaultsetting();
 		$context = (object) [
 			'avatarUrlsJson' => json_encode($avatar_urls),

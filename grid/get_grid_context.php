@@ -1,9 +1,25 @@
 <?php
 
+function add_module_info($rows)
+{
+	$newRows = array_map(function ($row) {
+		$items = array_map(function ($item) {
+			if ($item->modName === 'manual') return $item;
+			$moduleInfo = get_coursemodule_from_id($item->modName, $item->modId);
+			$item->name = $moduleInfo->name;
+			return $item;
+		}, $row->items);
+		$row->items = $items;
+		return $row;
+	}, $rows);
+	return $newRows;
+}
+
 function get_grid_context($is_settings_page)
 {
 	global $CFG;
 	$config = json_decode(get_config("theme_academy", "grid_config"));
+	$config->rows = add_module_info($config->rows);
 	if ($is_settings_page) return [
 		'cnn_academy' => [
 			'carouselItems' => $config->carousel,
