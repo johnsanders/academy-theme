@@ -12,7 +12,7 @@ function add_module_info($rows)
 		$row->items = $items;
 		return $row;
 	}, $rows);
-	return $newRows;
+	return array_values($newRows);
 }
 
 function get_grid_context($is_settings_page)
@@ -24,12 +24,11 @@ function get_grid_context($is_settings_page)
 		'cnn_academy' => [
 			'carouselItems' => $config->carousel,
 			'instructors' => $config->instructors,
-			'rows' => array_values($config->rows),
+			'rows' => $config->rows,
 			'tags' => $config->tags,
 		],
 		'js_src' => $CFG->wwwroot . '/theme/academy/js/dist/bundle.js',
 	];
-
 	$user_courses = enrol_get_my_courses();
 	$user_course_ids = array_map(function ($course) {
 		return $course->id;
@@ -56,10 +55,10 @@ function get_grid_context($is_settings_page)
 
 	return [
 		'cnn_academy' => [
-			'instructors' => $config->instructors,
-			'tags' => $config->tags,
 			'carouselItems' => $config->carousel,
+			'instructors' => $config->instructors,
 			'rows' => $rows,
+			'tags' => $config->tags,
 		],
 		'js_src' => $CFG->wwwroot . '/theme/academy/js/dist/bundle.js',
 	];

@@ -16,6 +16,7 @@ interface Props {
 }
 
 const RowItem: React.FC<Props> = (props: Props): JSX.Element => {
+	console.log(props.item);
 	const dateString =
 		props.item.dateDisplayed && new Date(props.item.dateDisplayed).toLocaleString();
 	return (

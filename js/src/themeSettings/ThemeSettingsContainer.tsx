@@ -11,7 +11,12 @@ import modifyDom from '../helpers/modifyDom';
 import qs from 'qs';
 import updateUrlQuery from '../helpers/updateUrlQuery';
 
-const initialConfig: Config = { carousel: [], instructors: [], rows: [], tags: [] };
+const initialConfig: Config = {
+	carousel: cnnAcademy.carouselItems || [],
+	instructors: cnnAcademy.instructors || [],
+	rows: cnnAcademy.rows || [],
+	tags: cnnAcademy.tags || [],
+};
 
 const ThemeSettingsContainer: React.FC = (): JSX.Element | null => {
 	const inputRef = React.useRef(
@@ -36,13 +41,6 @@ const ThemeSettingsContainer: React.FC = (): JSX.Element | null => {
 	};
 	React.useEffect(() => {
 		modifyDom();
-		try {
-			setConfig(JSON.parse(inputRef.current.value));
-			setUnsavedChanges(false);
-		} catch {
-			console.log('Settings config is not valid JSON. Using blank config.');
-			inputRef.current.value = JSON.stringify(initialConfig);
-		}
 		const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
 		const activeTab = query.tab || 'grid';
 		setActiveTab(activeTab as string);

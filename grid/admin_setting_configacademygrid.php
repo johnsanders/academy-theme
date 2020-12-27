@@ -15,7 +15,6 @@ class admin_setting_configacademygrid extends admin_setting
 		$this->paramtype = $paramtype;
 		parent::__construct($name, $visiblename, $description, $defaultsetting);
 	}
-
 	public function get_setting()
 	{
 		return $this->config_read($this->name);
