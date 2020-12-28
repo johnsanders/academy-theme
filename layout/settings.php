@@ -17,6 +17,7 @@ $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_action
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 $grid_context = get_grid_context(true);
 $sitename = format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);
+$navdraweropen = false;
 
 $templatecontext = [
 	'bodyattributes' => $bodyattributes,
@@ -28,7 +29,7 @@ $templatecontext = [
 	'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
 	'js_src' => $grid_context['js_src'],
 	'nav_config' => get_nav_config($OUTPUT, $navdraweropen, $sitename, $show_nav_drawer),
-	'navdraweropen' => false,
+	'navdraweropen' => $navdraweropen,
 	'output' => $OUTPUT,
 	'regionmainsettingsmenu' => $regionmainsettingsmenu,
 	'show_nav_drawer' => $show_nav_drawer,

@@ -2,7 +2,6 @@
 
 /bin/rm ./.DS_Store
 cd ../../
-pwd
 /usr/bin/tar --exclude='./.git' --exclude='./js/node_modules' --exclude='./js/src' -czvf academy.tar.gz ./academy
 /usr/bin/scp academy.tar.gz cnnitouch@academy.cnntoolbox.com:/home/cnnitouch
 /bin/rm ./academy.tar.gz
