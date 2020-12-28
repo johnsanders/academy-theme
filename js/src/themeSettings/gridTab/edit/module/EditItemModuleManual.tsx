@@ -1,10 +1,10 @@
-import { Module, RowItem } from '../../../../types';
+import { ItemModule, RowItem } from '../../../../types';
 import React from 'react';
 import { v4 as uuid } from 'uuid';
 
 interface Props {
 	className?: string;
-	updateModule: (module: Module, url?: string) => void;
+	updateModule: (module: ItemModule, url?: string) => void;
 	onFocus: () => void;
 	selectedItem: RowItem;
 }

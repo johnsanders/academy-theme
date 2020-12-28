@@ -1,4 +1,4 @@
-import { Config, Row, RowItem } from '../../types';
+import { Course, Instructor, MoodleAcademySettings, Row, RowItem, Tag } from '../../types';
 import EditItemContainer from './edit/EditItemContainer';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
@@ -10,7 +10,7 @@ interface Props {
 	activeItem: RowItem | null;
 	activeRow: Row | null;
 	cancelEdit: () => void;
-	config: Config;
+	courses: Course[];
 	handleAddItemToRow: (rowId: string) => void;
 	handleAddRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleDeleteItem: (rowId: string, itemId: string) => void;
@@ -20,6 +20,10 @@ interface Props {
 	handleReorderRow: (rowId: string, from: number, to: number) => void;
 	handleSaveItem: (item: RowItem) => void;
 	handleSaveRow: (newRow: Row) => void;
+	instructors: Instructor[];
+	modsInfo: MoodleAcademySettings['modsInfo'];
+	rows: Row[];
+	tags: Tag[];
 }
 
 const Grid: React.FC<Props> = (props: Props): JSX.Element => (
@@ -34,7 +38,8 @@ const Grid: React.FC<Props> = (props: Props): JSX.Element => (
 					handleEditRowClick={props.handleEditRowClick}
 					handleReorderRow={props.handleReorderRow}
 					handleSaveRow={props.handleSaveRow}
-					rows={props.config.rows}
+					modsInfo={props.modsInfo}
+					rows={props.rows}
 				/>
 				<div>
 					<button className="btn btn-secondary" onClick={props.handleAddRowClick}>
@@ -55,9 +60,10 @@ const Grid: React.FC<Props> = (props: Props): JSX.Element => (
 			<EditItemContainer
 				activeItem={props.activeItem}
 				activeRow={props.activeRow}
-				allInstructors={props.config.instructors}
-				allTags={props.config.tags}
+				allInstructors={props.instructors}
+				allTags={props.tags}
 				cancelEdit={props.cancelEdit}
+				courses={props.courses}
 				handleSave={props.handleSaveItem}
 			/>
 		) : null}

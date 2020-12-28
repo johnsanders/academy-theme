@@ -1,11 +1,12 @@
+import { MoodleAcademySettings, Row as RowType } from '../../types';
 import React from 'react';
 import RowItems from './RowItems';
-import { Row as RowType } from '../../types';
 import ScrollButtons from '../../shared/ScrollButtons';
 import debounce from 'lodash/debounce';
 
 interface Props {
 	handleInit: () => void;
+	modsInfo: MoodleAcademySettings['modsInfo'];
 	row: RowType;
 	setActiveTagId: (tagId: string) => void;
 }
@@ -54,6 +55,7 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => {
 					handleInit={props.handleInit}
 					handleMouse={handleMouseEvent}
 					handleScroll={handleScrollEvent}
+					modsInfo={props.modsInfo}
 					row={props.row}
 					setActiveTagId={props.setActiveTagId}
 				/>

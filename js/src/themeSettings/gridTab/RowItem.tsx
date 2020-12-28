@@ -1,22 +1,22 @@
+import { MoodleAcademySettings, RowItem as RowItemType } from '../../types';
 import { faCog, faTimes } from '@fortawesome/pro-solid-svg-icons';
 import { getInstructorById, getTagById } from '../../shared/getById';
 import { DraggableProvided } from 'react-beautiful-dnd';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import ImageWithFallback from '../../shared/ImageWithFallback';
 import React from 'react';
-import { RowItem as RowItemType } from '../../types';
 import getForegroundColor from '../../helpers/getForegroundColor';
 
 interface Props {
 	item: RowItemType;
 	handleDeleteItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleEditItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	modsInfo: MoodleAcademySettings['modsInfo'];
 	provided: DraggableProvided;
 	rowId: string;
 }
 
 const RowItem: React.FC<Props> = (props: Props): JSX.Element => {
-	console.log(props.item);
 	const dateString =
 		props.item.dateDisplayed && new Date(props.item.dateDisplayed).toLocaleString();
 	return (
@@ -31,7 +31,11 @@ const RowItem: React.FC<Props> = (props: Props): JSX.Element => {
 				<ImageWithFallback imgUrl={props.item.thumbUrl} />
 			</div>
 			<div className="card-body">
-				<h4 className="mb-0">{props.item.name}</h4>
+				<h4 className="mb-0">
+					{props.item.modName === 'manual'
+						? props.item.name
+						: props.modsInfo[props.item.modId].name}
+				</h4>
 				{dateString ? <div className="text-muted">{dateString}</div> : null}
 				<div className="instructorsContainer">
 					{props.item.instructors.map((instructorId) => {

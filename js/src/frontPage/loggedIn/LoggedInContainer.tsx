@@ -1,21 +1,20 @@
-declare const cnnAcademy: MoodleAcademy;
 import './style.css';
 import '../../shared/style.css';
 import LoggedIn from './LoggedIn';
-import { MoodleAcademy } from '../../types';
+import { MoodleAcademyFront } from '../../types';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { parse as qsParse } from 'qs';
 import updateUrlQuery from '../../helpers/updateUrlQuery';
 
-const { carouselItems, rows, tags } = cnnAcademy;
-
 interface Props {
+	cnnAcademy: MoodleAcademyFront;
 	setLoading: (loading: boolean) => void;
 	visible: boolean;
 }
 
 const LoggedInContainer: React.FC<Props> = (props: Props): JSX.Element | null => {
+	const { carouselItems, rows, tags } = props.cnnAcademy;
 	const el = document.getElementById('academyContent');
 	const queryRef = React.useRef(qsParse(window.location.search, { ignoreQueryPrefix: true }));
 	const carouselDidInit = React.useRef(false);
@@ -52,6 +51,7 @@ const LoggedInContainer: React.FC<Props> = (props: Props): JSX.Element | null =>
 			handleCarouselInit={handleCarouselInit}
 			handleCollectionInit={handleCollectionInit}
 			handleRowInit={handleRowInit}
+			modsInfo={props.cnnAcademy.modsInfo}
 			rows={rows}
 			setActiveTagId={setActiveTagId}
 			setLoading={props.setLoading}

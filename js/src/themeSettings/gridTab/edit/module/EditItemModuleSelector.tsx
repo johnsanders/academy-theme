@@ -1,5 +1,4 @@
-declare const cnnAcademy: MoodleAcademy;
-import { Course, MoodleAcademy, RowItem } from '../../../../types';
+import { Course, RowItem } from '../../../../types';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import ModulesList from './ModulesList';
 import React from 'react';
@@ -7,12 +6,13 @@ import { faBookOpen } from '@fortawesome/pro-solid-svg-icons';
 
 interface Props {
 	className?: string;
-	course: Course;
+	courses: Course[];
 	handleCourseChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 	handleOpenSelectorClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleSelectModule: (moduleId: string) => void;
 	itemsAlreadyInRow: RowItem[];
 	onFocus: () => void;
+	selectedCourse: Course;
 	selectorIsOpen: boolean;
 	selectedModuleName: string;
 }
@@ -45,9 +45,9 @@ const EditItemModuleSelector: React.FC<Props> = (props: Props): JSX.Element => (
 					<select
 						className="form-control"
 						onChange={props.handleCourseChange}
-						value={props.course.id}
+						value={props.selectedCourse.id}
 					>
-						{cnnAcademy.courses.map((course) => (
+						{props.courses.map((course) => (
 							<option key={course.id} value={course.id}>
 								{course.fullname}
 							</option>
@@ -57,9 +57,9 @@ const EditItemModuleSelector: React.FC<Props> = (props: Props): JSX.Element => (
 				<div className="form-group">
 					<label>Select Module</label>
 					<ModulesList
-						course={props.course}
 						existingRowModuleIds={props.itemsAlreadyInRow.map((item) => item.modId)}
 						handleSelectModule={props.handleSelectModule}
+						selectedCourse={props.selectedCourse}
 					/>
 				</div>
 			</>

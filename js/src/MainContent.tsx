@@ -1,7 +1,7 @@
-declare const cnnAcademy: MoodleAcademy;
+declare const cnnAcademy: MoodleAcademyFront | MoodleAcademySettings;
+import { MoodleAcademyFront, MoodleAcademySettings } from './types';
 import ErrorBoundary from './shared/ErrorBoundary';
 import FooterContainer from './shared/FooterContainer';
-import { MoodleAcademy } from './types';
 import Navbar from './navbar';
 import React from 'react';
 import clearStaticLoader from './helpers/clearStaticLoader';
@@ -26,8 +26,16 @@ const MainContent: React.FC = (): JSX.Element => {
 				<Navbar visible={!loading} />
 			</ErrorBoundary>
 			<React.Suspense fallback={<div />}>
-				{isAcademySettingsPage ? <Settings /> : null}
-				{isFrontPage ? <FrontPage setLoading={setLoading} visible={!loading} /> : null}
+				{isAcademySettingsPage ? (
+					<Settings cnnAcademy={cnnAcademy as MoodleAcademySettings} />
+				) : null}
+				{isFrontPage ? (
+					<FrontPage
+						cnnAcademy={cnnAcademy as MoodleAcademyFront}
+						setLoading={setLoading}
+						visible={!loading}
+					/>
+				) : null}
 			</React.Suspense>
 			<FooterContainer drawerOpen={false} visible={!loading} />
 		</>

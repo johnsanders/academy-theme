@@ -1,10 +1,10 @@
-declare const cnnAcademy: MoodleAcademy;
-import { Module, MoodleAcademy, RowItem } from '../../../../types';
+import { Course, Module, RowItem } from '../../../../types';
 import EditItemModuleSelector from './EditItemModuleSelector';
 import React from 'react';
 
 interface Props {
 	className?: string;
+	courses: Course[];
 	itemsAlreadyInRow: RowItem[];
 	onFocus: () => void;
 	selectedItemName: string;
@@ -12,11 +12,10 @@ interface Props {
 }
 
 const ModuleSelector: React.FC<Props> = (props: Props): JSX.Element => {
-	const { courses } = cnnAcademy;
 	const allModulesRef = React.useRef(
-		courses.reduce<Module[]>((acc, course) => [...acc, ...course.modules], []),
+		props.courses.reduce<Module[]>((acc, course) => [...acc, ...course.modules], []),
 	);
-	const [courseId, setCourseId] = React.useState(courses[0].id);
+	const [courseId, setCourseId] = React.useState(props.courses[0].id);
 	const [selectorIsOpen, setSelectorIsOpen] = React.useState(false);
 	const handleCourseChange = (e: React.ChangeEvent<HTMLSelectElement>): void =>
 		setCourseId(e.currentTarget.value);
@@ -30,17 +29,18 @@ const ModuleSelector: React.FC<Props> = (props: Props): JSX.Element => {
 		e.preventDefault();
 		setSelectorIsOpen(true);
 	};
-	const course = courses.find((course) => course.id === courseId);
-	if (!course) throw new Error('Cannot find selected course');
+	const selectedCourse = props.courses.find((course) => course.id === courseId);
+	if (!selectedCourse) throw new Error('Cannot find selected course');
 	return (
 		<EditItemModuleSelector
 			className={props.className}
-			course={course}
+			courses={props.courses}
 			handleCourseChange={handleCourseChange}
 			handleOpenSelectorClick={handleOpenSelectorClick}
 			handleSelectModule={handleSelectModule}
 			itemsAlreadyInRow={props.itemsAlreadyInRow}
 			onFocus={props.onFocus}
+			selectedCourse={selectedCourse}
 			selectedModuleName={props.selectedItemName}
 			selectorIsOpen={selectorIsOpen}
 		/>

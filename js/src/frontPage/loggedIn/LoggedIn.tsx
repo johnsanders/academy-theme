@@ -1,6 +1,6 @@
 import './style.css';
 import '../../shared/style.css';
-import { CarouselItem, Row as RowType, Tag } from '../../types';
+import { CarouselItem, MoodleAcademyFront, Row as RowType, Tag } from '../../types';
 import Carousel from './Carousel';
 import Collection from './Collection';
 import React from 'react';
@@ -13,6 +13,7 @@ interface Props {
 	handleCarouselInit: () => void;
 	handleCollectionInit: () => void;
 	handleRowInit: () => void;
+	modsInfo: MoodleAcademyFront['modsInfo'];
 	rows: RowType[];
 	setActiveTagId: (tagId: string) => void;
 	setLoading: (loading: boolean) => void;
@@ -34,6 +35,7 @@ const LoggedIn: React.FC<Props> = (props: Props): JSX.Element | null => (
 				{props.activeTagId ? (
 					<Collection
 						handleInit={props.handleCollectionInit}
+						modsInfo={props.modsInfo}
 						rows={props.rows}
 						setActiveTagId={props.setActiveTagId}
 						tag={props.tags.find((tag) => tag.id === props.activeTagId)}
@@ -43,6 +45,7 @@ const LoggedIn: React.FC<Props> = (props: Props): JSX.Element | null => (
 						<Row
 							handleInit={props.handleRowInit}
 							key={row.id}
+							modsInfo={props.modsInfo}
 							row={row}
 							setActiveTagId={props.setActiveTagId}
 						/>

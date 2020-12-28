@@ -1,9 +1,9 @@
 import { DropResult, ResponderProvided } from 'react-beautiful-dnd';
+import { MoodleAcademySettings, Row as RowType } from '../../types';
 import { faPencil, faPlus, faTrash } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import RowItems from './RowItems';
-import { Row as RowType } from '../../types';
 import ScrollButtons from '../../shared/ScrollButtons';
 import debounce from 'lodash/debounce';
 
@@ -15,6 +15,7 @@ interface Props {
 	handleEditRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleDragEnd: (result: DropResult, provided: ResponderProvided) => void;
 	handleMouseEnter: (e: React.MouseEvent<HTMLDivElement>) => void;
+	modsInfo: MoodleAcademySettings['modsInfo'];
 	row: RowType;
 }
 
@@ -96,6 +97,7 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => {
 					handleMouse={handleMouseEvent}
 					handleScroll={handleScrollEvent}
 					items={props.row.items}
+					modsInfo={props.modsInfo}
 					rowId={props.row.id}
 				/>
 			</div>

@@ -1,7 +1,6 @@
-declare const cnnAcademy: MoodleAcademy;
 import './style.css';
 import '../shared/style.css';
-import { CarouselItem, Config, Instructor, MoodleAcademy, Row } from '../types';
+import { CarouselItem, Config, Instructor, MoodleAcademySettings, Row } from '../types';
 import React from 'react';
 import { Tag } from '../types';
 import ThemeSettings from './ThemeSettings';
@@ -11,34 +10,29 @@ import modifyDom from '../helpers/modifyDom';
 import qs from 'qs';
 import updateUrlQuery from '../helpers/updateUrlQuery';
 
-const initialConfig: Config = {
-	carousel: cnnAcademy.carouselItems || [],
-	instructors: cnnAcademy.instructors || [],
-	rows: cnnAcademy.rows || [],
-	tags: cnnAcademy.tags || [],
-};
+interface Props {
+	cnnAcademy: MoodleAcademySettings;
+}
 
-const ThemeSettingsContainer: React.FC = (): JSX.Element | null => {
+const ThemeSettingsContainer: React.FC<Props> = (props: Props): JSX.Element | null => {
 	const inputRef = React.useRef(
-		document.getElementById(cnnAcademy.settingsInputId) as HTMLInputElement,
+		document.getElementById(props.cnnAcademy.settingsInputId) as HTMLInputElement,
 	);
 	const queryRef = React.useRef<{ [key: string]: unknown }>(
 		qs.parse(window.location.search, { ignoreQueryPrefix: true }),
 	);
 	const formRef = React.useRef(document.getElementById('adminsettings') as HTMLFormElement);
-	const [config, setConfigState] = React.useState<Config>(initialConfig);
+	const [carousel, setCarousel] = React.useState<CarouselItem[]>(
+		props.cnnAcademy.carouselItems || [],
+	);
+	const [instructors, setInstructors] = React.useState<Instructor[]>(
+		props.cnnAcademy.instructors || [],
+	);
+	const [rows, setRows] = React.useState<Row[]>(props.cnnAcademy.rows || []);
+	const [tags, setTags] = React.useState<Tag[]>(props.cnnAcademy.tags || []);
+
 	const [activeTab, setActiveTab] = React.useState('grid');
 	const [unsavedChanges, setUnsavedChanges] = React.useState(false);
-	const setConfig = (newConfig: Config) => {
-		const flashClose = document.querySelector<HTMLButtonElement>('.alert-block button.close');
-		if (flashClose) flashClose.click();
-		if (!unsavedChanges) {
-			setUnsavedChanges(true);
-			window.onbeforeunload = () => true;
-		}
-		setConfigState(newConfig);
-		inputRef.current.value = JSON.stringify(newConfig);
-	};
 	React.useEffect(() => {
 		modifyDom();
 		const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
@@ -49,16 +43,22 @@ const ThemeSettingsContainer: React.FC = (): JSX.Element | null => {
 		window.onbeforeunload = null;
 		clearStaticLoader();
 	}, []);
+	React.useEffect(() => {
+		const flashClose = document.querySelector<HTMLButtonElement>('.alert-block button.close');
+		if (flashClose) flashClose.click();
+		if (!unsavedChanges) {
+			setUnsavedChanges(true);
+			window.onbeforeunload = () => true;
+		}
+		const newConfig: Config = { carousel, instructors, rows, tags };
+		inputRef.current.value = JSON.stringify(newConfig);
+	}, [carousel, instructors, rows, tags]);
 	const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>): void => {
 		const id = e.currentTarget.dataset.id;
 		queryRef.current.tab = id;
 		updateUrlQuery(queryRef.current);
 		if (id) setActiveTab(id.toLowerCase());
 	};
-	const setCarousel = (carousel: CarouselItem[]): void => setConfig({ ...config, carousel });
-	const setInstructors = (instructors: Instructor[]): void => setConfig({ ...config, instructors });
-	const setRows = (rows: Row[]): void => setConfig({ ...config, rows });
-	const setTags = (tags: Tag[]): void => setConfig({ ...config, tags });
 	const submitForm = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
 		if (e.currentTarget.classList.contains('disabled')) return;
@@ -73,14 +73,19 @@ const ThemeSettingsContainer: React.FC = (): JSX.Element | null => {
 	return createPortal(
 		<ThemeSettings
 			activeTab={activeTab}
-			config={config}
+			carousel={carousel}
+			courses={props.cnnAcademy.courses}
 			handleNavClick={handleNavClick}
 			inputRef={inputRef}
+			instructors={instructors}
+			modsInfo={props.cnnAcademy.modsInfo}
+			rows={rows}
 			setCarousel={setCarousel}
 			setInstructors={setInstructors}
 			setRows={setRows}
 			setTags={setTags}
 			submitForm={submitForm}
+			tags={tags}
 			unsavedChanges={unsavedChanges}
 		/>,
 		el,

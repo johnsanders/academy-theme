@@ -1,7 +1,7 @@
+import { MoodleAcademySettings, Row as RowType } from '../../types';
 import { DropResult } from 'react-beautiful-dnd';
 import React from 'react';
 import Row from './Row';
-import { Row as RowType } from '../../types';
 
 interface Props {
 	handleAddItemToRow: (rowId: string) => void;
@@ -11,6 +11,7 @@ interface Props {
 	handleEditRowClick: (rowId: string) => void;
 	handleReorderRow: (rowId: string, from: number, to: number) => void;
 	handleSaveRow: (row: RowType) => void;
+	modsInfo: MoodleAcademySettings['modsInfo'];
 	rows: RowType[];
 }
 
@@ -63,6 +64,7 @@ const RowsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 					handleEditRowClick={handleEditRowClick}
 					handleMouseEnter={handleMouseEnter}
 					key={row.id}
+					modsInfo={props.modsInfo}
 					row={row}
 				/>
 			))}

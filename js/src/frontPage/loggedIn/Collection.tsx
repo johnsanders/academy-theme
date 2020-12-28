@@ -1,4 +1,4 @@
-import { Row, RowItem as RowItemType, Tag } from '../../types';
+import { MoodleAcademyFront, Row, RowItem as RowItemType, Tag } from '../../types';
 import ErrorBoundary from '../../shared/ErrorBoundary';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
@@ -7,6 +7,7 @@ import { faChevronLeft } from '@fortawesome/pro-solid-svg-icons';
 
 interface Props {
 	handleInit: () => void;
+	modsInfo: MoodleAcademyFront['modsInfo'];
 	rows: Row[];
 	setActiveTagId: (tagId: string) => void;
 	tag: Tag | undefined;
@@ -41,6 +42,7 @@ const Collection: React.FC<Props> = (props: Props): JSX.Element | null => {
 							handleInit={handleItemInit}
 							item={item}
 							key={item.id}
+							modsInfo={props.modsInfo}
 							setActiveTagId={props.setActiveTagId}
 						/>
 					))}

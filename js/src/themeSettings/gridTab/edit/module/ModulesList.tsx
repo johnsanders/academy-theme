@@ -5,9 +5,9 @@ import { createModuleUrl } from '../../GridContainer';
 import { faPlus } from '@fortawesome/pro-solid-svg-icons';
 
 interface Props {
-	course: Course;
 	existingRowModuleIds: string[];
 	handleSelectModule: (moduleId: string) => void;
+	selectedCourse: Course;
 }
 
 const ModulesList: React.FC<Props> = (props: Props): JSX.Element => {
@@ -17,12 +17,12 @@ const ModulesList: React.FC<Props> = (props: Props): JSX.Element => {
 		if (moduleId === undefined) throw new Error('Cannot get module ID');
 		props.handleSelectModule(moduleId);
 	};
-	return props.course.modules.length === 0 ? (
+	return props.selectedCourse.modules.length === 0 ? (
 		<div className="text-muted">This course has no modules in it.</div>
 	) : (
 		<table className="table table-striped table-bordered mb-0">
 			<tbody>
-				{props.course.modules.map((module) => (
+				{props.selectedCourse.modules.map((module) => (
 					<tr key={`${module.modname}_${module.id}`}>
 						<td>
 							<a href={createModuleUrl(module.id, module.modname)}>{module.name}</a>

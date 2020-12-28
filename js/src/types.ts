@@ -32,24 +32,30 @@ export interface Instructor {
 	name: string;
 	role: string;
 }
+export interface ModInfo {
+	name: string;
+}
 export interface Module {
 	id: string;
 	modname: string;
 	name: string;
 }
-export interface MoodleAcademy {
-	avatarUrls: string[];
+export interface MoodleAcademyFront {
 	carouselItems: CarouselItem[];
-	carouselUrls: string[];
-	courses: Course[];
 	drawer: { init: () => void };
 	getStrings: MoodleJs['util']['get_strings'];
 	instructors: Instructor[];
+	modsInfo: { [key: string]: ModInfo };
 	navbarConfig: NavbarConfig;
 	rows: Row[];
-	settingsInputId: string;
 	tags: Tag[];
 	templateType: string;
+}
+export interface MoodleAcademySettings extends MoodleAcademyFront {
+	avatarUrls: string[];
+	carouselUrls: string[];
+	courses: Course[];
+	settingsInputId: string;
 	thumbUrls: string[];
 }
 export interface MoodleJs {
@@ -85,9 +91,9 @@ export interface RowItem {
 	duration: string;
 	id: string;
 	instructors: string[];
+	manualName: string;
 	modId: string;
 	modName: string;
-	name: string;
 	tags: string[];
 	thumbUrl: string;
 	url: string;

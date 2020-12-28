@@ -1,4 +1,4 @@
-import { Instructor, Module, Row, RowItem, Tag } from '../../../types';
+import { Course, Instructor, Module, Row, RowItem, Tag } from '../../../types';
 import { faCheck, faTimes } from '@fortawesome/pro-solid-svg-icons';
 import EditItemDatesContainer from './dates/EditItemDatesContainer';
 import EditItemDuration from './EditItemDuration';
@@ -15,6 +15,7 @@ interface Props {
 	allTags: Tag[];
 	cancelEdit: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	clearErrorMessage: () => void;
+	courses: Course[];
 	errorMessage: string;
 	newItem: RowItem;
 	saveItem: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -31,6 +32,7 @@ const EditItem: React.FC<Props> = (props: Props): JSX.Element => (
 		<h2>Edit Grid Item</h2>
 		<EditItemModule
 			className="mb-3"
+			courses={props.courses}
 			itemsAlreadyInRow={props.activeRow.items}
 			onFocus={props.clearErrorMessage}
 			selectedItem={props.newItem}

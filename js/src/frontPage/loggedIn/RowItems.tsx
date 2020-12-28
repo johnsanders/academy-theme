@@ -1,6 +1,6 @@
+import { MoodleAcademyFront, Row } from '../../types';
 import ErrorBoundary from '../../shared/ErrorBoundary';
 import React from 'react';
-import { Row } from '../../types';
 import RowItem from './RowItem';
 
 interface Props {
@@ -8,6 +8,7 @@ interface Props {
 	handleMouse: (e: React.MouseEvent<HTMLDivElement>) => void;
 	handleInit: () => void;
 	handleScroll: () => void;
+	modsInfo: MoodleAcademyFront['modsInfo'];
 	row: Row;
 	setActiveTagId: (tagId: string) => void;
 }
@@ -35,6 +36,7 @@ const RowItems: React.FC<Props> = (props: Props): JSX.Element => {
 							handleInit={handleItemInit}
 							item={item}
 							key={item.id}
+							modsInfo={props.modsInfo}
 							setActiveTagId={props.setActiveTagId}
 						/>
 					);

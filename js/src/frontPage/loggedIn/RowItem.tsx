@@ -1,13 +1,14 @@
+import { MoodleAcademyFront, RowItem as RowItemType } from '../../types';
 import { getInstructorById, getTagById } from '../../shared/getById';
 import ErrorBoundary from '../../shared/ErrorBoundary';
 import ImageWithFallback from '../../shared/ImageWithFallback';
 import React from 'react';
-import { RowItem as RowItemType } from '../../types';
 import getForegroundColor from '../../helpers/getForegroundColor';
 
 interface Props {
 	handleInit: () => void;
 	item: RowItemType;
+	modsInfo: MoodleAcademyFront['modsInfo'];
 	setActiveTagId: (tagId: string) => void;
 }
 
@@ -34,7 +35,11 @@ const RowItem: React.FC<Props> = (props: Props): JSX.Element => {
 					</div>
 					<div className="card-body">
 						<a href={props.item.url}>
-							<h4 className="mb-0">{props.item.name}</h4>
+							<h4 className="mb-0">
+								{props.item.modName === 'manual'
+									? props.item.manualName
+									: props.modsInfo[props.item.modId].name}
+							</h4>
 						</a>
 						{dateString ? <div className="text-muted">{dateString}</div> : null}
 						<div className="instructorsContainer">

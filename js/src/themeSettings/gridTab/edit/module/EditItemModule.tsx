@@ -1,10 +1,11 @@
-import { Module, RowItem } from '../../../../types';
+import { Course, Module, RowItem } from '../../../../types';
 import EditItemModuleManual from './EditItemModuleManual';
 import EditItemModuleSelectorContainer from './EditItemModuleSelectorContainer';
 import React from 'react';
 
 interface Props {
 	className?: string;
+	courses: Course[];
 	itemsAlreadyInRow: RowItem[];
 	onFocus: () => void;
 	selectedItem: RowItem;
@@ -43,9 +44,10 @@ const ModuleSelector: React.FC<Props> = (props: Props): JSX.Element => {
 				) : (
 					<EditItemModuleSelectorContainer
 						className={props.className}
+						courses={props.courses}
 						itemsAlreadyInRow={props.itemsAlreadyInRow}
 						onFocus={props.onFocus}
-						selectedItemName={props.selectedItem.name}
+						selectedItemName={props.selectedItem.manualName}
 						updateModule={props.updateModule}
 					/>
 				)}

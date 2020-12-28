@@ -5,9 +5,9 @@ import {
 	Droppable,
 	ResponderProvided,
 } from 'react-beautiful-dnd';
+import { MoodleAcademySettings, RowItem as RowItemType } from '../../types';
 import React from 'react';
 import RowItem from './RowItem';
-import { RowItem as RowItemType } from '../../types';
 
 interface Props {
 	containerRef: React.MutableRefObject<HTMLDivElement | undefined>;
@@ -19,6 +19,7 @@ interface Props {
 	handleMouse: (e: React.MouseEvent<HTMLDivElement>) => void;
 	handleScroll: () => void;
 	items: RowItemType[];
+	modsInfo: MoodleAcademySettings['modsInfo'];
 	rowId: string;
 }
 
@@ -52,6 +53,7 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => (
 										handleDeleteItemClick={props.handleDeleteItemClick}
 										handleEditItemClick={props.handleEditItemClick}
 										item={item}
+										modsInfo={props.modsInfo}
 										provided={provided}
 										rowId={props.rowId}
 									/>

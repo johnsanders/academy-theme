@@ -1,29 +1,27 @@
 <?php
 
-function add_module_info($rows)
+function get_modules_info($rows)
 {
-	$newRows = array_map(function ($row) {
-		$items = array_map(function ($item) {
-			if ($item->modName === 'manual') return $item;
-			$moduleInfo = get_coursemodule_from_id($item->modName, $item->modId);
-			$item->name = $moduleInfo->name;
-			return $item;
-		}, $row->items);
-		$row->items = $items;
-		return $row;
-	}, $rows);
-	return array_values($newRows);
+	$mods_info = [];
+	foreach ($rows as $row) {
+		foreach ($row->items as $item) {
+			if ($item->modName === 'manual') continue;
+			$item_module = get_coursemodule_from_id($item->modName, $item->modId);
+			$mods_info[$item_module->id] = ["name" => $item_module->name];
+		};
+	}
+	return $mods_info;
 }
-
 function get_grid_context($is_settings_page)
 {
 	global $CFG;
 	$config = json_decode(get_config("theme_academy", "grid_config"));
-	$config->rows = add_module_info($config->rows);
+	$mods_info = get_modules_info($config->rows);
 	if ($is_settings_page) return [
 		'cnn_academy' => [
 			'carouselItems' => $config->carousel,
 			'instructors' => $config->instructors,
+			'modsInfo' => $mods_info,
 			'rows' => $config->rows,
 			'tags' => $config->tags,
 		],
@@ -52,11 +50,11 @@ function get_grid_context($is_settings_page)
 		return $row;
 	}, $user_rows);
 	$rows = array_values($rows_with_only_current_items);
-
 	return [
 		'cnn_academy' => [
 			'carouselItems' => $config->carousel,
 			'instructors' => $config->instructors,
+			'modsInfo' => $mods_info,
 			'rows' => $rows,
 			'tags' => $config->tags,
 		],

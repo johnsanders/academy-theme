@@ -1,4 +1,4 @@
-import { Instructor, Module, Row, RowItem, Tag } from '../../../types';
+import { Course, Instructor, Module, Row, RowItem, Tag } from '../../../types';
 import EditItem from './EditItem';
 import React from 'react';
 import { createModuleUrl } from '../GridContainer';
@@ -9,6 +9,7 @@ interface Props {
 	allInstructors: Instructor[];
 	allTags: Tag[];
 	cancelEdit: () => void;
+	courses: Course[];
 	handleSave: (updatedItem: RowItem) => void;
 }
 
@@ -26,9 +27,9 @@ const EditItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		const url = manualUrl || createModuleUrl(module.id, module.modname);
 		setNewItem({
 			...newItem,
+			manualName: module.name,
 			modId: module.id,
 			modName: module.modname,
-			name: module.name,
 			url,
 		});
 	};
@@ -42,7 +43,7 @@ const EditItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	};
 	const saveItem = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
-		if (!newItem.name || !newItem.modId || !newItem.thumbUrl) {
+		if (!newItem.manualName || !newItem.modId || !newItem.thumbUrl) {
 			setErrorMessage('Module and thumbnail image are required.');
 			return;
 		}
@@ -56,6 +57,7 @@ const EditItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			allTags={props.allTags}
 			cancelEdit={cancelEdit}
 			clearErrorMessage={clearErrorMessage}
+			courses={props.courses}
 			errorMessage={errorMessage}
 			newItem={newItem}
 			saveItem={saveItem}
