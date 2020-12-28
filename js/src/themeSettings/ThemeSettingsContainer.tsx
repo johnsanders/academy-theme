@@ -30,9 +30,8 @@ const ThemeSettingsContainer: React.FC<Props> = (props: Props): JSX.Element | nu
 	);
 	const [rows, setRows] = React.useState<Row[]>(props.cnnAcademy.rows || []);
 	const [tags, setTags] = React.useState<Tag[]>(props.cnnAcademy.tags || []);
-
 	const [activeTab, setActiveTab] = React.useState('grid');
-	const [unsavedChanges, setUnsavedChanges] = React.useState(false);
+	const [unsavedChanges, setUnsavedChanges] = React.useState<boolean>();
 	React.useEffect(() => {
 		modifyDom();
 		const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
@@ -44,6 +43,10 @@ const ThemeSettingsContainer: React.FC<Props> = (props: Props): JSX.Element | nu
 		clearStaticLoader();
 	}, []);
 	React.useEffect(() => {
+		if (unsavedChanges === undefined) {
+			setUnsavedChanges(false);
+			return;
+		}
 		const flashClose = document.querySelector<HTMLButtonElement>('.alert-block button.close');
 		if (flashClose) flashClose.click();
 		if (!unsavedChanges) {
@@ -86,7 +89,7 @@ const ThemeSettingsContainer: React.FC<Props> = (props: Props): JSX.Element | nu
 			setTags={setTags}
 			submitForm={submitForm}
 			tags={tags}
-			unsavedChanges={unsavedChanges}
+			unsavedChanges={unsavedChanges || false}
 		/>,
 		el,
 	);
