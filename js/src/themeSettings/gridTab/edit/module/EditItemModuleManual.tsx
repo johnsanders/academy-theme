@@ -1,10 +1,10 @@
-import { ItemModule, RowItem } from '../../../../types';
+import { Module, RowItem } from '../../../../types';
 import React from 'react';
 import { v4 as uuid } from 'uuid';
 
 interface Props {
 	className?: string;
-	updateModule: (module: ItemModule, url?: string) => void;
+	updateModule: (module: Module, url?: string) => void;
 	onFocus: () => void;
 	selectedItem: RowItem;
 }
@@ -13,7 +13,7 @@ const EditItemModuleManual: React.FC<Props> = (props: Props): JSX.Element => {
 	const moduleRef = React.useRef({
 		id: uuid(),
 		modname: 'manual',
-		name: props.selectedItem.name,
+		name: props.selectedItem.manualName,
 	});
 	const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		moduleRef.current.name = e.currentTarget.value;
@@ -28,7 +28,7 @@ const EditItemModuleManual: React.FC<Props> = (props: Props): JSX.Element => {
 				<input
 					className="form-control"
 					onChange={handleNameChange}
-					value={props.selectedItem.name}
+					value={props.selectedItem.manualName}
 				/>
 			</div>
 			<div className="form-group">

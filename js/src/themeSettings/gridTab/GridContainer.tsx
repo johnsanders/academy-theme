@@ -1,4 +1,4 @@
-import { Instructor, MoodleAcademySettings, Row, RowItem, Tag } from '../../types';
+import { Course, Instructor, MoodleAcademySettings, Row, RowItem, Tag } from '../../types';
 import { createBlankGridItem, createBlankGridRow } from './edit/createBlankElement';
 import Grid from './Grid';
 import React from 'react';
@@ -100,6 +100,7 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			activeItem={activeItem}
 			activeRow={activeRow}
 			cancelEdit={cancelEdit}
+			courses={props.courses}
 			handleAddItemToRow={handleAddItemToRow}
 			handleAddRowClick={handleAddRowClick}
 			handleDeleteItem={handleDeleteItem}

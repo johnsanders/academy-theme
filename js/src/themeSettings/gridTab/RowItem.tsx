@@ -33,7 +33,7 @@ const RowItem: React.FC<Props> = (props: Props): JSX.Element => {
 			<div className="card-body">
 				<h4 className="mb-0">
 					{props.item.modName === 'manual'
-						? props.item.name
+						? props.item.manualName
 						: props.modsInfo[props.item.modId].name}
 				</h4>
 				{dateString ? <div className="text-muted">{dateString}</div> : null}
