@@ -21,6 +21,7 @@ const EditItemTags: React.FC<Props> = (props: Props): JSX.Element => {
 	const handleAddTag = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
 		if (!selectedTag) throw new Error('No tag selected');
+		if (props.tags.includes(selectedTag.id)) return;
 		props.updateTags([...props.tags, selectedTag.id]);
 	};
 	const handleDeleteTag = (e: React.MouseEvent<HTMLAnchorElement>): void => {

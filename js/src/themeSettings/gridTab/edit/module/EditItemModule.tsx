@@ -47,7 +47,7 @@ const ModuleSelector: React.FC<Props> = (props: Props): JSX.Element => {
 						courses={props.courses}
 						itemsAlreadyInRow={props.itemsAlreadyInRow}
 						onFocus={props.onFocus}
-						selectedItemName={props.selectedItem.manualName}
+						selectedItem={props.selectedItem}
 						updateModule={props.updateModule}
 					/>
 				)}

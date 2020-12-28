@@ -1,15 +1,17 @@
 import { faCheck, faTimes } from '@fortawesome/pro-solid-svg-icons';
+import { Course } from '../../../types';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import RowEditRequiredCoursesContainer from './RowEditRequiredCoursesContainer';
 
 interface Props {
+	allCourses: Course[];
 	handleSaveRow: (e: React.MouseEvent<HTMLButtonElement>) => void;
-	handleAddRequiredCourse: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	handleAddRequiredCourse: (courseId: string) => void;
 	handleCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	name: string;
 	requiredCourses: string[];
-	requiredCourse: string;
 }
 
 const RowEdit: React.FC<Props> = (props: Props): JSX.Element => (
@@ -25,33 +27,12 @@ const RowEdit: React.FC<Props> = (props: Props): JSX.Element => (
 				value={props.name}
 			/>
 		</div>
-		<div className="form-group">
-			<label htmlFor="requiredCourseIds">Required Course IDs</label>
-			<div className="input-group">
-				<input
-					className="form-control"
-					data-id="setRequiredCourse"
-					id="requiredCourseIds"
-					onChange={props.handleInputChange}
-					value={props.requiredCourse}
-				/>
-				<div className="input-group-append">
-					<button className="btn btn-secondary" onClick={props.handleAddRequiredCourse}>
-						Add
-					</button>
-				</div>
-			</div>
-			<div className="mt-2">
-				{props.requiredCourses.length === 0 ? (
-					<span className="text-muted">No required course IDs have been added.</span>
-				) : (
-					<span>
-						<strong>Courses added: </strong>
-						{props.requiredCourses.join(', ')}
-					</span>
-				)}
-			</div>
-		</div>
+		<RowEditRequiredCoursesContainer
+			allCourses={props.allCourses}
+			handleAddRequiredCourse={props.handleAddRequiredCourse}
+			requiredCourses={props.requiredCourses}
+		/>
+		<div className="form-group"></div>
 		<div className="form-group">
 			<button className="btn btn-secondary mr-1" onClick={props.handleSaveRow}>
 				<Icon className="mr-1" icon={faCheck} />

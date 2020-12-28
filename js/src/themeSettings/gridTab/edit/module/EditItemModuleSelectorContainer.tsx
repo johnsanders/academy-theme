@@ -7,7 +7,7 @@ interface Props {
 	courses: Course[];
 	itemsAlreadyInRow: RowItem[];
 	onFocus: () => void;
-	selectedItemName: string;
+	selectedItem: RowItem;
 	updateModule: (module: Module, url?: string) => void;
 }
 
@@ -31,6 +31,10 @@ const ModuleSelector: React.FC<Props> = (props: Props): JSX.Element => {
 	};
 	const selectedCourse = props.courses.find((course) => course.id === courseId);
 	if (!selectedCourse) throw new Error('Cannot find selected course');
+	const selectedItemName =
+		props.selectedItem.modName === 'manual'
+			? props.selectedItem.manualName
+			: allModulesRef.current.find((module) => module.id === props.selectedItem.modId)?.name || '';
 	return (
 		<EditItemModuleSelector
 			className={props.className}
@@ -41,7 +45,7 @@ const ModuleSelector: React.FC<Props> = (props: Props): JSX.Element => {
 			itemsAlreadyInRow={props.itemsAlreadyInRow}
 			onFocus={props.onFocus}
 			selectedCourse={selectedCourse}
-			selectedModuleName={props.selectedItemName}
+			selectedItemName={selectedItemName}
 			selectorIsOpen={selectorIsOpen}
 		/>
 	);

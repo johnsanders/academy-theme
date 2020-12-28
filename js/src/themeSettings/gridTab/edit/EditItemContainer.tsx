@@ -25,9 +25,10 @@ const EditItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	};
 	const updateModule = (module: Module, manualUrl?: string) => {
 		const url = manualUrl || createModuleUrl(module.id, module.modname);
+		const manualName = module.modname === 'manual' ? module.name : '';
 		setNewItem({
 			...newItem,
-			manualName: module.name,
+			manualName,
 			modId: module.id,
 			modName: module.modname,
 			url,
@@ -43,7 +44,11 @@ const EditItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	};
 	const saveItem = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
-		if (!newItem.manualName || !newItem.modId || !newItem.thumbUrl) {
+		if (
+			!newItem.modId ||
+			!newItem.thumbUrl ||
+			(newItem.modName === 'manual' && !newItem.manualName)
+		) {
 			setErrorMessage('Module and thumbnail image are required.');
 			return;
 		}

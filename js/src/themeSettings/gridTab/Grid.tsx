@@ -51,6 +51,7 @@ const Grid: React.FC<Props> = (props: Props): JSX.Element => (
 		) : null}
 		{props.activeRow && !props.activeItem ? (
 			<RowEditContainer
+				allCourses={props.courses}
 				handleCancel={props.cancelEdit}
 				handleSaveRow={props.handleSaveRow}
 				initialValues={props.activeRow}

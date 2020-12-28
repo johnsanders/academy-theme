@@ -14,17 +14,17 @@ interface Props {
 	onFocus: () => void;
 	selectedCourse: Course;
 	selectorIsOpen: boolean;
-	selectedModuleName: string;
+	selectedItemName: string;
 }
 
 const EditItemModuleSelector: React.FC<Props> = (props: Props): JSX.Element => (
 	<>
 		<div className="form-group">
 			<h5>Module Name</h5>
-			{props.selectedModuleName === '' ? (
+			{props.selectedItemName === '' ? (
 				<div className="text-muted">No module selected.</div>
 			) : (
-				<div>{props.selectedModuleName}</div>
+				<div>{props.selectedItemName}</div>
 			)}
 		</div>
 		{!props.selectorIsOpen ? (
