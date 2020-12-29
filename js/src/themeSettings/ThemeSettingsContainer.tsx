@@ -12,6 +12,7 @@ import updateUrlQuery from '../helpers/updateUrlQuery';
 
 interface Props {
 	cnnAcademy: MoodleAcademySettings;
+	handleComponentsReady: () => void;
 }
 
 const ThemeSettingsContainer: React.FC<Props> = (props: Props): JSX.Element | null => {
@@ -41,6 +42,7 @@ const ThemeSettingsContainer: React.FC<Props> = (props: Props): JSX.Element | nu
 		updateUrlQuery(queryRef.current);
 		window.onbeforeunload = null;
 		clearStaticLoader();
+		props.handleComponentsReady();
 	}, []);
 	React.useEffect(() => {
 		if (unsavedChanges === undefined) {

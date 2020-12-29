@@ -9,7 +9,7 @@ import updateUrlQuery from '../../helpers/updateUrlQuery';
 
 interface Props {
 	cnnAcademy: MoodleAcademyFront;
-	setLoading: (loading: boolean) => void;
+	handleComponentsReady: () => void;
 	visible: boolean;
 }
 
@@ -32,16 +32,16 @@ const LoggedInContainer: React.FC<Props> = (props: Props): JSX.Element | null =>
 	);
 	const handleCarouselInit = () => {
 		carouselDidInit.current = true;
-		if (rowInitRef.current >= rows.length) props.setLoading(false);
-		if (activeTagId && collectionDidInit.current) props.setLoading(false);
+		if (rowInitRef.current >= rows.length) props.handleComponentsReady();
+		if (activeTagId && collectionDidInit.current) props.handleComponentsReady();
 	};
 	const handleCollectionInit = () => {
 		collectionDidInit.current = true;
-		if (carouselDidInit.current) props.setLoading(false);
+		if (carouselDidInit.current) props.handleComponentsReady();
 	};
 	const handleRowInit = () => {
 		rowInitRef.current += 1;
-		if (rowInitRef.current >= rows.length && carouselDidInit.current) props.setLoading(false);
+		if (rowInitRef.current >= rows.length && carouselDidInit.current) props.handleComponentsReady();
 	};
 	if (!el) return null;
 	return createPortal(
@@ -54,7 +54,6 @@ const LoggedInContainer: React.FC<Props> = (props: Props): JSX.Element | null =>
 			modsInfo={props.cnnAcademy.modsInfo}
 			rows={rows}
 			setActiveTagId={setActiveTagId}
-			setLoading={props.setLoading}
 			tags={tags}
 			visible={props.visible}
 		/>,

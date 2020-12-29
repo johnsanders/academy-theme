@@ -8,19 +8,16 @@ import Trainers from './Trainers';
 import { createPortal } from 'react-dom';
 
 interface Props {
-	setLoading: (loading: boolean) => void;
+	handleComponentsReady: () => void;
 	visible: boolean;
 }
 
 const LoggedOut: React.FC<Props> = (props: Props): JSX.Element | null => {
 	const el = document.getElementById('academyContent');
-	const setLoading = () => {
-		props.setLoading(false);
-	};
 	if (!el) return null;
 	return createPortal(
 		<div className={`fadeIn ${props.visible ? '' : 'd-none'}`}>
-			<Hero setLoading={setLoading} />
+			<Hero handleReady={props.handleComponentsReady} />
 			<ClientSegments />
 			<ExecEducation />
 			<Delivery />

@@ -1,19 +1,22 @@
-declare const cnnAcademy: MoodleAcademy;
-import { MoodleAcademy } from '../types';
 import Navbar from './Navbar';
+import { NavbarConfig } from '../types';
 import React from 'react';
 import SimpleMenu from './SimpleMenu';
 
-const { navbarConfig } = cnnAcademy;
-const largeThreshold = navbarConfig.isLoggedIn ? 50 : 400;
-
 interface Props {
+	config: NavbarConfig;
+	templateType: string;
 	visible: boolean;
 }
 
 const NavbarContainer: React.FC<Props> = (props: Props): JSX.Element => {
+	const largeThreshold = props.config.isLoggedIn ? 50 : 400;
+	const shouldHideLargeNavbar =
+		!props.config.isLoggedIn && !(document.title === 'Forgotten password');
 	const drawerRef = React.useRef(document.querySelector('#nav-drawer') as HTMLElement);
-	const [navState, setNavState] = React.useState(navbarConfig.isLoggedIn ? 'large' : 'none');
+	const [navState, setNavState] = React.useState(
+		props.config.isLoggedIn || document.title === 'Forgotten password' ? 'large' : 'none',
+	);
 	const setLarge = (): void => {
 		drawerRef.current.classList.add('lower');
 		setNavState('large');
@@ -30,12 +33,12 @@ const NavbarContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		e.preventDefault();
 	};
 	const onScroll = () => {
-		if (navbarConfig.isLoggedIn) {
-			if (navState === 'small' && window.scrollY < largeThreshold) setLarge();
-			else if (navState === 'large' && window.scrollY > largeThreshold) setSmall();
-		} else {
+		if (shouldHideLargeNavbar) {
 			if (navState === 'large' && window.scrollY < largeThreshold) setNone();
 			else if (navState === 'none' && window.scrollY > largeThreshold) setLarge();
+		} else {
+			if (navState === 'small' && window.scrollY < largeThreshold) setLarge();
+			else if (navState === 'large' && window.scrollY > largeThreshold) setSmall();
 		}
 	};
 	React.useEffect(() => {
@@ -43,23 +46,23 @@ const NavbarContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		document.addEventListener('scroll', onScroll);
 		return () => document.removeEventListener('scroll', onScroll);
 	}, [onScroll]);
-	const fadeClass = cnnAcademy.templateType === 'front_page_logged_out' ? '' : 'fadeIn';
+	const fadeClass = props.templateType === 'front_page_logged_out' ? '' : 'fadeIn';
 	return (
 		<div className={`${fadeClass} ${props.visible ? '' : 'd-none'}`}>
 			{navState === 'none' ? (
-				<SimpleMenu userMenu={cnnAcademy.navbarConfig.userMenu} />
+				<SimpleMenu userMenu={props.config.userMenu} />
 			) : (
 				<Navbar
-					ariaLabel={navbarConfig.ariaLabel}
-					fixed={!navbarConfig.isLoggedIn}
+					ariaLabel={props.config.ariaLabel}
+					fixed={!props.config.isLoggedIn}
 					handleDrawerToggleClick={handleDrawerToggleClick}
-					isLoggedIn={navbarConfig.isLoggedIn}
-					menuButtonName={navbarConfig.menuButtonName}
-					navbarPluginOutput={navbarConfig.navbarPluginOutput}
-					pageHeadingMenu={navbarConfig.pageHeadingMenu}
-					siteName={navbarConfig.siteName}
+					isLoggedIn={props.config.isLoggedIn}
+					menuButtonName={props.config.menuButtonName}
+					navbarPluginOutput={props.config.navbarPluginOutput}
+					pageHeadingMenu={props.config.pageHeadingMenu}
+					siteName={props.config.siteName}
 					size={navState}
-					userMenu={navbarConfig.userMenu}
+					userMenu={props.config.userMenu}
 				/>
 			)}
 		</div>

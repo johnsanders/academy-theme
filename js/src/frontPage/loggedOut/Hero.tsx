@@ -1,5 +1,3 @@
-declare const cnnAcademy: MoodleAcademy;
-import { MoodleAcademy } from '../../types';
 import React from 'react';
 import heroPoster from '../../img/heroPoster.jpg';
 import heroVideo from '../../img/hero.mp4';
@@ -8,14 +6,14 @@ import logoLight from '../../img/logo_light.png';
 const itemsToInit = 2;
 
 interface Props {
-	setLoading: (loading: boolean) => void;
+	handleReady: () => void;
 }
 
 const Hero: React.FC<Props> = (props: Props): JSX.Element => {
 	const itemsInitedRef = React.useRef(0);
 	const handleInit = () => {
 		itemsInitedRef.current += 1;
-		if (itemsInitedRef.current === itemsToInit) props.setLoading(false);
+		if (itemsInitedRef.current === itemsToInit) props.handleReady();
 	};
 	return (
 		<div
@@ -51,7 +49,7 @@ const Hero: React.FC<Props> = (props: Props): JSX.Element => {
 					<div className="row h-100">
 						<div className="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 d-flex flex-column justify-content-center align-items-center">
 							<img
-								alt={cnnAcademy.navbarConfig.siteName}
+								alt="CNN Academy Logo"
 								className="mb-5"
 								onError={handleInit}
 								onLoad={handleInit}

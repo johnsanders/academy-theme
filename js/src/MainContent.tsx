@@ -14,25 +14,45 @@ const MainContent: React.FC = (): JSX.Element => {
 	const isAcademySettingsPage = window.location.search.includes('section=themesettingacademy');
 	const isFrontPage = cnnAcademy.templateType.includes('front_page');
 	const isLoggedIn = cnnAcademy.navbarConfig.isLoggedIn;
-	const [loading, setLoading] = React.useState(isFrontPage);
+	const [loading, setLoading] = React.useState(true);
 	const handleReactError = () => setLoading(false);
+	const handleComponentsReady = () => {
+		if (isLoggedIn) {
+			prepTranslation().then(() => {
+				setLoading(false);
+				clearStaticLoader();
+			});
+		} else {
+			clearStaticLoader();
+			setLoading(false);
+		}
+	};
 	React.useEffect(() => {
-		if (!loading && isLoggedIn) prepTranslation().then(clearStaticLoader);
-		else if (!loading) clearStaticLoader();
-	}, [loading]);
+		if (!isFrontPage && !isAcademySettingsPage) {
+			if (document.readyState === 'complete') handleComponentsReady();
+			else document.addEventListener('ready', handleComponentsReady);
+		}
+	}, []);
 	return (
 		<>
 			<ErrorBoundary errorMessage="Error rendering navbar" handleError={handleReactError}>
-				<Navbar visible={!loading} />
+				<Navbar
+					config={cnnAcademy.navbarConfig}
+					templateType={cnnAcademy.templateType}
+					visible={!loading}
+				/>
 			</ErrorBoundary>
 			<React.Suspense fallback={<div />}>
 				{isAcademySettingsPage ? (
-					<Settings cnnAcademy={cnnAcademy as MoodleAcademySettings} />
+					<Settings
+						cnnAcademy={cnnAcademy as MoodleAcademySettings}
+						handleComponentsReady={handleComponentsReady}
+					/>
 				) : null}
 				{isFrontPage ? (
 					<FrontPage
 						cnnAcademy={cnnAcademy as MoodleAcademyFront}
-						setLoading={setLoading}
+						handleComponentsReady={handleComponentsReady}
 						visible={!loading}
 					/>
 				) : null}

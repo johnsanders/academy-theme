@@ -16,7 +16,6 @@ interface Props {
 	modsInfo: MoodleAcademyFront['modsInfo'];
 	rows: RowType[];
 	setActiveTagId: (tagId: string) => void;
-	setLoading: (loading: boolean) => void;
 	tags: Tag[];
 	visible: boolean;
 }

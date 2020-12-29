@@ -5,15 +5,19 @@ import React from 'react';
 
 interface Props {
 	cnnAcademy: MoodleAcademyFront;
-	setLoading: (loading: boolean) => void;
+	handleComponentsReady: () => void;
 	visible: boolean;
 }
 
 const FrontPage: React.FC<Props> = (props: Props): JSX.Element => {
 	return props.cnnAcademy.navbarConfig.isLoggedIn ? (
-		<LoggedIn cnnAcademy={props.cnnAcademy} setLoading={props.setLoading} visible={props.visible} />
+		<LoggedIn
+			cnnAcademy={props.cnnAcademy}
+			handleComponentsReady={props.handleComponentsReady}
+			visible={props.visible}
+		/>
 	) : (
-		<LoggedOut setLoading={props.setLoading} visible={props.visible} />
+		<LoggedOut handleComponentsReady={props.handleComponentsReady} visible={props.visible} />
 	);
 };
 
