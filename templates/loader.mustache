@@ -1,3 +1,11 @@
 <div class="academyLoader" id="academyLoaderTemplate">
-	<div id="loaderBox"></div>
+	<div id="loaderBox">
+		<div class="errorMessage">!</div>
+	</div>
 </div>
+{{#js}}
+	setTimeout(() => {
+		const loaderBox = document.getElementById('loaderBox');
+		if (loaderBox) loaderBox.classList.add('error')
+	}, 5000);
+{{/js}}

@@ -91,10 +91,26 @@ footer .drawerOpen {
 	border-color:#6c757d;
 }
 #loaderBox {
+	align-items: center;
 	animation: flip 1.5s infinite;
 	background-color: #CA0000;
+	display: flex;
 	height: 100px;
+	justify-content: center;
 	width: 100px;
+}
+#loaderBox.error {
+	animation: unset;
+	background-color: #A0A0A0;
+	display: flex;
+}
+#loaderBox .errorMessage {
+	display: none;
+}
+#loaderBox.error .errorMessage {
+	color: white;
+	font-size: 3em;
+	display: block;
 }
 .loginLogo {
 	max-height: 100px;
