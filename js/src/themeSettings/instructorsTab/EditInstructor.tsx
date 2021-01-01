@@ -7,8 +7,8 @@ interface Props {
 	bioUrl: string;
 	clearErrorMessage: () => void;
 	errorMessage: string;
-	handleAdd: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	handleDone: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 	handleOpenImageModal: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	imageModalIsOpen: boolean;
@@ -81,7 +81,7 @@ const EditInstructor: React.FC<Props> = (props: Props): JSX.Element => (
 			</div>
 		</div>
 		<div>
-			<button className="btn btn-secondary mr-1" onClick={props.handleAdd}>
+			<button className="btn btn-secondary mr-1" onClick={props.handleDone}>
 				<Icon className="mr-1" icon={faCheck} />
 				Done
 			</button>

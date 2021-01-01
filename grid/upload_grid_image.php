@@ -1,10 +1,10 @@
 <?php
 
 require_once(__DIR__ . '/../../../config.php');
-require_once($CFG->dirroot . '/theme/academy/classes/upload_grid_thumb.php');
+require_once($CFG->dirroot . '/theme/academy/classes/upload_grid_image.php');
 
 
-$PAGE->set_url(new moodle_url('/theme/academy/grid/upload_grid_thumb.php'));
+$PAGE->set_url(new moodle_url('/theme/academy/grid/upload_grid_image.php'));
 $PAGE->set_context(context_system::instance());
 $PAGE->set_title('Upload Academy Grid Image');
 $PAGE->set_heading('Upload Academy Grid Image');
@@ -14,6 +14,7 @@ $component_name = 'theme_academy';
 $context = context_system::instance();
 $file_area = 'thumbs';
 $file_id = 0;
+$sizes = ["collectionThumb" => [480, 270], "gridThumb" => [320, 180]];
 
 function crop_to_16_9($im)
 {
@@ -49,7 +50,8 @@ if ($mform->is_cancelled()) {
 	$name = $mform->get_new_filename('grid_image');
 	$im = imagecreatefromstring($content);
 	$cropped = crop_to_16_9($im);
-	$scaled = imagescale($cropped, 320, 180);
+	$size = $sizes[$data->image_type];
+	$scaled = imagescale($cropped, $size[0], $size[1]);
 	$tmp_path = tempnam(sys_get_temp_dir(), 'tmpimg');
 	imagejpeg($scaled, $tmp_path);
 	$file_info = [

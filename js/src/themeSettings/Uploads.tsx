@@ -8,7 +8,7 @@ const Uploads: React.FC = (): JSX.Element => (
 		<div>
 			<a
 				className="btn btn-secondary mt-3"
-				href={`${M.cfg.wwwroot}/theme/academy/grid/upload_grid_thumb.php`}
+				href={`${M.cfg.wwwroot}/theme/academy/grid/upload_grid_image.php`}
 			>
 				<Icon className="mr-1" icon={faUpload} />
 				Upload Grid Thumbnail

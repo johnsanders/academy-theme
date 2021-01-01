@@ -1,7 +1,6 @@
-declare const cnnAcademy: MoodleAcademy;
-import { Instructor, MoodleAcademy } from '../../types';
 import EditInstructor from './EditInstructor';
 import ImagesModal from '../ImagesModal';
+import { Instructor } from '../../types';
 import React from 'react';
 
 export const roles = ['Instructor', 'Speaker', 'Special Guest', 'Contributor'];
@@ -29,7 +28,7 @@ const EditInstructorContainer: React.FC<Props> = (props: Props): JSX.Element => 
 		e.preventDefault();
 		props.handleCancel();
 	};
-	const handleAdd = (e: React.MouseEvent<HTMLButtonElement>): void => {
+	const handleDone = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
 		setErrorMessage('');
 		if (!avatarUrl || !bioUrl || !name) {
@@ -37,10 +36,6 @@ const EditInstructorContainer: React.FC<Props> = (props: Props): JSX.Element => 
 			return;
 		}
 		props.handleEditFinished({ avatarUrl, bioUrl, id: props.initialProperties.id, name, role });
-		setAvatarUrl('');
-		setBioUrl('');
-		setName('');
-		setRole(roles[0]);
 	};
 	const handleOpenImageModal = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
@@ -58,8 +53,8 @@ const EditInstructorContainer: React.FC<Props> = (props: Props): JSX.Element => 
 				bioUrl={bioUrl}
 				clearErrorMessage={clearErrorMessage}
 				errorMessage={errorMessage}
-				handleAdd={handleAdd}
 				handleCancel={handleCancel}
+				handleDone={handleDone}
 				handleInputChange={handleInputChange}
 				handleOpenImageModal={handleOpenImageModal}
 				imageModalIsOpen={imageModalIsOpen}

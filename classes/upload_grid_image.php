@@ -8,6 +8,15 @@ class upload_grid_image extends moodleform
 	{
 		$mform = $this->_form;
 		$mform->addElement(
+			'select',
+			'image_type',
+			'Type of Image',
+			[
+				"gridThumb" => "Grid Thumbnail",
+				"collectionThumb" => "Collection Thumbnail"
+			]
+		);
+		$mform->addElement(
 			'filepicker',
 			'grid_image',
 			'New Academy Grid Image',

@@ -1,53 +1,56 @@
+import EditTagContainer from './EditTagContainer';
 import React from 'react';
 import { Tag } from '../../types';
 import Tags from './Tags';
-import { v4 as uuid } from 'uuid';
-
-const defaultColor = '#D0D0D0';
+import createBlankTag from './createBlankTag';
+import disableSaveButtons from '../disableSaveButtons';
 
 interface Props {
 	setTags: (tags: Tag[]) => void;
 	tags: Tag[];
+	thumbUrls: string[];
 }
 
 const TagsContainer: React.FC<Props> = (props: Props): JSX.Element => {
-	const [errorMessage, setErrorMessage] = React.useState('');
-	const [color, setColor] = React.useState(defaultColor);
-	const [name, setName] = React.useState('');
-	const handleAddTag = (e: React.FormEvent<HTMLFormElement>): void => {
+	const [activeTag, setActiveTag] = React.useState<Tag | null>(null);
+	const handleAddTagClick = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
-		setErrorMessage('');
-		if (!name) {
-			setErrorMessage('Tag name is required.');
-			return;
-		}
-		if (props.tags.find((tag) => tag.name === name)) return;
-		props.setTags([...props.tags, { color, id: uuid(), name }]);
-		setName('');
-		setColor(defaultColor);
+		setActiveTag(createBlankTag());
+		disableSaveButtons(true);
 	};
-	const handleDeleteTag = (e: React.MouseEvent<HTMLAnchorElement>): void => {
-		e.preventDefault();
-		const id = e.currentTarget.dataset.id;
+	const handleEditClick = (id: string): void => {
+		const tagToEdit = props.tags.find((tag) => tag.id === id);
+		if (tagToEdit) setActiveTag(tagToEdit);
+		disableSaveButtons(true);
+	};
+	const handleEditFinished = (newTag: Tag): void => {
+		const existingTag = props.tags.find((tag) => tag.id === newTag.id);
+		if (existingTag) props.setTags(props.tags.map((tag) => (tag.id === newTag.id ? newTag : tag)));
+		else props.setTags([...props.tags, newTag]);
+		setActiveTag(null);
+		disableSaveButtons(false);
+	};
+	const handleCancelEdit = (): void => {
+		setActiveTag(null);
+		disableSaveButtons(false);
+	};
+	const handleDeleteClick = (id: string): void => {
 		const tagToDelete = props.tags.find((tag) => tag.id === id);
 		if (!tagToDelete) throw new Error('Cannot find tag to delete');
 		props.setTags(props.tags.filter((tag) => tag.id !== tagToDelete.id));
 	};
-	const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>): void =>
-		setName(e.currentTarget.value);
-	const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>): void =>
-		setColor(e.currentTarget.value);
-	const clearErrorMessage = () => setErrorMessage('');
-	return (
+	return activeTag ? (
+		<EditTagContainer
+			handleCancel={handleCancelEdit}
+			handleEditFinished={handleEditFinished}
+			initialProperties={activeTag}
+			thumbUrls={props.thumbUrls}
+		/>
+	) : (
 		<Tags
-			clearErrorMessage={clearErrorMessage}
-			errorMessage={errorMessage}
-			handleAddTag={handleAddTag}
-			handleColorChange={handleColorChange}
-			handleDeleteTag={handleDeleteTag}
-			handleNameChange={handleNameChange}
-			selectedColor={color}
-			selectedName={name}
+			handleAddTagClick={handleAddTagClick}
+			handleDeleteClick={handleDeleteClick}
+			handleEditClick={handleEditClick}
 			tags={props.tags}
 		/>
 	);

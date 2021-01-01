@@ -3,7 +3,7 @@ import { faExclamationTriangle, faSave } from '@fortawesome/pro-solid-svg-icons'
 import CarouselContainer from './carouselTab/CarouselContainer';
 import GridContainer from './gridTab/GridContainer';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import Instructors from './instructorsTab/Instructors';
+import InstructorsContainer from './instructorsTab/InstructorsContainer';
 import React from 'react';
 import TagsContainer from './tagsTab/TagsContainer';
 import Uploads from './Uploads';
@@ -23,6 +23,7 @@ interface Props {
 	setTags: (tags: Tag[]) => void;
 	submitForm: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	tags: Tag[];
+	thumbUrls: string[];
 	unsavedChanges: boolean;
 }
 
@@ -61,6 +62,7 @@ const ThemeSettings: React.FC<Props> = (props: Props): JSX.Element => (
 				rows={props.rows}
 				setRows={props.setRows}
 				tags={props.tags}
+				thumbUrls={props.thumbUrls}
 			/>
 		) : null}
 		{props.activeTab === 'carousel' ? (
@@ -71,10 +73,10 @@ const ThemeSettings: React.FC<Props> = (props: Props): JSX.Element => (
 			/>
 		) : null}
 		{props.activeTab === 'instructors' ? (
-			<Instructors instructors={props.instructors} setInstructors={props.setInstructors} />
+			<InstructorsContainer instructors={props.instructors} setInstructors={props.setInstructors} />
 		) : null}
 		{props.activeTab === 'tags' ? (
-			<TagsContainer setTags={props.setTags} tags={props.tags} />
+			<TagsContainer setTags={props.setTags} tags={props.tags} thumbUrls={props.thumbUrls} />
 		) : null}
 		{props.activeTab === 'uploads' ? <Uploads /> : null}
 		<button className="btn btn-primary mt-3 saveAll" onClick={props.submitForm}>

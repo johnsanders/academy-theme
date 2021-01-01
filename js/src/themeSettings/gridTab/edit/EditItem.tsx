@@ -19,6 +19,7 @@ interface Props {
 	errorMessage: string;
 	newItem: RowItem;
 	saveItem: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	thumbUrls: string[];
 	updateDate: (key: 'dateEnd' | 'dateStart' | 'dateDisplayed', value: number | null) => void;
 	updateDuration: (duration: string) => void;
 	updateInstructors: (instructors: string[]) => void;
@@ -66,6 +67,7 @@ const EditItem: React.FC<Props> = (props: Props): JSX.Element => (
 			className="mb-3"
 			onFocus={props.clearErrorMessage}
 			thumbUrl={props.newItem.thumbUrl}
+			thumbUrls={props.thumbUrls}
 			updateThumb={props.updateThumb}
 		/>
 		<div>

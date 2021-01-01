@@ -1,5 +1,5 @@
-declare const cnnAcademy: MoodleAcademy;
-import { Instructor, MoodleAcademy, Tag } from '../types';
+declare const cnnAcademy: MoodleAcademyFront;
+import { Instructor, MoodleAcademyFront, Tag } from '../types';
 
 export const getInstructorById = (id: string): Instructor | null =>
 	cnnAcademy.instructors.find((instructor) => instructor.id === id) || null;

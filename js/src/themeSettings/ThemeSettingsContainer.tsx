@@ -91,6 +91,7 @@ const ThemeSettingsContainer: React.FC<Props> = (props: Props): JSX.Element | nu
 			setTags={setTags}
 			submitForm={submitForm}
 			tags={tags}
+			thumbUrls={props.cnnAcademy.thumbUrls}
 			unsavedChanges={unsavedChanges || false}
 		/>,
 		el,

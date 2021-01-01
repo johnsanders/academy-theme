@@ -1,6 +1,6 @@
 declare const M: MoodleJs;
-declare const cnnAcademy: MoodleAcademy;
-import { MoodleAcademy, MoodleJs } from '../types';
+declare const cnnAcademy: MoodleAcademyFront;
+import { MoodleAcademyFront, MoodleJs } from '../types';
 
 const maxAttempts = 30;
 const timeout = 500;

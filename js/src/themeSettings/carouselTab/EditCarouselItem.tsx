@@ -1,12 +1,11 @@
-declare const cnnAcademy: MoodleAcademy;
 import { faCheck, faImage, faTimes } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import ImagesModal from '../ImagesModal';
-import { MoodleAcademy } from '../../types';
 import React from 'react';
 
 interface Props {
 	cancelEdit: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	carouselUrls: string[];
 	clearErrorMessage: () => void;
 	errorMessage: string;
 	handleImageSelect: (imageUrl: string) => void;
@@ -75,7 +74,7 @@ const EditCarouselItem: React.FC<Props> = (props: Props): JSX.Element => (
 		{props.imageModalIsOpen && (
 			<ImagesModal
 				handleImageClick={props.handleImageSelect}
-				imageUrls={cnnAcademy.carouselUrls}
+				imageUrls={props.carouselUrls}
 				setIsOpen={props.setImageModalIsOpen}
 			/>
 		)}

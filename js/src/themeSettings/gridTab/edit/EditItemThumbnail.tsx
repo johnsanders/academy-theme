@@ -1,7 +1,5 @@
-declare const cnnAcademy: MoodleAcademy;
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import ImagesModal from '../../ImagesModal';
-import { MoodleAcademy } from '../../../types';
 import React from 'react';
 import { faImage } from '@fortawesome/pro-solid-svg-icons';
 
@@ -9,6 +7,7 @@ interface Props {
 	className?: string;
 	onFocus: () => void;
 	thumbUrl: string;
+	thumbUrls: string[];
 	updateThumb: (url: string) => void;
 }
 
@@ -41,7 +40,7 @@ const EditItemThumbnail: React.FC<Props> = (props: Props): JSX.Element => {
 			{thumbsModalIsOpen && (
 				<ImagesModal
 					handleImageClick={props.updateThumb}
-					imageUrls={cnnAcademy.thumbUrls}
+					imageUrls={props.thumbUrls}
 					setIsOpen={setThumbsModalIsOpen}
 				/>
 			)}

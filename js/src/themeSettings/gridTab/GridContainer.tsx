@@ -12,6 +12,7 @@ interface Props {
 	rows: Row[];
 	setRows: (rows: Row[]) => void;
 	tags: Tag[];
+	thumbUrls: string[];
 }
 
 export const createModuleUrl = (id: string, modname: string): string =>
@@ -114,6 +115,7 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			modsInfo={props.modsInfo}
 			rows={props.rows}
 			tags={props.tags}
+			thumbUrls={props.thumbUrls}
 		/>
 	);
 };

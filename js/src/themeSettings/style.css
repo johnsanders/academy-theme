@@ -7,11 +7,11 @@
 	margin: 0 0.5em 0.25em 0;
 	padding: 5px 10px;
 }
-.academyTagDeleteBtn {
+.academyTagBtn {
 	color: white;
 	opacity: 0.5;
 }
-.academyTagDeleteBtn:hover {
+.academyTagBtn:hover {
 	color: white;
 	opacity: 1;
 }

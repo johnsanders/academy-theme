@@ -11,6 +11,7 @@ interface Props {
 	cancelEdit: () => void;
 	courses: Course[];
 	handleSave: (updatedItem: RowItem) => void;
+	thumbUrls: string[];
 }
 
 const EditItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
@@ -66,6 +67,7 @@ const EditItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			errorMessage={errorMessage}
 			newItem={newItem}
 			saveItem={saveItem}
+			thumbUrls={props.thumbUrls}
 			updateDate={updateDate}
 			updateDuration={updateDuration}
 			updateInstructors={updateInstructors}

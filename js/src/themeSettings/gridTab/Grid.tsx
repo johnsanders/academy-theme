@@ -24,6 +24,7 @@ interface Props {
 	modsInfo: MoodleAcademySettings['modsInfo'];
 	rows: Row[];
 	tags: Tag[];
+	thumbUrls: string[];
 }
 
 const Grid: React.FC<Props> = (props: Props): JSX.Element => (
@@ -66,6 +67,7 @@ const Grid: React.FC<Props> = (props: Props): JSX.Element => (
 				cancelEdit={props.cancelEdit}
 				courses={props.courses}
 				handleSave={props.handleSaveItem}
+				thumbUrls={props.thumbUrls}
 			/>
 		) : null}
 	</>
