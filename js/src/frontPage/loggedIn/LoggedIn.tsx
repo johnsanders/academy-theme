@@ -23,7 +23,7 @@ interface Props {
 const LoggedIn: React.FC<Props> = (props: Props): JSX.Element | null => (
 	<div
 		className={`container-fluid fadeIn ${props.visible ? '' : 'd-none'}`}
-		style={{ marginTop: '122px' }}
+		style={{ marginTop: '105px' }}
 	>
 		{<ReactTooltip />}
 		<div className="row">

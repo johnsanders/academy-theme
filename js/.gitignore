@@ -1,5 +1,6 @@
-node_modules
-dist
 *.log
 *.swp
 *.swo
+dist
+node_modules
+rollbarToken.js
