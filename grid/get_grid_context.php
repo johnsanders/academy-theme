@@ -12,12 +12,12 @@ function get_modules_info($rows)
 	}
 	return $mods_info;
 }
-function get_grid_context($is_settings_page)
+function get_grid_context_settings()
 {
 	global $CFG;
 	$config = json_decode(get_config("theme_academy", "grid_config"));
 	$mods_info = get_modules_info($config->rows);
-	if ($is_settings_page) return [
+	return [
 		'cnn_academy' => [
 			'carouselItems' => $config->carousel,
 			'instructors' => $config->instructors,
@@ -27,6 +27,12 @@ function get_grid_context($is_settings_page)
 		],
 		'js_src' => $CFG->wwwroot . '/theme/academy/js/dist/bundle.js',
 	];
+}
+function get_grid_context_front()
+{
+	global $CFG;
+	$config = json_decode(get_config("theme_academy", "grid_config"));
+	$mods_info = get_modules_info($config->rows);
 	$user_courses = enrol_get_my_courses();
 	$user_course_ids = array_map(function ($course) {
 		return $course->id;
@@ -35,7 +41,7 @@ function get_grid_context($is_settings_page)
 		if (count($row->requiredCourses) === 0) return true;
 		else {
 			foreach ($user_course_ids as $user_course_id) {
-				if (in_array($user_course_id, $row->required_courses)) return true;
+				if (in_array($user_course_id, $row->requiredCourses)) return true;
 			}
 		}
 		return false;

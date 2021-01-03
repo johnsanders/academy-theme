@@ -12,6 +12,7 @@
 			captureUnhandledRejections: true,
 			checkIgnore: (_isUncaught, _args, payload) => {
 				if (payload.includes('/lib/javascript.php')) return true;
+				if (window.location.hostname === 'localhost') return true;
 				return false;
 			},
 			payload: {

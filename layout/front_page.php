@@ -15,7 +15,7 @@ $blockshtml = $OUTPUT->blocks('side-pre');
 $hasblocks = strpos($blockshtml, 'data-block=') !== false;
 $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions();
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
-$grid_context = get_grid_context($is_settings_page);
+$grid_context = get_grid_context_front($is_settings_page);
 $sitename = format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);
 
 $templatecontext = [
