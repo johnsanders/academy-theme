@@ -2,7 +2,7 @@ import { Course, Instructor, MoodleAcademySettings, Row, RowItem, Tag } from '..
 import EditItemContainer from './edit/EditItemContainer';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import RowEditContainer from './edit/RowEditContainer';
+import RowEditContainer from './edit/row/RowEditContainer';
 import RowsContainer from './RowsContainer';
 import { faPlus } from '@fortawesome/pro-solid-svg-icons';
 

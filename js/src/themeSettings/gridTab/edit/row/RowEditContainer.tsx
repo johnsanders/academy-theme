@@ -1,4 +1,4 @@
-import { Course, Row } from '../../../types';
+import { Course, Row } from '../../../../types';
 import React from 'react';
 import RowEdit from './RowEdit';
 
@@ -9,7 +9,7 @@ interface Props {
 	initialValues: Row;
 }
 
-const RowAddContainer: React.FC<Props> = (props: Props): JSX.Element => {
+const RowEditContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	const [name, setName] = React.useState(props.initialValues.name);
 	const [requiredCourses, setRequiredCourses] = React.useState<string[]>(
 		props.initialValues.requiredCourses,
@@ -52,4 +52,4 @@ const RowAddContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	);
 };
 
-export default RowAddContainer;
+export default RowEditContainer;

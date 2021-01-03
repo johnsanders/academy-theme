@@ -29,7 +29,8 @@ const Tags: React.FC<Props> = (props: Props): JSX.Element => (
 							handleDeleteClick={props.handleDeleteClick}
 							handleEditClick={props.handleEditClick}
 							key={tag.id}
-							showButtons={true}
+							showDeleteButton={true}
+							showEditButton={true}
 							tag={tag}
 						/>
 					))}

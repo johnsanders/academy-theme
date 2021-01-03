@@ -1,15 +1,24 @@
-import { Course } from '../../../types';
+import { Course } from '../../../../types';
 import React from 'react';
 
 interface Props {
 	allCourses: Course[];
-	handleAddRequiredCourse: (e: React.MouseEvent<HTMLButtonElement>) => void;
-	handleSelectedCourseChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+	handleAddRequiredCourse: (couseId: string) => void;
 	requiredCourses: string[];
-	selectedCourse: Course;
 }
 
 const RowEditRequiredCourses: React.FC<Props> = (props: Props) => {
+	const [selectedCourse, setSelectedCourse] = React.useState(props.allCourses[0]);
+	const handleSelectedCourseChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const course = props.allCourses.find((course) => course.id === e.currentTarget.value);
+		if (course) setSelectedCourse(course);
+	};
+	const handleAddRequiredCourse = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		if (!selectedCourse || props.requiredCourses.includes(selectedCourse.id)) return;
+		props.handleAddRequiredCourse(selectedCourse.id);
+	};
+	if (props.allCourses.length === 0) return <div>No courses available to assign.</div>;
 	return (
 		<>
 			<label htmlFor="requiredCourses">Select Required Course</label>
@@ -17,8 +26,8 @@ const RowEditRequiredCourses: React.FC<Props> = (props: Props) => {
 				<select
 					className="form-control"
 					id="requiredCourses"
-					onChange={props.handleSelectedCourseChange}
-					value={props.selectedCourse.id}
+					onChange={handleSelectedCourseChange}
+					value={selectedCourse.id}
 				>
 					{props.allCourses.map((course) => (
 						<option key={course.id} value={course.id}>
@@ -27,7 +36,7 @@ const RowEditRequiredCourses: React.FC<Props> = (props: Props) => {
 					))}
 				</select>
 				<div className="input-group-append">
-					<button className="btn btn-secondary" onClick={props.handleAddRequiredCourse}>
+					<button className="btn btn-secondary" onClick={handleAddRequiredCourse}>
 						Add
 					</button>
 				</div>

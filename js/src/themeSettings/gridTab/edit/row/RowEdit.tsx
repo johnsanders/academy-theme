@@ -1,8 +1,8 @@
 import { faCheck, faTimes } from '@fortawesome/pro-solid-svg-icons';
-import { Course } from '../../../types';
+import { Course } from '../../../../types';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import RowEditRequiredCoursesContainer from './RowEditRequiredCoursesContainer';
+import RowEditRequiredCourses from './RowEditRequiredCourses';
 
 interface Props {
 	allCourses: Course[];
@@ -27,12 +27,11 @@ const RowEdit: React.FC<Props> = (props: Props): JSX.Element => (
 				value={props.name}
 			/>
 		</div>
-		<RowEditRequiredCoursesContainer
+		<RowEditRequiredCourses
 			allCourses={props.allCourses}
 			handleAddRequiredCourse={props.handleAddRequiredCourse}
 			requiredCourses={props.requiredCourses}
 		/>
-		<div className="form-group"></div>
 		<div className="form-group">
 			<button className="btn btn-secondary mr-1" onClick={props.handleSaveRow}>
 				<Icon className="mr-1" icon={faCheck} />

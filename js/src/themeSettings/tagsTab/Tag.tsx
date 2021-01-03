@@ -8,14 +8,15 @@ import getForegroundColor from '../../helpers/getForegroundColor';
 interface Props {
 	tag: TagType;
 	handleDeleteClick: (id: string) => void;
-	handleEditClick: (id: string) => void;
-	showButtons?: boolean;
+	handleEditClick?: (id: string) => void;
+	showDeleteButton?: boolean;
+	showEditButton?: boolean;
 }
 
 const Tag: React.FC<Props> = (props: Props): JSX.Element => {
 	const handleEditClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
 		const id = e.currentTarget.dataset.id;
-		if (id) props.handleEditClick(id);
+		if (id && props.handleEditClick) props.handleEditClick(id);
 	};
 	const handleDeleteClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
 		const id = e.currentTarget.dataset.id;
@@ -29,16 +30,18 @@ const Tag: React.FC<Props> = (props: Props): JSX.Element => {
 			}}
 		>
 			{props.tag.name}
-			{props.showButtons && (
-				<>
+			<>
+				{props.showEditButton && (
 					<a className="academyTagBtn" data-id={props.tag.id} href="#" onClick={handleEditClick}>
 						<Icon className="ml-2" icon={faEdit} />
 					</a>
+				)}
+				{props.showDeleteButton && (
 					<a className="academyTagBtn" data-id={props.tag.id} href="#" onClick={handleDeleteClick}>
 						<Icon className="ml-2" icon={faTimes} />
 					</a>
-				</>
-			)}
+				)}
+			</>
 		</span>
 	);
 };

@@ -24,9 +24,7 @@ const EditItemTags: React.FC<Props> = (props: Props): JSX.Element => {
 		if (props.tags.includes(selectedTag.id)) return;
 		props.updateTags([...props.tags, selectedTag.id]);
 	};
-	const handleDeleteTag = (e: React.MouseEvent<HTMLAnchorElement>): void => {
-		e.preventDefault();
-		const idToDelete = e.currentTarget.dataset.id;
+	const handleDeleteTag = (idToDelete: string): void => {
 		props.updateTags(props.tags.filter((tagId) => tagId !== idToDelete));
 	};
 	return (
@@ -66,12 +64,17 @@ const EditItemTags: React.FC<Props> = (props: Props): JSX.Element => {
 						{props.tags.map((tagId) => {
 							const tag = props.allTags.find((tag) => tag.id === tagId);
 							return tag ? (
-								<Tag handleDelete={handleDeleteTag} key={tagId} showDeleteButton={true} tag={tag} />
+								<Tag
+									handleDeleteClick={handleDeleteTag}
+									key={tagId}
+									showDeleteButton={true}
+									tag={tag}
+								/>
 							) : null;
 						})}
 					</div>
 				)}
-			</div>{' '}
+			</div>
 		</div>
 	);
 };

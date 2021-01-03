@@ -34,6 +34,15 @@ button.btn:focus {
 .fontMedium {
 	font-family: 'CNNSansMedium';
 }
+.gridRowCollection {
+	margin: 0.5em;
+	min-width: 300px;
+	width: 300px;
+}
+.gridRowCollection img {
+	border-radius: 5px;
+	width: 100%;
+}
 .gridRowItems {
 	display: flex;
 	flex-wrap: nowrap;
