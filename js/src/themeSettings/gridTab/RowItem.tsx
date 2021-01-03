@@ -23,7 +23,6 @@ const RowItem: React.FC<Props> = (props: Props): JSX.Element => {
 		<div
 			className="card m-2 gridRowItem"
 			ref={props.provided.innerRef}
-			style={{ userSelect: 'none' }}
 			{...props.provided.draggableProps}
 			{...props.provided.dragHandleProps}
 		>

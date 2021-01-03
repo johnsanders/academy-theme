@@ -23,25 +23,25 @@ const tags: Tag[] = [
 		color: '#808080',
 		id: '1',
 		name: 'Tag 1',
-		thumbUrl: 'https://picsum.photos/480/270',
+		thumbUrl: 'https://picsum.photos/480/270?rand=1',
 	},
 	{
 		color: '#F08080',
 		id: '2',
 		name: 'Tag 2',
-		thumbUrl: 'https://picsum.photos/480/270',
+		thumbUrl: 'https://picsum.photos/480/270?rand=2',
 	},
 	{
 		color: '#80F080',
 		id: '3',
 		name: 'Tag 3',
-		thumbUrl: 'https://picsum.photos/480/270',
+		thumbUrl: 'https://picsum.photos/480/270?rand=3',
 	},
 	{
 		color: '#8080F0',
 		id: '4',
 		name: 'Tag 4',
-		thumbUrl: 'https://picsum.photos/480/270',
+		thumbUrl: 'https://picsum.photos/480/270?rand=4',
 	},
 ];
 

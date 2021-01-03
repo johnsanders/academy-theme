@@ -34,10 +34,12 @@ button.btn:focus {
 .fontMedium {
 	font-family: 'CNNSansMedium';
 }
-.gridRowCollection {
+.gridRowCollectionSettings {
 	margin: 0.5em;
-	min-width: 300px;
-	width: 300px;
+	min-width: 150px;
+	position: relative;
+	user-select: none;
+	width: 150px;
 }
 .gridRowCollection img {
 	border-radius: 5px;
@@ -55,6 +57,7 @@ button.btn:focus {
 	margin: 0.5em;
 	min-width: 250px;
 	position: relative;
+	user-select: none;
 	width: 250px;
 }
 .gridRowItem a {

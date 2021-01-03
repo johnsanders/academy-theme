@@ -44,8 +44,7 @@ const RowsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		if (itemId && rowId) props.handleDeleteItem(rowId, itemId);
 	};
 	const handleDragEnd = (result: DropResult): void => {
-		if (!activeRowIdRef.current || !result.destination)
-			throw new Error('Cannot find active row or destination');
+		if (!activeRowIdRef.current || !result.destination) return;
 		props.handleReorderRow(activeRowIdRef.current, result.source.index, result.destination.index);
 	};
 	const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>): void => {

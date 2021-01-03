@@ -36,31 +36,31 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => (
 	>
 		<DragDropContext onDragEnd={props.handleDragEnd}>
 			<Droppable direction="horizontal" droppableId="droppable">
-				{(provided) => (
+				{(providedOuter) => (
 					<div
 						className="gridRowItems"
 						onScroll={props.handleScroll}
-						ref={provided.innerRef}
-						{...provided.droppableProps}
+						ref={providedOuter.innerRef}
+						{...providedOuter.droppableProps}
 					>
 						{props.items.length === 0 ? (
 							<div className="text-muted my-2">No items to show in this row.</div>
 						) : null}
 						{props.items.map((item, i) => (
 							<Draggable draggableId={item.modId} index={i} key={item.modId}>
-								{(provided) => (
+								{(providedInner) => (
 									<RowItem
 										handleDeleteItemClick={props.handleDeleteItemClick}
 										handleEditItemClick={props.handleEditItemClick}
 										item={item}
 										modsInfo={props.modsInfo}
-										provided={provided}
+										provided={providedInner}
 										rowId={props.rowId}
 									/>
 								)}
 							</Draggable>
 						))}
-						{provided.placeholder}
+						{providedOuter.placeholder}
 					</div>
 				)}
 			</Droppable>
