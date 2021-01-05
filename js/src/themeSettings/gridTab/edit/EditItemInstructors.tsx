@@ -12,8 +12,9 @@ interface Props {
 }
 
 const EditItemInstructors: React.FC<Props> = (props: Props): JSX.Element => {
+	const allInstructors = props.allInstructors.sort((a, b) => (a.name > b.name ? 1 : -1));
 	const [selectedInstructor, setSelectedInstructor] = React.useState<Instructor | undefined>(
-		props.allInstructors[0],
+		allInstructors[0],
 	);
 	const handleInstructorChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
 		const selectedInstructor = props.allInstructors.find(
@@ -50,7 +51,7 @@ const EditItemInstructors: React.FC<Props> = (props: Props): JSX.Element => {
 								onChange={handleInstructorChange}
 								value={selectedInstructor?.id}
 							>
-								{props.allInstructors.map((instructor) => (
+								{allInstructors.map((instructor) => (
 									<option key={instructor.id} value={instructor.id}>
 										{instructor.name}
 									</option>
