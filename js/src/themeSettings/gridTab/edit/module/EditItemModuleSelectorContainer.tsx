@@ -11,7 +11,7 @@ interface Props {
 	updateModule: (module: Module, url?: string) => void;
 }
 
-const ModuleSelector: React.FC<Props> = (props: Props): JSX.Element => {
+const ModuleSelectorContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	const allModulesRef = React.useRef(
 		props.courses.reduce<Module[]>((acc, course) => [...acc, ...course.modules], []),
 	);
@@ -51,4 +51,4 @@ const ModuleSelector: React.FC<Props> = (props: Props): JSX.Element => {
 	);
 };
 
-export default ModuleSelector;
+export default ModuleSelectorContainer;

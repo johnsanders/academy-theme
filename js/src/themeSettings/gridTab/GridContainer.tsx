@@ -21,6 +21,7 @@ export const createModuleUrl = (id: string, modname: string): string =>
 const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	const [activeItem, setActiveItem] = React.useState<RowItem | null>(null);
 	const [activeRow, setActiveRow] = React.useState<Row | null>(null);
+	const [activeCollectionRow, setActiveCollectionRow] = React.useState<Tag[] | null>(null);
 	const cancelEdit = (e?: React.MouseEvent<HTMLButtonElement>): void => {
 		if (e) e.preventDefault();
 		setActiveItem(null);
@@ -33,10 +34,18 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		setActiveRow(newRow);
 		disableSaveButtons(true);
 	};
+	const handleAddCollectionRowClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
+		e.preventDefault();
+		setActiveCollectionRow([]);
+		disableSaveButtons(true);
+	};
 	const handleEditRowClick = (rowId: string): void => {
 		const rowToEdit = props.rows.find((row) => row.id === rowId);
 		if (rowToEdit) setActiveRow(rowToEdit);
 		disableSaveButtons(true);
+	};
+	const handleSaveCollectionRow = (newRow: Tag[]): void => {
+		console.log(newRow);
 	};
 	const handleSaveRow = (newRow: Row): void => {
 		const existingRow = props.rows.find((row) => row.id === newRow.id);
@@ -98,10 +107,12 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	};
 	return (
 		<Grid
+			activeCollectionRow={activeCollectionRow}
 			activeItem={activeItem}
 			activeRow={activeRow}
 			cancelEdit={cancelEdit}
 			courses={props.courses}
+			handleAddCollectionRowClick={handleAddCollectionRowClick}
 			handleAddItemToRow={handleAddItemToRow}
 			handleAddRowClick={handleAddRowClick}
 			handleDeleteItem={handleDeleteItem}
@@ -109,6 +120,7 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			handleEditItem={handleEditItem}
 			handleEditRowClick={handleEditRowClick}
 			handleReorderRow={handleReorderRow}
+			handleSaveCollectionRow={handleSaveCollectionRow}
 			handleSaveItem={handleSaveItem}
 			handleSaveRow={handleSaveRow}
 			instructors={props.instructors}

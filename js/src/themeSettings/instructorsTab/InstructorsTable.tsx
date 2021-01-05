@@ -5,7 +5,7 @@ import React from 'react';
 
 interface Props {
 	handleDelete: (id: string) => void;
-	handleEdit: (id: string) => void;
+	handleEdit?: (id: string) => void;
 	instructors: Instructor[];
 }
 
@@ -47,14 +47,16 @@ const InstructorsTable: React.FC<Props> = (props: Props) => {
 							<a href={instructor.bioUrl}>{instructor.bioUrl}</a>
 						</td>
 						<td className="text-center">
-							<button
-								className="btn btn-sm btn-secondary mr-1 mb-1"
-								data-id={instructor.id}
-								onClick={handleEdit}
-							>
-								<Icon className="mr-1" icon={faPencil} />
-								Edit
-							</button>
+							{!props.handleEdit ? null : (
+								<button
+									className="btn btn-sm btn-secondary mr-1 mb-1"
+									data-id={instructor.id}
+									onClick={handleEdit}
+								>
+									<Icon className="mr-1" icon={faPencil} />
+									Edit
+								</button>
+							)}
 							<button
 								className="btn btn-sm btn-secondary mb-1"
 								data-id={instructor.id}

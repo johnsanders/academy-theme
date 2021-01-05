@@ -17,7 +17,7 @@ $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_action
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 $is_front_page = $PAGE->has_set_url() && $PAGE->url->compare($system_context->get_url(), URL_MATCH_BASE);
 $is_settings_page = $PAGE->has_set_url() && strpos((string)$PAGE->url, 'themesettingacademy') !== false;
-$grid_context = get_grid_context($is_settings_page);
+$grid_context = get_grid_context_settings($is_settings_page);
 $sitename = format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);
 
 $templatecontext = [
@@ -33,6 +33,7 @@ $templatecontext = [
 	'navdraweropen' => false,
 	'output' => $OUTPUT,
 	'regionmainsettingsmenu' => $regionmainsettingsmenu,
+	'show_full_header' => $PAGE->cm->modname !== 'scorm',
 	'show_nav_drawer' => $show_nav_drawer,
 	'sidepreblocks' => $blockshtml,
 	'sitename' => $sitename,

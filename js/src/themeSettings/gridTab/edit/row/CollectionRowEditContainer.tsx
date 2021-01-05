@@ -9,7 +9,6 @@ interface Props {
 	handleCancel: () => void;
 	handleSaveCollectionRow: (collectionRow: Tag[]) => void;
 	initialValues: Tag[];
-	updateTags: (tags: Tag[]) => void;
 }
 
 const CollectionRowEditContainer: React.FC<Props> = (props: Props) => {

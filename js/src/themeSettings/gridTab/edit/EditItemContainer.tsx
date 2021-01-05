@@ -2,6 +2,7 @@ import { Course, Instructor, Module, Row, RowItem, Tag } from '../../../types';
 import EditItem from './EditItem';
 import React from 'react';
 import { createModuleUrl } from '../GridContainer';
+import updateGlobalObject from '../../../helpers/updateGlobalObject';
 
 interface Props {
 	activeItem: RowItem;
@@ -25,7 +26,9 @@ const EditItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		setNewItem({ ...newItem, [key]: value });
 	};
 	const updateModule = (module: Module, manualUrl?: string) => {
-		const url = manualUrl || createModuleUrl(module.id, module.modname);
+		updateGlobalObject('modsInfo', { [module.id]: { name: module.name } });
+		const url =
+			typeof manualUrl === 'string' ? manualUrl : createModuleUrl(module.id, module.modname);
 		const manualName = module.modname === 'manual' ? module.name : '';
 		setNewItem({
 			...newItem,
@@ -53,6 +56,7 @@ const EditItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			setErrorMessage('Module and thumbnail image are required.');
 			return;
 		}
+		// cnnAcademy.modsInfo[newItem.modId] = {name: }
 		props.handleSave(newItem);
 	};
 	const clearErrorMessage = () => setErrorMessage('');

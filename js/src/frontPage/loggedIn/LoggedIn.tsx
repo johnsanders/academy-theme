@@ -3,7 +3,6 @@ import '../../shared/style.css';
 import { CarouselItem, MoodleAcademyFront, Row as RowType, Tag } from '../../types';
 import Carousel from './Carousel';
 import Collection from './Collection';
-import CollectionsRow from './CollectionsRow';
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
 import Row from './Row';
@@ -42,7 +41,6 @@ const LoggedIn: React.FC<Props> = (props: Props): JSX.Element | null => (
 					/>
 				) : (
 					<>
-						<CollectionsRow tags={props.tags} />
 						{props.rows.map((row) => (
 							<Row
 								handleInit={props.handleRowInit}

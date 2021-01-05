@@ -17,6 +17,7 @@ const EditItemModuleManual: React.FC<Props> = (props: Props): JSX.Element => {
 	});
 	const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		moduleRef.current.name = e.currentTarget.value;
+		console.log(props.selectedItem.url);
 		props.updateModule(moduleRef.current, props.selectedItem.url);
 	};
 	const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>): void =>

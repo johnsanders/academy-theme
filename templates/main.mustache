@@ -16,7 +16,9 @@
 				id="page"
 				class="container-fluid d-print-block loggedIn fadeIn d-none"
 			>
-				{{{ output.full_header }}}
+				{{#show_full_header }}
+					{{{ output.full_header }}}
+				{{/show_full_header}}
 				<div id="page-content" class="row py-3 d-print-block">
 					<div id="region-main-box" class="col-12">
 						{{#hasregionmainsettingsmenu}}
