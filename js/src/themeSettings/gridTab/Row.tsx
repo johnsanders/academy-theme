@@ -1,6 +1,12 @@
 import { DropResult, ResponderProvided } from 'react-beautiful-dnd';
 import { MoodleAcademySettings, Row as RowType } from '../../types';
-import { faPencil, faPlus, faTrash } from '@fortawesome/pro-solid-svg-icons';
+import {
+	faChevronDown,
+	faChevronUp,
+	faPencil,
+	faPlus,
+	faTrash,
+} from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import RowItems from './RowItems';
@@ -52,6 +58,22 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => {
 					{props.row.name}
 				</h4>
 				<span>
+					<button
+						className="btn btn-secondary btn-sm mr-2 mb-1"
+						data-id={props.row.id}
+						onClick={props.handleMoveRowClick}
+					>
+						<Icon className="mr-1" icon={faChevronUp} />
+						Move Up
+					</button>
+					<button
+						className="btn btn-secondary btn-sm mr-2 mb-1"
+						data-id={props.row.id}
+						onClick={props.handleMoveRowClick}
+					>
+						<Icon className="mr-1" icon={faChevronDown} />
+						Move Down
+					</button>
 					<button
 						className="btn btn-secondary btn-sm mr-2 mb-1"
 						data-id={props.row.id}
