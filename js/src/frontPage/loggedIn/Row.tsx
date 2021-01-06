@@ -34,7 +34,9 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => {
 	};
 	const handleScrollClick = (direction: string): void => {
 		if (!containerRef.current) return;
-		const distance = (containerRef.current.clientWidth - 25) * (direction === 'left' ? -1 : 1);
+		const { clientWidth, scrollLeft } = containerRef.current;
+		const plusMinus = direction === 'left' ? -1 : 1;
+		const distance = scrollLeft + (clientWidth - 25) * plusMinus;
 		containerRef.current.scroll({ behavior: 'smooth', left: distance });
 	};
 	const handleScrollEvent = (): void => updateContainerInfo();
