@@ -20,7 +20,8 @@ interface Props {
 	handleDeleteRow: (rowId: string) => void;
 	handleEditItem: (rowId: string, itemId: string) => void;
 	handleEditRowClick: (id: string) => void;
-	handleReorderRow: (rowId: string, from: number, to: number) => void;
+	handleReorderItems: (rowId: string, from: number, to: number) => void;
+	handleReorderRows: (from: number, to: number) => void;
 	handleSaveCollectionRow: (collectionRow: Tag[]) => void;
 	handleSaveItem: (item: RowItem) => void;
 	handleSaveRow: (newRow: Row) => void;
@@ -41,7 +42,8 @@ const Grid: React.FC<Props> = (props: Props): JSX.Element => (
 					handleDeleteRow={props.handleDeleteRow}
 					handleEditItem={props.handleEditItem}
 					handleEditRowClick={props.handleEditRowClick}
-					handleReorderRow={props.handleReorderRow}
+					handleReorderItems={props.handleReorderItems}
+					handleReorderRows={props.handleReorderRows}
 					handleSaveRow={props.handleSaveRow}
 					modsInfo={props.modsInfo}
 					rows={props.rows}

@@ -1,7 +1,7 @@
 import { MoodleAcademySettings, Row as RowType } from '../../types';
 import { DropResult } from 'react-beautiful-dnd';
 import React from 'react';
-import Row from './Row';
+import Rows from './Rows';
 
 interface Props {
 	handleAddItemToRow: (rowId: string) => void;
@@ -9,7 +9,8 @@ interface Props {
 	handleDeleteRow: (rowId: string) => void;
 	handleEditItem: (rowId: string, itemId: string) => void;
 	handleEditRowClick: (rowId: string) => void;
-	handleReorderRow: (rowId: string, from: number, to: number) => void;
+	handleReorderItems: (rowId: string, from: number, to: number) => void;
+	handleReorderRows: (from: number, to: number) => void;
 	handleSaveRow: (row: RowType) => void;
 	modsInfo: MoodleAcademySettings['modsInfo'];
 	rows: RowType[];
@@ -43,31 +44,31 @@ const RowsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		const itemId = e.currentTarget.dataset.itemid;
 		if (itemId && rowId) props.handleDeleteItem(rowId, itemId);
 	};
-	const handleDragEnd = (result: DropResult): void => {
+	const handleItemDragEnd = (result: DropResult): void => {
 		if (!activeRowIdRef.current || !result.destination) return;
-		props.handleReorderRow(activeRowIdRef.current, result.source.index, result.destination.index);
+		props.handleReorderItems(activeRowIdRef.current, result.source.index, result.destination.index);
+	};
+	const handleRowDragEnd = (result: DropResult): void => {
+		if (!result.destination) return;
+		props.handleReorderRows(result.source.index, result.destination.index);
 	};
 	const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>): void => {
 		const id = e.currentTarget.dataset.id;
 		if (id) activeRowIdRef.current = id;
 	};
 	return (
-		<>
-			{props.rows.map((row) => (
-				<Row
-					handleAddItemClick={handleAddItemClick}
-					handleDeleteItemClick={handleDeleteItemClick}
-					handleDeleteRowClick={handleDeleteRowClick}
-					handleDragEnd={handleDragEnd}
-					handleEditItemClick={handleEditItemClick}
-					handleEditRowClick={handleEditRowClick}
-					handleMouseEnter={handleMouseEnter}
-					key={row.id}
-					modsInfo={props.modsInfo}
-					row={row}
-				/>
-			))}
-		</>
+		<Rows
+			handleAddItemClick={handleAddItemClick}
+			handleDeleteItemClick={handleDeleteItemClick}
+			handleDeleteRowClick={handleDeleteRowClick}
+			handleEditItemClick={handleEditItemClick}
+			handleEditRowClick={handleEditRowClick}
+			handleItemDragEnd={handleItemDragEnd}
+			handleMouseEnter={handleMouseEnter}
+			handleRowDragEnd={handleRowDragEnd}
+			modsInfo={props.modsInfo}
+			rows={props.rows}
+		/>
 	);
 };
 

@@ -56,12 +56,16 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		setActiveRow(null);
 		disableSaveButtons(false);
 	};
-	const handleReorderRow = (rowId: string, from: number, to: number): void => {
+	const handleReorderItems = (rowId: string, from: number, to: number): void => {
 		const row = props.rows.find((row) => row.id === rowId);
 		if (!row) throw new Error('Cannot find row to reorder');
 		const newItems = arrayMove(row.items, from, to);
 		const newRow = { ...row, items: newItems };
 		const newRows = props.rows.map((row) => (row.id === rowId ? newRow : row));
+		props.setRows(newRows);
+	};
+	const handleReorderRows = (from: number, to: number): void => {
+		const newRows = arrayMove(props.rows, from, to);
 		props.setRows(newRows);
 	};
 	const handleDeleteRow = (idToDelete: string): void =>
@@ -119,7 +123,8 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			handleDeleteRow={handleDeleteRow}
 			handleEditItem={handleEditItem}
 			handleEditRowClick={handleEditRowClick}
-			handleReorderRow={handleReorderRow}
+			handleReorderItems={handleReorderItems}
+			handleReorderRows={handleReorderRows}
 			handleSaveCollectionRow={handleSaveCollectionRow}
 			handleSaveItem={handleSaveItem}
 			handleSaveRow={handleSaveRow}

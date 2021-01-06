@@ -88,6 +88,10 @@ button.disabled {
 .offset-sm-3 {
 	margin-left: unset;
 }
+.rowDragHandle {
+	border: solid 1px transparent;
+	vertical-align: middle;
+}
 .table td, .table th {
 	vertical-align: middle;
 }
@@ -96,6 +100,4 @@ button.disabled {
 	right: 35px;
 	top: 100px;
 	z-index: 1000;
-
-
 }
