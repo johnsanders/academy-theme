@@ -18,11 +18,12 @@ $sizes = ["collectionThumb" => [480, 270], "gridThumb" => [320, 180]];
 
 function crop_to_16_9($im)
 {
-	$aspect = 16 / 9;
 	$width = imagesx($im);
 	$height = imagesy($im);
-	if ($width > $height) {
-		$new_width = $height * $aspect;
+	$native_aspect = $width / $height;
+	$target_aspect = 16 / 9;
+	if ($native_aspect > $target_aspect) {
+		$new_width = $height * $target_aspect;
 		$width_difference = $width - $new_width;
 		return imagecrop($im, [
 			'height' => $height,
@@ -31,7 +32,7 @@ function crop_to_16_9($im)
 			'y' => 0,
 		]);
 	} else {
-		$new_height = $width / $aspect;
+		$new_height = $width / $target_aspect;
 		$height_difference = $height - $new_height;
 		return imagecrop($im, [
 			'height' => $new_height,

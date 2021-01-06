@@ -12,7 +12,7 @@ class upload_grid_image extends moodleform
 			'image_type',
 			'Type of Image',
 			[
-				"gridThumb" => "Grid Thumbnail",
+				"gridThumb" => "Item Thumbnail",
 				"collectionThumb" => "Collection Thumbnail"
 			]
 		);

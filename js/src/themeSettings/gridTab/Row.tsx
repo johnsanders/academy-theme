@@ -34,7 +34,6 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => (
 		onMouseEnter={props.handleMouseEnter}
 		ref={props.provided.innerRef}
 		{...props.provided.draggableProps}
-		{...props.provided.dragHandleProps}
 	>
 		<div className="d-flex align-items-center justify-content-between">
 			<h4 className="w-50" style={{ borderBottom: 'none' }}>
@@ -65,7 +64,10 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => (
 					<Icon className="mr-1" icon={faTrash} />
 					Delete Row
 				</button>
-				<div className="rowDragHandle d-inline-block bg-secondary btn-sm mb-1">
+				<div
+					className="rowDragHandle d-inline-block bg-secondary btn-sm mb-1"
+					{...props.provided.dragHandleProps}
+				>
 					<Icon className="mr-1" icon={faArrowsV} />
 					Reorder
 				</div>
