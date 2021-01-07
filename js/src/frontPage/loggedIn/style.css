@@ -26,14 +26,6 @@
 .carouselImg {
 	width: 100%;
 }
-.duration {
-	background-color: #00000050;
-	bottom: 0;
-	color: white;
-	padding: 0 0.5em;
-	position: absolute;
-	right: 0;
-}
 .gridRowItem:hover {
 	transform: scale3d(1.05, 1.05, 1.05);
 	transform-origin: center;

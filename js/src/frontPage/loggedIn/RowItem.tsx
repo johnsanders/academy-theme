@@ -19,10 +19,7 @@ const RowItem: React.FC<Props> = (props: Props): JSX.Element => {
 		const tagId = e.currentTarget.dataset.id;
 		if (tagId) props.setActiveTagId(tagId);
 	};
-	const handleError = () => {
-		console.log('123');
-		props.handleInit();
-	};
+	const handleError = () => props.handleInit();
 	return (
 		<div className="gridRowItem">
 			<div className="card">

@@ -27,6 +27,14 @@ button.btn:focus {
 .card-img-top img {
 	width: 100%
 }
+.duration {
+	background-color: #00000050;
+	bottom: 0;
+	color: white;
+	padding: 0 0.5em;
+	position: absolute;
+	right: 0;
+}
 .fontBlack {
 	font-family: 'CNNSansBlack';
 }

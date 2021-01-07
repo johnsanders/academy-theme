@@ -28,6 +28,7 @@ const RowItem: React.FC<Props> = (props: Props): JSX.Element => {
 		>
 			<div className="card-img-top">
 				<ImageWithFallback imgUrl={props.item.thumbUrl} />
+				{props.item.duration ? <span className="duration">{props.item.duration}</span> : null}
 			</div>
 			<div className="card-body">
 				<h4 className="mb-0">
