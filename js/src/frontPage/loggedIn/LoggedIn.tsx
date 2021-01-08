@@ -41,15 +41,17 @@ const LoggedIn: React.FC<Props> = (props: Props): JSX.Element | null => (
 					/>
 				) : (
 					<>
-						{props.rows.map((row) => (
-							<Row
-								handleInit={props.handleRowInit}
-								key={row.id}
-								modsInfo={props.modsInfo}
-								row={row}
-								setActiveTagId={props.setActiveTagId}
-							/>
-						))}
+						{props.rows.map((row) =>
+							row.items.length === 0 ? null : (
+								<Row
+									handleInit={props.handleRowInit}
+									key={row.id}
+									modsInfo={props.modsInfo}
+									row={row}
+									setActiveTagId={props.setActiveTagId}
+								/>
+							),
+						)}
 					</>
 				)}
 			</div>
