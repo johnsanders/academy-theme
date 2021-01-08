@@ -13,17 +13,15 @@ const pattern = /bundle\.js$/;
 const distDir = './dist/';
 const distDirList = fs.readdirSync(distDir);
 
-const sourceMapContents = fs.readFileSync(distDir + 'bundle.js', { encoding: 'utf-8' });
+const sourceMapContents = fs.readFileSync(distDir + 'bundle.js.map', { encoding: 'utf-8' });
 const form = new FormData();
 form.append('access_token', accessToken);
 form.append('version', version);
-form.append('minified_url', 'https://academy.cnn.com/theme/academy/js/dist/bundle.js');
-/*
+form.append('minified_url', '//academy.cnn.com/theme/academy/js/dist/bundle.js');
 form.append('source_map', sourceMapContents, {
 	contentType: 'application/json',
 	filename: 'bundle.js.map',
 });
-*/
 
 const run = async () => {
 	const res = await (0, fetch)(endpoint, {
