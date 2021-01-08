@@ -94,7 +94,7 @@ $THEME->layouts = [
 		'regions' => array(),
 	),
 	'report' => array(
-		'file' => 'columns2.php',
+		'file' => 'main.php',
 		'regions' => array('side-pre'),
 		'defaultregion' => 'side-pre',
 	),
