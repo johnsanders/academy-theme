@@ -15,6 +15,7 @@ interface Props {
 
 const LoggedInContainer: React.FC<Props> = (props: Props): JSX.Element | null => {
 	const { carouselItems, rows, tags } = props.cnnAcademy;
+	const populatedRows = rows.filter((row) => row.items.length > 0);
 	const el = document.getElementById('academyContent');
 	const queryRef = React.useRef(qsParse(window.location.search, { ignoreQueryPrefix: true }));
 	const carouselDidInit = React.useRef(false);
@@ -32,7 +33,7 @@ const LoggedInContainer: React.FC<Props> = (props: Props): JSX.Element | null =>
 	);
 	const handleCarouselInit = () => {
 		carouselDidInit.current = true;
-		if (rowInitRef.current >= rows.length) props.handleComponentsReady();
+		if (rowInitRef.current >= populatedRows.length) props.handleComponentsReady();
 		if (activeTagId && collectionDidInit.current) props.handleComponentsReady();
 	};
 	const handleCollectionInit = () => {
@@ -41,7 +42,8 @@ const LoggedInContainer: React.FC<Props> = (props: Props): JSX.Element | null =>
 	};
 	const handleRowInit = () => {
 		rowInitRef.current += 1;
-		if (rowInitRef.current >= rows.length && carouselDidInit.current) props.handleComponentsReady();
+		if (rowInitRef.current >= populatedRows.length && carouselDidInit.current)
+			props.handleComponentsReady();
 	};
 	if (!el) return null;
 	return createPortal(
@@ -52,7 +54,7 @@ const LoggedInContainer: React.FC<Props> = (props: Props): JSX.Element | null =>
 			handleCollectionInit={handleCollectionInit}
 			handleRowInit={handleRowInit}
 			modsInfo={props.cnnAcademy.modsInfo}
-			rows={rows}
+			rows={populatedRows}
 			setActiveTagId={setActiveTagId}
 			tags={tags}
 			visible={props.visible}
