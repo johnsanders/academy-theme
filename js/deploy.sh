@@ -3,23 +3,23 @@
 /bin/rm ./.DS_Store
 cd ../../
 /usr/bin/tar \
-	--exclude='./.git*' \
-	--exclude='./.DS_Store' \
-	--exclude='./js/.babelrc' \
-	--exclude='./js/.eslintrc.js' \
-	--exclude='./js/.prettierrc.js' \
-	--exclude='./js/.gitignore' \
-	--exclude='./js/.storybook' \
-	--exclude='./js/deploy_rollbar_maps.js' \
-	--exclude='./js/deploy.sh' \
-	--exclude='./js/node_modules' \
-	--exclude='./js/package-lock.json' \
-	--exclude='./js/package.json' \
-	--exclude='./js/rollbarToken_blank.js' \
-	--exclude='./js/rollbarToken.js' \
-	--exclude='./js/src' \
-	--exclude='./js/tsconfig.json' \
-	--exclude='./js/webpack.config.js' \
+	--exclude='./academy/.git*' \
+	--exclude='*.DS_Store' \
+	--exclude='./academy/js/.babelrc' \
+	--exclude='./academy/js/.eslintrc.js' \
+	--exclude='./academy/js/.prettierrc.js' \
+	--exclude='./academy/js/.gitignore' \
+	--exclude='./academy/js/.storybook' \
+	--exclude='./academy/js/deploy_rollbar_maps.js' \
+	--exclude='./academy/js/deploy.sh' \
+	--exclude='./academy/js/node_modules' \
+	--exclude='./academy/js/package-lock.json' \
+	--exclude='./academy/js/package.json' \
+	--exclude='./academy/js/rollbarToken_blank.js' \
+	--exclude='./academy/js/rollbarToken.js' \
+	--exclude='./academy/js/src' \
+	--exclude='./academy/js/tsconfig.json' \
+	--exclude='./academy/js/webpack.config.js' \
 	-czvf academy.tar.gz ./academy
 /usr/bin/scp academy.tar.gz cnnitouch@academy.cnntoolbox.com:/home/cnnitouch
 /bin/rm ./academy.tar.gz
