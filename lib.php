@@ -5,7 +5,6 @@ function theme_academy_pluginfile($course, $cm, $context, $filearea, $args, $for
 {
 	if ($context->contextlevel !== CONTEXT_SYSTEM) return false;
 	if ($filearea !== 'thumbs' && $filearea !== 'carousel' && $filearea !== 'avatars') return false;
-	//require_login($course, true);
 	$itemid = array_shift($args);
 
 	$filename = array_pop($args);

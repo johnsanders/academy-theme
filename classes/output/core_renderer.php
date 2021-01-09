@@ -2,6 +2,14 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+class theme_academy_core_course_renderer extends plugin_renderer_base
+{
+	public function render_activity_navigation()
+	{
+		return "";
+	}
+}
+
 class theme_academy_core_renderer extends core_renderer
 {
 	public function render_login(\core_auth\output\login $form)
@@ -30,7 +38,6 @@ class theme_academy_core_renderer extends core_renderer
 
 	public function full_header()
 	{
-
 		if (
 			$this->page->include_region_main_settings_in_header_actions() &&
 			!$this->page->blocks->is_block_present('settings')
