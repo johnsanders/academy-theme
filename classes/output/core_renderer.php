@@ -2,9 +2,11 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-class theme_academy_core_course_renderer extends plugin_renderer_base
+require_once($CFG->dirroot . '/course/renderer.php');
+
+class theme_academy_core_course_renderer extends core_course_renderer
 {
-	public function render_activity_navigation()
+	public function render_activity_navigation(\core_course\output\activity_navigation $page)
 	{
 		return "";
 	}
