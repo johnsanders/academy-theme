@@ -1,18 +1,10 @@
 <?php
 
+namespace theme_academy\output;
+
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->dirroot . '/course/renderer.php');
-
-class theme_academy_core_course_renderer extends core_course_renderer
-{
-	public function render_activity_navigation(\core_course\output\activity_navigation $page)
-	{
-		return "";
-	}
-}
-
-class theme_academy_core_renderer extends core_renderer
+class core_renderer extends \core_renderer
 {
 	public function render_login(\core_auth\output\login $form)
 	{
@@ -33,7 +25,7 @@ class theme_academy_core_renderer extends core_renderer
 		$context->sitename = format_string(
 			$SITE->fullname,
 			true,
-			['context' => context_course::instance(SITEID), "escape" => false]
+			['context' => \context_course::instance(SITEID), "escape" => false]
 		);
 		return $this->render_from_template('theme_academy/loginform', $context);
 	}
@@ -44,13 +36,13 @@ class theme_academy_core_renderer extends core_renderer
 			$this->page->include_region_main_settings_in_header_actions() &&
 			!$this->page->blocks->is_block_present('settings')
 		) {
-			$this->page->add_header_action(html_writer::div(
+			$this->page->add_header_action(\html_writer::div(
 				$this->region_main_settings_menu(),
 				'd-print-none',
 				['id' => 'region-main-settings-menu']
 			));
 		}
-		$header = new stdClass();
+		$header = new \stdClass();
 		$header->settingsmenu = $this->context_header_settings_menu();
 		$header->contextheader = $this->context_header();
 		// $header->hasnavbar = empty($this->page->layout_options['nonavbar']);
@@ -94,8 +86,8 @@ class theme_academy_core_renderer extends core_renderer
 			if (!$loginpage) {
 				$returnstr .= "<a href=\"$loginurl\">" . get_string('login', 'theme_academy') . '</a>';
 			}
-			return html_writer::div(
-				html_writer::span($returnstr, 'login'),
+			return \html_writer::div(
+				\html_writer::span($returnstr, 'login'),
 				$usermenuclasses
 			);
 		}
@@ -104,8 +96,8 @@ class theme_academy_core_renderer extends core_renderer
 			if (!$loginpage && $withlinks) {
 				$returnstr .= " <a href=\"$loginurl\">" . get_string('login') . '</a>';
 			}
-			return html_writer::div(
-				html_writer::span(
+			return \html_writer::div(
+				\html_writer::span(
 					$returnstr,
 					'login'
 				),
@@ -118,12 +110,12 @@ class theme_academy_core_renderer extends core_renderer
 
 		if (!empty($opts->metadata['asotheruser'])) {
 			$usertextcontents = $opts->metadata['realuserfullname'];
-			$usertextcontents .= html_writer::tag(
+			$usertextcontents .= \html_writer::tag(
 				'span',
 				get_string(
 					'loggedinas',
 					'moodle',
-					html_writer::span(
+					\html_writer::span(
 						$opts->metadata['userfullname'],
 						'value'
 					)
@@ -133,31 +125,31 @@ class theme_academy_core_renderer extends core_renderer
 		}
 
 		if (!empty($opts->metadata['asotherrole'])) {
-			$role = core_text::strtolower(preg_replace('#[ ]+#', '-', trim($opts->metadata['rolename'])));
-			$usertextcontents .= html_writer::span(
+			$role = \core_text::strtolower(preg_replace('#[ ]+#', '-', trim($opts->metadata['rolename'])));
+			$usertextcontents .= \html_writer::span(
 				$opts->metadata['rolename'],
 				'meta role role-' . $role
 			);
 		}
 
 		if (!empty($opts->metadata['userloginfail'])) {
-			$usertextcontents .= html_writer::span(
+			$usertextcontents .= \html_writer::span(
 				$opts->metadata['userloginfail'],
 				'meta loginfailures'
 			);
 		}
 
-		$returnstr .= html_writer::span($usertextcontents, 'usertext mr-1');
+		$returnstr .= \html_writer::span($usertextcontents, 'usertext mr-1');
 
-		$divider = new action_menu_filler();
+		$divider = new \action_menu_filler();
 		$divider->primary = false;
 
-		$am = new action_menu();
+		$am = new \action_menu();
 		$am->set_menu_trigger(
 			$returnstr
 		);
 		$am->set_action_label(get_string('usermenu'));
-		$am->set_alignment(action_menu::TR, action_menu::BR);
+		$am->set_alignment(\action_menu::TR, \action_menu::BR);
 		$am->set_nowrap_on_items();
 		if ($withlinks) {
 			$navitemcount = count($opts->navitems);
@@ -165,7 +157,7 @@ class theme_academy_core_renderer extends core_renderer
 			$unwantedLinks = ['mymoodle,admin', 'profile,moodle', 'grades,grades', 'messages,messages'];
 			array_unshift($opts->navitems, (object)[
 				"itemtype" => "link",
-				"url" => new moodle_url('/calendar/view.php?view=month'),
+				"url" => new \moodle_url('/calendar/view.php?view=month'),
 				"title" => get_string('calendar', 'core_calendar'),
 				"titleidentifier" => "calendar,moodle",
 				"pix" => "i/calendar",
@@ -185,15 +177,15 @@ class theme_academy_core_renderer extends core_renderer
 						if (in_array($value->titleidentifier, $unwantedLinks)) break;
 						$pix = null;
 						if (isset($value->pix) && !empty($value->pix)) {
-							$pix = new pix_icon($value->pix, '', null, array('class' => 'iconsmall'));
+							$pix = new \pix_icon($value->pix, '', null, array('class' => 'iconsmall'));
 						} else if (isset($value->imgsrc) && !empty($value->imgsrc)) {
-							$value->title = html_writer::img(
+							$value->title = \html_writer::img(
 								$value->imgsrc,
 								$value->title,
 								array('class' => 'iconsmall')
 							) . $value->title;
 						}
-						$al = new action_menu_link_secondary(
+						$al = new \action_menu_link_secondary(
 							$value->url,
 							$pix,
 							$value->title,
@@ -213,7 +205,7 @@ class theme_academy_core_renderer extends core_renderer
 				}
 			}
 		}
-		return html_writer::div(
+		return \html_writer::div(
 			$this->render($am),
 			$usermenuclasses
 		);
