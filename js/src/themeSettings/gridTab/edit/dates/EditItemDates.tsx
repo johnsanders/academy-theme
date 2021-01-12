@@ -68,9 +68,9 @@ const EditItemDates: React.FC<Props> = (props: Props): JSX.Element => (
 							onChange={props.onEndChange}
 							value={props.end}
 						/>
-						{props.end && props.start ? null : (
+						{props.end || props.start ? null : (
 							<span className="text-danger" style={{ lineHeight: 1, marginTop: '2em' }}>
-								Unset date(s). Item will always display.
+								Unset dates. Item will always display.
 							</span>
 						)}
 					</>

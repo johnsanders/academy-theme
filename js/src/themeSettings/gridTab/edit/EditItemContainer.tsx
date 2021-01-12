@@ -1,8 +1,13 @@
 import { Course, Instructor, Module, Row, RowItem, Tag } from '../../../types';
 import EditItem from './EditItem';
 import React from 'react';
-import { createModuleUrl } from '../GridContainer';
 import updateGlobalObject from '../../../helpers/updateGlobalObject';
+
+export type UpdateDateArgs = {
+	dateDisplay?: number | null;
+	dateEnd?: number | null;
+	dateStart?: number | null;
+};
 
 interface Props {
 	activeItem: RowItem;
@@ -19,23 +24,16 @@ const EditItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	const [errorMessage, setErrorMessage] = React.useState('');
 	const [newItem, setNewItem] = React.useState<RowItem>(props.activeItem);
 	const updateDuration = (duration: string): void => setNewItem({ ...newItem, duration });
-	const updateDate = (
-		key: 'dateEnd' | 'dateStart' | 'dateDisplayed',
-		value: number | null,
-	): void => {
-		setNewItem({ ...newItem, [key]: value });
-	};
+	const updateDate = (args: UpdateDateArgs): void => setNewItem({ ...newItem, ...args });
 	const updateModule = (module: Module, manualUrl?: string) => {
 		updateGlobalObject('modsInfo', { [module.id]: { name: module.name } });
-		const url =
-			typeof manualUrl === 'string' ? manualUrl : createModuleUrl(module.id, module.modname);
 		const manualName = module.modname === 'manual' ? module.name : '';
 		setNewItem({
 			...newItem,
 			manualName,
+			manualUrl: manualUrl || '',
 			modId: module.id,
 			modName: module.modname,
-			url,
 		});
 	};
 	const updateInstructors = (instructors: string[]): void =>

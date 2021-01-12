@@ -8,6 +8,7 @@ import EditItemTags from './EditItemTags';
 import EditItemThumbnail from './EditItemThumbnail';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { UpdateDateArgs } from './EditItemContainer';
 
 interface Props {
 	activeRow: Row;
@@ -20,7 +21,7 @@ interface Props {
 	newItem: RowItem;
 	saveItem: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	thumbUrls: string[];
-	updateDate: (key: 'dateEnd' | 'dateStart' | 'dateDisplayed', value: number | null) => void;
+	updateDate: (args: UpdateDateArgs) => void;
 	updateDuration: (duration: string) => void;
 	updateInstructors: (instructors: string[]) => void;
 	updateModule: (module: Module) => void;

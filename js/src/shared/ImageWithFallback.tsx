@@ -20,7 +20,7 @@ const ImageWithFallback: React.FC<Props> = (props: Props): JSX.Element => {
 			<img src={logoDark} />
 		</div>
 	) : (
-		<img onError={handleImageError} onLoad={handleImageLoad} src={props.imgUrl} />
+		<img onError={handleImageError} onLoad={handleImageLoad} src={props.imgUrl || ''} />
 	);
 };
 

@@ -96,7 +96,7 @@ export interface RowItem {
 	modName: string;
 	tags: string[];
 	thumbUrl: string;
-	url: string;
+	manualUrl: string;
 }
 export interface Tag {
 	color: string;

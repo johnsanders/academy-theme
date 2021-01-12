@@ -12,6 +12,32 @@ function get_modules_info($rows)
 	}
 	return $mods_info;
 }
+function get_user_rows($config, $user_course_ids)
+{
+	return array_filter($config->rows, function ($row) use ($user_course_ids) {
+		if (count($row->requiredCourses) === 0) return true;
+		else {
+			foreach ($user_course_ids as $user_course_id) {
+				if (in_array($user_course_id, $row->requiredCourses)) return true;
+			}
+		}
+		return false;
+	});
+}
+function get_current_items($user_rows)
+{
+	$now = time() * 1000;
+	return array_map(function ($row) use ($now) {
+		$current_row_items = array_filter($row->items, function ($item) use ($now) {
+			if (!$item->dateStart && !$item->dateEnd) return true;
+			if (!$item->dateStart) return $now < $item->dateEnd;
+			if (!$item->dateEnd) return $now > $item->dateStart;
+			return $now > $item->dateStart && $now < $item->dateEnd;
+		});
+		$row->items = array_values($current_row_items);
+		return $row;
+	}, $user_rows);
+}
 function get_grid_context_settings()
 {
 	global $CFG;
@@ -37,24 +63,8 @@ function get_grid_context_front()
 	$user_course_ids = array_map(function ($course) {
 		return $course->id;
 	}, $user_courses);
-	$user_rows = array_filter($config->rows, function ($row) use ($user_course_ids) {
-		if (count($row->requiredCourses) === 0) return true;
-		else {
-			foreach ($user_course_ids as $user_course_id) {
-				if (in_array($user_course_id, $row->requiredCourses)) return true;
-			}
-		}
-		return false;
-	});
-	$now = time() * 1000;
-	$rows_with_only_current_items = array_map(function ($row) use ($now) {
-		$current_row_items = array_filter($row->items, function ($item) use ($now) {
-			if (!$item->dateStart || !$item->dateEnd) return true;
-			return $now > $item->dateStart && $now < $item->dateEnd;
-		});
-		$row->items = array_values($current_row_items);
-		return $row;
-	}, $user_rows);
+	$user_rows = get_user_rows($config, $user_course_ids);
+	$rows_with_only_current_items = get_current_items($user_rows);
 	$rows = array_values($rows_with_only_current_items);
 	return [
 		'cnn_academy' => [

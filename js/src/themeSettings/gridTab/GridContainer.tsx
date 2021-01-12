@@ -15,9 +15,6 @@ interface Props {
 	thumbUrls: string[];
 }
 
-export const createModuleUrl = (id: string, modname: string): string =>
-	`/mod/${modname}/view.php?id=${id}`;
-
 const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	const [activeItem, setActiveItem] = React.useState<RowItem | null>(null);
 	const [activeRow, setActiveRow] = React.useState<Row | null>(null);

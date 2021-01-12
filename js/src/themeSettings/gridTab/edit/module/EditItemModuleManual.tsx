@@ -17,8 +17,7 @@ const EditItemModuleManual: React.FC<Props> = (props: Props): JSX.Element => {
 	});
 	const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		moduleRef.current.name = e.currentTarget.value;
-		console.log(props.selectedItem.url);
-		props.updateModule(moduleRef.current, props.selectedItem.url);
+		props.updateModule(moduleRef.current, props.selectedItem.manualUrl);
 	};
 	const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>): void =>
 		props.updateModule(moduleRef.current, e.currentTarget.value);
@@ -29,12 +28,16 @@ const EditItemModuleManual: React.FC<Props> = (props: Props): JSX.Element => {
 				<input
 					className="form-control"
 					onChange={handleNameChange}
-					value={props.selectedItem.manualName}
+					value={props.selectedItem.manualName || ''}
 				/>
 			</div>
 			<div className="form-group">
 				<h5>URL</h5>
-				<input className="form-control" onChange={handleUrlChange} value={props.selectedItem.url} />
+				<input
+					className="form-control"
+					onChange={handleUrlChange}
+					value={props.selectedItem.manualUrl || ''}
+				/>
 			</div>
 		</>
 	);

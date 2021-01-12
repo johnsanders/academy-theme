@@ -3,6 +3,7 @@ import { getInstructorById, getTagById } from '../../shared/getById';
 import ErrorBoundary from '../../shared/ErrorBoundary';
 import ImageWithFallback from '../../shared/ImageWithFallback';
 import React from 'react';
+import createModuleUrl from '../../helpers/createModuleUrl';
 import getForegroundColor from '../../helpers/getForegroundColor';
 
 interface Props {
@@ -20,23 +21,25 @@ const RowItem: React.FC<Props> = (props: Props): JSX.Element => {
 		if (tagId) props.setActiveTagId(tagId);
 	};
 	const handleError = () => props.handleInit();
+	const name =
+		props.item.modName === 'manual' ? props.item.manualName : props.modsInfo[props.item.modId].name;
+	const url =
+		props.item.modName === 'manual'
+			? props.item.manualUrl
+			: createModuleUrl(props.item.modId, props.item.modName);
 	return (
 		<div className="gridRowItem">
 			<div className="card">
 				<ErrorBoundary errorMessage="Error rendering item" handleError={handleError}>
 					<div className="card-img-top">
-						<a href={props.item.url}>
+						<a href={url}>
 							<ImageWithFallback handleInit={props.handleInit} imgUrl={props.item.thumbUrl} />
 						</a>
 						{props.item.duration ? <span className="duration">{props.item.duration}</span> : null}
 					</div>
 					<div className="card-body">
-						<a href={props.item.url}>
-							<h4 className="mb-0">
-								{props.item.modName === 'manual'
-									? props.item.manualName
-									: props.modsInfo[props.item.modId].name}
-							</h4>
+						<a href={url}>
+							<h4 className="mb-0">{name}</h4>
 						</a>
 						{dateString ? <div className="text-muted">{dateString}</div> : null}
 						<div className="instructorsContainer">

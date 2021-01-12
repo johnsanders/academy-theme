@@ -9,11 +9,11 @@ export const createBlankGridItem = (): RowItem => ({
 	id: uuid(),
 	instructors: [],
 	manualName: '',
+	manualUrl: '',
 	modId: '',
 	modName: '',
 	tags: [],
 	thumbUrl: '',
-	url: '',
 });
 
 export const createBlankGridRow = (): Row => ({
