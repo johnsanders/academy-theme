@@ -12,6 +12,34 @@ function get_modules_info($rows)
 	}
 	return $mods_info;
 }
+function get_scorm_attempts($userid)
+{
+	global $DB;
+	$attempts = array_values($DB->get_records(
+		'scorm_scoes_track',
+		array("element" => "cmi.core.score.raw", "userid" => $userid),
+		'',
+		'id, userid, scormid, value'
+	));
+	$attempts[1]->value = "89";
+	$groups = [];
+	foreach ($attempts as $attempt) {
+		if (array_key_exists($attempt->scormid, $groups)) {
+			array_push($groups[$attempt->scormid], $attempt);
+		} else {
+			$groups[$attempt->scormid] = [$attempt];
+		}
+	}
+	$highest_attempts = array_map(function ($attempts) use ($groups) {
+		$highest = $attempts[0];
+		foreach ($groups as $group) {
+			foreach ($group as $attempt)
+				if ((int) $attempt->value > (int) $highest->value) $highest = $attempt;
+			return $highest;
+		}
+	}, $groups);
+	return $highest_attempts;
+}
 function get_user_rows($config, $user_course_ids)
 {
 	return array_filter($config->rows, function ($row) use ($user_course_ids) {
@@ -54,7 +82,7 @@ function get_grid_context_settings()
 		'js_src' => $CFG->wwwroot . '/theme/academy/js/dist/bundle.js',
 	];
 }
-function get_grid_context_front()
+function get_grid_context_front($userid)
 {
 	global $CFG;
 	$config = json_decode(get_config("theme_academy", "grid_config"));
@@ -66,12 +94,14 @@ function get_grid_context_front()
 	$user_rows = get_user_rows($config, $user_course_ids);
 	$rows_with_only_current_items = get_current_items($user_rows);
 	$rows = array_values($rows_with_only_current_items);
+	$scorm_attempts = get_scorm_attempts($userid);
 	return [
 		'cnn_academy' => [
 			'carouselItems' => $config->carousel,
 			'instructors' => $config->instructors,
 			'modsInfo' => $mods_info,
 			'rows' => $rows,
+			'scormAttempts' => $scorm_attempts,
 			'tags' => $config->tags,
 		],
 		'js_src' => $CFG->wwwroot . '/theme/academy/js/dist/bundle.js',

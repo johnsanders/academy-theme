@@ -48,6 +48,7 @@ export interface MoodleAcademyFront {
 	modsInfo: { [key: string]: ModInfo };
 	navbarConfig: NavbarConfig;
 	rows: Row[];
+	scormAttempts: ScormAttempt[];
 	tags: Tag[];
 	templateType: string;
 }
@@ -97,6 +98,12 @@ export interface RowItem {
 	tags: string[];
 	thumbUrl: string;
 	manualUrl: string;
+}
+export interface ScormAttempt {
+	id: string;
+	scormid: string;
+	userid: string;
+	value: string;
 }
 export interface Tag {
 	color: string;
