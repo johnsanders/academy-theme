@@ -5,4 +5,16 @@
 	<link rel="shortcut icon" href="{{{ output.favicon }}}" />
 	{{{ output.standard_head_html }}}
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta property="og:title" content="CNN Academy">
+	<meta property="og:site_name" content="CNN Academy">
+	<meta property="og:url" content="https://academy.cnn.com">
+	<meta property="og:description" content="Courses to develop best practices in cross-platform journalism, production and broadcasting.">
+	<meta property="og:type" content="website">
+	<meta property="og:image" content="https://academy.cnn.com/theme/academy/pix/logo_dark.png">
+	<script>
+		const moodleContext = {{{cnn_academy_json}}};
+		const navbarConfig = {{{nav_config}}};
+		window.cnnAcademy = { ...moodleContext, navbarConfig };
+	</script>
+	<script src={{js_src}} type="text/javascript"></script>
 </head>

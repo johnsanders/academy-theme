@@ -66,11 +66,17 @@ function get_current_items($user_rows)
 		return $row;
 	}, $user_rows);
 }
+function get_js_bundle_filename($dir_root)
+{
+	$manifest = json_decode(file_get_contents($dir_root . '/theme/academy/js/dist/manifest.json'));
+	return preg_replace('/^auto/', '', $manifest->{'main.js'});
+}
 function get_grid_context_settings()
 {
 	global $CFG;
 	$config = json_decode(get_config("theme_academy", "grid_config"));
 	$mods_info = get_modules_info($config->rows);
+	$js_bundle_filename = get_js_bundle_filename($CFG->dirroot);
 	return [
 		'cnn_academy' => [
 			'carouselItems' => $config->carousel,
@@ -79,7 +85,7 @@ function get_grid_context_settings()
 			'rows' => $config->rows,
 			'tags' => $config->tags,
 		],
-		'js_src' => $CFG->wwwroot . '/theme/academy/js/dist/bundle.js',
+		'js_src' => $CFG->wwwroot . '/theme/academy/js/dist/' . $js_bundle_filename,
 	];
 }
 function get_grid_context_front($userid)
@@ -95,6 +101,7 @@ function get_grid_context_front($userid)
 	$rows_with_only_current_items = get_current_items($user_rows);
 	$rows = array_values($rows_with_only_current_items);
 	$scorm_attempts = get_scorm_attempts($userid);
+	$js_bundle_filename = get_js_bundle_filename($CFG->dirroot);
 	return [
 		'cnn_academy' => [
 			'carouselItems' => $config->carousel,
@@ -104,6 +111,6 @@ function get_grid_context_front($userid)
 			'scormAttempts' => $scorm_attempts,
 			'tags' => $config->tags,
 		],
-		'js_src' => $CFG->wwwroot . '/theme/academy/js/dist/bundle.js',
+		'js_src' => $CFG->wwwroot . '/theme/academy/js/dist/' . $js_bundle_filename,
 	];
 };
