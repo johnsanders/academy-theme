@@ -8,6 +8,7 @@ require_once($CFG->dirroot . '/theme/academy/grid/get_nav_config.php');
 
 $system_context = context_system::instance();
 $show_nav_drawer = has_capability('moodle/site:manageblocks', $system_context, $USER);
+$hide_header_on = ['scorm', 'vimeo'];
 
 $extraclasses = [];
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
@@ -33,7 +34,7 @@ $templatecontext = [
 	'navdraweropen' => false,
 	'output' => $OUTPUT,
 	'regionmainsettingsmenu' => $regionmainsettingsmenu,
-	'show_full_header' => $PAGE->cm->modname !== 'scorm',
+	'show_full_header' => !in_array($PAGE->cm->modname, $hide_header_on),
 	'show_nav_drawer' => $show_nav_drawer,
 	'sidepreblocks' => $blockshtml,
 	'sitename' => $sitename,
