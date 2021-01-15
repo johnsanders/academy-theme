@@ -102,7 +102,7 @@ export interface RowItem {
 export interface ScormAttempt {
 	id: string;
 	scormid: string;
-	userid: string;
+	scorminstanceid: string;
 	value: string;
 }
 export interface Tag {

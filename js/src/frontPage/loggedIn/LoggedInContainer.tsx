@@ -55,6 +55,7 @@ const LoggedInContainer: React.FC<Props> = (props: Props): JSX.Element | null =>
 			handleRowInit={handleRowInit}
 			modsInfo={props.cnnAcademy.modsInfo}
 			rows={populatedRows}
+			scormAttempts={props.cnnAcademy.scormAttempts}
 			setActiveTagId={setActiveTagId}
 			tags={tags}
 			visible={props.visible}

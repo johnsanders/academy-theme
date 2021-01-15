@@ -17,11 +17,32 @@
 	border: none;
 	border-radius: 5px;
 	font-size: 0.85em;
-	margin: 0 0.5em 0.5em 0;
+	margin: 0 0.5em 0jauto 0;
 	padding: 2px 5px;
 }
 .academyTagsContainer button:active {
 	border: none;
+}
+.attemptStatus {
+	align-items: center;
+	border-radius: 20px;
+	display: flex;
+	font-size: 2em;
+	height: 40px;
+	justify-content: center;
+	position: absolute;
+	right: 0.25em;
+	top: 0.25em;
+	width: 40px;
+	z-index: 1000;
+}
+.attemptComplete {
+	background-color: #7e9c3a;
+	color: white;
+}
+.attemptIncomplete {
+	background-color: #feb323;
+	color: #553700;
 }
 .carouselImg {
 	width: 100%;

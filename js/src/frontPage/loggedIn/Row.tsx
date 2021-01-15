@@ -1,4 +1,4 @@
-import { MoodleAcademySettings, Row as RowType } from '../../types';
+import { MoodleAcademySettings, Row as RowType, ScormAttempt } from '../../types';
 import React from 'react';
 import RowItems from './RowItems';
 import ScrollButtons from '../../shared/ScrollButtons';
@@ -8,6 +8,7 @@ interface Props {
 	handleInit: () => void;
 	modsInfo: MoodleAcademySettings['modsInfo'];
 	row: RowType;
+	scormAttempts: ScormAttempt[];
 	setActiveTagId: (tagId: string) => void;
 }
 
@@ -59,6 +60,7 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => {
 					handleScroll={handleScrollEvent}
 					modsInfo={props.modsInfo}
 					row={props.row}
+					scormAttempts={props.scormAttempts}
 					setActiveTagId={props.setActiveTagId}
 				/>
 			</div>

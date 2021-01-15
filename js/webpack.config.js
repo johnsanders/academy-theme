@@ -26,6 +26,7 @@ const sentryPlugin = new SentryWebpackPlugin({
 	project: 'cnn_academy',
 });
 const productionPlugins = [bundleAnalyzerPlugin, cleanWebpackPlugin, manifestPlugin, sentryPlugin];
+const devPlugins = [cleanWebpackPlugin, manifestPlugin];
 
 module.exports = {
 	mode: process.env.NODE_ENV,
@@ -55,7 +56,7 @@ module.exports = {
 			},
 		],
 	},
-	plugins: process.env.NODE_ENV === 'production' ? productionPlugins : [],
+	plugins: process.env.NODE_ENV === 'production' ? productionPlugins : devPlugins,
 	devtool: 'source-map',
 	devServer: { historyApiFallback: true },
 	stats: {

@@ -1,7 +1,7 @@
-import { MoodleAcademyFront, Row } from '../../types';
+import { MoodleAcademyFront, Row, ScormAttempt } from '../../types';
 import ErrorBoundary from '../../shared/ErrorBoundary';
 import React from 'react';
-import RowItem from './RowItem';
+import RowItemContainer from './RowItemContainer';
 
 interface Props {
 	containerRef: React.MutableRefObject<HTMLDivElement | undefined>;
@@ -10,6 +10,7 @@ interface Props {
 	handleScroll: () => void;
 	modsInfo: MoodleAcademyFront['modsInfo'];
 	row: Row;
+	scormAttempts: ScormAttempt[];
 	setActiveTagId: (tagId: string) => void;
 }
 
@@ -32,11 +33,12 @@ const RowItems: React.FC<Props> = (props: Props): JSX.Element => {
 			>
 				{props.row.items.map((item) => {
 					return (
-						<RowItem
+						<RowItemContainer
 							handleInit={handleItemInit}
 							item={item}
 							key={item.id}
 							modsInfo={props.modsInfo}
+							scormAttempts={props.scormAttempts}
 							setActiveTagId={props.setActiveTagId}
 						/>
 					);
