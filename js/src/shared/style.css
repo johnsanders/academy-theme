@@ -54,11 +54,16 @@ button.btn:focus {
 }
 .gridRowItems {
 	display: flex;
-	flex-wrap: nowrap;
 	justify-content: flex-start;
-	overflow-x: scroll;
 	padding-bottom: 1em;
 	position: relative;
+}
+.gridRowItems_scroll {
+	flex-wrap: nowrap;
+	overflow-x: scroll;
+}
+.gridRowItems_wrap {
+	flex-wrap: wrap;
 }
 .gridRowItem {
 	margin: 0.5em;

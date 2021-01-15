@@ -83,6 +83,7 @@ export interface Row {
 	id: string;
 	name: string;
 	items: RowItem[];
+	overflowBehavior: string;
 	requiredCourses: string[];
 }
 export interface RowItem {

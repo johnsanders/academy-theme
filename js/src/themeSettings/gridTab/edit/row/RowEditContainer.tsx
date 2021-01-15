@@ -11,11 +11,15 @@ interface Props {
 
 const RowEditContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	const [name, setName] = React.useState(props.initialValues.name);
+	const [overflowBehavior, setOverflowBehavior] = React.useState(
+		props.initialValues.overflowBehavior,
+	);
 	const [requiredCourses, setRequiredCourses] = React.useState<string[]>(
 		props.initialValues.requiredCourses,
 	);
-	const updaters = { setName };
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+	const updaters = { setName, setOverflowBehavior };
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
+		console.log(e.currentTarget.value);
 		const id = e.currentTarget.dataset.id;
 		if (!id) throw new Error('Cannot find input id');
 		if (updaters[id]) updaters[id](e.currentTarget.value);
@@ -36,6 +40,7 @@ const RowEditContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			id: props.initialValues.id,
 			items: props.initialValues.items,
 			name,
+			overflowBehavior,
 			requiredCourses,
 		});
 	};
@@ -47,6 +52,7 @@ const RowEditContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			handleInputChange={handleInputChange}
 			handleSaveRow={handleSaveRow}
 			name={name}
+			overflowBehavior={overflowBehavior}
 			requiredCourses={requiredCourses}
 		/>
 	);

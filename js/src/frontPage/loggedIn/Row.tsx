@@ -45,14 +45,16 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => {
 		<div>
 			<h3>{props.row.name}</h3>
 			<div className="position-relative">
-				<ScrollButtons
-					containerClientWidth={containerClientWidth}
-					containerScrollLeft={containerScrollLeft}
-					containerScrollWidth={containerScrollWidth}
-					handleMouse={handleMouseEvent}
-					handleScroll={handleScrollClick}
-					hovered={hovered}
-				/>
+				{props.row.overflowBehavior === 'scroll' ? (
+					<ScrollButtons
+						containerClientWidth={containerClientWidth}
+						containerScrollLeft={containerScrollLeft}
+						containerScrollWidth={containerScrollWidth}
+						handleMouse={handleMouseEvent}
+						handleScroll={handleScrollClick}
+						hovered={hovered}
+					/>
+				) : null}
 				<RowItems
 					containerRef={containerRef}
 					handleInit={props.handleInit}

@@ -23,7 +23,7 @@ const RowItems: React.FC<Props> = (props: Props): JSX.Element => {
 	return (
 		<ErrorBoundary errorMessage="Error rendering content row" handleError={props.handleInit}>
 			<div
-				className="gridRowItems"
+				className={`gridRowItems gridRowItems_${props.row.overflowBehavior}`}
 				onMouseEnter={props.handleMouse}
 				onMouseLeave={props.handleMouse}
 				onScroll={props.handleScroll}
