@@ -14,20 +14,21 @@ function get_modules_info($rows)
 }
 function get_scorm_attempts($userid)
 {
+	$query = "
+		SELECT scorm.id, scorm.value, scorm.scormid, cm.id AS scorminstanceid
+		FROM mdl_scorm_scoes_track as scorm
+		INNER JOIN mdl_course_modules AS cm
+		ON cm.instance = scorm.scormid AND cm.module = '19'
+		WHERE scorm.userid = '$userid' AND scorm.element = 'cmi.core.score.raw';
+	";
 	global $DB;
-	$attempts = array_values($DB->get_records(
-		'scorm_scoes_track',
-		array("element" => "cmi.core.score.raw", "userid" => $userid),
-		'',
-		'id, userid, scormid, value'
-	));
-	$attempts[1]->value = "89";
+	$attempts = array_values($DB->get_records_sql($query));
 	$groups = [];
 	foreach ($attempts as $attempt) {
-		if (array_key_exists($attempt->scormid, $groups)) {
-			array_push($groups[$attempt->scormid], $attempt);
+		if (array_key_exists($attempt->scorminstanceid, $groups)) {
+			array_push($groups[$attempt->scorminstanceid], $attempt);
 		} else {
-			$groups[$attempt->scormid] = [$attempt];
+			$groups[$attempt->scorminstanceid] = [$attempt];
 		}
 	}
 	$highest_attempts = array_map(function ($attempts) use ($groups) {

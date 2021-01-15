@@ -18,7 +18,6 @@ $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settin
 $grid_context = get_grid_context_front($USER->id);
 $sitename = format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);
 
-
 $templatecontext = [
 	'bodyattributes' => $bodyattributes,
 	'cnn_academy_json' => json_encode($grid_context['cnn_academy']),
