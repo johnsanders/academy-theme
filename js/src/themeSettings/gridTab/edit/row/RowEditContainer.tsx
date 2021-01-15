@@ -19,7 +19,6 @@ const RowEditContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	);
 	const updaters = { setName, setOverflowBehavior };
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
-		console.log(e.currentTarget.value);
 		const id = e.currentTarget.dataset.id;
 		if (!id) throw new Error('Cannot find input id');
 		if (updaters[id]) updaters[id](e.currentTarget.value);

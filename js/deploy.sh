@@ -15,8 +15,8 @@ cd ../../
 	--exclude='./academy/js/node_modules' \
 	--exclude='./academy/js/package-lock.json' \
 	--exclude='./academy/js/package.json' \
-	--exclude='./academy/js/rollbarToken_blank.js' \
-	--exclude='./academy/js/rollbarToken.js' \
+	--exclude='./academy/js/sentryToken_blank.js' \
+	--exclude='./academy/js/sentryToken.js' \
 	--exclude='./academy/js/src' \
 	--exclude='./academy/js/tsconfig.json' \
 	--exclude='./academy/js/webpack.config.js' \

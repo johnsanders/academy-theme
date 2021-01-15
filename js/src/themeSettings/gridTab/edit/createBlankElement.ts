@@ -20,5 +20,6 @@ export const createBlankGridRow = (): Row => ({
 	id: uuid(),
 	items: [],
 	name: '',
+	overflowBehavior: 'scroll',
 	requiredCourses: [],
 });
