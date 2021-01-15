@@ -20,6 +20,7 @@ interface Props {
 	handleScroll: () => void;
 	items: RowItemType[];
 	modsInfo: MoodleAcademySettings['modsInfo'];
+	overflowBehavior: string;
 	rowId: string;
 }
 
@@ -38,7 +39,7 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => (
 			<Droppable direction="horizontal" droppableId="droppableItems">
 				{(providedOuter) => (
 					<div
-						className="gridRowItems"
+						className={`gridRowItems gridRowItems_${props.overflowBehavior}`}
 						onScroll={props.handleScroll}
 						ref={providedOuter.innerRef}
 						{...providedOuter.droppableProps}

@@ -74,14 +74,16 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => (
 			</span>
 		</div>
 		<div className="position-relative">
-			<ScrollButtons
-				containerClientWidth={props.containerClientWidth}
-				containerScrollLeft={props.containerScrollLeft}
-				containerScrollWidth={props.containerScrollWidth}
-				handleMouse={props.handleMouseEvent}
-				handleScroll={props.handleScrollClick}
-				hovered={props.hovered}
-			/>
+			{props.row.overflowBehavior === 'scroll' ? (
+				<ScrollButtons
+					containerClientWidth={props.containerClientWidth}
+					containerScrollLeft={props.containerScrollLeft}
+					containerScrollWidth={props.containerScrollWidth}
+					handleMouse={props.handleMouseEvent}
+					handleScroll={props.handleScrollClick}
+					hovered={props.hovered}
+				/>
+			) : null}
 			<RowItems
 				containerRef={props.containerRef}
 				handleAddItemClick={props.handleAddItemClick}
@@ -93,6 +95,7 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => (
 				handleScroll={props.handleScrollEvent}
 				items={props.row.items}
 				modsInfo={props.modsInfo}
+				overflowBehavior={props.row.overflowBehavior}
 				rowId={props.row.id}
 			/>
 		</div>
