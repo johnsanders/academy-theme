@@ -16,5 +16,8 @@
 		const navbarConfig = {{{nav_config}}};
 		window.cnnAcademy = { ...moodleContext, navbarConfig };
 	</script>
-	<script src={{js_src}} type="text/javascript"></script>
+	<script
+		src="{{js_src_path}}/{{>theme_academy/js_bundle_filename}}"
+		type="text/javascript">
+	</script>
 </head>

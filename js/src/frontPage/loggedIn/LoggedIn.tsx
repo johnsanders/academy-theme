@@ -26,7 +26,7 @@ const LoggedIn: React.FC<Props> = (props: Props): JSX.Element | null => (
 		className={`container-fluid fadeIn ${props.visible ? '' : 'd-none'}`}
 		style={{ marginTop: '105px' }}
 	>
-		{<ReactTooltip />}
+		<ReactTooltip />
 		<div className="row">
 			<div className="col-12 col-xl-10 offset-xl-1">
 				<div className="my-3">

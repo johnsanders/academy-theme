@@ -1,16 +1,16 @@
 import { MoodleAcademySettings, RowItem as RowItemType } from '../../types';
-import { faCog, faTimes } from '@fortawesome/pro-solid-svg-icons';
 import { getInstructorById, getTagById } from '../../shared/getById';
 import { DraggableProvided } from 'react-beautiful-dnd';
-import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import ImageWithFallback from '../../shared/ImageWithFallback';
 import React from 'react';
+import RowItemButtons from './RowItemButtons';
 import getForegroundColor from '../../helpers/getForegroundColor';
 
 interface Props {
 	item: RowItemType;
-	handleDeleteItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-	handleEditItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	handleCloneItem: (rowId: string, itemId: string) => void;
+	handleDeleteItem: (rowId: string, itemId: string) => void;
+	handleEditItem: (rowId: string, itemId: string) => void;
 	modsInfo: MoodleAcademySettings['modsInfo'];
 	provided: DraggableProvided;
 	rowId: string;
@@ -67,24 +67,13 @@ const RowItem: React.FC<Props> = (props: Props): JSX.Element => {
 					})}
 				</div>
 			</div>
-			<div className="gridItemBtn gridItemBtnClose">
-				<button
-					data-itemid={props.item.modId}
-					data-rowid={props.rowId}
-					onClick={props.handleDeleteItemClick}
-				>
-					<Icon icon={faTimes} />
-				</button>
-			</div>
-			<div className="gridItemBtn gridItemBtnEdit">
-				<button
-					data-itemid={props.item.modId}
-					data-rowid={props.rowId}
-					onClick={props.handleEditItemClick}
-				>
-					<Icon icon={faCog} />
-				</button>
-			</div>
+			<RowItemButtons
+				handleCloneItem={props.handleCloneItem}
+				handleDeleteItem={props.handleDeleteItem}
+				handleEditItem={props.handleEditItem}
+				modId={props.item.modId}
+				rowId={props.rowId}
+			/>
 		</div>
 	);
 };

@@ -16,6 +16,7 @@ interface Props {
 	handleAddItemToRow: (rowId: string) => void;
 	handleAddCollectionRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleAddRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	handleCloneItem: (rowId: string, itemId: string) => void;
 	handleDeleteItem: (rowId: string, itemId: string) => void;
 	handleDeleteRow: (rowId: string) => void;
 	handleEditItem: (rowId: string, itemId: string) => void;
@@ -38,6 +39,7 @@ const Grid: React.FC<Props> = (props: Props): JSX.Element => (
 			<>
 				<RowsContainer
 					handleAddItemToRow={props.handleAddItemToRow}
+					handleCloneItem={props.handleCloneItem}
 					handleDeleteItem={props.handleDeleteItem}
 					handleDeleteRow={props.handleDeleteRow}
 					handleEditItem={props.handleEditItem}

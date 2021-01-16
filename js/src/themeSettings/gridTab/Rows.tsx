@@ -5,9 +5,10 @@ import RowContainer from './RowContainer';
 
 interface Props {
 	handleAddItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-	handleDeleteItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	handleCloneItem: (rowId: string, itemId: string) => void;
+	handleDeleteItem: (rowId: string, itemId: string) => void;
+	handleEditItem: (rowId: string, itemId: string) => void;
 	handleDeleteRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-	handleEditItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleEditRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleItemDragEnd: (resut: DropResult) => void;
 	handleMouseEnter: (e: React.MouseEvent<HTMLDivElement>) => void;
@@ -26,9 +27,10 @@ const Rows: React.FC<Props> = (props: Props): JSX.Element => (
 							{(providedInner) => (
 								<RowContainer
 									handleAddItemClick={props.handleAddItemClick}
-									handleDeleteItemClick={props.handleDeleteItemClick}
+									handleCloneItem={props.handleCloneItem}
+									handleDeleteItem={props.handleDeleteItem}
 									handleDeleteRowClick={props.handleDeleteRowClick}
-									handleEditItemClick={props.handleEditItemClick}
+									handleEditItem={props.handleEditItem}
 									handleEditRowClick={props.handleEditRowClick}
 									handleItemDragEnd={props.handleItemDragEnd}
 									handleMouseEnter={props.handleMouseEnter}

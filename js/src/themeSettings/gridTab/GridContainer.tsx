@@ -4,6 +4,7 @@ import Grid from './Grid';
 import React from 'react';
 import arrayMove from 'array-move';
 import disableSaveButtons from '../disableSaveButtons';
+import { v4 as uuid } from 'uuid';
 
 interface Props {
 	courses: Course[];
@@ -75,6 +76,24 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		setActiveItem(newItem);
 		disableSaveButtons(true);
 	};
+	const handleCloneItem = (rowId: string, itemId: string) => {
+		const row = props.rows.find((row) => row.id == rowId);
+		if (!row) throw new Error('Cannot find item row');
+		const newItems = row.items.reduce<RowItem[]>(
+			(acc, item) =>
+				item.modId === itemId ? [...acc, item, { ...item, id: uuid() }] : [...acc, item],
+			[],
+		);
+		const newRows = props.rows.map((row) =>
+			row.id !== rowId
+				? row
+				: {
+						...row,
+						items: newItems,
+				  },
+		);
+		props.setRows(newRows);
+	};
 	const handleEditItem = (rowId: string, itemId: string) => {
 		const row = props.rows.find((row) => row.id == rowId);
 		if (!row) throw new Error('Cannot find item row');
@@ -116,6 +135,7 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			handleAddCollectionRowClick={handleAddCollectionRowClick}
 			handleAddItemToRow={handleAddItemToRow}
 			handleAddRowClick={handleAddRowClick}
+			handleCloneItem={handleCloneItem}
 			handleDeleteItem={handleDeleteItem}
 			handleDeleteRow={handleDeleteRow}
 			handleEditItem={handleEditItem}

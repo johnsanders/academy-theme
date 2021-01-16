@@ -12,9 +12,10 @@ import RowItem from './RowItem';
 interface Props {
 	containerRef: React.MutableRefObject<HTMLDivElement | undefined>;
 	handleAddItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-	handleDeleteItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	handleCloneItem: (rowId: string, itemId: string) => void;
+	handleDeleteItem: (rowId: string, itemId: string) => void;
 	handleDeleteRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-	handleEditItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	handleEditItem: (rowId: string, itemId: string) => void;
 	handleItemDragEnd: (result: DropResult, provided: ResponderProvided) => void;
 	handleMouse: (e: React.MouseEvent<HTMLDivElement>) => void;
 	handleScroll: () => void;
@@ -51,8 +52,9 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => (
 							<Draggable draggableId={item.id} index={i} key={item.id}>
 								{(providedInner) => (
 									<RowItem
-										handleDeleteItemClick={props.handleDeleteItemClick}
-										handleEditItemClick={props.handleEditItemClick}
+										handleCloneItem={props.handleCloneItem}
+										handleDeleteItem={props.handleDeleteItem}
+										handleEditItem={props.handleEditItem}
 										item={item}
 										modsInfo={props.modsInfo}
 										provided={providedInner}

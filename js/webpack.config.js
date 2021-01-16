@@ -5,6 +5,7 @@ const sentryToken = require('./sentryToken');
 
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HookShellScriptPlugin = require('hook-shell-script-webpack-plugin');
 const SentryWebpackPlugin = require('@sentry/webpack-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 
@@ -15,6 +16,7 @@ const bundleAnalyzerPlugin = new BundleAnalyzerPlugin({
 	analyzerPort: 8989,
 });
 const cleanWebpackPlugin = new CleanWebpackPlugin();
+const scriptPlugin = new HookShellScriptPlugin({ afterEmit: ['node ./updateBundleFilename.js'] });
 const manifestPlugin = new WebpackManifestPlugin({
 	filter: (file) => file.name === 'main.js',
 });
@@ -26,7 +28,7 @@ const sentryPlugin = new SentryWebpackPlugin({
 	project: 'cnn_academy',
 });
 const productionPlugins = [bundleAnalyzerPlugin, cleanWebpackPlugin, manifestPlugin, sentryPlugin];
-const devPlugins = [cleanWebpackPlugin, manifestPlugin];
+const devPlugins = [cleanWebpackPlugin, manifestPlugin, scriptPlugin];
 
 module.exports = {
 	mode: process.env.NODE_ENV,

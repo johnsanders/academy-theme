@@ -5,6 +5,7 @@ import GridContainer from './gridTab/GridContainer';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import InstructorsContainer from './instructorsTab/InstructorsContainer';
 import React from 'react';
+import ReactTooltip from 'react-tooltip';
 import TagsContainer from './tagsTab/TagsContainer';
 import Uploads from './Uploads';
 
@@ -31,6 +32,7 @@ const tabs = ['Grid', 'Carousel', 'Instructors', 'Tags', 'Uploads'];
 
 const ThemeSettings: React.FC<Props> = (props: Props): JSX.Element => (
 	<div className="container" id="academyGridSettings">
+		<ReactTooltip />
 		{!props.unsavedChanges ? null : (
 			<div className="alert alert-warning unsavedAlert">
 				<Icon className="mr-1" icon={faExclamationTriangle} />

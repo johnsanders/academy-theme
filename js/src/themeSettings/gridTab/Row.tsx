@@ -12,9 +12,10 @@ interface Props {
 	containerScrollLeft: number;
 	containerScrollWidth: number;
 	handleAddItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-	handleDeleteItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	handleCloneItem: (rowId: string, itemId: string) => void;
+	handleDeleteItem: (rowId: string, itemId: string) => void;
 	handleDeleteRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-	handleEditItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	handleEditItem: (rowId: string, itemId: string) => void;
 	handleEditRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleItemDragEnd: (result: DropResult) => void;
 	handleMouseEnter: (e: React.MouseEvent<HTMLDivElement>) => void;
@@ -87,9 +88,10 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => (
 			<RowItems
 				containerRef={props.containerRef}
 				handleAddItemClick={props.handleAddItemClick}
-				handleDeleteItemClick={props.handleDeleteItemClick}
+				handleCloneItem={props.handleCloneItem}
+				handleDeleteItem={props.handleDeleteItem}
 				handleDeleteRowClick={props.handleDeleteRowClick}
-				handleEditItemClick={props.handleEditItemClick}
+				handleEditItem={props.handleEditItem}
 				handleItemDragEnd={props.handleItemDragEnd}
 				handleMouse={props.handleMouseEvent}
 				handleScroll={props.handleScrollEvent}

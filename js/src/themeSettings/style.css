@@ -40,24 +40,24 @@ button.disabled {
 	background-color: white;
 	border: solid lightgray 1px;
 	border-radius: 1.5em;
-	display: flex;
+	display: inline-flex;
 	height: 1.5em;
 	justify-content: center;
-	position: absolute;
-	top: -0.5em;
+	margin-left: 0.25em;
 	width: 1.5em;
 	z-index: 1000;
-}
-.gridItemBtnClose {
-	right: -0.5em;
-}
-.gridItemBtnEdit {
-	right: 1.25em;
 }
 .gridItemBtn button {
 	background-color: unset;
 	border: unset;
 	border-radius: 1.5em;
+}
+.gridItemBtns {
+	position: absolute;
+	left: 0;
+	text-align: right;
+	top: -0.5em;
+	width: calc(100% + 0.5em);
 }
 .image {
 	height: 90px;

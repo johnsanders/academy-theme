@@ -5,6 +5,7 @@ import Rows from './Rows';
 
 interface Props {
 	handleAddItemToRow: (rowId: string) => void;
+	handleCloneItem: (rowId: string, itemId: string) => void;
 	handleDeleteItem: (rowId: string, itemId: string) => void;
 	handleDeleteRow: (rowId: string) => void;
 	handleEditItem: (rowId: string, itemId: string) => void;
@@ -27,22 +28,10 @@ const RowsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		const rowId = e.currentTarget.dataset.id;
 		if (rowId) props.handleAddItemToRow(rowId);
 	};
-	const handleEditItemClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
-		e.preventDefault();
-		const rowId = e.currentTarget.dataset.rowid;
-		const itemId = e.currentTarget.dataset.itemid;
-		if (itemId && rowId) props.handleEditItem(rowId, itemId);
-	};
 	const handleDeleteRowClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		const idToDelete = e.currentTarget.dataset.id;
 		if (!idToDelete) throw new Error('Cannot find row id to delete');
 		props.handleDeleteRow(idToDelete);
-	};
-	const handleDeleteItemClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
-		e.preventDefault();
-		const rowId = e.currentTarget.dataset.rowid;
-		const itemId = e.currentTarget.dataset.itemid;
-		if (itemId && rowId) props.handleDeleteItem(rowId, itemId);
 	};
 	const handleItemDragEnd = (result: DropResult): void => {
 		if (!activeRowIdRef.current || !result.destination) return;
@@ -59,9 +48,10 @@ const RowsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	return (
 		<Rows
 			handleAddItemClick={handleAddItemClick}
-			handleDeleteItemClick={handleDeleteItemClick}
+			handleCloneItem={props.handleCloneItem}
+			handleDeleteItem={props.handleDeleteItem}
 			handleDeleteRowClick={handleDeleteRowClick}
-			handleEditItemClick={handleEditItemClick}
+			handleEditItem={props.handleEditItem}
 			handleEditRowClick={handleEditRowClick}
 			handleItemDragEnd={handleItemDragEnd}
 			handleMouseEnter={handleMouseEnter}
