@@ -6,7 +6,7 @@ import { Tag } from '../types';
 import ThemeSettings from './ThemeSettings';
 import clearStaticLoader from '../helpers/clearStaticLoader';
 import { createPortal } from 'react-dom';
-import modifyDom from '../helpers/modifyDom';
+import modifySettingsDom from '../helpers/modifySettingsDom';
 import qs from 'qs';
 import updateUrlQuery from '../helpers/updateUrlQuery';
 
@@ -34,7 +34,7 @@ const ThemeSettingsContainer: React.FC<Props> = (props: Props): JSX.Element | nu
 	const [activeTab, setActiveTab] = React.useState('grid');
 	const [unsavedChanges, setUnsavedChanges] = React.useState<boolean>();
 	React.useEffect(() => {
-		modifyDom();
+		modifySettingsDom();
 		const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
 		const activeTab = query.tab || 'grid';
 		setActiveTab(activeTab as string);
