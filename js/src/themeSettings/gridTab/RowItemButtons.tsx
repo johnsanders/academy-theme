@@ -24,7 +24,7 @@ const RowItemButtons: React.FC<Props> = (props: Props) => {
 	};
 	return (
 		<div className="gridItemBtns">
-			<div className="gridItemBtn">
+			<div className="gridItemBtn gridItemBtnSm">
 				<button data-id="clone" data-tip="Clone" onClick={clickHandler}>
 					<Icon icon={faClone} />
 				</button>

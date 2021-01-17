@@ -13,7 +13,7 @@ interface Props {
 const EditItemDatesContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	const [editing, setEditing] = React.useState(props.start !== null || props.end !== null);
 	const onDisplayedChange = (date: Date | null): void =>
-		props.updateDate({ dateDisplay: date ? date.getTime() : null });
+		props.updateDate({ dateDisplayed: date ? date.getTime() : null });
 	const onStartChange = (date: Date | null): void =>
 		props.updateDate({ dateStart: date ? date.getTime() : null });
 	const onEndChange = (date: Date | null): void =>

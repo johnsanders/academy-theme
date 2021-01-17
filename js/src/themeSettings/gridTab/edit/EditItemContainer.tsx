@@ -4,7 +4,7 @@ import React from 'react';
 import updateGlobalObject from '../../../helpers/updateGlobalObject';
 
 export type UpdateDateArgs = {
-	dateDisplay?: number | null;
+	dateDisplayed?: number | null;
 	dateEnd?: number | null;
 	dateStart?: number | null;
 };
@@ -54,7 +54,6 @@ const EditItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			setErrorMessage('Module and thumbnail image are required.');
 			return;
 		}
-		// cnnAcademy.modsInfo[newItem.modId] = {name: }
 		props.handleSave(newItem);
 	};
 	const clearErrorMessage = () => setErrorMessage('');

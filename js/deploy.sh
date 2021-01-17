@@ -23,7 +23,7 @@ cd ../../
 	-czvf academy.tar.gz ./academy
 /usr/bin/scp academy.tar.gz cnnitouch@academy.cnntoolbox.com:/home/cnnitouch
 
-#/bin/rm ./academy.tar.gz
+/bin/rm ./academy.tar.gz
 
 #/usr/bin/ssh -tt cnnitouch@academy.cnntoolbox.com << EOF
 #/usr/bin/sudo bash

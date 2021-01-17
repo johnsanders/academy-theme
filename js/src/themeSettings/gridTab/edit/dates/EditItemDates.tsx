@@ -29,7 +29,7 @@ const EditItemDates: React.FC<Props> = (props: Props): JSX.Element => (
 			<h5>Date displayed with item</h5>
 			<EditItemDatepicker
 				className="mr-1 mb-3"
-				id="dateVisible"
+				id="dateDisplayed"
 				isClearable={true}
 				onChange={props.onDisplayedChange}
 				value={props.displayed}

@@ -47,6 +47,9 @@ button.disabled {
 	width: 1.5em;
 	z-index: 1000;
 }
+.gridItemBtnSm button{
+	font-size: 0.8em;
+}
 .gridItemBtn button {
 	background-color: unset;
 	border: unset;
