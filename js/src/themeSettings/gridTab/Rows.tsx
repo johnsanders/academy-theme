@@ -8,7 +8,7 @@ interface Props {
 	handleCloneItem: (rowId: string, itemId: string) => void;
 	handleDeleteItem: (rowId: string, itemId: string) => void;
 	handleEditItem: (rowId: string, itemId: string) => void;
-	handleDeleteRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	handleDeleteRow: (rowId: string) => void;
 	handleEditRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleItemDragEnd: (resut: DropResult) => void;
 	handleMoveItemToRow: (itemId: string, rowFromId: string, rowToId: string) => void;
@@ -29,7 +29,7 @@ const Rows: React.FC<Props> = (props: Props): JSX.Element => (
 									handleAddItemClick={props.handleAddItemClick}
 									handleCloneItem={props.handleCloneItem}
 									handleDeleteItem={props.handleDeleteItem}
-									handleDeleteRowClick={props.handleDeleteRowClick}
+									handleDeleteRow={props.handleDeleteRow}
 									handleEditItem={props.handleEditItem}
 									handleEditRowClick={props.handleEditRowClick}
 									handleItemDragEnd={props.handleItemDragEnd}

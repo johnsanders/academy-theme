@@ -24,11 +24,8 @@ const RowsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		const rowId = e.currentTarget.dataset.id;
 		if (rowId) props.handleAddItemToRow(rowId);
 	};
-	const handleDeleteRowClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
-		const idToDelete = e.currentTarget.dataset.id;
-		if (!idToDelete) throw new Error('Cannot find row id to delete');
-		props.setRows(props.rows.filter((row) => row.id !== idToDelete));
-	};
+	const handleDeleteRow = (rowId: string): void =>
+		props.setRows(props.rows.filter((row) => row.id !== rowId));
 	const handleItemDragEnd = (result: DropResult): void => {
 		if (!result.destination) return;
 		const row = props.rows.find((row) => row.id === result.source.droppableId);
@@ -95,7 +92,7 @@ const RowsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			handleAddItemClick={handleAddItemClick}
 			handleCloneItem={handleCloneItem}
 			handleDeleteItem={handleDeleteItem}
-			handleDeleteRowClick={handleDeleteRowClick}
+			handleDeleteRow={handleDeleteRow}
 			handleEditItem={props.handleEditItem}
 			handleEditRowClick={handleEditRowClick}
 			handleItemDragEnd={handleItemDragEnd}

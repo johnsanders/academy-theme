@@ -2,6 +2,7 @@ import { faArrowsV, faClone, faCog, faTimes } from '@fortawesome/pro-solid-svg-i
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import MoveToRowDropdown from './MoveToRowDropdown';
 import React from 'react';
+import ReactTooltip from 'react-tooltip';
 import { Row } from '../../types';
 
 interface Props {
@@ -17,6 +18,7 @@ interface Props {
 
 const RowItemButtons: React.FC<Props> = (props: Props) => {
 	const [moveToRowVisible, setMoveToRowVisible] = React.useState(false);
+	ReactTooltip.rebuild();
 	const clickHandlers = {
 		clone: props.handleCloneItem,
 		delete: props.handleDeleteItem,
@@ -24,6 +26,7 @@ const RowItemButtons: React.FC<Props> = (props: Props) => {
 	};
 	const clickHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
+		ReactTooltip.hide();
 		const id = e.currentTarget.dataset.id;
 		if (!id || !clickHandlers[id]) return;
 		clickHandlers[id](props.rowId, props.modId);

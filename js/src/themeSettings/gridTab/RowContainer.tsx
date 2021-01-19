@@ -8,7 +8,7 @@ interface Props {
 	handleAddItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleCloneItem: (rowId: string, itemId: string) => void;
 	handleDeleteItem: (rowId: string, itemId: string) => void;
-	handleDeleteRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	handleDeleteRow: (rowId: string) => void;
 	handleEditItem: (rowId: string, itemId: string) => void;
 	handleEditRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleItemDragEnd: (result: DropResult) => void;
@@ -46,6 +46,11 @@ const RowContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		containerRef.current.scroll({ behavior: 'smooth', left: distance });
 	};
 	const handleScrollEvent = (): void => updateContainerInfo();
+	const handleDeleteRowClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
+		const idToDelete = e.currentTarget.dataset.id;
+		if (!idToDelete) return;
+		props.handleDeleteRow(idToDelete);
+	};
 	return (
 		<Row
 			containerClientWidth={containerClientWidth}
@@ -55,7 +60,7 @@ const RowContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			handleAddItemClick={props.handleAddItemClick}
 			handleCloneItem={props.handleCloneItem}
 			handleDeleteItem={props.handleDeleteItem}
-			handleDeleteRowClick={props.handleDeleteRowClick}
+			handleDeleteRowClick={handleDeleteRowClick}
 			handleEditItem={props.handleEditItem}
 			handleEditRowClick={props.handleEditRowClick}
 			handleItemDragEnd={props.handleItemDragEnd}
