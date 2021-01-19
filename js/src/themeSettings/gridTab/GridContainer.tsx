@@ -2,9 +2,7 @@ import { Course, Instructor, MoodleAcademySettings, Row, RowItem, Tag } from '..
 import { createBlankGridItem, createBlankGridRow } from './edit/createBlankElement';
 import Grid from './Grid';
 import React from 'react';
-import arrayMove from 'array-move';
 import disableSaveButtons from '../disableSaveButtons';
-import { v4 as uuid } from 'uuid';
 
 interface Props {
 	courses: Course[];
@@ -19,7 +17,6 @@ interface Props {
 const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	const [activeItem, setActiveItem] = React.useState<RowItem | null>(null);
 	const [activeRow, setActiveRow] = React.useState<Row | null>(null);
-	const [activeCollectionRow, setActiveCollectionRow] = React.useState<Tag[] | null>(null);
 	const cancelEdit = (e?: React.MouseEvent<HTMLButtonElement>): void => {
 		if (e) e.preventDefault();
 		setActiveItem(null);
@@ -32,18 +29,10 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		setActiveRow(newRow);
 		disableSaveButtons(true);
 	};
-	const handleAddCollectionRowClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
-		e.preventDefault();
-		setActiveCollectionRow([]);
-		disableSaveButtons(true);
-	};
 	const handleEditRowClick = (rowId: string): void => {
 		const rowToEdit = props.rows.find((row) => row.id === rowId);
 		if (rowToEdit) setActiveRow(rowToEdit);
 		disableSaveButtons(true);
-	};
-	const handleSaveCollectionRow = (newRow: Tag[]): void => {
-		console.log(newRow);
 	};
 	const handleSaveRow = (newRow: Row): void => {
 		const existingRow = props.rows.find((row) => row.id === newRow.id);
@@ -54,10 +43,6 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		setActiveRow(null);
 		disableSaveButtons(false);
 	};
-	const handleReorderRows = (from: number, to: number): void => {
-		const newRows = arrayMove(props.rows, from, to);
-		props.setRows(newRows);
-	};
 	const handleAddItemToRow = (rowId: string) => {
 		const row = props.rows.find((row) => row.id == rowId);
 		if (!row) throw new Error('Cannot find row to add item');
@@ -65,24 +50,6 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		setActiveRow(row);
 		setActiveItem(newItem);
 		disableSaveButtons(true);
-	};
-	const handleCloneItem = (rowId: string, itemId: string) => {
-		const row = props.rows.find((row) => row.id == rowId);
-		if (!row) throw new Error('Cannot find item row');
-		const newItems = row.items.reduce<RowItem[]>(
-			(acc, item) =>
-				item.modId === itemId ? [...acc, item, { ...item, id: uuid() }] : [...acc, item],
-			[],
-		);
-		const newRows = props.rows.map((row) =>
-			row.id !== rowId
-				? row
-				: {
-						...row,
-						items: newItems,
-				  },
-		);
-		props.setRows(newRows);
 	};
 	const handleEditItem = (rowId: string, itemId: string) => {
 		const row = props.rows.find((row) => row.id == rowId);
@@ -106,18 +73,14 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	};
 	return (
 		<Grid
-			activeCollectionRow={activeCollectionRow}
 			activeItem={activeItem}
 			activeRow={activeRow}
 			cancelEdit={cancelEdit}
 			courses={props.courses}
-			handleAddCollectionRowClick={handleAddCollectionRowClick}
 			handleAddItemToRow={handleAddItemToRow}
 			handleAddRowClick={handleAddRowClick}
 			handleEditItem={handleEditItem}
 			handleEditRowClick={handleEditRowClick}
-			handleReorderRows={handleReorderRows}
-			handleSaveCollectionRow={handleSaveCollectionRow}
 			handleSaveItem={handleSaveItem}
 			handleSaveRow={handleSaveRow}
 			instructors={props.instructors}

@@ -9,7 +9,6 @@ interface Props {
 	handleAddItemToRow: (rowId: string) => void;
 	handleEditItem: (rowId: string, itemId: string) => void;
 	handleEditRowClick: (rowId: string) => void;
-	handleReorderRows: (from: number, to: number) => void;
 	modsInfo: MoodleAcademySettings['modsInfo'];
 	rows: RowType[];
 	setRows: (rows: Row[]) => void;
@@ -42,7 +41,8 @@ const RowsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	};
 	const handleRowDragEnd = (result: DropResult): void => {
 		if (!result.destination) return;
-		props.handleReorderRows(result.source.index, result.destination.index);
+		const newRows = arrayMove(props.rows, result.source.index, result.destination.index);
+		props.setRows(newRows);
 	};
 	const handleCloneItem = (rowId: string, itemId: string) => {
 		const row = props.rows.find((row) => row.id == rowId);
