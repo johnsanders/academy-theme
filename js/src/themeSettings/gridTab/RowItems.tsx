@@ -39,7 +39,7 @@ const RowItems: React.FC<Props> = (props: Props): JSX.Element => (
 		}}
 	>
 		<DragDropContext onDragEnd={props.handleItemDragEnd}>
-			<Droppable direction="horizontal" droppableId="droppableItems">
+			<Droppable direction="horizontal" droppableId={props.rowId}>
 				{(providedOuter) => (
 					<div
 						className={`gridRowItems gridRowItems_${props.overflowBehavior}`}

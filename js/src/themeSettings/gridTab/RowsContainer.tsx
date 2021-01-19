@@ -15,7 +15,6 @@ interface Props {
 }
 
 const RowsContainer: React.FC<Props> = (props: Props): JSX.Element => {
-	const activeRowIdRef = React.useRef<string>();
 	const handleEditRowClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		const rowId = e.currentTarget.dataset.id;
 		if (rowId) props.handleEditRowClick(rowId);
@@ -31,12 +30,12 @@ const RowsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		props.setRows(props.rows.filter((row) => row.id !== idToDelete));
 	};
 	const handleItemDragEnd = (result: DropResult): void => {
-		if (!activeRowIdRef.current || !result.destination) return;
-		const row = props.rows.find((row) => row.id === activeRowIdRef.current);
+		if (!result.destination) return;
+		const row = props.rows.find((row) => row.id === result.source.droppableId);
 		if (!row) throw new Error('Cannot find row to reorder');
 		const newItems = arrayMove(row.items, result.source.index, result.destination.index);
 		const newRow = { ...row, items: newItems };
-		const newRows = props.rows.map((row) => (row.id === activeRowIdRef.current ? newRow : row));
+		const newRows = props.rows.map((row) => (row.id === result.source.droppableId ? newRow : row));
 		props.setRows(newRows);
 	};
 	const handleRowDragEnd = (result: DropResult): void => {
