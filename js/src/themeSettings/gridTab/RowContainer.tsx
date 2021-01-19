@@ -12,10 +12,11 @@ interface Props {
 	handleEditItem: (rowId: string, itemId: string) => void;
 	handleEditRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleItemDragEnd: (result: DropResult) => void;
-	handleMouseEnter: (e: React.MouseEvent<HTMLDivElement>) => void;
+	handleMoveItemToRow: (itemId: string, rowFromId: string, rowToId: string) => void;
 	modsInfo: MoodleAcademySettings['modsInfo'];
 	provided: DraggableProvided;
 	row: RowType;
+	rows: RowType[];
 }
 
 const RowContainer: React.FC<Props> = (props: Props): JSX.Element => {
@@ -34,7 +35,6 @@ const RowContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		if (e.type === 'mouseenter') {
 			setHovered(true);
 			updateContainerInfo();
-			props.handleMouseEnter(e);
 		}
 		if (e.type === 'mouseleave') setHovered(false);
 	};
@@ -59,14 +59,15 @@ const RowContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			handleEditItem={props.handleEditItem}
 			handleEditRowClick={props.handleEditRowClick}
 			handleItemDragEnd={props.handleItemDragEnd}
-			handleMouseEnter={props.handleMouseEnter}
 			handleMouseEvent={handleMouseEvent}
+			handleMoveItemToRow={props.handleMoveItemToRow}
 			handleScrollClick={handleScrollClick}
 			handleScrollEvent={handleScrollEvent}
 			hovered={hovered}
 			modsInfo={props.modsInfo}
 			provided={props.provided}
 			row={props.row}
+			rows={props.rows}
 		/>
 	);
 };

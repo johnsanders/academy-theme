@@ -54,20 +54,10 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		setActiveRow(null);
 		disableSaveButtons(false);
 	};
-	const handleReorderItems = (rowId: string, from: number, to: number): void => {
-		const row = props.rows.find((row) => row.id === rowId);
-		if (!row) throw new Error('Cannot find row to reorder');
-		const newItems = arrayMove(row.items, from, to);
-		const newRow = { ...row, items: newItems };
-		const newRows = props.rows.map((row) => (row.id === rowId ? newRow : row));
-		props.setRows(newRows);
-	};
 	const handleReorderRows = (from: number, to: number): void => {
 		const newRows = arrayMove(props.rows, from, to);
 		props.setRows(newRows);
 	};
-	const handleDeleteRow = (idToDelete: string): void =>
-		props.setRows(props.rows.filter((row) => row.id !== idToDelete));
 	const handleAddItemToRow = (rowId: string) => {
 		const row = props.rows.find((row) => row.id == rowId);
 		if (!row) throw new Error('Cannot find row to add item');
@@ -114,17 +104,6 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		cancelEdit();
 		disableSaveButtons(false);
 	};
-	const handleDeleteItem = (rowId: string, deletedItemId: string) => {
-		const newRows = props.rows.map((row) =>
-			row.id !== rowId
-				? row
-				: {
-						...row,
-						items: row.items.filter((item) => item.modId !== deletedItemId),
-				  },
-		);
-		props.setRows(newRows);
-	};
 	return (
 		<Grid
 			activeCollectionRow={activeCollectionRow}
@@ -135,12 +114,8 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			handleAddCollectionRowClick={handleAddCollectionRowClick}
 			handleAddItemToRow={handleAddItemToRow}
 			handleAddRowClick={handleAddRowClick}
-			handleCloneItem={handleCloneItem}
-			handleDeleteItem={handleDeleteItem}
-			handleDeleteRow={handleDeleteRow}
 			handleEditItem={handleEditItem}
 			handleEditRowClick={handleEditRowClick}
-			handleReorderItems={handleReorderItems}
 			handleReorderRows={handleReorderRows}
 			handleSaveCollectionRow={handleSaveCollectionRow}
 			handleSaveItem={handleSaveItem}
@@ -148,6 +123,7 @@ const GridContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			instructors={props.instructors}
 			modsInfo={props.modsInfo}
 			rows={props.rows}
+			setRows={props.setRows}
 			tags={props.tags}
 			thumbUrls={props.thumbUrls}
 		/>

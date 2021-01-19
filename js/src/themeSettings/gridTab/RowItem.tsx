@@ -1,4 +1,4 @@
-import { MoodleAcademySettings, RowItem as RowItemType } from '../../types';
+import { MoodleAcademySettings, Row, RowItem as RowItemType } from '../../types';
 import { getInstructorById, getTagById } from '../../shared/getById';
 import { DraggableProvided } from 'react-beautiful-dnd';
 import ImageWithFallback from '../../shared/ImageWithFallback';
@@ -11,9 +11,11 @@ interface Props {
 	handleCloneItem: (rowId: string, itemId: string) => void;
 	handleDeleteItem: (rowId: string, itemId: string) => void;
 	handleEditItem: (rowId: string, itemId: string) => void;
+	handleMoveToRow: (itemId: string, rowFromId: string, rowToId: string) => void;
 	modsInfo: MoodleAcademySettings['modsInfo'];
 	provided: DraggableProvided;
 	rowId: string;
+	rows: Row[];
 }
 
 const RowItem: React.FC<Props> = (props: Props): JSX.Element => {
@@ -71,8 +73,11 @@ const RowItem: React.FC<Props> = (props: Props): JSX.Element => {
 				handleCloneItem={props.handleCloneItem}
 				handleDeleteItem={props.handleDeleteItem}
 				handleEditItem={props.handleEditItem}
+				handleMoveToRow={props.handleMoveToRow}
+				itemId={props.item.id}
 				modId={props.item.modId}
 				rowId={props.rowId}
+				rows={props.rows}
 			/>
 		</div>
 	);

@@ -5,7 +5,7 @@ import {
 	Droppable,
 	ResponderProvided,
 } from 'react-beautiful-dnd';
-import { MoodleAcademySettings, RowItem as RowItemType } from '../../types';
+import { MoodleAcademySettings, Row, RowItem as RowItemType } from '../../types';
 import React from 'react';
 import RowItem from './RowItem';
 
@@ -18,14 +18,16 @@ interface Props {
 	handleEditItem: (rowId: string, itemId: string) => void;
 	handleItemDragEnd: (result: DropResult, provided: ResponderProvided) => void;
 	handleMouse: (e: React.MouseEvent<HTMLDivElement>) => void;
+	handleMoveItemToRow: (temId: string, rowFromId: string, rowToId: string) => void;
 	handleScroll: () => void;
 	items: RowItemType[];
 	modsInfo: MoodleAcademySettings['modsInfo'];
 	overflowBehavior: string;
 	rowId: string;
+	rows: Row[];
 }
 
-const Row: React.FC<Props> = (props: Props): JSX.Element => (
+const RowItems: React.FC<Props> = (props: Props): JSX.Element => (
 	<div
 		onMouseEnter={props.handleMouse}
 		onMouseLeave={props.handleMouse}
@@ -55,10 +57,12 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => (
 										handleCloneItem={props.handleCloneItem}
 										handleDeleteItem={props.handleDeleteItem}
 										handleEditItem={props.handleEditItem}
+										handleMoveToRow={props.handleMoveItemToRow}
 										item={item}
 										modsInfo={props.modsInfo}
 										provided={providedInner}
 										rowId={props.rowId}
+										rows={props.rows}
 									/>
 								)}
 							</Draggable>
@@ -71,4 +75,4 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => (
 	</div>
 );
 
-export default Row;
+export default RowItems;

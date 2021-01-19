@@ -88,6 +88,27 @@ button.disabled {
 .instructorsTable a {
 	color: inherit;
 }
+.moveToRowChoice:hover {
+	background-color: lightgray;
+}
+.moveToRowDropdown {
+	background-color: white;
+	box-shadow: 0 0 20px 0 #505050;
+	cursor: default;
+	left: -7.5em;
+	position: absolute;
+	text-align: left;
+	top: 1.5em;
+	width: 15em;
+}
+.moveToRowDropdown h5 {
+	background-color: #F0F0F0;
+	padding: 0.5em;
+}
+.moveToRowDropdown .moveToRowChoice {
+	padding: 0.1em 0.5em;
+}
+
 .offset-sm-3 {
 	margin-left: unset;
 }

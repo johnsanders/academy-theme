@@ -16,12 +16,8 @@ interface Props {
 	handleAddItemToRow: (rowId: string) => void;
 	handleAddCollectionRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleAddRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-	handleCloneItem: (rowId: string, itemId: string) => void;
-	handleDeleteItem: (rowId: string, itemId: string) => void;
-	handleDeleteRow: (rowId: string) => void;
 	handleEditItem: (rowId: string, itemId: string) => void;
 	handleEditRowClick: (id: string) => void;
-	handleReorderItems: (rowId: string, from: number, to: number) => void;
 	handleReorderRows: (from: number, to: number) => void;
 	handleSaveCollectionRow: (collectionRow: Tag[]) => void;
 	handleSaveItem: (item: RowItem) => void;
@@ -29,6 +25,7 @@ interface Props {
 	instructors: Instructor[];
 	modsInfo: MoodleAcademySettings['modsInfo'];
 	rows: Row[];
+	setRows: (rows: Row[]) => void;
 	tags: Tag[];
 	thumbUrls: string[];
 }
@@ -39,16 +36,12 @@ const Grid: React.FC<Props> = (props: Props): JSX.Element => (
 			<>
 				<RowsContainer
 					handleAddItemToRow={props.handleAddItemToRow}
-					handleCloneItem={props.handleCloneItem}
-					handleDeleteItem={props.handleDeleteItem}
-					handleDeleteRow={props.handleDeleteRow}
 					handleEditItem={props.handleEditItem}
 					handleEditRowClick={props.handleEditRowClick}
-					handleReorderItems={props.handleReorderItems}
 					handleReorderRows={props.handleReorderRows}
-					handleSaveRow={props.handleSaveRow}
 					modsInfo={props.modsInfo}
 					rows={props.rows}
+					setRows={props.setRows}
 				/>
 				<div>
 					<button className="btn btn-secondary" onClick={props.handleAddRowClick}>

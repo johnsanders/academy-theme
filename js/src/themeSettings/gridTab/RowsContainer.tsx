@@ -1,20 +1,18 @@
-import { MoodleAcademySettings, Row as RowType } from '../../types';
+import { MoodleAcademySettings, Row, RowItem, Row as RowType } from '../../types';
 import { DropResult } from 'react-beautiful-dnd';
 import React from 'react';
 import Rows from './Rows';
+import arrayMove from 'array-move';
+import { v4 as uuid } from 'uuid';
 
 interface Props {
 	handleAddItemToRow: (rowId: string) => void;
-	handleCloneItem: (rowId: string, itemId: string) => void;
-	handleDeleteItem: (rowId: string, itemId: string) => void;
-	handleDeleteRow: (rowId: string) => void;
 	handleEditItem: (rowId: string, itemId: string) => void;
 	handleEditRowClick: (rowId: string) => void;
-	handleReorderItems: (rowId: string, from: number, to: number) => void;
 	handleReorderRows: (from: number, to: number) => void;
-	handleSaveRow: (row: RowType) => void;
 	modsInfo: MoodleAcademySettings['modsInfo'];
 	rows: RowType[];
+	setRows: (rows: Row[]) => void;
 }
 
 const RowsContainer: React.FC<Props> = (props: Props): JSX.Element => {
@@ -31,30 +29,78 @@ const RowsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	const handleDeleteRowClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		const idToDelete = e.currentTarget.dataset.id;
 		if (!idToDelete) throw new Error('Cannot find row id to delete');
-		props.handleDeleteRow(idToDelete);
+		props.setRows(props.rows.filter((row) => row.id !== idToDelete));
 	};
 	const handleItemDragEnd = (result: DropResult): void => {
 		if (!activeRowIdRef.current || !result.destination) return;
-		props.handleReorderItems(activeRowIdRef.current, result.source.index, result.destination.index);
+		const row = props.rows.find((row) => row.id === activeRowIdRef.current);
+		if (!row) throw new Error('Cannot find row to reorder');
+		const newItems = arrayMove(row.items, result.source.index, result.destination.index);
+		const newRow = { ...row, items: newItems };
+		const newRows = props.rows.map((row) => (row.id === activeRowIdRef.current ? newRow : row));
+		props.setRows(newRows);
 	};
 	const handleRowDragEnd = (result: DropResult): void => {
 		if (!result.destination) return;
 		props.handleReorderRows(result.source.index, result.destination.index);
 	};
-	const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>): void => {
-		const id = e.currentTarget.dataset.id;
-		if (id) activeRowIdRef.current = id;
+	const handleCloneItem = (rowId: string, itemId: string) => {
+		const row = props.rows.find((row) => row.id == rowId);
+		if (!row) throw new Error('Cannot find item row');
+		const newItems = row.items.reduce<RowItem[]>(
+			(acc, item) =>
+				item.modId === itemId ? [...acc, item, { ...item, id: uuid() }] : [...acc, item],
+			[],
+		);
+		const newRows = props.rows.map((row) =>
+			row.id !== rowId
+				? row
+				: {
+						...row,
+						items: newItems,
+				  },
+		);
+		props.setRows(newRows);
+	};
+	const handleMoveItemToRow = (itemId: string, rowFromId: string, rowToId: string): void => {
+		const oldFromRow = props.rows.find((row) => row.id === rowFromId);
+		const oldToRow = props.rows.find((row) => row.id === rowToId);
+		if (!oldFromRow || !oldToRow) return;
+		const item = oldFromRow.items.find((rowItem) => rowItem.id === itemId);
+		if (!item) return;
+		const newFromRow = {
+			...oldFromRow,
+			items: oldFromRow.items.filter((rowItem) => rowItem.id !== itemId),
+		};
+		const newToRow = { ...oldToRow, items: [item, ...oldToRow.items] };
+		const newRows = props.rows.map((row) => {
+			if (row.id === newFromRow.id) return newFromRow;
+			if (row.id === newToRow.id) return newToRow;
+			return row;
+		});
+		props.setRows(newRows);
+	};
+	const handleDeleteItem = (rowId: string, deletedItemId: string) => {
+		const newRows = props.rows.map((row) =>
+			row.id !== rowId
+				? row
+				: {
+						...row,
+						items: row.items.filter((item) => item.modId !== deletedItemId),
+				  },
+		);
+		props.setRows(newRows);
 	};
 	return (
 		<Rows
 			handleAddItemClick={handleAddItemClick}
-			handleCloneItem={props.handleCloneItem}
-			handleDeleteItem={props.handleDeleteItem}
+			handleCloneItem={handleCloneItem}
+			handleDeleteItem={handleDeleteItem}
 			handleDeleteRowClick={handleDeleteRowClick}
 			handleEditItem={props.handleEditItem}
 			handleEditRowClick={handleEditRowClick}
 			handleItemDragEnd={handleItemDragEnd}
-			handleMouseEnter={handleMouseEnter}
+			handleMoveItemToRow={handleMoveItemToRow}
 			handleRowDragEnd={handleRowDragEnd}
 			modsInfo={props.modsInfo}
 			rows={props.rows}

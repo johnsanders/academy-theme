@@ -18,21 +18,21 @@ interface Props {
 	handleEditItem: (rowId: string, itemId: string) => void;
 	handleEditRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleItemDragEnd: (result: DropResult) => void;
-	handleMouseEnter: (e: React.MouseEvent<HTMLDivElement>) => void;
 	handleMouseEvent: (e: React.MouseEvent<HTMLDivElement>) => void;
+	handleMoveItemToRow: (itemId: string, rowFromId: string, rowToId: string) => void;
 	handleScrollEvent: () => void;
 	handleScrollClick: (direction: string) => void;
 	hovered: boolean;
 	modsInfo: MoodleAcademySettings['modsInfo'];
 	provided: DraggableProvided;
 	row: RowType;
+	rows: RowType[];
 }
 
 const Row: React.FC<Props> = (props: Props): JSX.Element => (
 	<div
 		className="mb-4"
 		data-id={props.row.id}
-		onMouseEnter={props.handleMouseEnter}
 		ref={props.provided.innerRef}
 		{...props.provided.draggableProps}
 	>
@@ -94,11 +94,13 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => (
 				handleEditItem={props.handleEditItem}
 				handleItemDragEnd={props.handleItemDragEnd}
 				handleMouse={props.handleMouseEvent}
+				handleMoveItemToRow={props.handleMoveItemToRow}
 				handleScroll={props.handleScrollEvent}
 				items={props.row.items}
 				modsInfo={props.modsInfo}
 				overflowBehavior={props.row.overflowBehavior}
 				rowId={props.row.id}
+				rows={props.rows}
 			/>
 		</div>
 	</div>

@@ -11,7 +11,7 @@ interface Props {
 	handleDeleteRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleEditRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleItemDragEnd: (resut: DropResult) => void;
-	handleMouseEnter: (e: React.MouseEvent<HTMLDivElement>) => void;
+	handleMoveItemToRow: (itemId: string, rowFromId: string, rowToId: string) => void;
 	handleRowDragEnd: (result: DropResult) => void;
 	modsInfo: MoodleAcademySettings['modsInfo'];
 	rows: RowType[];
@@ -33,15 +33,17 @@ const Rows: React.FC<Props> = (props: Props): JSX.Element => (
 									handleEditItem={props.handleEditItem}
 									handleEditRowClick={props.handleEditRowClick}
 									handleItemDragEnd={props.handleItemDragEnd}
-									handleMouseEnter={props.handleMouseEnter}
+									handleMoveItemToRow={props.handleMoveItemToRow}
 									key={row.id}
 									modsInfo={props.modsInfo}
 									provided={providedInner}
 									row={row}
+									rows={props.rows}
 								/>
 							)}
 						</Draggable>
 					))}
+					{providedOuter.placeholder}
 				</div>
 			)}
 		</Droppable>
