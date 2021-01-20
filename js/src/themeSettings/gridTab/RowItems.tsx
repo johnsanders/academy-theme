@@ -1,13 +1,7 @@
-import {
-	DragDropContext,
-	Draggable,
-	DropResult,
-	Droppable,
-	ResponderProvided,
-} from 'react-beautiful-dnd';
 import { MoodleAcademySettings, Row, RowItem as RowItemType } from '../../types';
+import { SortableContext, horizontalListSortingStrategy } from '@dnd-kit/sortable';
 import React from 'react';
-import RowItem from './RowItem';
+import RowItemSortable from './RowItemSortable';
 
 interface Props {
 	containerRef: React.MutableRefObject<HTMLDivElement | undefined>;
@@ -16,7 +10,6 @@ interface Props {
 	handleDeleteItem: (rowId: string, itemId: string) => void;
 	handleDeleteRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleEditItem: (rowId: string, itemId: string) => void;
-	handleItemDragEnd: (result: DropResult, provided: ResponderProvided) => void;
 	handleMouse: (e: React.MouseEvent<HTMLDivElement>) => void;
 	handleMoveItemToRow: (temId: string, rowFromId: string, rowToId: string) => void;
 	handleScroll: () => void;
@@ -38,40 +31,32 @@ const RowItems: React.FC<Props> = (props: Props): JSX.Element => (
 			}
 		}}
 	>
-		<DragDropContext onDragEnd={props.handleItemDragEnd}>
-			<Droppable direction="horizontal" droppableId={props.rowId}>
-				{(providedOuter) => (
-					<div
-						className={`gridRowItems gridRowItems_${props.overflowBehavior}`}
-						onScroll={props.handleScroll}
-						ref={providedOuter.innerRef}
-						{...providedOuter.droppableProps}
-					>
-						{props.items.length === 0 ? (
-							<div className="text-muted my-2">No items to show in this row.</div>
-						) : null}
-						{props.items.map((item, i) => (
-							<Draggable draggableId={item.id} index={i} key={item.id}>
-								{(providedInner) => (
-									<RowItem
-										handleCloneItem={props.handleCloneItem}
-										handleDeleteItem={props.handleDeleteItem}
-										handleEditItem={props.handleEditItem}
-										handleMoveToRow={props.handleMoveItemToRow}
-										item={item}
-										modsInfo={props.modsInfo}
-										provided={providedInner}
-										rowId={props.rowId}
-										rows={props.rows}
-									/>
-								)}
-							</Draggable>
-						))}
-						{providedOuter.placeholder}
-					</div>
-				)}
-			</Droppable>
-		</DragDropContext>
+		<div
+			className={`gridRowItems gridRowItems_${props.overflowBehavior}`}
+			onScroll={props.handleScroll}
+		>
+			<SortableContext
+				items={props.items.map((item) => item.id)}
+				strategy={horizontalListSortingStrategy}
+			>
+				{props.items.length === 0 ? (
+					<div className="text-muted my-2">No items to show in this row.</div>
+				) : null}
+				{props.items.map((item) => (
+					<RowItemSortable
+						handleCloneItem={props.handleCloneItem}
+						handleDeleteItem={props.handleDeleteItem}
+						handleEditItem={props.handleEditItem}
+						handleMoveToRow={props.handleMoveItemToRow}
+						item={item}
+						key={item.id}
+						modsInfo={props.modsInfo}
+						rowId={props.rowId}
+						rows={props.rows}
+					/>
+				))}
+			</SortableContext>
+		</div>
 	</div>
 );
 

@@ -1,4 +1,3 @@
-import { DraggableProvided, DropResult } from 'react-beautiful-dnd';
 import { MoodleAcademySettings, Row as RowType } from '../../types';
 import { faArrowsV, faPencil, faPlus, faTrash } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
@@ -17,25 +16,18 @@ interface Props {
 	handleDeleteRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleEditItem: (rowId: string, itemId: string) => void;
 	handleEditRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-	handleItemDragEnd: (result: DropResult) => void;
 	handleMouseEvent: (e: React.MouseEvent<HTMLDivElement>) => void;
 	handleMoveItemToRow: (itemId: string, rowFromId: string, rowToId: string) => void;
 	handleScrollEvent: () => void;
 	handleScrollClick: (direction: string) => void;
 	hovered: boolean;
 	modsInfo: MoodleAcademySettings['modsInfo'];
-	provided: DraggableProvided;
 	row: RowType;
 	rows: RowType[];
 }
 
 const Row: React.FC<Props> = (props: Props): JSX.Element => (
-	<div
-		className="mb-4"
-		data-id={props.row.id}
-		ref={props.provided.innerRef}
-		{...props.provided.draggableProps}
-	>
+	<div className="mb-4" data-id={props.row.id}>
 		<div className="d-flex align-items-center justify-content-between">
 			<h4 className="w-50" style={{ borderBottom: 'none' }}>
 				{props.row.name}
@@ -65,10 +57,7 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => (
 					<Icon className="mr-1" icon={faTrash} />
 					Delete Row
 				</button>
-				<div
-					className="rowDragHandle d-inline-block bg-secondary btn-sm mb-1"
-					{...props.provided.dragHandleProps}
-				>
+				<div className="rowDragHandle d-inline-block bg-secondary btn-sm mb-1">
 					<Icon className="mr-1" icon={faArrowsV} />
 					Reorder
 				</div>
@@ -92,7 +81,6 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => (
 				handleDeleteItem={props.handleDeleteItem}
 				handleDeleteRowClick={props.handleDeleteRowClick}
 				handleEditItem={props.handleEditItem}
-				handleItemDragEnd={props.handleItemDragEnd}
 				handleMouse={props.handleMouseEvent}
 				handleMoveItemToRow={props.handleMoveItemToRow}
 				handleScroll={props.handleScrollEvent}

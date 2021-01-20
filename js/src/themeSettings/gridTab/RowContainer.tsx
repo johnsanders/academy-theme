@@ -1,4 +1,3 @@
-import { DraggableProvided, DropResult } from 'react-beautiful-dnd';
 import { MoodleAcademySettings, Row as RowType } from '../../types';
 import React from 'react';
 import Row from './Row';
@@ -11,10 +10,8 @@ interface Props {
 	handleDeleteRow: (rowId: string) => void;
 	handleEditItem: (rowId: string, itemId: string) => void;
 	handleEditRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-	handleItemDragEnd: (result: DropResult) => void;
 	handleMoveItemToRow: (itemId: string, rowFromId: string, rowToId: string) => void;
 	modsInfo: MoodleAcademySettings['modsInfo'];
-	provided: DraggableProvided;
 	row: RowType;
 	rows: RowType[];
 }
@@ -63,14 +60,12 @@ const RowContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			handleDeleteRowClick={handleDeleteRowClick}
 			handleEditItem={props.handleEditItem}
 			handleEditRowClick={props.handleEditRowClick}
-			handleItemDragEnd={props.handleItemDragEnd}
 			handleMouseEvent={handleMouseEvent}
 			handleMoveItemToRow={props.handleMoveItemToRow}
 			handleScrollClick={handleScrollClick}
 			handleScrollEvent={handleScrollEvent}
 			hovered={hovered}
 			modsInfo={props.modsInfo}
-			provided={props.provided}
 			row={props.row}
 			rows={props.rows}
 		/>

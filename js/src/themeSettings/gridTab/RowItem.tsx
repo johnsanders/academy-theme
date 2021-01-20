@@ -1,32 +1,41 @@
 import { MoodleAcademySettings, Row, RowItem as RowItemType } from '../../types';
 import { getInstructorById, getTagById } from '../../shared/getById';
-import { DraggableProvided } from 'react-beautiful-dnd';
 import ImageWithFallback from '../../shared/ImageWithFallback';
 import React from 'react';
 import RowItemButtons from './RowItemButtons';
 import getForegroundColor from '../../helpers/getForegroundColor';
 
 interface Props {
+	attributes?: {
+		role: string;
+		tabIndex: number;
+		'aria-pressed': boolean;
+		'aria-roledescription': string;
+		'aria-describedby': string;
+	};
 	item: RowItemType;
-	handleCloneItem: (rowId: string, itemId: string) => void;
-	handleDeleteItem: (rowId: string, itemId: string) => void;
-	handleEditItem: (rowId: string, itemId: string) => void;
-	handleMoveToRow: (itemId: string, rowFromId: string, rowToId: string) => void;
+	handleCloneItem?: (rowId: string, itemId: string) => void;
+	handleDeleteItem?: (rowId: string, itemId: string) => void;
+	handleEditItem?: (rowId: string, itemId: string) => void;
+	handleMoveToRow?: (itemId: string, rowFromId: string, rowToId: string) => void;
+	/* eslint-disable-next-line @typescript-eslint/ban-types */
+	listeners?: Record<string, Function>;
 	modsInfo: MoodleAcademySettings['modsInfo'];
-	provided: DraggableProvided;
-	rowId: string;
-	rows: Row[];
+	rowId?: string;
+	rows?: Row[];
+	style?: React.CSSProperties;
 }
 
-const RowItem: React.FC<Props> = (props: Props): JSX.Element => {
+const RowItem = React.forwardRef<HTMLDivElement, Props>((props: Props, ref) => {
 	const dateString =
 		props.item.dateDisplayed && new Date(props.item.dateDisplayed).toLocaleString();
 	return (
 		<div
 			className="card m-2 gridRowItem"
-			ref={props.provided.innerRef}
-			{...props.provided.draggableProps}
-			{...props.provided.dragHandleProps}
+			ref={ref}
+			style={props.style}
+			{...props.attributes}
+			{...props.listeners}
 		>
 			<div className="card-img-top">
 				<ImageWithFallback imgUrl={props.item.thumbUrl} />
@@ -76,11 +85,13 @@ const RowItem: React.FC<Props> = (props: Props): JSX.Element => {
 				handleMoveToRow={props.handleMoveToRow}
 				itemId={props.item.id}
 				modId={props.item.modId}
-				rowId={props.rowId}
+				rowId={props.rowId || ''}
 				rows={props.rows}
 			/>
 		</div>
 	);
-};
+});
+
+RowItem.displayName = 'RowItem';
 
 export default RowItem;
