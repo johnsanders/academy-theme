@@ -154,7 +154,7 @@ class core_renderer extends \core_renderer
 		if ($withlinks) {
 			$navitemcount = count($opts->navitems);
 			$idx = 0;
-			$unwantedLinks = ['mymoodle,admin', 'profile,moodle', 'grades,grades', 'messages,messages'];
+			$unwantedLinks = ['mymoodle,admin', 'profile,moodle', 'grades,grades', 'messages,message'];
 			array_unshift($opts->navitems, (object)[
 				"itemtype" => "link",
 				"url" => new \moodle_url('/calendar/view.php?view=month'),
