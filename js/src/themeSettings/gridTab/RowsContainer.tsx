@@ -3,6 +3,7 @@ import { MoodleAcademySettings, Row, RowItem, Row as RowType } from '../../types
 import React from 'react';
 import Rows from './Rows';
 import { arrayMove } from '@dnd-kit/sortable';
+import getItemInRows from '../../helpers/getItemInRows';
 import { v4 as uuid } from 'uuid';
 
 interface Props {
@@ -16,37 +17,13 @@ interface Props {
 
 const RowsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	const [activeDragId, setActiveDragId] = React.useState<string | null>(null);
-	const handleEditRowClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
-		const rowId = e.currentTarget.dataset.id;
-		if (rowId) props.handleEditRowClick(rowId);
-	};
-	const handleAddItemClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
-		e.preventDefault();
-		const rowId = e.currentTarget.dataset.id;
-		if (rowId) props.handleAddItemToRow(rowId);
+	const handleMoveRow = (rowId: string, increment: number): void => {
+		const rowIndex = props.rows.findIndex((row) => row.id === rowId);
+		const newRows = arrayMove(props.rows, rowIndex, rowIndex + increment);
+		props.setRows(newRows);
 	};
 	const handleDeleteRow = (rowId: string): void =>
 		props.setRows(props.rows.filter((row) => row.id !== rowId));
-	const handleItemDragEnd = (e: DragEndEvent): void => {
-		const fromRow = props.rows.find((row) => row.items.find((item) => item.id === e.active.id));
-		const toRow = props.rows.find((row) => row.items.find((item) => item.id === e.over?.id));
-		if (!fromRow || !toRow || fromRow === toRow) return;
-		if (fromRow.id === toRow.id) {
-			setActiveDragId(null);
-			return;
-		}
-		// const fromIndex = fromRow.items.findIndex(item => item.id === e.)
-		setActiveDragId(null);
-		/*
-
-		const row = props.rows.find((row) => row.id === result.source.droppableId);
-		if (!row) throw new Error('Cannot find row to reorder');
-		const newItems = arrayMove(row.items, result.source.index, result.destination.index);
-		const newRow = { ...row, items: newItems };
-		const newRows = props.rows.map((row) => (row.id === result.source.droppableId ? newRow : row));
-		props.setRows(newRows);
-		*/
-	};
 	const handleItemDragOver = (e: DragOverEvent) => {
 		const fromRow = props.rows.find((row) => row.items.find((item) => item.id === e.active.id));
 		const toRow = props.rows.find((row) => row.items.find((item) => item.id === e.over?.id));
@@ -79,9 +56,17 @@ const RowsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		props.setRows(newRows);
 	};
 	const handleItemDragStart = (e: DragStartEvent): void => setActiveDragId(e.active.id);
-	const handleRowDragEnd = (result: any): void => {
-		if (!result.destination) return;
-		const newRows = arrayMove(props.rows, result.source.index, result.destination.index);
+	const handleItemDragEnd = (e: DragEndEvent): void => {
+		if (!e.over?.id) return;
+		const fromItem = getItemInRows(e.active.id, props.rows);
+		const toItem = getItemInRows(e.over.id, props.rows);
+		if (!fromItem || !toItem) return;
+		console.log(fromItem.itemIndex, toItem.itemIndex);
+		const newRow = {
+			...toItem.row,
+			items: arrayMove(toItem.row.items, fromItem.itemIndex, toItem.itemIndex),
+		};
+		const newRows = props.rows.map((row) => (row.id === newRow.id ? newRow : row));
 		props.setRows(newRows);
 	};
 	const handleCloneItem = (rowId: string, itemId: string) => {
@@ -102,24 +87,6 @@ const RowsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		);
 		props.setRows(newRows);
 	};
-	const handleMoveItemToRow = (itemId: string, rowFromId: string, rowToId: string): void => {
-		const oldFromRow = props.rows.find((row) => row.id === rowFromId);
-		const oldToRow = props.rows.find((row) => row.id === rowToId);
-		if (!oldFromRow || !oldToRow) return;
-		const item = oldFromRow.items.find((rowItem) => rowItem.id === itemId);
-		if (!item) return;
-		const newFromRow = {
-			...oldFromRow,
-			items: oldFromRow.items.filter((rowItem) => rowItem.id !== itemId),
-		};
-		const newToRow = { ...oldToRow, items: [item, ...oldToRow.items] };
-		const newRows = props.rows.map((row) => {
-			if (row.id === newFromRow.id) return newFromRow;
-			if (row.id === newToRow.id) return newToRow;
-			return row;
-		});
-		props.setRows(newRows);
-	};
 	const handleDeleteItem = (rowId: string, deletedItemId: string) => {
 		const newRows = props.rows.map((row) =>
 			row.id !== rowId
@@ -134,17 +101,16 @@ const RowsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	return (
 		<Rows
 			activeDragId={activeDragId}
-			handleAddItemClick={handleAddItemClick}
+			handleAddItemClick={props.handleAddItemToRow}
 			handleCloneItem={handleCloneItem}
 			handleDeleteItem={handleDeleteItem}
 			handleDeleteRow={handleDeleteRow}
 			handleEditItem={props.handleEditItem}
-			handleEditRowClick={handleEditRowClick}
+			handleEditRow={props.handleEditRowClick}
 			handleItemDragEnd={handleItemDragEnd}
 			handleItemDragOver={handleItemDragOver}
 			handleItemDragStart={handleItemDragStart}
-			handleMoveItemToRow={handleMoveItemToRow}
-			handleRowDragEnd={handleRowDragEnd}
+			handleMoveRow={handleMoveRow}
 			modsInfo={props.modsInfo}
 			rows={props.rows}
 		/>

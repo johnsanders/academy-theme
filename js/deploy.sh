@@ -25,14 +25,14 @@ cd ../../
 
 /bin/rm ./academy.tar.gz
 
-#/usr/bin/ssh -tt cnnitouch@academy.cnntoolbox.com << EOF
-#/usr/bin/sudo bash
-#cd /tmp
-#cd /var/lib/docker/volumes/server_moodle_data/_data/theme
-#/bin/rm -rf academy
-#/bin/mv /home/cnnitouch/academy.tar.gz ./
-#/bin/tar -xzvf academy.tar.gz
-#/bin/rm academy.tar.gz
-#exit
-#exit
-#EOF
+/usr/bin/ssh -tt cnnitouch@academy.cnntoolbox.com << EOF
+/usr/bin/sudo bash
+cd /tmp
+cd /var/lib/docker/volumes/server_moodle_data/_data/theme
+/bin/rm -rf academy
+/bin/mv /home/cnnitouch/academy.tar.gz ./
+/bin/tar -xzvf academy.tar.gz
+/bin/rm academy.tar.gz
+exit
+exit
+EOF

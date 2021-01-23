@@ -1,4 +1,4 @@
-import { MoodleAcademySettings, Row, RowItem as RowItemType } from '../../types';
+import { MoodleAcademySettings, RowItem as RowItemType } from '../../types';
 import { getInstructorById, getTagById } from '../../shared/getById';
 import ImageWithFallback from '../../shared/ImageWithFallback';
 import React from 'react';
@@ -9,7 +9,7 @@ interface Props {
 	attributes?: {
 		role: string;
 		tabIndex: number;
-		'aria-pressed': boolean;
+		'aria-pressed': boolean | undefined;
 		'aria-roledescription': string;
 		'aria-describedby': string;
 	};
@@ -22,7 +22,6 @@ interface Props {
 	listeners?: Record<string, Function>;
 	modsInfo: MoodleAcademySettings['modsInfo'];
 	rowId?: string;
-	rows?: Row[];
 	style?: React.CSSProperties;
 }
 
@@ -45,7 +44,7 @@ const RowItem = React.forwardRef<HTMLDivElement, Props>((props: Props, ref) => {
 				<h4 className="mb-0">
 					{props.item.modName === 'manual'
 						? props.item.manualName
-						: props.modsInfo[props.item.modId].name}
+						: props.modsInfo[props.item.modId]?.name}
 				</h4>
 				{dateString ? <div className="text-muted">{dateString}</div> : null}
 				<div className="instructorsContainer">
@@ -82,11 +81,9 @@ const RowItem = React.forwardRef<HTMLDivElement, Props>((props: Props, ref) => {
 				handleCloneItem={props.handleCloneItem}
 				handleDeleteItem={props.handleDeleteItem}
 				handleEditItem={props.handleEditItem}
-				handleMoveToRow={props.handleMoveToRow}
 				itemId={props.item.id}
 				modId={props.item.modId}
 				rowId={props.rowId || ''}
-				rows={props.rows}
 			/>
 		</div>
 	);

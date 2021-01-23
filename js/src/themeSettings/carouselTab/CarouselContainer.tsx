@@ -2,7 +2,7 @@ import Carousel from './Carousel';
 import { CarouselItem } from '../../types';
 import { DropResult } from 'react-beautiful-dnd';
 import React from 'react';
-import arrayMove from '@dnd-kit/sortable';
+import { arrayMove } from '@dnd-kit/sortable';
 import createBlankCarouselItem from './createBlankCarouselItem';
 import disableSaveButtons from '../disableSaveButtons';
 

@@ -18,17 +18,16 @@ import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 
 interface Props {
 	activeDragId: string | null;
-	handleAddItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	handleAddItemClick: (rowId: string) => void;
 	handleCloneItem: (rowId: string, itemId: string) => void;
 	handleDeleteItem: (rowId: string, itemId: string) => void;
 	handleEditItem: (rowId: string, itemId: string) => void;
 	handleDeleteRow: (rowId: string) => void;
-	handleEditRowClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	handleEditRow: (rowId: string) => void;
 	handleItemDragEnd: (e: DragEndEvent) => void;
 	handleItemDragOver: (e: DragOverEvent) => void;
 	handleItemDragStart: (e: DragStartEvent) => void;
-	handleMoveItemToRow: (itemId: string, rowFromId: string, rowToId: string) => void;
-	handleRowDragEnd: (result: any) => void;
+	handleMoveRow: (rowId: string, increment: number) => void;
 	modsInfo: MoodleAcademySettings['modsInfo'];
 	rows: RowType[];
 }
@@ -48,19 +47,20 @@ const Rows: React.FC<Props> = (props: Props): JSX.Element => {
 			onDragStart={props.handleItemDragStart}
 			sensors={sensors}
 		>
-			{props.rows.map((row) => (
+			{props.rows.map((row, i) => (
 				<RowContainer
 					handleAddItemClick={props.handleAddItemClick}
 					handleCloneItem={props.handleCloneItem}
 					handleDeleteItem={props.handleDeleteItem}
 					handleDeleteRow={props.handleDeleteRow}
 					handleEditItem={props.handleEditItem}
-					handleEditRowClick={props.handleEditRowClick}
-					handleMoveItemToRow={props.handleMoveItemToRow}
+					handleEditRow={props.handleEditRow}
+					handleMoveRow={props.handleMoveRow}
+					isFirst={i === 0}
+					isLast={i === props.rows.length - 1}
 					key={row.id}
 					modsInfo={props.modsInfo}
 					row={row}
-					rows={props.rows}
 				/>
 			))}
 			<DragOverlay>

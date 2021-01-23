@@ -1,4 +1,4 @@
-import { MoodleAcademySettings, Row, RowItem as RowItemType } from '../../types';
+import { MoodleAcademySettings, RowItem as RowItemType } from '../../types';
 import { CSS } from '@dnd-kit/utilities';
 import React from 'react';
 import RowItem from './RowItem';
@@ -9,10 +9,8 @@ interface Props {
 	handleCloneItem: (rowId: string, itemId: string) => void;
 	handleDeleteItem: (rowId: string, itemId: string) => void;
 	handleEditItem: (rowId: string, itemId: string) => void;
-	handleMoveToRow: (itemId: string, rowFromId: string, rowToId: string) => void;
 	modsInfo: MoodleAcademySettings['modsInfo'];
 	rowId: string;
-	rows: Row[];
 }
 
 const RowItemSortable: React.FC<Props> = (props: Props): JSX.Element => {
