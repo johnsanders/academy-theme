@@ -9,8 +9,6 @@ const HookShellScriptPlugin = require('hook-shell-script-webpack-plugin');
 const SentryWebpackPlugin = require('@sentry/webpack-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 
-const outputDir = path.resolve('./dist');
-
 const bundleAnalyzerPlugin = new BundleAnalyzerPlugin({
 	analyzerMode: 'server',
 	analyzerPort: 8989,
@@ -27,7 +25,13 @@ const sentryPlugin = new SentryWebpackPlugin({
 	org: 'cnn',
 	project: 'cnn_academy',
 });
-const productionPlugins = [bundleAnalyzerPlugin, cleanWebpackPlugin, manifestPlugin, sentryPlugin];
+const productionPlugins = [
+	cleanWebpackPlugin,
+	manifestPlugin,
+	scriptPlugin,
+	sentryPlugin,
+	bundleAnalyzerPlugin,
+];
 const devPlugins = [cleanWebpackPlugin, manifestPlugin, scriptPlugin];
 
 module.exports = {
@@ -35,7 +39,7 @@ module.exports = {
 	entry: path.resolve('./src/index.tsx'),
 	output: {
 		filename: '[name].[contenthash].js',
-		path: outputDir,
+		path: path.resolve('./dist'),
 		publicPath: 'auto',
 	},
 	resolve: {
