@@ -13,7 +13,6 @@ interface Props {
 }
 
 const RowItemButtons: React.FC<Props> = (props: Props) => {
-	ReactTooltip.rebuild();
 	const clickHandlers = {
 		clone: props.handleCloneItem,
 		delete: props.handleDeleteItem,
