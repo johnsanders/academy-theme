@@ -61,7 +61,6 @@ const RowsContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		const fromItem = getItemInRows(e.active.id, props.rows);
 		const toItem = getItemInRows(e.over.id, props.rows);
 		if (!fromItem || !toItem) return;
-		console.log(fromItem.itemIndex, toItem.itemIndex);
 		const newRow = {
 			...toItem.row,
 			items: arrayMove(toItem.row.items, fromItem.itemIndex, toItem.itemIndex),
