@@ -29,14 +29,8 @@ const RowItem = React.forwardRef<HTMLDivElement, Props>((props: Props, ref) => {
 	const dateString =
 		props.item.dateDisplayed && new Date(props.item.dateDisplayed).toLocaleString();
 	return (
-		<div
-			className="card m-2 gridRowItem"
-			ref={ref}
-			style={props.style}
-			{...props.attributes}
-			{...props.listeners}
-		>
-			<div className="card-img-top">
+		<div className="card m-2 gridRowItem" ref={ref} style={props.style} {...props.attributes}>
+			<div className="card-img-top" {...props.listeners}>
 				<ImageWithFallback imgUrl={props.item.thumbUrl} />
 				{props.item.duration ? <span className="duration">{props.item.duration}</span> : null}
 			</div>
