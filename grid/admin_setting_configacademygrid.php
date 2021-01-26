@@ -50,8 +50,10 @@ class admin_setting_configacademygrid extends admin_setting
 	private function get_courses()
 	{
 		global $DB;
-		$courses_list = $DB->get_records('course', null, '', 'id,fullname');
-		$courses_associative = array_map(function ($course) {
+		$courses_list = get_courses(null, 'c.timecreated DESC', 'c.id,c.fullname');
+		array_pop($courses_list);
+		$courses_list = array_values($courses_list);
+		$courses = array_map(function ($course) {
 			$cm = get_fast_modinfo($course->id);
 			$cms = $cm->get_cms();
 			$modules = [];
@@ -61,7 +63,7 @@ class admin_setting_configacademygrid extends admin_setting
 			$course->modules = array_values($modules);
 			return $course;
 		}, $courses_list);
-		return array_values($courses_associative);
+		return $courses;
 	}
 	public function output_html($data, $query = '')
 	{
