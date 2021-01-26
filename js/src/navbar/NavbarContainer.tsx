@@ -3,8 +3,14 @@ import { NavbarConfig } from '../types';
 import React from 'react';
 import SimpleMenu from './SimpleMenu';
 
+export interface Link {
+	text: string;
+	url: string;
+}
+
 interface Props {
 	config: NavbarConfig;
+	extraLinks?: Link[];
 	templateType: string;
 	visible: boolean;
 }
@@ -51,6 +57,7 @@ const NavbarContainer: React.FC<Props> = (props: Props): JSX.Element => {
 			) : (
 				<Navbar
 					ariaLabel={props.config.ariaLabel}
+					extraLinks={props.extraLinks}
 					fixed={!props.config.isLoggedIn}
 					handleDrawerToggleClick={handleDrawerToggleClick}
 					isLoggedIn={props.config.isLoggedIn}

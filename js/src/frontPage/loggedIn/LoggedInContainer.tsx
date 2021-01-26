@@ -2,6 +2,7 @@ import './style.css';
 import '../../shared/style.css';
 import LoggedIn from './LoggedIn';
 import { MoodleAcademyFront } from '../../types';
+import Navbar from '../../navbar';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { parse as qsParse } from 'qs';
@@ -47,19 +48,26 @@ const LoggedInContainer: React.FC<Props> = (props: Props): JSX.Element | null =>
 	};
 	if (!el) return null;
 	return createPortal(
-		<LoggedIn
-			activeTagId={activeTagId}
-			carouselItems={carouselItems}
-			handleCarouselInit={handleCarouselInit}
-			handleCollectionInit={handleCollectionInit}
-			handleRowInit={handleRowInit}
-			modsInfo={props.cnnAcademy.modsInfo}
-			rows={populatedRows}
-			scormAttempts={props.cnnAcademy.scormAttempts}
-			setActiveTagId={setActiveTagId}
-			tags={tags}
-			visible={props.visible}
-		/>,
+		<>
+			<Navbar
+				config={props.cnnAcademy.navbarConfig}
+				templateType={props.cnnAcademy.templateType}
+				visible={true}
+			/>
+			<LoggedIn
+				activeTagId={activeTagId}
+				carouselItems={carouselItems}
+				handleCarouselInit={handleCarouselInit}
+				handleCollectionInit={handleCollectionInit}
+				handleRowInit={handleRowInit}
+				modsInfo={props.cnnAcademy.modsInfo}
+				rows={populatedRows}
+				scormAttempts={props.cnnAcademy.scormAttempts}
+				setActiveTagId={setActiveTagId}
+				tags={tags}
+				visible={props.visible}
+			/>
+		</>,
 		el,
 	);
 };

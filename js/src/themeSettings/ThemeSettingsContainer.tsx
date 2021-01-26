@@ -1,6 +1,7 @@
 import './style.css';
 import '../shared/style.css';
 import { CarouselItem, Config, Instructor, MoodleAcademySettings, Row } from '../types';
+import Navbar from '../navbar';
 import React from 'react';
 import { Tag } from '../types';
 import ThemeSettings from './ThemeSettings';
@@ -76,24 +77,31 @@ const ThemeSettingsContainer: React.FC<Props> = (props: Props): JSX.Element | nu
 		return null;
 	}
 	return createPortal(
-		<ThemeSettings
-			activeTab={activeTab}
-			carousel={carousel}
-			courses={props.cnnAcademy.courses}
-			handleNavClick={handleNavClick}
-			inputRef={inputRef}
-			instructors={instructors}
-			modsInfo={props.cnnAcademy.modsInfo}
-			rows={rows}
-			setCarousel={setCarousel}
-			setInstructors={setInstructors}
-			setRows={setRows}
-			setTags={setTags}
-			submitForm={submitForm}
-			tags={tags}
-			thumbUrls={props.cnnAcademy.thumbUrls}
-			unsavedChanges={unsavedChanges || false}
-		/>,
+		<>
+			<Navbar
+				config={props.cnnAcademy.navbarConfig}
+				templateType={props.cnnAcademy.templateType}
+				visible={true}
+			/>
+			<ThemeSettings
+				activeTab={activeTab}
+				carousel={carousel}
+				courses={props.cnnAcademy.courses}
+				handleNavClick={handleNavClick}
+				inputRef={inputRef}
+				instructors={instructors}
+				modsInfo={props.cnnAcademy.modsInfo}
+				rows={rows}
+				setCarousel={setCarousel}
+				setInstructors={setInstructors}
+				setRows={setRows}
+				setTags={setTags}
+				submitForm={submitForm}
+				tags={tags}
+				thumbUrls={props.cnnAcademy.thumbUrls}
+				unsavedChanges={unsavedChanges || false}
+			/>
+		</>,
 		el,
 	);
 };

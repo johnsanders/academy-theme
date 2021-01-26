@@ -17,7 +17,11 @@ const FrontPage: React.FC<Props> = (props: Props): JSX.Element => {
 			visible={props.visible}
 		/>
 	) : (
-		<LoggedOut handleComponentsReady={props.handleComponentsReady} visible={props.visible} />
+		<LoggedOut
+			cnnAcademy={props.cnnAcademy}
+			handleComponentsReady={props.handleComponentsReady}
+			visible={props.visible}
+		/>
 	);
 };
 
