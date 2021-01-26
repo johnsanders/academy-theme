@@ -108,9 +108,16 @@ button.disabled {
 .moveToRowDropdown .moveToRowChoice {
 	padding: 0.1em 0.5em;
 }
-
 .offset-sm-3 {
 	margin-left: unset;
+}
+#pageEditor {
+	border: solid red 2px;
+	left: 2.5%;
+	overflow: scroll;
+	position: fixed;
+	top: 2.5%;
+	z-index: 100000;
 }
 .rowDragHandle {
 	border: solid 1px transparent;

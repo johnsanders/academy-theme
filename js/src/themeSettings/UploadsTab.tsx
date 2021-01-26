@@ -3,7 +3,7 @@ import { faCog, faUpload } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
-const Uploads: React.FC = (): JSX.Element => (
+const UploadsTab: React.FC = (): JSX.Element => (
 	<div className="mt-3">
 		<div>
 			<a
@@ -44,4 +44,4 @@ const Uploads: React.FC = (): JSX.Element => (
 	</div>
 );
 
-export default Uploads;
+export default UploadsTab;

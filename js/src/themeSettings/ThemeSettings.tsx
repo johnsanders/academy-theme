@@ -1,13 +1,14 @@
 import { CarouselItem, Course, Instructor, MoodleAcademySettings, Row, Tag } from '../types';
 import { faExclamationTriangle, faSave } from '@fortawesome/pro-solid-svg-icons';
-import CarouselContainer from './carouselTab/CarouselContainer';
-import GridContainer from './gridTab/GridContainer';
+import CarouselTab from './carouselTab';
+import GridTab from './gridTab';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import InstructorsContainer from './instructorsTab/InstructorsContainer';
+import InstructorsTab from './instructorsTab';
+import PagesTab from './PagesTab';
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
-import TagsContainer from './tagsTab/TagsContainer';
-import Uploads from './Uploads';
+import TagsTab from './tagsTab';
+import UploadsTab from './UploadsTab';
 
 interface Props {
 	activeTab: string;
@@ -28,7 +29,7 @@ interface Props {
 	unsavedChanges: boolean;
 }
 
-const tabs = ['Grid', 'Carousel', 'Instructors', 'Tags', 'Uploads'];
+const tabs = ['Grid', 'Carousel', 'Instructors', 'Tags', 'Uploads', 'Pages'];
 
 const ThemeSettings: React.FC<Props> = (props: Props): JSX.Element => (
 	<div className="container" id="academyGridSettings">
@@ -57,7 +58,7 @@ const ThemeSettings: React.FC<Props> = (props: Props): JSX.Element => (
 			))}
 		</ul>
 		{props.activeTab === 'grid' ? (
-			<GridContainer
+			<GridTab
 				courses={props.courses}
 				instructors={props.instructors}
 				modsInfo={props.modsInfo}
@@ -68,19 +69,20 @@ const ThemeSettings: React.FC<Props> = (props: Props): JSX.Element => (
 			/>
 		) : null}
 		{props.activeTab === 'carousel' ? (
-			<CarouselContainer
+			<CarouselTab
 				carouselItems={props.carousel}
 				inputRef={props.inputRef}
 				setCarousel={props.setCarousel}
 			/>
 		) : null}
 		{props.activeTab === 'instructors' ? (
-			<InstructorsContainer instructors={props.instructors} setInstructors={props.setInstructors} />
+			<InstructorsTab instructors={props.instructors} setInstructors={props.setInstructors} />
 		) : null}
 		{props.activeTab === 'tags' ? (
-			<TagsContainer setTags={props.setTags} tags={props.tags} thumbUrls={props.thumbUrls} />
+			<TagsTab setTags={props.setTags} tags={props.tags} thumbUrls={props.thumbUrls} />
 		) : null}
-		{props.activeTab === 'uploads' ? <Uploads /> : null}
+		{props.activeTab === 'pages' ? <PagesTab /> : null}
+		{props.activeTab === 'uploads' ? <UploadsTab /> : null}
 		<button className="btn btn-primary mt-3 saveAll" onClick={props.submitForm}>
 			<Icon className="mr-1" icon={faSave} />
 			Save All Changes

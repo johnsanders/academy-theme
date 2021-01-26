@@ -11,12 +11,9 @@ interface Props {
 
 const NavbarContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	const largeThreshold = props.config.isLoggedIn ? 50 : 400;
-	const shouldHideLargeNavbar =
-		!props.config.isLoggedIn && !(document.title === 'Forgotten password');
+	const shouldHideLargeNavbar = false;
 	const drawerRef = React.useRef(document.querySelector('#nav-drawer') as HTMLElement);
-	const [navState, setNavState] = React.useState(
-		props.config.isLoggedIn || document.title === 'Forgotten password' ? 'large' : 'none',
-	);
+	const [navState, setNavState] = React.useState('large');
 	const setLarge = (): void => {
 		drawerRef.current.classList.add('lower');
 		setNavState('large');
