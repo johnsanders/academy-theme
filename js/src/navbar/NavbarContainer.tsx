@@ -4,8 +4,9 @@ import React from 'react';
 import SimpleMenu from './SimpleMenu';
 
 export interface Link {
+	links?: Link[];
 	text: string;
-	url: string;
+	url?: string;
 }
 
 interface Props {

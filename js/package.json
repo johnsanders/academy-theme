@@ -24,7 +24,6 @@
 		"@sentry/react": "^6.0.1",
 		"@sentry/tracing": "^6.0.1",
 		"dateformat": "^4.4.2",
-		"grapesjs": "^0.16.34",
 		"qs": "^6.9.6",
 		"react": "^17.0.1",
 		"react-beautiful-dnd": "^13.0.0",

@@ -3,7 +3,7 @@ import education from '../../img/education.svg';
 import professional from '../../img/professional.svg';
 import tvPhone from '../../img/tv_phone.svg';
 
-const ClientSegments: React.FC = (): JSX.Element => (
+const Why: React.FC = (): JSX.Element => (
 	<div style={{ backgroundColor: 'white', padding: '5em 0' }}>
 		<div style={{ paddingBottom: '2em' }}>
 			<h1 className="text-center">Why CNN Academy?</h1>
@@ -44,6 +44,9 @@ const ClientSegments: React.FC = (): JSX.Element => (
 				</div>
 			</div>
 		</div>
+		<div className="mt-5 text-center">
+			<a className="btn btn-primary btn-lg text-light">Learn More</a>
+		</div>
 	</div>
 );
-export default ClientSegments;
+export default Why;

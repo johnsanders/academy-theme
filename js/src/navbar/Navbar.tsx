@@ -3,6 +3,7 @@ declare const cnnAcademy: MoodleAcademyFront | MoodleAcademySettings;
 import './style.css';
 import { MoodleAcademyFront, MoodleAcademySettings, MoodleJs } from '../types';
 import ErrorBoundary from '../shared/ErrorBoundary';
+import ExtraLinks from './ExtraLinks';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { Link } from './NavbarContainer';
 import React from 'react';
@@ -30,12 +31,13 @@ const Navbar: React.FC<Props> = (props: Props): JSX.Element => (
 		<nav
 			aria-label={props.ariaLabel}
 			className={`
-			fixed-top
-			moodle-has-zindex
-			navbar
-			navbar-dark
-			navbar-expand
-			navbar-${props.size}
+				fadeIn
+				fixed-top
+				moodle-has-zindex
+				navbar
+				navbar-dark
+				navbar-expand
+				navbar-${props.size}
 		`}
 		>
 			{!navbarConfig.showNavToggle ? null : (
@@ -67,17 +69,7 @@ const Navbar: React.FC<Props> = (props: Props): JSX.Element => (
 				</span>
 			</a>
 			<div className="ml-auto d-flex flex-wrap justify-content-end">
-				{!props.extraLinks ? null : (
-					<ul className="nav navbar-nav justify-content-end">
-						{props.extraLinks.map((link, i) => (
-							<li className="nav-item" key={i}>
-								<a className="nav-link text-light" href={link.url}>
-									{link.text}
-								</a>
-							</li>
-						))}
-					</ul>
-				)}
+				{props.extraLinks ? <ExtraLinks links={props.extraLinks} /> : null}
 			</div>
 			<div className="d-flex flex-wrap justify-content-end">
 				<ul className="nav navbar-nav justify-content-end">

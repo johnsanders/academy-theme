@@ -1,13 +1,13 @@
-import ClientSegments from './ClientSegments';
+import Carousel from './Carousel';
 import Contact from './Contact';
 import FeaturedCourses from './FeaturedCourses';
 import FeaturedSeminars from './FeaturedSeminars';
-import Hero from './Hero';
 import { MoodleAcademyFront } from '../../types';
 import Navbar from '../../navbar';
 import React from 'react';
 import StudentContent from './StudentContent';
 import Trainers from './Trainers';
+import Why from './Why';
 import { createPortal } from 'react-dom';
 
 interface Props {
@@ -29,20 +29,23 @@ const LoggedOut: React.FC<Props> = (props: Props): JSX.Element | null => {
 						url: '#',
 					},
 					{
+						links: [
+							{ text: '🇦🇪 Abu Dhabi Academy', url: '#' },
+							{ text: '🇪🇸 CNN Academy Loyola', url: '#' },
+						],
 						text: 'Current Academies',
-						url: '#',
 					},
 					{
 						text: 'Contact Us',
-						url: '#',
+						url: 'https://commercial.cnn.com/contact-us',
 					},
 				]}
 				templateType={props.cnnAcademy.templateType}
 				visible={props.visible}
 			/>
 			<div className={`fadeIn ${props.visible ? '' : 'd-none'}`}>
-				<Hero handleReady={props.handleComponentsReady} />
-				<ClientSegments />
+				<Carousel handleReady={props.handleComponentsReady} />
+				<Why />
 				<FeaturedCourses />
 				<FeaturedSeminars />
 				<StudentContent />
