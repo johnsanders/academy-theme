@@ -4,7 +4,6 @@ import CarouselTab from './carouselTab';
 import GridTab from './gridTab';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import InstructorsTab from './instructorsTab';
-import PagesTab from './PagesTab';
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
 import TagsTab from './tagsTab';
@@ -29,7 +28,7 @@ interface Props {
 	unsavedChanges: boolean;
 }
 
-const tabs = ['Grid', 'Carousel', 'Instructors', 'Tags', 'Uploads', 'Pages'];
+const tabs = ['Grid', 'Carousel', 'Instructors', 'Tags', 'Uploads'];
 
 const ThemeSettings: React.FC<Props> = (props: Props): JSX.Element => (
 	<div className="container" id="academyGridSettings">
@@ -81,7 +80,6 @@ const ThemeSettings: React.FC<Props> = (props: Props): JSX.Element => (
 		{props.activeTab === 'tags' ? (
 			<TagsTab setTags={props.setTags} tags={props.tags} thumbUrls={props.thumbUrls} />
 		) : null}
-		{props.activeTab === 'pages' ? <PagesTab /> : null}
 		{props.activeTab === 'uploads' ? <UploadsTab /> : null}
 		<button className="btn btn-primary mt-3 saveAll" onClick={props.submitForm}>
 			<Icon className="mr-1" icon={faSave} />

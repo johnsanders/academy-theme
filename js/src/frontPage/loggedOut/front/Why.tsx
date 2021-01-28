@@ -1,7 +1,7 @@
 import React from 'react';
-import education from '../../img/education.svg';
-import professional from '../../img/professional.svg';
-import tvPhone from '../../img/tv_phone.svg';
+import education from '../../../img/education.svg';
+import professional from '../../../img/professional.svg';
+import tvPhone from '../../../img/tv_phone.svg';
 
 const Why: React.FC = (): JSX.Element => (
 	<div style={{ backgroundColor: 'white', padding: '5em 0' }}>

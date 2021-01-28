@@ -1,5 +1,5 @@
-import '../../shared/slickSlider.css';
-import '../../shared/slickSliderTheme.css';
+import '../../../shared/slickSlider.css';
+import '../../../shared/slickSliderTheme.css';
 import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';

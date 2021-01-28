@@ -1,9 +1,9 @@
 import React from 'react';
-import alireza from '../../img/alireza.jpg';
-import allen from '../../img/allen_shum.jpg';
-import anna from '../../img/anna_coren.jpg';
-import jim from '../../img/jim_lemay.jpg';
-import paul from '../../img/paul_ferguson.jpg';
+import alireza from '../../../img/alireza.jpg';
+import allen from '../../../img/allen_shum.jpg';
+import anna from '../../../img/anna_coren.jpg';
+import jim from '../../../img/jim_lemay.jpg';
+import paul from '../../../img/paul_ferguson.jpg';
 
 const trainers = [
 	{

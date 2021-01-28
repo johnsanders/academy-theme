@@ -1,9 +1,9 @@
-import Carousel from './Carousel';
+import Carousel from '../Carousel';
 import Contact from './Contact';
 import FeaturedCourses from './FeaturedCourses';
 import FeaturedSeminars from './FeaturedSeminars';
-import { MoodleAcademyFront } from '../../types';
-import Navbar from '../../navbar';
+import { MoodleAcademyFront } from '../../../types';
+import Navbar from '../../../navbar';
 import React from 'react';
 import StudentContent from './StudentContent';
 import Trainers from './Trainers';
@@ -16,7 +16,7 @@ interface Props {
 	visible: boolean;
 }
 
-const LoggedOut: React.FC<Props> = (props: Props): JSX.Element | null => {
+const Front: React.FC<Props> = (props: Props): JSX.Element | null => {
 	const el = document.getElementById('academyContent');
 	if (!el) return null;
 	return createPortal(
@@ -57,4 +57,4 @@ const LoggedOut: React.FC<Props> = (props: Props): JSX.Element | null => {
 	);
 };
 
-export default LoggedOut;
+export default Front;

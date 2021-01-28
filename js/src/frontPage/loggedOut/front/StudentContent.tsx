@@ -1,9 +1,9 @@
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import bootcamps from '../../img/bootcamps.png';
+import bootcamps from '../../../img/bootcamps.png';
 import { faCamcorder } from '@fortawesome/pro-solid-svg-icons';
-import onsiteCourses from '../../img/onsite_courses.jpg';
-import webinars from '../../img/webinars.jpg';
+import onsiteCourses from '../../../img/onsite_courses.jpg';
+import webinars from '../../../img/webinars.jpg';
 
 const Delivery: React.FC = (): JSX.Element => (
 	<div style={{ backgroundColor: '#f1f1f2' }}>
