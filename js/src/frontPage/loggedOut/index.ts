@@ -1,1 +1,1 @@
-export { default } from './front/Front';
+export { default } from './LoggedOut';

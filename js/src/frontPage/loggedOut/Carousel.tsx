@@ -7,7 +7,7 @@ interface Props {
 	handleReady: () => void;
 }
 
-const Hero: React.FC<Props> = (props: React.PropsWithChildren<Props>): JSX.Element => {
+const Carousel: React.FC<Props> = (props: React.PropsWithChildren<Props>): JSX.Element => {
 	const [isIn, setIsIn] = React.useState(true);
 	const itemsInitedRef = React.useRef(0);
 	const itemsToInit = 1;
@@ -23,9 +23,7 @@ const Hero: React.FC<Props> = (props: React.PropsWithChildren<Props>): JSX.Eleme
 	}, [isIn]);
 	return (
 		<CarouselItem handleInit={handleInit} isIn={isIn} posterUrl={heroPoster} videoUrl={heroVideo}>
-			<h1 className="text-light text-center" style={{ fontFamily: 'CNNSansMedium' }}>
-				The Art of Storytelling
-			</h1>
+			<h1 className="text-light text-center fontMedium">The Art of Storytelling</h1>
 			<h4 className="text-light text-center" style={{ maxWidth: '20em' }}>
 				From enterprising new ideas, to delivering the killer pitch, to executing your story in the
 				field... this wide-ranging course delivers real-world skills from CNN&#8217;s top
@@ -35,4 +33,4 @@ const Hero: React.FC<Props> = (props: React.PropsWithChildren<Props>): JSX.Eleme
 	);
 };
 
-export default Hero;
+export default Carousel;

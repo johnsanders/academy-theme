@@ -1,0 +1,19 @@
+.featureRow {
+	padding: 100px 2em;
+}
+.featureRow:nth-child(even) {
+	background-color: white;
+}
+.featureRow:nth-child(odd) {
+	background-color: #f1f1f2;
+}
+.featureRowImage {
+	border-radius: 40px;
+	height: 200px;
+}
+.featureRowItem {
+	text-align: center;
+}
+.featureRowItem:not(:first-child) {
+	border-left: solid #CC0000 2px;
+}

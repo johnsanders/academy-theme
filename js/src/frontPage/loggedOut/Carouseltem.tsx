@@ -21,7 +21,7 @@ const CarouselItem: React.FC<React.PropsWithChildren<Props>> = (
 	props: React.PropsWithChildren<Props>,
 ): JSX.Element => {
 	return (
-		<div className="row" style={{ marginTop: '100px', overflow: 'hidden', position: 'relative' }}>
+		<div className="row" style={{ overflow: 'hidden', position: 'relative' }}>
 			<div style={{ left: 0, position: 'absolute', top: 0 }}>
 				<video
 					autoPlay={true}
