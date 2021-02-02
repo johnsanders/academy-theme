@@ -131,6 +131,9 @@ footer .drawerOpen {
 #page-footer a:hover {
 	text-decoration: underline;
 }
+.usermenu .login {
+	line-height: inherit;
+}
 .aabtn.focus, .btn-link.focus, .nav-link.focus, .atto_link_button.focus, [role="button"].focus, .list-group-item-action.focus, input[type="checkbox"].focus, input[type="radio"].focus, input[type="file"].focus, input[type="image"].focus, .sr-only-focusable.focus, a.dropdown-item.focus, a.dropdown-toggle.focus, .modal-dialog[tabindex="0"].focus, .moodle-dialogue-base .closebutton.focus, button.close.focus, .aabtn:focus, .btn-link:focus, .nav-link:focus, .atto_link_button:focus, [role="button"]:focus, .list-group-item-action:focus, input[type="checkbox"]:focus, input[type="radio"]:focus, input[type="file"]:focus, input[type="image"]:focus, .sr-only-focusable:focus, a.dropdown-item:focus, a.dropdown-toggle:focus, .modal-dialog[tabindex="0"]:focus, .moodle-dialogue-base .closebutton:focus, button.close:focus {
 	box-shadow: 0 0 0 0.01em rgba(20,46,65,.75);
 }
