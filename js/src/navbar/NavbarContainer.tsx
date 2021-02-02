@@ -18,16 +18,11 @@ interface Props {
 
 const NavbarContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	const largeThreshold = props.config.isLoggedIn ? 50 : 400;
-	const shouldHideLargeNavbar = false;
 	const drawerRef = React.useRef(document.querySelector('#nav-drawer') as HTMLElement);
 	const [navState, setNavState] = React.useState('large');
 	const setLarge = (): void => {
 		drawerRef.current.classList.add('lower');
 		setNavState('large');
-	};
-	const setNone = (): void => {
-		drawerRef.current.classList.remove('lower');
-		setNavState('none');
 	};
 	const setSmall = (): void => {
 		setNavState('small');
@@ -37,13 +32,8 @@ const NavbarContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		e.preventDefault();
 	};
 	const onScroll = () => {
-		if (shouldHideLargeNavbar) {
-			if (navState === 'large' && window.scrollY < largeThreshold) setNone();
-			else if (navState === 'none' && window.scrollY > largeThreshold) setLarge();
-		} else {
-			if (navState === 'small' && window.scrollY < largeThreshold) setLarge();
-			else if (navState === 'large' && window.scrollY > largeThreshold) setSmall();
-		}
+		if (navState === 'small' && window.scrollY < largeThreshold) setLarge();
+		else if (navState === 'large' && window.scrollY > largeThreshold) setSmall();
 	};
 	React.useEffect(() => {
 		onScroll();

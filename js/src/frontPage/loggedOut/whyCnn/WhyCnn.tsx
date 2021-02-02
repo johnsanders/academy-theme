@@ -11,7 +11,7 @@ interface Props {
 const WhyCnn: React.FC<Props> = (props: Props): JSX.Element => {
 	React.useEffect(() => props.handleComponentsReady(), []);
 	return (
-		<div style={{ backgroundColor: 'white', padding: '5em 0' }}>
+		<div style={{ backgroundColor: 'white', paddingTop: '5em' }}>
 			<div style={{ paddingBottom: '2em' }}>
 				<h1 className="text-center fontBlack">WHY CNN ACADEMY?</h1>
 			</div>

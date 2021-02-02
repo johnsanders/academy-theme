@@ -14,6 +14,8 @@
 .featureRowItem {
 	text-align: center;
 }
-.featureRowItem:not(:first-child) {
-	border-left: solid #CC0000 2px;
+@media (min-width: 768px) {  
+	.featureRowItem:not(:first-child) {
+		border-left: solid #CC0000 2px;
+	}
 }

@@ -14,7 +14,7 @@ const LoggedOutNavbar: React.FC<Props> = (props: Props) => (
 		extraLinks={[
 			{
 				text: 'Why CNN Academy?',
-				url: '#',
+				url: '?page=whycnn',
 			},
 			{
 				links: [
