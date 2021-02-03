@@ -11,7 +11,7 @@ const Overview: React.FC = (): JSX.Element => (
 						will learn how CNN gathers information, verifies sources and produces content for its
 						multiple platforms. During in-person workshops at CNN Abu Dhabi, participants will get a
 						behind-the-scene look at the production of the network’s flagship current affairs show,
-						Connect the World with Becky Anderson, live from CNN Abu Dhabi.
+						<em>Connect the World with Becky Anderson</em>, live from CNN Abu Dhabi.
 					</div>
 					<div>
 						Throughout the course, participants will also work on producing their own multiplatform
