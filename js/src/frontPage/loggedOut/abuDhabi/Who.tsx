@@ -7,7 +7,6 @@ const Overview: React.FC = (): JSX.Element => (
 				<div className="col-12 col-md-6">
 					<iframe
 						allow="autoplay; fullscreen; picture-in-picture"
-						allowFullScreen={true}
 						frameBorder="0"
 						height="100%"
 						src="https://player.vimeo.com/video/507994481"
