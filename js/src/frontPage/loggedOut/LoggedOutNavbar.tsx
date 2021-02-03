@@ -4,6 +4,7 @@ import React from 'react';
 
 interface Props {
 	config: NavbarConfig;
+	forceSize?: 'large' | 'small';
 	templateType: string;
 	visible: boolean;
 }
@@ -17,17 +18,15 @@ const LoggedOutNavbar: React.FC<Props> = (props: Props) => (
 				url: '?page=whycnn',
 			},
 			{
-				links: [
-					{ text: '🇦🇪 Abu Dhabi Academy', url: '#' },
-					{ text: '🇪🇸 CNN Academy Loyola', url: '#' },
-				],
-				text: 'Current Academies',
+				text: 'Abu Dhabi Academy',
+				url: '?page=abudhabi',
 			},
 			{
 				text: 'Contact Us',
 				url: 'https://commercial.cnn.com/contact-us',
 			},
 		]}
+		forceSize={props.forceSize}
 		templateType={props.templateType}
 		visible={props.visible}
 	/>

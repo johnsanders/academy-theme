@@ -1,4 +1,5 @@
 import './styles.css';
+import AbuDhabi from './abuDhabi';
 import Home from './home';
 import HomeOld from './homeOld';
 import LoggedOutNavbar from './LoggedOutNavbar';
@@ -18,30 +19,51 @@ const LoggedOut: React.FC<Props> = (props: Props) => {
 	const { page } = parse(window.location.search, { ignoreQueryPrefix: true });
 	return (
 		<>
-			{page ? (
-				<LoggedOutNavbar
-					config={props.cnnAcademy.navbarConfig}
-					templateType={props.cnnAcademy.templateType}
-					visible={props.visible}
-				/>
-			) : (
-				<Navbar
-					config={props.cnnAcademy.navbarConfig}
-					templateType={props.cnnAcademy.templateType}
-					visible={props.visible}
-				/>
-			)}
-			<div style={{ marginTop: '100px' }}>
-				{!page ? (
+			{!page ? (
+				<>
+					<Navbar
+						config={props.cnnAcademy.navbarConfig}
+						templateType={props.cnnAcademy.templateType}
+						visible={props.visible}
+					/>
 					<HomeOld handleComponentsReady={props.handleComponentsReady} visible={props.visible} />
-				) : null}
-				{page === 'homenew' ? (
-					<Home handleComponentsReady={props.handleComponentsReady} visible={props.visible} />
-				) : null}
-				{page === 'whycnn' ? (
-					<WhyCnn handleComponentsReady={props.handleComponentsReady} visible={props.visible} />
-				) : null}
-			</div>
+				</>
+			) : null}
+			{page === 'homenew' ? (
+				<>
+					<LoggedOutNavbar
+						config={props.cnnAcademy.navbarConfig}
+						templateType={props.cnnAcademy.templateType}
+						visible={props.visible}
+					/>
+					<div style={{ marginTop: '100px' }}>
+						<Home handleComponentsReady={props.handleComponentsReady} visible={props.visible} />
+					</div>
+				</>
+			) : null}
+			{page === 'whycnn' ? (
+				<>
+					<LoggedOutNavbar
+						config={props.cnnAcademy.navbarConfig}
+						templateType={props.cnnAcademy.templateType}
+						visible={props.visible}
+					/>
+					<div style={{ marginTop: '100px' }}>
+						<WhyCnn handleComponentsReady={props.handleComponentsReady} visible={props.visible} />
+					</div>
+				</>
+			) : null}
+			{page === 'abudhabi' ? (
+				<>
+					<LoggedOutNavbar
+						config={props.cnnAcademy.navbarConfig}
+						forceSize="small"
+						templateType={props.cnnAcademy.templateType}
+						visible={props.visible}
+					/>
+					<AbuDhabi handleComponentsReady={props.handleComponentsReady} visible={props.visible} />
+				</>
+			) : null}
 		</>
 	);
 };

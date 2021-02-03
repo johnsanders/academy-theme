@@ -19,13 +19,18 @@ const Home: React.FC<Props> = (props: Props): JSX.Element | null => {
 	return createPortal(
 		<>
 			<div className={`fadeIn ${props.visible ? '' : 'd-none'}`}>
-				<Carousel handleReady={props.handleComponentsReady} />
-				<Why />
-				<FeaturedCourses />
-				<FeaturedSeminars />
-				<StudentContent />
-				<Trainers />
-				<Contact />
+				<Carousel
+					containerClassName={'d-none d-md-block'}
+					handleReady={props.handleComponentsReady}
+				/>
+				<div className="carouselAdjacentContent">
+					<Why />
+					<FeaturedCourses />
+					<FeaturedSeminars />
+					<StudentContent />
+					<Trainers />
+					<Contact />
+				</div>
 			</div>
 		</>,
 		el,

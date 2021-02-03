@@ -21,45 +21,48 @@ const Trainers: React.FC = (): JSX.Element => {
 	};
 	const beforeChange = (_current: number, next: number): void => setSliderIndex(next);
 	return (
-		<div style={{ backgroundColor: 'white', padding: '7em 2em' }}>
-			<div className="row">
-				<div className="col-12 col-md-4 col-lg-3 offset-lg-1 offset-xl-2">
-					<h1 className="mb-5"> Our specialist team of trainers</h1>
-					<div className="mb-5">
-						Access one of our subject matter experts from our portfolio of trainers and journalists.
-						<br />
-						<em className="text-muted">subject to availability and last-minute change</em>
+		<div className="featureRow">
+			<div className="container-fluid">
+				<div className="row">
+					<div className="col-12 col-md-4 col-lg-3 offset-lg-1 offset-xl-2">
+						<h1 className="mb-5"> Our specialist team of trainers</h1>
+						<div className="mb-5">
+							Access one of our subject matter experts from our portfolio of trainers and
+							journalists.
+							<br />
+							<em className="text-muted">subject to availability and last-minute change</em>
+						</div>
+						<div className="mb-3">
+							<h3>{trainersInfo[sliderIndex].name}</h3>
+							{trainersInfo[sliderIndex].description}
+						</div>
 					</div>
-					<div className="mb-3">
-						<h3>{trainersInfo[sliderIndex].name}</h3>
-						{trainersInfo[sliderIndex].description}
-					</div>
-				</div>
-				<div
-					className="col-sm-12 col-md-8 col-lg-7 col-xl-5 mt-auto mb-auto"
-					id="sliderContainer"
-					onClick={handleClick}
-				>
-					<Slider
-						arrows={false}
-						beforeChange={beforeChange}
-						infinite={false}
-						ref={(el) => {
-							if (el) sliderRef.current = el;
-						}}
+					<div
+						className="col-sm-12 col-md-8 col-lg-7 col-xl-5 mt-auto mb-auto"
+						id="sliderContainer"
+						onClick={handleClick}
 					>
-						{trainersInfo.map((trainer) => trainer.image)}
-					</Slider>
-					<div className="mt-3">
-						<button className="btn border-none" id="sliderPrevious" onClick={handleClick}>
-							<Icon className="fa-3x" icon={faArrowAltCircleLeft} />
-						</button>
-						<button className="btn border-none" id="sliderNext" onClick={handleClick}>
-							<Icon className="fa-3x" icon={faArrowAltCircleRight} />
-						</button>
+						<Slider
+							arrows={false}
+							beforeChange={beforeChange}
+							infinite={false}
+							ref={(el) => {
+								if (el) sliderRef.current = el;
+							}}
+						>
+							{trainersInfo.map((trainer) => trainer.image)}
+						</Slider>
+						<div className="mt-3">
+							<button className="btn border-none" id="sliderPrevious" onClick={handleClick}>
+								<Icon className="fa-3x" icon={faArrowAltCircleLeft} />
+							</button>
+							<button className="btn border-none" id="sliderNext" onClick={handleClick}>
+								<Icon className="fa-3x" icon={faArrowAltCircleRight} />
+							</button>
+						</div>
 					</div>
 				</div>
-			</div>
+			</div>{' '}
 		</div>
 	);
 };

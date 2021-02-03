@@ -20,9 +20,25 @@ interface Props {
 const CarouselItem: React.FC<React.PropsWithChildren<Props>> = (
 	props: React.PropsWithChildren<Props>,
 ): JSX.Element => {
+	const vidRef = React.useRef<HTMLVideoElement>();
+	const bgVidRef = React.useRef<HTMLVideoElement>();
+	const { isIn } = props;
+	React.useEffect(() => {
+		if (isIn) {
+			vidRef.current?.play();
+			bgVidRef.current?.play();
+		} else {
+			const timeout = setTimeout(() => {
+				console.log(vidRef.current);
+				vidRef.current?.pause();
+				bgVidRef.current?.pause();
+			}, 1000);
+			return () => clearTimeout(timeout);
+		}
+	}, [isIn]);
 	return (
-		<div className="row" style={{ overflow: 'hidden', position: 'relative' }}>
-			<div style={{ left: 0, position: 'absolute', top: 0 }}>
+		<div className="row m-0 w-100" style={{ overflow: 'hidden', position: 'absolute' }}>
+			<div style={{ left: '-15%', position: 'absolute', top: '-15%', width: '70%' }}>
 				<video
 					autoPlay={true}
 					loop={true}
@@ -30,12 +46,13 @@ const CarouselItem: React.FC<React.PropsWithChildren<Props>> = (
 					onCanPlayThrough={props.handleInit}
 					onError={props.handleInit}
 					poster={props.posterUrl}
+					ref={(el) => bgVidRef}
 					src={props.videoUrl}
 					style={{
 						filter: 'blur(40px) brightness(0.6)',
 						transition: 'transform 1s',
 						width: '100%',
-						...(props.isIn ? inStyle : leftOutStyle),
+						...(isIn ? inStyle : leftOutStyle),
 					}}
 				/>
 			</div>
@@ -53,10 +70,11 @@ const CarouselItem: React.FC<React.PropsWithChildren<Props>> = (
 					poster={props.posterUrl}
 					src={props.videoUrl}
 					style={{
+						height: '100%',
 						transform: 'scale(1.025)',
 						transition: 'transform 1s',
 						width: '100%',
-						...(props.isIn ? inStyle : rightOutStyle),
+						...(isIn ? inStyle : rightOutStyle),
 					}}
 				/>
 			</div>

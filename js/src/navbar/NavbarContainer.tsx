@@ -12,6 +12,7 @@ export interface Link {
 interface Props {
 	config: NavbarConfig;
 	extraLinks?: Link[];
+	forceSize?: 'large' | 'small';
 	templateType: string;
 	visible: boolean;
 }
@@ -19,7 +20,7 @@ interface Props {
 const NavbarContainer: React.FC<Props> = (props: Props): JSX.Element => {
 	const largeThreshold = props.config.isLoggedIn ? 50 : 400;
 	const drawerRef = React.useRef(document.querySelector('#nav-drawer') as HTMLElement);
-	const [navState, setNavState] = React.useState('large');
+	const [navState, setNavState] = React.useState(props.forceSize || 'large');
 	const setLarge = (): void => {
 		drawerRef.current.classList.add('lower');
 		setNavState('large');
@@ -32,6 +33,7 @@ const NavbarContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		e.preventDefault();
 	};
 	const onScroll = () => {
+		if (props.forceSize) return;
 		if (navState === 'small' && window.scrollY < largeThreshold) setLarge();
 		else if (navState === 'large' && window.scrollY > largeThreshold) setSmall();
 	};

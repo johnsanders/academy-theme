@@ -15,6 +15,9 @@
 	text-align: center;
 }
 @media (min-width: 768px) {  
+	.carouselAdjacentContent{
+		padding-top: 28.9%;
+	}
 	.featureRowItem:not(:first-child) {
 		border-left: solid #CC0000 2px;
 	}
