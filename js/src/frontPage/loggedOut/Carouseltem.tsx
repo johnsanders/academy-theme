@@ -46,7 +46,9 @@ const CarouselItem: React.FC<React.PropsWithChildren<Props>> = (
 					onCanPlayThrough={props.handleInit}
 					onError={props.handleInit}
 					poster={props.posterUrl}
-					ref={(el) => bgVidRef}
+					ref={(el) => {
+						if (el) bgVidRef.current = el;
+					}}
 					src={props.videoUrl}
 					style={{
 						filter: 'blur(40px) brightness(0.6)',
@@ -68,6 +70,9 @@ const CarouselItem: React.FC<React.PropsWithChildren<Props>> = (
 					loop={true}
 					muted={true}
 					poster={props.posterUrl}
+					ref={(el) => {
+						if (el) vidRef.current = el;
+					}}
 					src={props.videoUrl}
 					style={{
 						height: '100%',
