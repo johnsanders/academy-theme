@@ -14,22 +14,19 @@ const Overview: React.FC = (): JSX.Element => (
 					/>
 				</div>
 				<div className="col-12 col-md-6">
-					<h1>من يمكنه تقديم طلب المشاركة؟</h1>
+					<h1>Who can apply?</h1>
 					<div className="mb-3">
-						تقبل أكاديمية CNN أبوظبي الطلبات المقدمة من مواطني دولة الإمارات العربية المتحدة
-						والمقيمين الذين تزيد أعمارهم عن 21 عاماً، ممن تتوافر لديهم خلفية و / أو اهتمام بصناعة
-						الإعلام والسرد القصصي على مختلف المنصات.
+						CNN Academy Abu Dhabi will only accept applications from UAE nationals and residents
+						over the age of 21 who have a background and/or interest in media and multiplatform
+						storytelling.
 					</div>
 					<div>
-						وتعتبر أكاديمية CNN أبوظبي هي دورة بدوام كامل مدتها خمسة أسابيع. سيتعين على المتقدمين
-						الذين يتم اختيارهم للمشاركة بالدورة حضور المحاضرات عبر الإنترنت، والتواجد في ورش العمل
-						طوال مدة البرنامج، مع الالتزام بجميع إجراءات التباعد الاجتماعي التي قد تكون سارية في
-						يناير 2021.
+						CNN Academy Abu Dhabi is a full-time five-week course. Successful applicants will have
+						to attend online lectures and in-person workshops throughout the duration of the
+						program, while adhering to any and all social distancing rules that might be in place in
+						January 2021.
 					</div>
-					<div>
-						يجب أن يتقن المتقدمون التحدث والكتابة باللغة الإنجليزية، علماً بأن الدورة ستقدم حصراً
-						باللغة الإنجليزية.
-					</div>
+					<div>Applicants must be proficient in written and spoken English.</div>
 				</div>
 			</div>
 		</div>
