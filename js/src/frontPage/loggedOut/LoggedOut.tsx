@@ -1,5 +1,6 @@
 import './styles.css';
 import AbuDhabi from './abuDhabi';
+import AbuDhabiArabic from './abuDhabiArabic';
 import Home from './home';
 import HomeOld from './homeOld';
 import LoggedOutNavbar from './LoggedOutNavbar';
@@ -62,6 +63,20 @@ const LoggedOut: React.FC<Props> = (props: Props) => {
 						visible={props.visible}
 					/>
 					<AbuDhabi handleComponentsReady={props.handleComponentsReady} visible={props.visible} />
+				</>
+			) : null}
+			{page === 'abudhabiarabic' ? (
+				<>
+					<LoggedOutNavbar
+						config={props.cnnAcademy.navbarConfig}
+						forceSize="small"
+						templateType={props.cnnAcademy.templateType}
+						visible={props.visible}
+					/>
+					<AbuDhabiArabic
+						handleComponentsReady={props.handleComponentsReady}
+						visible={props.visible}
+					/>
 				</>
 			) : null}
 		</>
