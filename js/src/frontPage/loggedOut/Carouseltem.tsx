@@ -1,4 +1,5 @@
 import React from 'react';
+import { Tag } from '../../types';
 
 const inStyle: React.CSSProperties = {
 	transform: 'translate3d(0, 0, 0)',
@@ -14,6 +15,7 @@ interface Props {
 	handleInit: () => void;
 	isIn: boolean;
 	posterUrl: string;
+	tags: Tag[];
 	videoUrl: string;
 }
 
@@ -29,7 +31,6 @@ const CarouselItem: React.FC<React.PropsWithChildren<Props>> = (
 			bgVidRef.current?.play();
 		} else {
 			const timeout = setTimeout(() => {
-				console.log(vidRef.current);
 				vidRef.current?.pause();
 				bgVidRef.current?.pause();
 			}, 1000);
@@ -62,6 +63,17 @@ const CarouselItem: React.FC<React.PropsWithChildren<Props>> = (
 				className="col-12 col-md-6 d-flex flex-column align-items-center justify-content-center px-5"
 				style={{ transition: 'transform 1s', ...(props.isIn ? inStyle : leftOutStyle) }}
 			>
+				<div>
+					{props.tags.map((tag) => (
+						<h5
+							className="badge badge-secondary mr-2"
+							key={tag.id}
+							style={{ backgroundColor: tag.color, borderRadius: '0.25em' }}
+						>
+							{tag.name}
+						</h5>
+					))}
+				</div>
 				{props.children}
 			</div>
 			<div className="col-12 col-md-6 text-center p-0">

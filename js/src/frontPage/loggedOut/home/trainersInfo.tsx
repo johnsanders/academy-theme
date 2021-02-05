@@ -15,7 +15,7 @@ const trainers = [
 				practices to our Asia Affiliate partners.
 				Allen also had a leading role in the launch of CNN Indonesia in 2015
 				and CNN Philippines in 2016.`,
-		image: <img key="allen" src={allen} />,
+		image: <img className="w-100" src={allen} />,
 		name: 'Allen Shum',
 	},
 	{
@@ -27,7 +27,7 @@ const trainers = [
 				Currently based in Dublin, Alireza is a consulting producer for
 				Connect the World with Becky Anderson and teaches The Newsroom
 				graduate module at University College Dublin’s Clinton Institute.`,
-		image: <img key="alireza" src={alireza} />,
+		image: <img className="w-100" src={alireza} />,
 		name: 'Alireza Hajihosseini',
 	},
 	{
@@ -38,7 +38,7 @@ const trainers = [
 	including former U.S. President Bill Clinton, U.N. Secretary-General Ban Ki-moon,
 	former Australian Prime Ministers Julia Gillard and John Howard and actors and 
 	activists George Clooney and Sigourney Weaver.`,
-		image: <img key="ana" src={anna} />,
+		image: <img className="w-100" src={anna} />,
 		name: 'Anna Coren',
 	},
 	{
@@ -47,7 +47,7 @@ Jim is Senior Consultant at Frank N. Magid and Associates and a former Deputy Ma
 Jim advises and consults broadcast executives, journalist and entrepreneurs around the world.
 At CNN, Jim was instrumental in building and maintaining the network’s multifaceted,
 multiplatform approach to news coverage.`,
-		image: <img key="jim" src={jim} />,
+		image: <img className="w-100" src={jim} />,
 		name: 'Jim LeMay',
 	},
 	{
@@ -60,7 +60,7 @@ multiplatform approach to news coverage.`,
 	to the question “what makes a great story?”
 	He can instruct on the CNN approach to balancing editorial context with accuracy
 	on the latest story developments.`,
-		image: <img key="paul" src={paul} />,
+		image: <img className="w-100" src={paul} />,
 		name: 'Paul Ferguson',
 	},
 ];

@@ -13,28 +13,45 @@ const Delivery: React.FC = (): JSX.Element => (
 				CNN Academy students learn to create industry-leading content
 			</h5>
 			<div className="row justify-content-center">
-				<div className="col-12 col-md-4 text-center m-4">
-					<img src="https://picsum.photos/320/180?rand=1" style={{ width: '300px' }} />
-					<h3 className="fontMedium mt-4 text-center">Student Production 1</h3>
+				<div className="col-12 col-md-4 text-center">
+					<iframe
+						allow="autoplay; fullscreen; picture-in-picture"
+						className="mt-5 mt-md-0"
+						frameBorder="0"
+						src="https://player.vimeo.com/video/508403845"
+						width="100%"
+					/>
+					<h3 className="fontMedium mt-2 text-center">Lest We Forget</h3>
 					<div className="text-center">
-						A few sentences here describing the student production. Lorem ipsum dolor sit amet. And
-						other stuff like that.
+						A young Emirati explores efforts to rediscover and preserve her nation&apos;s history
+						even as it races into the future.
 					</div>
 				</div>
-				<div className="col-12 col-md-4 text-center m-4">
-					<img src="https://picsum.photos/320/180?rand=2" style={{ width: '300px' }} />
-					<h3 className="fontMedium mt-4 text-center">Student Production 2</h3>
+				<div className="col-12 col-md-4 text-center">
+					<iframe
+						allow="autoplay; fullscreen"
+						className="mt-5 mt-md-0"
+						frameBorder="0"
+						src="https://player.vimeo.com/video/508404342"
+						width="100%"
+					></iframe>
+					<h3 className="fontMedium mt-2 text-center">Rediscovering Roots</h3>
 					<div className="text-center">
-						A few sentences here describing the student production. Lorem ipsum dolor sit amet. And
-						other stuff like that.
+						A CNN Abu Dhabi intern delves into the history of the Arabic language as one of her
+						first broadcast industry productions.
 					</div>
 				</div>
-				<div className="col-12 col-md-4 text-center m-4">
-					<img src="https://picsum.photos/320/180?rand=3" style={{ width: '300px' }} />
-					<h3 className="fontMedium mt-4 text-center">Student Production 3</h3>
+				<div className="col-12 col-md-4 text-center">
+					<iframe
+						allow="autoplay; fullscreen"
+						className="mt-5 mt-md-0"
+						frameBorder="0"
+						src="https://player.vimeo.com/video/508404084"
+						width="100%"
+					></iframe>
+					<h3 className="fontMedium mt-2 text-center">My Abaya and Me</h3>
 					<div className="text-center">
-						A few sentences here describing the student production. Lorem ipsum dolor sit amet. And
-						other stuff like that.
+						A CNN Academy student looks at the intersection of culture, fashion and identity.
 					</div>
 				</div>
 			</div>

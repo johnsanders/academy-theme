@@ -1,4 +1,5 @@
 import { MoodleAcademySettings, Row as RowType, ScormAttempt } from '../../types';
+import ErrorBoundary from '../../shared/ErrorBoundary';
 import React from 'react';
 import RowItems from './RowItems';
 import ScrollButtons from '../../shared/ScrollButtons';
@@ -42,31 +43,33 @@ const Row: React.FC<Props> = (props: Props): JSX.Element => {
 	};
 	const handleScrollEvent = (): void => updateContainerInfo();
 	return (
-		<div>
-			<h3>{props.row.name}</h3>
-			<div className="position-relative">
-				{props.row.overflowBehavior === 'scroll' ? (
-					<ScrollButtons
-						containerClientWidth={containerClientWidth}
-						containerScrollLeft={containerScrollLeft}
-						containerScrollWidth={containerScrollWidth}
+		<ErrorBoundary errorMessage="Error rendering content row" handleError={props.handleInit}>
+			<div>
+				<h3>{props.row.name}</h3>
+				<div className="position-relative">
+					{props.row.overflowBehavior === 'scroll' ? (
+						<ScrollButtons
+							containerClientWidth={containerClientWidth}
+							containerScrollLeft={containerScrollLeft}
+							containerScrollWidth={containerScrollWidth}
+							handleMouse={handleMouseEvent}
+							handleScroll={handleScrollClick}
+							hovered={hovered}
+						/>
+					) : null}
+					<RowItems
+						containerRef={containerRef}
+						handleInit={props.handleInit}
 						handleMouse={handleMouseEvent}
-						handleScroll={handleScrollClick}
-						hovered={hovered}
+						handleScroll={handleScrollEvent}
+						modsInfo={props.modsInfo}
+						row={props.row}
+						scormAttempts={props.scormAttempts}
+						setActiveTagId={props.setActiveTagId}
 					/>
-				) : null}
-				<RowItems
-					containerRef={containerRef}
-					handleInit={props.handleInit}
-					handleMouse={handleMouseEvent}
-					handleScroll={handleScrollEvent}
-					modsInfo={props.modsInfo}
-					row={props.row}
-					scormAttempts={props.scormAttempts}
-					setActiveTagId={props.setActiveTagId}
-				/>
+				</div>
 			</div>
-		</div>
+		</ErrorBoundary>
 	);
 };
 
