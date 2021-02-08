@@ -1,76 +1,67 @@
 import { MoodleAcademySettings, Row as RowType, ScormAttempt } from '../../types';
 import ErrorBoundary from '../../shared/ErrorBoundary';
 import React from 'react';
+import RowExpandButton from './RowExpandButton';
 import RowItems from './RowItems';
 import ScrollButtons from '../../shared/ScrollButtons';
-import debounce from 'lodash/debounce';
 
 interface Props {
+	containerClientWidth: number;
+	containerRef: React.MutableRefObject<HTMLDivElement | undefined>;
+	containerScrollLeft: number;
+	containerScrollWidth: number;
 	handleInit: () => void;
+	handleMouseEvent: (e: React.MouseEvent<HTMLDivElement>) => void;
+	handleScrollClick: (direction: string) => void;
+	handleScrollEvent: () => void;
+	hovered: boolean;
+	isWrapped: boolean;
 	modsInfo: MoodleAcademySettings['modsInfo'];
+	overflowBehavior: string;
 	row: RowType;
+	setOverflowBehavior: (overflowBehavior: string) => void;
 	scormAttempts: ScormAttempt[];
 	setActiveTagId: (tagId: string) => void;
 }
 
-const Row: React.FC<Props> = (props: Props): JSX.Element => {
-	const containerRef = React.useRef<HTMLDivElement>();
-	const [containerClientWidth, setContainerClientWidth] = React.useState(0);
-	const [containerScrollLeft, setContainerScrollLeft] = React.useState(0);
-	const [containerScrollWidth, setContainerScrollWidth] = React.useState(0);
-	const [hovered, setHovered] = React.useState(false);
-	React.useEffect(() => {
-		if (props.row.items.length === 0) props.handleInit();
-	}, []);
-	const updateContainerInfo = debounce((): void => {
-		if (!containerRef.current) return;
-		setContainerClientWidth(containerRef.current.clientWidth);
-		setContainerScrollLeft(containerRef.current.scrollLeft);
-		setContainerScrollWidth(containerRef.current.scrollWidth);
-	}, 250);
-	const handleMouseEvent = (e: React.MouseEvent<HTMLDivElement>): void => {
-		if (e.type === 'mouseenter') {
-			setHovered(true);
-			updateContainerInfo();
-		} else if (e.type === 'mouseleave') setHovered(false);
-	};
-	const handleScrollClick = (direction: string): void => {
-		if (!containerRef.current) return;
-		const { clientWidth, scrollLeft } = containerRef.current;
-		const plusMinus = direction === 'left' ? -1 : 1;
-		const distance = scrollLeft + (clientWidth - 25) * plusMinus;
-		containerRef.current.scroll({ behavior: 'smooth', left: distance });
-	};
-	const handleScrollEvent = (): void => updateContainerInfo();
-	return (
-		<ErrorBoundary errorMessage="Error rendering content row" handleError={props.handleInit}>
-			<div>
-				<h3>{props.row.name}</h3>
-				<div className="position-relative">
-					{props.row.overflowBehavior === 'scroll' ? (
-						<ScrollButtons
-							containerClientWidth={containerClientWidth}
-							containerScrollLeft={containerScrollLeft}
-							containerScrollWidth={containerScrollWidth}
-							handleMouse={handleMouseEvent}
-							handleScroll={handleScrollClick}
-							hovered={hovered}
-						/>
-					) : null}
-					<RowItems
-						containerRef={containerRef}
-						handleInit={props.handleInit}
-						handleMouse={handleMouseEvent}
-						handleScroll={handleScrollEvent}
-						modsInfo={props.modsInfo}
-						row={props.row}
-						scormAttempts={props.scormAttempts}
-						setActiveTagId={props.setActiveTagId}
+const Row: React.FC<Props> = (props: Props): JSX.Element => (
+	<ErrorBoundary errorMessage="Error rendering content row" handleError={props.handleInit}>
+		<div>
+			<h3>
+				<RowExpandButton
+					containerClientWidth={props.containerClientWidth}
+					containerScrollWidth={props.containerScrollWidth}
+					isWrapped={props.isWrapped}
+					overflowBehavior={props.overflowBehavior}
+					setOverflowBehavior={props.setOverflowBehavior}
+				/>
+				{props.row.name}
+			</h3>
+			<div className="position-relative">
+				{props.overflowBehavior === 'scroll' ? (
+					<ScrollButtons
+						containerClientWidth={props.containerClientWidth}
+						containerScrollLeft={props.containerScrollLeft}
+						containerScrollWidth={props.containerScrollWidth}
+						handleMouse={props.handleMouseEvent}
+						handleScroll={props.handleScrollClick}
+						hovered={props.hovered}
 					/>
-				</div>
+				) : null}
+				<RowItems
+					containerRef={props.containerRef}
+					handleInit={props.handleInit}
+					handleMouse={props.handleMouseEvent}
+					handleScroll={props.handleScrollEvent}
+					modsInfo={props.modsInfo}
+					overflowBehavior={props.overflowBehavior}
+					row={props.row}
+					scormAttempts={props.scormAttempts}
+					setActiveTagId={props.setActiveTagId}
+				/>
 			</div>
-		</ErrorBoundary>
-	);
-};
+		</div>
+	</ErrorBoundary>
+);
 
 export default Row;

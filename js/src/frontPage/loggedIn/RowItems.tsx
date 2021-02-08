@@ -8,6 +8,7 @@ interface Props {
 	handleInit: () => void;
 	handleScroll: () => void;
 	modsInfo: MoodleAcademyFront['modsInfo'];
+	overflowBehavior: string;
 	row: Row;
 	scormAttempts: ScormAttempt[];
 	setActiveTagId: (tagId: string) => void;
@@ -21,7 +22,7 @@ const RowItems: React.FC<Props> = (props: Props): JSX.Element => {
 	};
 	return (
 		<div
-			className={`gridRowItems gridRowItems_${props.row.overflowBehavior}`}
+			className={`gridRowItems gridRowItems_${props.overflowBehavior}`}
 			onMouseEnter={props.handleMouse}
 			onMouseLeave={props.handleMouse}
 			onScroll={props.handleScroll}

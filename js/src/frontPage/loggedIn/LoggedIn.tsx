@@ -5,7 +5,7 @@ import Carousel from './Carousel';
 import Collection from './Collection';
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
-import Row from './Row';
+import RowContainer from './RowContainer';
 
 interface Props {
 	activeTagId: string | undefined;
@@ -43,7 +43,7 @@ const LoggedIn: React.FC<Props> = (props: Props): JSX.Element | null => (
 				) : (
 					<>
 						{props.rows.map((row) => (
-							<Row
+							<RowContainer
 								handleInit={props.handleRowInit}
 								key={row.id}
 								modsInfo={props.modsInfo}
