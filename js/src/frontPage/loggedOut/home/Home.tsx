@@ -5,6 +5,7 @@ import FeaturedSeminars from './FeaturedSeminars';
 import React from 'react';
 import StudentContent from './StudentContent';
 import Trainers from './Trainers';
+import What from './What';
 import Why from './Why';
 import { createPortal } from 'react-dom';
 
@@ -24,6 +25,7 @@ const Home: React.FC<Props> = (props: Props): JSX.Element | null => {
 					handleReady={props.handleComponentsReady}
 				/>
 				<div className="carouselAdjacentContent">
+					<What />
 					<Why />
 					<FeaturedCourses />
 					<FeaturedSeminars />

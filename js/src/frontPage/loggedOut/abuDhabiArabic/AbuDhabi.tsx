@@ -25,6 +25,12 @@ const LoggedOut: React.FC<Props> = (props: Props): JSX.Element | null => {
 			}}
 		>
 			<Hero handleReady={props.handleComponentsReady} />
+			<div className="d-flex justify-content-center py-2" style={{ backgroundColor: '#f1f1f2' }}>
+				<strong>العربية</strong>
+				<a className="mr-3" href="?page=abudhabi">
+					English
+				</a>
+			</div>
 			<Intro />
 			<Overview />
 			<Who />

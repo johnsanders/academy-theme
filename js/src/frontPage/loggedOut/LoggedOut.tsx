@@ -1,14 +1,15 @@
 import './styles.css';
-import AbuDhabi from './abuDhabi';
-import AbuDhabiArabic from './abuDhabiArabic';
-import Home from './home';
-import HomeOld from './homeOld';
 import LoggedOutNavbar from './LoggedOutNavbar';
 import { MoodleAcademyFront } from '../../types';
 import Navbar from '../../navbar';
 import React from 'react';
 import WhyCnn from './whyCnn';
 import { parse } from 'qs';
+
+const AbuDhabi = React.lazy(() => import('./abuDhabi'));
+const AbuDhabiArabic = React.lazy(() => import('./abuDhabiArabic'));
+const Home = React.lazy(() => import('./home'));
+const HomeOld = React.lazy(() => import('./homeOld'));
 
 interface Props {
 	cnnAcademy: MoodleAcademyFront;
