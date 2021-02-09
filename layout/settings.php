@@ -18,6 +18,7 @@ $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settin
 $grid_context = get_grid_context_settings();
 $sitename = format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);
 $navdraweropen = false;
+$is_mod_edit = strpos($PAGE->url, 'modedit.php') !== false;
 
 $templatecontext = [
 	'bodyattributes' => $bodyattributes,
@@ -27,6 +28,7 @@ $templatecontext = [
 	'flatnavigation' => $PAGE->flatnav,
 	'hasblocks' => $hasblocks,
 	'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
+	'is_mod_edit' => $is_mod_edit,
 	'js_src_path' => $grid_context['js_src_path'],
 	'nav_config' => get_nav_config($OUTPUT, $navdraweropen, $sitename, $show_nav_drawer),
 	'navdraweropen' => $navdraweropen,
