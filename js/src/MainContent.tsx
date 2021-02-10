@@ -1,6 +1,7 @@
 declare const cnnAcademy: MoodleAcademyFront | MoodleAcademySettings;
 import { MoodleAcademyFront, MoodleAcademySettings } from './types';
 import FooterContainer from './shared/FooterContainer';
+import ModEdit from './modEdit';
 import Navbar from './navbar';
 import React from 'react';
 import clearStaticLoader from './helpers/clearStaticLoader';
@@ -12,6 +13,7 @@ const Settings = React.lazy(() => import('./themeSettings'));
 const MainContent: React.FC = (): JSX.Element => {
 	const isAcademySettingsPage = window.location.search.includes('section=themesettingacademy');
 	const isFrontPage = cnnAcademy.templateType.includes('front_page');
+	const isModEditPage = cnnAcademy.templateType === 'modedit';
 	const isLoggedIn = cnnAcademy.navbarConfig.isLoggedIn;
 	const [loading, setLoading] = React.useState(true);
 	const handleComponentsReady = () => {
@@ -40,7 +42,7 @@ const MainContent: React.FC = (): JSX.Element => {
 					visible={true}
 				/>
 			)}
-			<React.Suspense fallback={<div />}>
+			<React.Suspense fallback={null}>
 				{isAcademySettingsPage ? (
 					<Settings
 						cnnAcademy={cnnAcademy as MoodleAcademySettings}
@@ -52,6 +54,12 @@ const MainContent: React.FC = (): JSX.Element => {
 						cnnAcademy={cnnAcademy as MoodleAcademyFront}
 						handleComponentsReady={handleComponentsReady}
 						visible={!loading}
+					/>
+				) : null}
+				{isModEditPage ? (
+					<ModEdit
+						cnnAcademy={cnnAcademy as MoodleAcademySettings}
+						handleComponentsReady={handleComponentsReady}
 					/>
 				) : null}
 			</React.Suspense>

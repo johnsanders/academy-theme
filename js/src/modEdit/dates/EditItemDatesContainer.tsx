@@ -1,6 +1,6 @@
 import EditItemDates from './EditItemDates';
 import React from 'react';
-import { UpdateDateArgs } from '../EditItemContainer';
+import { UpdateDateArgs } from '../../themeSettings/gridTab/edit/EditItemContainer';
 
 interface Props {
 	className?: string;

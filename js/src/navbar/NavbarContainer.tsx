@@ -12,7 +12,7 @@ export interface Link {
 interface Props {
 	config: NavbarConfig;
 	extraLinks?: Link[];
-	forceSize?: 'large' | 'small';
+	forceSize?: 'large' | 'small' | 'none';
 	templateType: string;
 	visible: boolean;
 }

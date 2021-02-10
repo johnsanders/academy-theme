@@ -1,6 +1,6 @@
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { Instructor } from '../../../types';
-import InstructorsTable from '../../instructorsTab/InstructorsTable';
+import { Instructor } from '../types';
+import InstructorsTable from '../themeSettings/instructorsTab/InstructorsTable';
 import React from 'react';
 import { faPlusCircle } from '@fortawesome/pro-solid-svg-icons';
 

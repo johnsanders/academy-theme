@@ -1,11 +1,10 @@
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import ImagesModal from '../../ImagesModal';
+import ImagesModal from '../themeSettings/ImagesModal';
 import React from 'react';
 import { faImage } from '@fortawesome/pro-solid-svg-icons';
 
 interface Props {
 	className?: string;
-	onFocus: () => void;
 	thumbUrl: string;
 	thumbUrls: string[];
 	updateThumb: (url: string) => void;

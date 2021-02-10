@@ -1,11 +1,11 @@
 import { Course, Instructor, Module, Row, RowItem, Tag } from '../../../types';
 import { faCheck, faTimes } from '@fortawesome/pro-solid-svg-icons';
-import EditItemDatesContainer from './dates/EditItemDatesContainer';
-import EditItemDuration from './EditItemDuration';
-import EditItemInstructors from './EditItemInstructors';
+import EditItemDatesContainer from '../../../modEdit/dates/EditItemDatesContainer';
+import EditItemDuration from '../../../modEdit/EditItemDuration';
+import EditItemInstructors from '../../../modEdit/EditItemInstructors';
 import EditItemModule from './module/EditItemModule';
 import EditItemTags from './EditItemTags';
-import EditItemThumbnail from './EditItemThumbnail';
+import EditItemThumbnail from '../../../modEdit/EditItemThumbnail';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { UpdateDateArgs } from './EditItemContainer';
@@ -66,7 +66,6 @@ const EditItem: React.FC<Props> = (props: Props): JSX.Element => (
 		/>
 		<EditItemThumbnail
 			className="mb-3"
-			onFocus={props.clearErrorMessage}
 			thumbUrl={props.newItem.thumbUrl}
 			thumbUrls={props.thumbUrls}
 			updateThumb={props.updateThumb}
