@@ -3,8 +3,9 @@
 		{{> theme_academy/loader }}
 		{{> core/local/toast/wrapper}}
 		<script>
-			cnnAcademy.templateType = 'settings';
+			cnnAcademy.templateType = '{{ template_type }}';
 			cnnAcademy.translationReady = false;
+			cnnAcademy.thumbUrls = {{{thumbUrlsJson}}};
 		</script>
 		<div
 			id="page-wrapper"

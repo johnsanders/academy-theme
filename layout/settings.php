@@ -19,6 +19,11 @@ $grid_context = get_grid_context_settings();
 $sitename = format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);
 $navdraweropen = false;
 $is_mod_edit = strpos($PAGE->url, 'modedit.php') !== false;
+$thumb_urls = [];
+if ($is_mod_edit) {
+	require_once($CFG->dirroot . '/theme/academy/grid/get_files.php');
+	$thumb_urls = get_files("thumbs");
+}
 
 $templatecontext = [
 	'bodyattributes' => $bodyattributes,
@@ -28,7 +33,6 @@ $templatecontext = [
 	'flatnavigation' => $PAGE->flatnav,
 	'hasblocks' => $hasblocks,
 	'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
-	'is_mod_edit' => $is_mod_edit,
 	'js_src_path' => $grid_context['js_src_path'],
 	'nav_config' => get_nav_config($OUTPUT, $navdraweropen, $sitename, $show_nav_drawer),
 	'navdraweropen' => $navdraweropen,
@@ -37,6 +41,8 @@ $templatecontext = [
 	'show_nav_drawer' => $show_nav_drawer,
 	'sidepreblocks' => $blockshtml,
 	'sitename' => $sitename,
+	'template_type' => $is_mod_edit ? 'modedit' : 'settings',
+	'thumbUrlsJson' => json_encode($thumb_urls),
 ];
 
 echo $OUTPUT->render_from_template('theme_academy/settings', $templatecontext);
