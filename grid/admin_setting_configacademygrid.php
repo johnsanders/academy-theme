@@ -56,7 +56,6 @@ class admin_setting_configacademygrid extends admin_setting
 		$courses = array_map(function ($course) {
 			$cm = get_fast_modinfo($course->id);
 			$cms = $cm->get_cms();
-			$modules = [];
 			$modules = array_map(function ($my_cm) {
 				return ["id" => $my_cm->id, "modname" => $my_cm->modname, "module" => $my_cm->module, "name" => $my_cm->name];
 			}, $cms);

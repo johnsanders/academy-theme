@@ -83,12 +83,55 @@ function get_grid_context_settings()
 		'js_src_path' => $CFG->wwwroot . '/theme/academy/js/dist',
 	];
 }
+function get_course_modules($courses)
+{
+	global $DB;
+	$mods_array = [];
+	foreach ($courses as $course) {
+		$modinfo = get_fast_modinfo($course);
+		$cms = $modinfo->get_cms();
+		foreach ($cms as $cm) {
+			if (isset($mods_array[$cm->modname])) $mods_array[$cm->modname][$cm->instance] = $cm;
+			else $mods_array[$cm->modname] = [$cm->instance => $cm];
+		}
+	}
+	$queries = [];
+	foreach ($mods_array as $modname => $mods) {
+		$ids = array_map(function ($mod) {
+			return $mod->instance;
+		}, $mods);
+		$where = implode(' OR ', $ids);
+		$query = "SELECT id, intro FROM mdl_$modname WHERE $where;";
+		$queries[$modname] = $query;
+	}
+	$mods_info = [];
+	foreach ($queries as $modname => $query) {
+		$mods_info[$modname] = $DB->get_records_sql($query);
+	}
+	$mods_info_indexed = [];
+	foreach ($mods_info as $modname => $mods) {
+		$new_mods = [];
+		foreach ($mods as $mod) {
+			$new_mods[$mod->id] = $mod;
+		}
+		$mods_info_indexed[$modname] = $new_mods;
+	}
+	foreach ($cms as $id => $cm) {
+		$cms[$id] = ["cm" => $cm, "intro" => $mods_info_indexed[$cm->modname][$cm->instance]];
+	}
+	return array_values($cms);
+}
 function get_grid_context_front($userid)
 {
 	global $CFG;
 	$config = json_decode(get_config("theme_academy", "grid_config"));
 	$mods_info = get_modules_info($config->rows);
-	$user_courses = enrol_get_my_courses();
+	$user_courses = array_values(enrol_get_my_courses());
+	/*
+	$user_modules = get_course_modules($user_courses);
+	var_dump($user_modules);
+	die;
+	*/
 	$user_course_ids = array_map(function ($course) {
 		return $course->id;
 	}, $user_courses);
