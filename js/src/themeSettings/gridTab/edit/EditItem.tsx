@@ -5,7 +5,7 @@ import EditItemDuration from '../../../modEdit/EditItemDuration';
 import EditItemInstructors from '../../../modEdit/EditItemInstructors';
 import EditItemModule from './module/EditItemModule';
 import EditItemTags from './EditItemTags';
-import EditItemThumbnail from '../../../modEdit/EditItemThumbnail';
+import EditItemThumbnail from './editItemThumbnail';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { UpdateDateArgs } from './EditItemContainer';

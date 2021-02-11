@@ -13,6 +13,7 @@ interface Props {
 	isOpen: boolean;
 	item: RowItem;
 	handleCloseClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	setIsOpen: (isOpen: boolean) => void;
 	thumbUrls: string[];
 	updateDate: (args: UpdateDateArgs) => void;
 	updateDuration: (duration: string) => void;
@@ -20,7 +21,7 @@ interface Props {
 	updateThumb: (thumbUrl: string) => void;
 }
 
-const Modal: React.FC<Props> = (props: Props): JSX.Element | null => (
+const SettingsModal: React.FC<Props> = (props: Props): JSX.Element | null => (
 	<div
 		className={`modal ${props.isOpen ? 'show' : ''}`}
 		role="dialog"
@@ -63,6 +64,7 @@ const Modal: React.FC<Props> = (props: Props): JSX.Element | null => (
 					/>
 					<EditItemThumbnail
 						className="mb-3"
+						setIsOpen={props.setIsOpen}
 						thumbUrl={props.item.thumbUrl}
 						thumbUrls={props.thumbUrls}
 						updateThumb={props.updateThumb}
@@ -77,4 +79,4 @@ const Modal: React.FC<Props> = (props: Props): JSX.Element | null => (
 	</div>
 );
 
-export default Modal;
+export default SettingsModal;

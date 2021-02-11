@@ -1,19 +1,20 @@
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
+import ImagesModal from '../../ImagesModal';
 import React from 'react';
 import { faImage } from '@fortawesome/pro-solid-svg-icons';
 
 interface Props {
 	className?: string;
 	thumbUrl: string;
-	setIsOpen: (isOpen: boolean) => void;
 	thumbUrls: string[];
 	updateThumb: (url: string) => void;
 }
 
 const EditItemThumbnail: React.FC<Props> = (props: Props): JSX.Element => {
+	const [thumbsModalIsOpen, setThumbsModalIsOpen] = React.useState(false);
 	const handleOpenThumbsModal = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
-		props.setIsOpen(true);
+		setThumbsModalIsOpen(true);
 	};
 	return (
 		<div className={`card ${props.className || ''}`}>
@@ -31,6 +32,13 @@ const EditItemThumbnail: React.FC<Props> = (props: Props): JSX.Element => {
 					Select Thumbnail
 				</button>
 			</div>
+			{thumbsModalIsOpen && (
+				<ImagesModal
+					handleImageClick={props.updateThumb}
+					imageUrls={props.thumbUrls}
+					setIsOpen={setThumbsModalIsOpen}
+				/>
+			)}
 		</div>
 	);
 };

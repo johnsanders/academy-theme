@@ -1,4 +1,5 @@
 <?php
+
 function get_files($file_area)
 {
 	$fs = get_file_storage();

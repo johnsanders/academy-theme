@@ -1,6 +1,7 @@
 import { Instructor, RowItem } from '../types';
-import Modal from './Modal';
+import ImagesModal from '../themeSettings/ImagesModal';
 import React from 'react';
+import SettingsModal from './SettingsModal';
 
 export type UpdateDateArgs = {
 	dateDisplayed?: number | null;
@@ -18,6 +19,7 @@ interface Props {
 }
 
 const ModalContainer: React.FC<Props> = (props: Props): JSX.Element | null => {
+	const [thumbsModalActive, setThumbsModalActive] = React.useState(false);
 	const updateDate = (args: UpdateDateArgs): void => props.setItem({ ...props.item, ...args });
 	const updateDuration = (duration: string) => props.setItem({ ...props.item, duration });
 	const updateInstructors = (instructors: string[]): void =>
@@ -32,12 +34,21 @@ const ModalContainer: React.FC<Props> = (props: Props): JSX.Element | null => {
 		if (isOpen) document.body.classList.add('modal-open');
 		else document.body.classList.remove('modal-open');
 	}, [isOpen]);
-	return (
-		<Modal
+	return thumbsModalActive ? (
+		<div className="modal show">
+			<ImagesModal
+				handleImageClick={updateThumb}
+				imageUrls={props.thumbUrls}
+				setIsOpen={setThumbsModalActive}
+			/>
+		</div>
+	) : (
+		<SettingsModal
 			allInstructors={props.allInstructors}
 			handleCloseClick={handleCloseClick}
 			isOpen={props.isOpen}
 			item={props.item}
+			setIsOpen={setThumbsModalActive}
 			thumbUrls={props.thumbUrls}
 			updateDate={updateDate}
 			updateDuration={updateDuration}
