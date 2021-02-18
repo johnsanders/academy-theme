@@ -12,6 +12,7 @@ import UploadsTab from './UploadsTab';
 interface Props {
 	activeTab: string;
 	carousel: CarouselItem[];
+	carouselUrls: string[];
 	courses: Course[];
 	handleNavClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 	inputRef: React.MutableRefObject<HTMLInputElement>;
@@ -70,6 +71,7 @@ const ThemeSettings: React.FC<Props> = (props: Props): JSX.Element => (
 		{props.activeTab === 'carousel' ? (
 			<CarouselTab
 				carouselItems={props.carousel}
+				carouselUrls={props.carouselUrls}
 				inputRef={props.inputRef}
 				setCarousel={props.setCarousel}
 			/>

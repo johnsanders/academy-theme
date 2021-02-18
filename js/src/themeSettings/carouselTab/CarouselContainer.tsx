@@ -7,6 +7,7 @@ import createBlankCarouselItem from './createBlankCarouselItem';
 import disableSaveButtons from '../disableSaveButtons';
 
 interface Props {
+	carouselUrls: string[];
 	carouselItems: CarouselItem[];
 	inputRef: React.MutableRefObject<HTMLInputElement>;
 	setCarousel: (carouselItems: CarouselItem[]) => void;
@@ -57,6 +58,7 @@ const CarouselContainer: React.FC<Props> = (props: Props): JSX.Element => {
 		<Carousel
 			activeItem={activeItem}
 			carouselItems={props.carouselItems}
+			carouselUrls={props.carouselUrls}
 			handleAddItemClick={handleAddItemClick}
 			handleCancelEdit={handleCancelEdit}
 			handleDeleteItemClick={handleDeleteItemClick}

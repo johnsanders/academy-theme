@@ -9,6 +9,7 @@ import { faPlusCircle } from '@fortawesome/pro-solid-svg-icons';
 interface Props {
 	activeItem: CarouselItem | null;
 	carouselItems: CarouselItem[];
+	carouselUrls: string[];
 	handleAddItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	handleCancelEdit: () => void;
 	handleDeleteItemClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -22,6 +23,7 @@ const Carousel: React.FC<Props> = (props: Props): JSX.Element =>
 		<EditCarouselItemContainer
 			activeItem={props.activeItem}
 			cancelEdit={props.handleCancelEdit}
+			carouselUrls={props.carouselUrls}
 			handleSave={props.handleSave}
 		/>
 	) : (

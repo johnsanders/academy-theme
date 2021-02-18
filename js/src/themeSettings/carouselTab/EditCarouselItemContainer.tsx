@@ -5,6 +5,7 @@ import React from 'react';
 interface Props {
 	activeItem: CarouselItem;
 	cancelEdit: () => void;
+	carouselUrls: string[];
 	handleSave: (item: CarouselItem) => void;
 }
 const EditCarouselItemContainer: React.FC<Props> = (props: Props): JSX.Element => {
@@ -39,6 +40,7 @@ const EditCarouselItemContainer: React.FC<Props> = (props: Props): JSX.Element =
 	return (
 		<EditCarouselItem
 			cancelEdit={handleCancelEdit}
+			carouselUrls={props.carouselUrls}
 			clearErrorMessage={clearErrorMessage}
 			errorMessage={errorMessage}
 			handleImageSelect={handleImageSelect}

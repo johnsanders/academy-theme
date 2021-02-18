@@ -86,6 +86,7 @@ const ThemeSettingsContainer: React.FC<Props> = (props: Props): JSX.Element | nu
 			<ThemeSettings
 				activeTab={activeTab}
 				carousel={carousel}
+				carouselUrls={props.cnnAcademy.carouselUrls}
 				courses={props.cnnAcademy.courses}
 				handleNavClick={handleNavClick}
 				inputRef={inputRef}
