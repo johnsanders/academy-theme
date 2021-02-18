@@ -83,55 +83,42 @@ function get_grid_context_settings()
 		'js_src_path' => $CFG->wwwroot . '/theme/academy/js/dist',
 	];
 }
-function get_course_modules($courses)
+function get_course_sections($courses)
 {
-	global $DB;
-	$mods_array = [];
+	$ret = [];
 	foreach ($courses as $course) {
 		$modinfo = get_fast_modinfo($course);
 		$cms = $modinfo->get_cms();
-		foreach ($cms as $cm) {
-			if (isset($mods_array[$cm->modname])) $mods_array[$cm->modname][$cm->instance] = $cm;
-			else $mods_array[$cm->modname] = [$cm->instance => $cm];
+		$sectionsinfo = $modinfo->get_section_info_all();
+		$sections = [];
+		foreach ($sectionsinfo as $index => $sectioninfo) {
+			$section_cms = [];
+			$section_cmids = $modinfo->sections[$index];
+			foreach ($cms as $id => $cm) {
+				if (in_array($id, $section_cmids)) {
+					$cminfo = [
+						"id" => $cm->id,
+						"instance" => $cm->instance,
+						"modname" => $cm->modname,
+						"name" => $cm->name,
+					];
+					array_push($section_cms, $cminfo);
+				}
+			}
+			$sections[$sectioninfo->id] = ["cms" => $section_cms, "name" => $sectioninfo->name];
 		}
+		array_push($ret, ["id" => $course->id, "name" => $course->fullname, "sections" => $sections]);
 	}
-	$queries = [];
-	foreach ($mods_array as $modname => $mods) {
-		$ids = array_map(function ($mod) {
-			return $mod->instance;
-		}, $mods);
-		$where = implode(' OR ', $ids);
-		$query = "SELECT id, intro FROM mdl_$modname WHERE $where;";
-		$queries[$modname] = $query;
-	}
-	$mods_info = [];
-	foreach ($queries as $modname => $query) {
-		$mods_info[$modname] = $DB->get_records_sql($query);
-	}
-	$mods_info_indexed = [];
-	foreach ($mods_info as $modname => $mods) {
-		$new_mods = [];
-		foreach ($mods as $mod) {
-			$new_mods[$mod->id] = $mod;
-		}
-		$mods_info_indexed[$modname] = $new_mods;
-	}
-	foreach ($cms as $id => $cm) {
-		$cms[$id] = ["cm" => $cm, "intro" => $mods_info_indexed[$cm->modname][$cm->instance]];
-	}
-	return array_values($cms);
+	return [];
 }
+
 function get_grid_context_front($userid)
 {
 	global $CFG;
 	$config = json_decode(get_config("theme_academy", "grid_config"));
 	$mods_info = get_modules_info($config->rows);
-	$user_courses = array_values(enrol_get_my_courses());
-	/*
-	$user_modules = get_course_modules($user_courses);
-	var_dump($user_modules);
-	die;
-	*/
+	$user_courses_info = enrol_get_my_courses();
+	$user_courses = get_course_sections($user_courses_info);
 	$user_course_ids = array_map(function ($course) {
 		return $course->id;
 	}, $user_courses);

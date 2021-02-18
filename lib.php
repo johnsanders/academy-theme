@@ -29,3 +29,9 @@ function theme_academy_get_main_scss_content($theme)
 	$post = file_get_contents($CFG->dirroot . '/theme/academy/scss/post.scss');
 	return $pre . "\n" . $scss . "\n" . $post;
 }
+
+function theme_academy_coursemodule_edit_post_actions($module)
+{
+	var_dump($module);
+	die;
+}
