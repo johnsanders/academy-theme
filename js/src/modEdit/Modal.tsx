@@ -12,7 +12,8 @@ interface Props {
 	allInstructors: Instructor[];
 	isOpen: boolean;
 	item: RowItem;
-	handleCloseClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	handleCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	handleSave: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	setIsOpen: (isOpen: boolean) => void;
 	thumbUrls: string[];
 	updateDate: (args: UpdateDateArgs) => void;
@@ -21,7 +22,7 @@ interface Props {
 	updateThumb: (thumbUrl: string) => void;
 }
 
-const SettingsModal: React.FC<Props> = (props: Props): JSX.Element | null => (
+const Modal: React.FC<Props> = (props: Props): JSX.Element | null => (
 	<div
 		className={`modal ${props.isOpen ? 'show' : ''}`}
 		role="dialog"
@@ -37,7 +38,7 @@ const SettingsModal: React.FC<Props> = (props: Props): JSX.Element | null => (
 					<button
 						aria-label="Close"
 						className="btn btn-light"
-						onClick={props.handleCloseClick}
+						onClick={props.handleCancel}
 						type="button"
 					>
 						<Icon icon={faTimes} />
@@ -69,9 +70,13 @@ const SettingsModal: React.FC<Props> = (props: Props): JSX.Element | null => (
 						thumbUrls={props.thumbUrls}
 						updateThumb={props.updateThumb}
 					/>
-					<button className="btn btn-secondary mr-1" onClick={props.handleCloseClick}>
+					<button className="btn btn-secondary mr-1" onClick={props.handleSave}>
 						<Icon className="mr-1" icon={faCheck} />
 						Done
+					</button>
+					<button className="btn btn-secondary" onClick={props.handleCancel}>
+						<Icon className="mr-1" icon={faTimes} />
+						Cancel
 					</button>
 				</div>
 			</div>
@@ -79,4 +84,4 @@ const SettingsModal: React.FC<Props> = (props: Props): JSX.Element | null => (
 	</div>
 );
 
-export default SettingsModal;
+export default Modal;

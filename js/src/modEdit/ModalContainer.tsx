@@ -1,7 +1,7 @@
 import { Instructor, RowItem } from '../types';
 import ImagesModal from '../themeSettings/ImagesModal';
 import React from 'react';
-import SettingsModal from './SettingsModal';
+import SettingsModal from './Modal';
 
 export type UpdateDateArgs = {
 	dateDisplayed?: number | null;
@@ -11,9 +11,10 @@ export type UpdateDateArgs = {
 
 interface Props {
 	allInstructors: Instructor[];
+	handleCancel: () => void;
+	handleSave: () => void;
 	isOpen: boolean;
 	item: RowItem;
-	setEditOpen: (isOpen: boolean) => void;
 	setItem: (item: RowItem) => void;
 	thumbUrls: string[];
 }
@@ -25,15 +26,19 @@ const ModalContainer: React.FC<Props> = (props: Props): JSX.Element | null => {
 	const updateInstructors = (instructors: string[]): void =>
 		props.setItem({ ...props.item, instructors });
 	const updateThumb = (thumbUrl: string): void => props.setItem({ ...props.item, thumbUrl });
-	const handleCloseClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-		e.preventDefault();
-		props.setEditOpen(false);
-	};
 	const { isOpen } = props;
 	React.useEffect(() => {
 		if (isOpen) document.body.classList.add('modal-open');
 		else document.body.classList.remove('modal-open');
 	}, [isOpen]);
+	const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		props.handleCancel();
+	};
+	const handleSave = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		props.handleSave();
+	};
 	return thumbsModalActive ? (
 		<div className="modal show">
 			<ImagesModal
@@ -45,7 +50,8 @@ const ModalContainer: React.FC<Props> = (props: Props): JSX.Element | null => {
 	) : (
 		<SettingsModal
 			allInstructors={props.allInstructors}
-			handleCloseClick={handleCloseClick}
+			handleCancel={handleCancel}
+			handleSave={handleSave}
 			isOpen={props.isOpen}
 			item={props.item}
 			setIsOpen={setThumbsModalActive}
